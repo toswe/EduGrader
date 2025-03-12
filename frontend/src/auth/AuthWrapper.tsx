@@ -28,7 +28,12 @@ const storeTokens = (response: any) => {
   sessionStorage.setItem("refreshToken", response.data.refresh);
 };
 
-const getUserFromAccessToken = () => {
+const removeTokens = () => {
+  sessionStorage.removeItem("accessToken");
+  sessionStorage.removeItem("refreshToken");
+};
+
+const getUserFromSessionStorage = () => {
   const token = sessionStorage.getItem("accessToken");
 
   if (!token) return { ...emptyUser };
@@ -38,17 +43,19 @@ const getUserFromAccessToken = () => {
 };
 
 export const AuthWrapper = (props: any) => {
-  const [user, setUser] = useState(getUserFromAccessToken());
+  const [user, setUser] = useState(getUserFromSessionStorage());
 
   const login = (username: string, password: string) => {
     return loginApi(username, password).then((response) => {
       storeTokens(response);
-      setUser(getUserFromAccessToken());
+      setUser(getUserFromSessionStorage());
     });
   };
 
   const logout = () => {
-    setUser({ ...emptyUser });
+    // TODO Make logout request to backend
+    removeTokens();
+    setUser(getUserFromSessionStorage());
   };
 
   return (
