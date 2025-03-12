@@ -1,0 +1,17 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/backend
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:80:5173"
+    volumes:
+      - ./frontend:/frontend
+
+  # TODO add a database service
