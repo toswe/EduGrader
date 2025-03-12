@@ -1,9 +1,11 @@
 import { createContext, useContext, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 
+import { login as loginApi } from "../api/auth";
+
 const AuthContext = createContext({
-  user: { name: "", isAuthenticated: false },
-  login: (name: string, password: string) => {},
+  user: { username: "", isAuthenticated: false },
+  login: (username: string, password: string) => {},
   logout: () => {},
 });
 
@@ -15,17 +17,12 @@ export const ProtectedRoutes = () => {
 };
 
 export const AuthWrapper = (props: any) => {
-  const emptyUser = { name: "", isAuthenticated: false };
+  const emptyUser = { username: "", isAuthenticated: false };
   const [user, setUser] = useState({ ...emptyUser });
 
-  const login = (userName: string, password: string) => {
-    return new Promise((resolve, reject) => {
-      if (password === "password") {
-        setUser({ name: userName, isAuthenticated: true });
-        resolve("success");
-      } else {
-        reject("Incorrect password");
-      }
+  const login = (username: string, password: string) => {
+    return loginApi(username, password).then(() => {
+      setUser({ username, isAuthenticated: true });
     });
   };
 
