@@ -9,7 +9,5 @@ class HomeView(APIView):
 
     def get(self, request):
 
-        content = {
-            "message": "Example secured endpoint."
-        }
+        content = {"message": "Example secured."}
         return Response(content)
