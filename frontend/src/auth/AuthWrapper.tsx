@@ -2,7 +2,10 @@ import { createContext, useContext, useState } from "react";
 import { Navigate, Outlet } from "react-router";
 import { jwtDecode } from "jwt-decode";
 
-import { login as loginApi } from "../api/auth";
+import {
+  login as makeLoginRequest,
+  logout as makeLogoutRequest,
+} from "../api/auth";
 
 interface JwtPayload {
   user_id: string;
@@ -46,16 +49,17 @@ export const AuthWrapper = (props: any) => {
   const [user, setUser] = useState(getUserFromSessionStorage());
 
   const login = (username: string, password: string) => {
-    return loginApi(username, password).then((response) => {
+    return makeLoginRequest(username, password).then((response) => {
       storeTokens(response);
       setUser(getUserFromSessionStorage());
     });
   };
 
   const logout = () => {
-    // TODO Make logout request to backend
-    removeTokens();
-    setUser(getUserFromSessionStorage());
+    makeLogoutRequest().then(() => {
+      removeTokens();
+      setUser(getUserFromSessionStorage());
+    });
   };
 
   return (
