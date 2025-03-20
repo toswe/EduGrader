@@ -4,14 +4,13 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/backend
+      - ./backend:/app
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
   nginx:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: nginx
     environment:
       - NODE_ENV=development
     ports:
