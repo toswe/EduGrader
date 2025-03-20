@@ -7,11 +7,12 @@ services:
       - ./backend:/backend
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
 
-  frontend:
-    build: ./frontend
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nginx
+    environment:
+      - NODE_ENV=development
     ports:
-      - "127.0.0.1:80:5173"
-    volumes:
-      - ./frontend:/frontend
-
-  # TODO add a database service
+      - "80:80"

@@ -1,10 +1,20 @@
-FROM node:22.11.0
+FROM nginx:stable-alpine AS base
 
-WORKDIR /frontend
+WORKDIR /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
 
-COPY . .
+FROM node:20.11.0 AS build
+WORKDIR /app
 
+COPY package.json package-lock.json ./
 RUN npm install
 
-# TODO Build the react app and serve staic files
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+COPY . .
+RUN npm run build
+
+FROM base as final
+WORKDIR /usr/share/nginx/html
+COPY --from=build /app/dist .
+
+CMD ["nginx", "-g", "daemon off;"]

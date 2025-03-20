@@ -12,7 +12,7 @@ const emptyUser = { username: "", isAuthenticated: false };
 
 const AuthContext = createContext({
   user: { ...emptyUser },
-  login: (username: string, password: string) => {},
+  login: (_username: string, _password: string) => {},
   logout: () => {},
 });
 
