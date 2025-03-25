@@ -23,7 +23,7 @@ from backend.views import QuestionCRView, QuestionRUDView, CourseRView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("authentification.urls")),
-    path("questions/", QuestionCRView.as_view(), name="questions-CR"),
+    path("courses/<int:pk>/questions/", QuestionCRView.as_view(), name="questions-CR"),
     path("questions/<int:pk>/", QuestionRUDView.as_view(), name="questions-RUD"),
     path("courses/", CourseRView.as_view(), name="courses-list"),
     path("courses/<int:pk>/", CourseRView.as_view(), name="courses-detail"),

@@ -20,8 +20,16 @@ class QuestionCRView(
     CreateModelMixin,
 ):
     permission_classes = (IsAuthenticated,)
-    queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+    def get_queryset(self):
+        course_pk = self.kwargs.get("pk")
+        return Question.objects.filter(course_id=course_pk)
+
+    def perform_create(self, serializer):
+        course_pk = self.kwargs.get("pk")
+        course = Course.objects.get(pk=course_pk)
+        serializer.save(course=course)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
