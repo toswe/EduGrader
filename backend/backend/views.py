@@ -10,8 +10,8 @@ from rest_framework.mixins import (
     DestroyModelMixin,
 )
 
-from backend.models import Question
-from backend.serializers import QuestionSerializer
+from backend.models import Question, Course
+from backend.serializers import QuestionSerializer, CourseSerializer
 
 
 class HomeView(APIView):
@@ -58,3 +58,18 @@ class QuestionRUDView(
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class CourseRView(
+    GenericAPIView,
+    RetrieveModelMixin,
+    ListModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+    def get(self, request, *args, **kwargs):
+        if kwargs.get("pk"):
+            return self.retrieve(request, *args, **kwargs)
+        return self.list(request, *args, **kwargs)

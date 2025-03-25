@@ -18,12 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from backend.views import HomeView, QuestionCRView, QuestionRUDView
+from backend.views import HomeView, QuestionCRView, QuestionRUDView, CourseRView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("authentification.urls")),
     path("home/", HomeView.as_view(), name="home"),
-    path("questions/", QuestionCRView.as_view(), name="question-list"),
-    path("questions/<int:pk>/", QuestionRUDView.as_view(), name="question-list"),
+    path("questions/", QuestionCRView.as_view(), name="questions-CR"),
+    path("questions/<int:pk>/", QuestionRUDView.as_view(), name="questions-RUD"),
+    path("courses/", CourseRView.as_view(), name="courses-list"),
+    path("courses/<int:pk>/", CourseRView.as_view(), name="courses-detail"),
 ]
