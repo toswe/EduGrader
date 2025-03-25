@@ -3,7 +3,7 @@ from django.db import models
 
 class Question(models.Model):
     question = models.TextField()
-    awnser = models.TextField()
+    answer = models.TextField()
     course = models.ForeignKey("Course", on_delete=models.CASCADE)
 
 
