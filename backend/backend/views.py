@@ -14,16 +14,6 @@ from backend.models import Question, Course
 from backend.serializers import QuestionSerializer, CourseSerializer
 
 
-class HomeView(APIView):
-
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request):
-
-        content = {"message": "Example secured."}
-        return Response(content)
-
-
 class QuestionCRView(
     GenericAPIView,
     ListModelMixin,
