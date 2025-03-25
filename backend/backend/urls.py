@@ -17,10 +17,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from backend import views
+
+from backend.views import HomeView, QuestionCRView, QuestionRUDView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("authentification.urls")),
-    path("home/", views.HomeView.as_view(), name="home"),
+    path("home/", HomeView.as_view(), name="home"),
+    path("questions/", QuestionCRView.as_view(), name="question-list"),
+    path("questions/<int:pk>/", QuestionRUDView.as_view(), name="question-list"),
 ]
