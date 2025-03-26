@@ -31,11 +31,25 @@ export const Course = () => {
       </div>
       <div>
         {questions.map((question) => (
-          <div key={question.id}>
-            {/* TODO Maybe change the link path... */}
-            <Link to={`/questions/${question.id}`}>{question.question}</Link>
+          <div
+            key={question.id}
+            style={{
+              border: "1px solid black",
+              margin: "10px",
+              padding: "5px",
+              borderRadius: "5px",
+            }}
+          >
+            <strong>{question.question}</strong>
+            <br />
+            <span>{question.answer}</span>
           </div>
         ))}
+      </div>
+      <div>
+        <Link to={`/course/${courseId}/new-question`}>
+          <button>Create question</button>
+        </Link>
       </div>
     </>
   );
