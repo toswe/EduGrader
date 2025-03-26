@@ -6,7 +6,7 @@ import { fetchCourse } from "../api/courses";
 import { fetchQuestions } from "../api/questions";
 import { ICourse, IQuestion } from "../types";
 
-export const Course = () => {
+export const CoursePage = () => {
   const { courseId } = useParams();
 
   const [course, setCourse] = useState<ICourse | null>(null);

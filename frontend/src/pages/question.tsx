@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 
 import { createQuestion } from "../api/questions";
 
-export const QuestionCreate = () => {
+export const QuestionPage = () => {
   const navigate = useNavigate();
   const { courseId } = useParams();
 

@@ -4,8 +4,8 @@ import { Route, Routes } from "react-router";
 import { AuthWrapper, ProtectedRoutes } from "./auth/AuthWrapper";
 import { Login } from "./pages/login";
 import { Home } from "./pages/home";
-import { Course } from "./pages/course";
-import { QuestionCreate } from "./pages/questionCreate";
+import { CoursePage } from "./pages/course";
+import { QuestionPage } from "./pages/question";
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="/course/:courseId" element={<Course />} />
+          <Route path="/course/:courseId" element={<CoursePage />} />
           <Route
             path="/course/:courseId/new-question"
-            element={<QuestionCreate />}
+            element={<QuestionPage />}
           />
         </Route>
 
