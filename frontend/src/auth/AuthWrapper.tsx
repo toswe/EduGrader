@@ -7,10 +7,8 @@ import {
   logout as makeLogoutRequest,
 } from "../api/auth";
 
-const emptyUser = { username: "", isAuthenticated: false };
-
 const AuthContext = createContext({
-  user: { ...emptyUser },
+  user: getUserFromStorage(),
   login: (_username: string, _password: string) => {},
   logout: () => {},
 });
