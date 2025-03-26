@@ -1,11 +1,15 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 
-import { createQuestion } from "../api/questions";
+import {
+  createQuestion,
+  fetchQuestion,
+  updateQuestion,
+} from "../api/questions";
 
 export const QuestionPage = () => {
   const navigate = useNavigate();
-  const { courseId } = useParams();
+  const { courseId, questionId } = useParams();
 
   const [errorMessage, setErrorMessage] = useState<string | unknown>("");
   const [formData, setFormData] = useReducer(
@@ -13,8 +17,22 @@ export const QuestionPage = () => {
     { question: "", answer: "" }
   );
 
+  useEffect(() => {
+    if (questionId) {
+      fetchQuestion(Number(questionId)).then((data) => {
+        setFormData({ ...data });
+      });
+    }
+  }, [questionId]);
+
   const saveQuestion = async () => {
-    createQuestion(Number(courseId), formData.question, formData.answer)
+    const createOrUpdateQuestion = async () => {
+      questionId
+        ? updateQuestion(Number(questionId), formData.question, formData.answer)
+        : createQuestion(Number(courseId), formData.question, formData.answer);
+    };
+
+    createOrUpdateQuestion()
       .then(() => {
         navigate(`/course/${courseId}`);
       })

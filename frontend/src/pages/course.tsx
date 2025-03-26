@@ -43,6 +43,10 @@ export const CoursePage = () => {
             <strong>{question.question}</strong>
             <br />
             <span>{question.answer}</span>
+            <br />
+            <Link to={`/course/${courseId}/questions/${question.id}`}>
+              <button>Edit</button>
+            </Link>
           </div>
         ))}
       </div>

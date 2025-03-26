@@ -18,6 +18,10 @@ function App() {
             path="/course/:courseId/new-question"
             element={<QuestionPage />}
           />
+          <Route
+            path="/course/:courseId/questions/:questionId"
+            element={<QuestionPage />}
+          />
         </Route>
 
         <Route path="/login" element={<Login />} />
