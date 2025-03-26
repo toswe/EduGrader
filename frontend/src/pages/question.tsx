@@ -5,6 +5,7 @@ import {
   createQuestion,
   fetchQuestion,
   updateQuestion,
+  deleteQuestion,
 } from "../api/questions";
 
 export const QuestionPage = () => {
@@ -25,6 +26,16 @@ export const QuestionPage = () => {
     }
   }, [questionId]);
 
+  const makeRequestAndRedirect = async (apiRequest: () => Promise<void>) => {
+    apiRequest()
+      .then(() => {
+        navigate(`/course/${courseId}`);
+      })
+      .catch((error) => {
+        setErrorMessage(error);
+      });
+  };
+
   const saveQuestion = async () => {
     const createOrUpdateQuestion = async () => {
       questionId
@@ -32,13 +43,11 @@ export const QuestionPage = () => {
         : createQuestion(Number(courseId), formData.question, formData.answer);
     };
 
-    createOrUpdateQuestion()
-      .then(() => {
-        navigate(`/course/${courseId}`);
-      })
-      .catch((error) => {
-        setErrorMessage(error);
-      });
+    makeRequestAndRedirect(() => createOrUpdateQuestion());
+  };
+
+  const removeQuestion = async () => {
+    makeRequestAndRedirect(() => deleteQuestion(Number(questionId)));
   };
 
   return (
@@ -64,6 +73,11 @@ export const QuestionPage = () => {
         {formData.question && formData.answer && (
           <div className="button">
             <button onClick={saveQuestion}>Save</button>
+          </div>
+        )}
+        {questionId && (
+          <div className="button">
+            <button onClick={removeQuestion}>Delete</button>
           </div>
         )}
         {errorMessage ? (
