@@ -8,8 +8,8 @@ from rest_framework.mixins import (
     DestroyModelMixin,
 )
 
-from backend.models import Question, Course
-from backend.serializers import QuestionSerializer, CourseSerializer
+from backend.models import Question, Course, Test
+from backend.serializers import QuestionSerializer, CourseSerializer, TestSerializer
 
 
 class QuestionCRView(
@@ -69,3 +69,30 @@ class CourseRView(
         if kwargs.get("pk"):
             return self.retrieve(request, *args, **kwargs)
         return self.list(request, *args, **kwargs)
+
+
+class TestCRView(
+    GenericAPIView,
+    ListModelMixin,
+    CreateModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TestSerializer
+
+    def get_queryset(self):
+        course_pk = self.kwargs.get("pk")
+        return Test.objects.filter(course_id=course_pk)
+
+    def perform_create(self, serializer):
+        course_pk = self.kwargs.get("pk")
+
+        course = Course.objects.get(pk=course_pk)
+        questions = []
+
+        serializer.save(course=course, questions=questions)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
