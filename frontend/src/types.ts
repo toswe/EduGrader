@@ -9,3 +9,10 @@ export interface IQuestion {
   answer: string;
   course: number;
 }
+
+export interface ITest {
+  id: number;
+  name: string;
+  course: number;
+  questions: IQuestion[] | number[];
+}
