@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from backend.views import QuestionCRView, QuestionRUDView, CourseRView, TestCRView
+from backend.views import QuestionCRView, QuestionRUDView, CourseRView, TestCRView, TestRUDView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,4 +28,5 @@ urlpatterns = [
     path("courses/", CourseRView.as_view(), name="courses-list"),
     path("courses/<int:pk>/", CourseRView.as_view(), name="courses-detail"),
     path("courses/<int:pk>/tests/", TestCRView.as_view(), name="tests-CR"),
+    path("tests/<int:pk>/", TestRUDView.as_view(), name="tests-RUD"),
 ]

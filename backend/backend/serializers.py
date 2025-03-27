@@ -22,3 +22,13 @@ class TestSerializer(serializers.ModelSerializer):
         fields = "__all__"
         read_only_fields = ("course",)
         extra_kwargs = {"questions": {"required": False}}
+
+    def validate(self, data):
+        questions = data.get("questions")
+        course = self.instance.course
+
+        if not all(q.course == course for q in questions):
+            error_message = "All questions must belong to the same course as the test."
+            raise serializers.ValidationError(error_message)
+
+        return data
