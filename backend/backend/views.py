@@ -12,6 +12,21 @@ from backend.models import Question, Course, Test
 from backend.serializers import QuestionSerializer, CourseSerializer, TestSerializer
 
 
+class CourseRView(
+    GenericAPIView,
+    RetrieveModelMixin,
+    ListModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+
+    def get(self, request, *args, **kwargs):
+        if kwargs.get("pk"):
+            return self.retrieve(request, *args, **kwargs)
+        return self.list(request, *args, **kwargs)
+
+
 class QuestionCRView(
     GenericAPIView,
     ListModelMixin,
@@ -54,21 +69,6 @@ class QuestionRUDView(
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-
-
-class CourseRView(
-    GenericAPIView,
-    RetrieveModelMixin,
-    ListModelMixin,
-):
-    permission_classes = (IsAuthenticated,)
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer
-
-    def get(self, request, *args, **kwargs):
-        if kwargs.get("pk"):
-            return self.retrieve(request, *args, **kwargs)
-        return self.list(request, *args, **kwargs)
 
 
 class TestCRView(
