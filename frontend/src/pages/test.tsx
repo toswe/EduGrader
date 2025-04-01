@@ -42,19 +42,8 @@ export const TestPage = () => {
     }
   }, [testId]);
 
-  const saveTest = async () => {
-    if (testId) {
-      updateTest(Number(testId), formData.name, formData.questions)
-        .then(() => {
-          navigate(`/course/${courseId}`);
-        })
-        .catch((error) => {
-          setErrorMessage(error);
-        });
-      return;
-    }
-
-    createTest(Number(courseId), formData.name, formData.questions)
+  const makeRequestAndRedirect = async (apiRequest: () => Promise<void>) => {
+    apiRequest()
       .then(() => {
         navigate(`/course/${courseId}`);
       })
@@ -63,14 +52,17 @@ export const TestPage = () => {
       });
   };
 
+  const saveTest = async () => {
+    const createOrUpdateTest = async () => {
+      testId
+        ? updateTest(Number(testId), formData.name, formData.questions)
+        : createTest(Number(courseId), formData.name, formData.questions);
+    };
+    makeRequestAndRedirect(() => createOrUpdateTest());
+  };
+
   const removeTest = async () => {
-    deleteTest(Number(testId))
-      .then(() => {
-        navigate(`/course/${courseId}`);
-      })
-      .catch((error) => {
-        setErrorMessage(error);
-      });
+    makeRequestAndRedirect(() => deleteTest(Number(testId)));
   };
 
   return (
