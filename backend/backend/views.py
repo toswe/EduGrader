@@ -21,6 +21,10 @@ class CourseRView(
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        return Course.objects.filter(users=user)
+
     def get(self, request, *args, **kwargs):
         if kwargs.get("pk"):
             return self.retrieve(request, *args, **kwargs)
@@ -37,7 +41,8 @@ class QuestionCRView(
 
     def get_queryset(self):
         course_pk = self.kwargs.get("pk")
-        return Question.objects.filter(course_id=course_pk)
+        user = self.request.user
+        return Question.objects.filter(course_id=course_pk, course__users=user)
 
     def perform_create(self, serializer):
         course_pk = self.kwargs.get("pk")
@@ -58,8 +63,11 @@ class QuestionRUDView(
     DestroyModelMixin,
 ):
     permission_classes = (IsAuthenticated,)
-    queryset = Question.objects.all()
     serializer_class = QuestionSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Question.objects.filter(course__users=user)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
@@ -81,7 +89,8 @@ class TestCRView(
 
     def get_queryset(self):
         course_pk = self.kwargs.get("pk")
-        return Test.objects.filter(course_id=course_pk)
+        user = self.request.user
+        return Test.objects.filter(course_id=course_pk, course__users=user)
 
     def perform_create(self, serializer):
         course_pk = self.kwargs.get("pk")
@@ -106,8 +115,11 @@ class TestRUDView(
     DestroyModelMixin,
 ):
     permission_classes = (IsAuthenticated,)
-    queryset = Test.objects.all()
     serializer_class = TestSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Test.objects.filter(course__users=user)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
