@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # Local apps
     "backend",
+    "authentification",
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,5 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
+
+AUTH_USER_MODEL = "authentification.User"
