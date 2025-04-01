@@ -1,12 +1,12 @@
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { fetchQuestions } from "../api/questions";
-import { createTest } from "../api/tests";
+import { createTest, fetchTest, updateTest } from "../api/tests";
 import { IQuestion } from "../types";
 
 export const TestPage = () => {
   const navigate = useNavigate();
-  const { courseId } = useParams();
+  const { courseId, testId } = useParams();
 
   const [errorMessage, setErrorMessage] = useState<string | unknown>("");
   const [questions, setQuestions] = useState<IQuestion[]>([]);
@@ -26,7 +26,33 @@ export const TestPage = () => {
     }
   }, [courseId]);
 
+  useEffect(() => {
+    if (testId) {
+      fetchTest(Number(testId))
+        .then((data) => {
+          setFormData({
+            name: data.name,
+            questions: data.questions.map((question) => question),
+          });
+        })
+        .catch((error) => {
+          setErrorMessage(error);
+        });
+    }
+  }, [testId]);
+
   const saveTest = async () => {
+    if (testId) {
+      updateTest(Number(testId), formData.name, formData.questions)
+        .then(() => {
+          navigate(`/course/${courseId}`);
+        })
+        .catch((error) => {
+          setErrorMessage(error);
+        });
+      return;
+    }
+
     createTest(Number(courseId), formData.name, formData.questions)
       .then(() => {
         navigate(`/course/${courseId}`);
@@ -69,7 +95,7 @@ export const TestPage = () => {
           onClick={saveTest}
           disabled={!formData.name || !formData.questions.length}
         >
-          Create
+          Save
         </button>
       </div>
       {errorMessage ? (

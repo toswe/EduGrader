@@ -24,6 +24,10 @@ function App() {
             element={<QuestionPage />}
           />
           <Route path="/course/:courseId/new-test" element={<TestPage />} />
+          <Route
+            path="/course/:courseId/tests/:testId"
+            element={<TestPage />}
+          />
         </Route>
 
         <Route path="/login" element={<Login />} />

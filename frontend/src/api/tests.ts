@@ -17,3 +17,17 @@ export const createTest = async (
     .post(`courses/${courseId}/tests/`, { name, questions })
     .then((res) => res.data);
 };
+
+export const fetchTest = async (testId: number): Promise<ITest> => {
+  return axiosInstance.get(`/tests/${testId}/`).then((res) => res.data);
+};
+
+export const updateTest = async (
+  testId: number,
+  name: string,
+  questions: number[]
+): Promise<ITest> => {
+  return axiosInstance
+    .put(`/tests/${testId}/`, { name, questions })
+    .then((res) => res.data);
+};
