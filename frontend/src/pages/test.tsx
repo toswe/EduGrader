@@ -1,7 +1,8 @@
 import { useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router";
+
 import { fetchQuestions } from "../api/questions";
-import { createTest, fetchTest, updateTest } from "../api/tests";
+import { createTest, fetchTest, updateTest, deleteTest } from "../api/tests";
 import { IQuestion } from "../types";
 
 export const TestPage = () => {
@@ -62,6 +63,16 @@ export const TestPage = () => {
       });
   };
 
+  const removeTest = async () => {
+    deleteTest(Number(testId))
+      .then(() => {
+        navigate(`/course/${courseId}`);
+      })
+      .catch((error) => {
+        setErrorMessage(error);
+      });
+  };
+
   return (
     <div>
       <div>
@@ -97,6 +108,7 @@ export const TestPage = () => {
         >
           Save
         </button>
+        {testId && <button onClick={removeTest}>Delete</button>}
       </div>
       {errorMessage ? (
         <div className="error">{String(errorMessage)}</div>

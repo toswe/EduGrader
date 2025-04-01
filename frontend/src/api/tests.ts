@@ -31,3 +31,7 @@ export const updateTest = async (
     .put(`/tests/${testId}/`, { name, questions })
     .then((res) => res.data);
 };
+
+export const deleteTest = async (testId: number): Promise<void> => {
+  return axiosInstance.delete(`/tests/${testId}/`);
+};
