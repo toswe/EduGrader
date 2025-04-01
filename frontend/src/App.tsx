@@ -6,6 +6,7 @@ import { Login } from "./pages/login";
 import { Home } from "./pages/home";
 import { CoursePage } from "./pages/course";
 import { QuestionPage } from "./pages/question";
+import { TestPage } from "./pages/test";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             path="/course/:courseId/questions/:questionId"
             element={<QuestionPage />}
           />
+          <Route path="/course/:courseId/new-test" element={<TestPage />} />
         </Route>
 
         <Route path="/login" element={<Login />} />

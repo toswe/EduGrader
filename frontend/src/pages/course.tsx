@@ -76,6 +76,11 @@ export const CoursePage = () => {
           </div>
         ))}
       </div>
+      <div>
+        <Link to={`/course/${courseId}/new-test`}>
+          <button>Create test</button>
+        </Link>
+      </div>
     </>
   );
 };
