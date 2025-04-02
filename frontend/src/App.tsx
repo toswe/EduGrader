@@ -14,20 +14,13 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="/course/:courseId" element={<CoursePage />} />
-          <Route
-            path="/course/:courseId/new-question"
-            element={<QuestionPage />}
-          />
-          <Route
-            path="/course/:courseId/questions/:questionId"
-            element={<QuestionPage />}
-          />
-          <Route path="/course/:courseId/new-test" element={<TestPage />} />
-          <Route
-            path="/course/:courseId/tests/:testId"
-            element={<TestPage />}
-          />
+          <Route path="/course/:courseId/">
+            <Route index element={<CoursePage />} />
+            <Route path="new-question" element={<QuestionPage />} />
+            <Route path="questions/:questionId" element={<QuestionPage />} />
+            <Route path="new-test" element={<TestPage />} />
+            <Route path="tests/:testId" element={<TestPage />} />
+          </Route>
         </Route>
 
         <Route path="/login" element={<Login />} />
