@@ -2,7 +2,7 @@ import { useReducer, useState } from "react";
 import { AuthData } from "../auth/AuthWrapper";
 import { Navigate } from "react-router";
 
-export const Login = () => {
+const LoginPage = () => {
   const { login, user } = AuthData();
   const [formData, setFormData] = useReducer(
     (formData, newItem) => {
@@ -54,3 +54,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default LoginPage;

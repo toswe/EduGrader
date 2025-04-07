@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router";
 
-import { fetchCourse } from "../api/courses";
-import { fetchQuestions } from "../api/questions";
-import { fetchTests } from "../api/tests";
-import { ICourse, IQuestion, ITest } from "../types";
+import { fetchCourse } from "../../api/courses";
+import { fetchQuestions } from "../../api/questions";
+import { fetchTests } from "../../api/tests";
+import { ICourse, IQuestion, ITest } from "../../types";
 
-export const CoursePage = () => {
+const CoursePage = () => {
   const { courseId } = useParams();
 
   const [course, setCourse] = useState<ICourse | null>(null);
@@ -88,3 +88,5 @@ export const CoursePage = () => {
     </>
   );
 };
+
+export default CoursePage;

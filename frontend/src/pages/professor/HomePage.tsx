@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
-import { AuthData } from "../auth/AuthWrapper";
-import { fetchCourses } from "../api/courses";
-import { ICourse } from "../types";
+import { AuthData } from "../../auth/AuthWrapper";
+import { fetchCourses } from "../../api/courses";
+import { ICourse } from "../../types";
 
-export const Home = () => {
+const HomePage = () => {
   const { user, logout } = AuthData();
 
   const [courses, setCourses] = useState<ICourse[]>([]);
@@ -33,3 +33,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default HomePage;

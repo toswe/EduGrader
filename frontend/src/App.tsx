@@ -2,7 +2,7 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 
 import { AuthWrapper } from "./auth/AuthWrapper";
-import { Login } from "./pages/login";
+import LoginPage from "./pages/LoginPage";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <AuthWrapper>
       <Routes>
         <Route path="*" element={<ProtectedRoutes />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </AuthWrapper>
   );

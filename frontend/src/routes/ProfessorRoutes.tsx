@@ -1,13 +1,14 @@
 import { Route, Routes } from "react-router";
-import { Home } from "../pages/home";
-import { CoursePage } from "../pages/course";
-import { QuestionPage } from "../pages/question";
-import { TestPage } from "../pages/test";
+
+import HomePage from "../pages/professor/HomePage";
+import CoursePage from "../pages/professor/CoursePage";
+import QuestionPage from "../pages/professor/QuestionPage";
+import TestPage from "../pages/professor/TestPage";
 
 export function ProfessorRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/course/:courseId/">
         <Route index element={<CoursePage />} />
         <Route path="new-question" element={<QuestionPage />} />

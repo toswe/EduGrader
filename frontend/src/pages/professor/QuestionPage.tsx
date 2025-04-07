@@ -6,9 +6,9 @@ import {
   fetchQuestion,
   updateQuestion,
   deleteQuestion,
-} from "../api/questions";
+} from "../../api/questions";
 
-export const QuestionPage = () => {
+const QuestionPage = () => {
   const navigate = useNavigate();
   const { courseId, questionId } = useParams();
 
@@ -87,3 +87,5 @@ export const QuestionPage = () => {
     </div>
   );
 };
+
+export default QuestionPage;
