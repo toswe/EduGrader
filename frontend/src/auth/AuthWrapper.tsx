@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { Navigate, Outlet } from "react-router";
 import { getUserFromStorage, removeTokens, storeTokens } from "./util";
 
 import {
@@ -14,11 +13,6 @@ const AuthContext = createContext({
 });
 
 export const AuthData = () => useContext(AuthContext);
-
-export const ProtectedRoutes = () => {
-  const { user } = AuthData();
-  return user.isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
-};
 
 export const AuthWrapper = (props: any) => {
   const [user, setUser] = useState(getUserFromStorage());
