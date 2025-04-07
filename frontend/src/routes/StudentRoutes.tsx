@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import HomePage from "../pages/student/HomePage";
+import { HomePage } from "../pages/student";
 
 export function StudentRoutes() {
   return (

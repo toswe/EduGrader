@@ -7,7 +7,7 @@ import { fetchQuestions } from "../../api/questions";
 import { fetchTests } from "../../api/tests";
 import { ICourse, IQuestion, ITest } from "../../types";
 
-const CoursePage = () => {
+export const CoursePage = () => {
   const { courseId } = useParams();
 
   const [course, setCourse] = useState<ICourse | null>(null);
@@ -88,5 +88,3 @@ const CoursePage = () => {
     </>
   );
 };
-
-export default CoursePage;

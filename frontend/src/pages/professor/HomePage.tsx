@@ -5,7 +5,7 @@ import { AuthData } from "../../auth/AuthWrapper";
 import { fetchCourses } from "../../api/courses";
 import { ICourse } from "../../types";
 
-const HomePage = () => {
+export const HomePage = () => {
   const { user, logout } = AuthData();
 
   const [courses, setCourses] = useState<ICourse[]>([]);
@@ -33,5 +33,3 @@ const HomePage = () => {
     </>
   );
 };
-
-export default HomePage;

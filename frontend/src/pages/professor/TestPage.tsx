@@ -5,7 +5,7 @@ import { fetchQuestions } from "../../api/questions";
 import { createTest, fetchTest, updateTest, deleteTest } from "../../api/tests";
 import { IQuestion } from "../../types";
 
-const TestPage = () => {
+export const TestPage = () => {
   const navigate = useNavigate();
   const { courseId, testId } = useParams();
 
@@ -108,5 +108,3 @@ const TestPage = () => {
     </div>
   );
 };
-
-export default TestPage;

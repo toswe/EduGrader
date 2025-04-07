@@ -8,7 +8,7 @@ import {
   deleteQuestion,
 } from "../../api/questions";
 
-const QuestionPage = () => {
+export const QuestionPage = () => {
   const navigate = useNavigate();
   const { courseId, questionId } = useParams();
 
@@ -87,5 +87,3 @@ const QuestionPage = () => {
     </div>
   );
 };
-
-export default QuestionPage;

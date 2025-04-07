@@ -1,6 +1,6 @@
 import { AuthData } from "../../auth/AuthWrapper";
 
-const HomePage = () => {
+export const HomePage = () => {
   const { user, logout } = AuthData();
 
   return (
@@ -14,5 +14,3 @@ const HomePage = () => {
     </>
   );
 };
-
-export default HomePage;

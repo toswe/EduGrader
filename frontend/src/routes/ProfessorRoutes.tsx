@@ -1,9 +1,10 @@
 import { Route, Routes } from "react-router";
-
-import HomePage from "../pages/professor/HomePage";
-import CoursePage from "../pages/professor/CoursePage";
-import QuestionPage from "../pages/professor/QuestionPage";
-import TestPage from "../pages/professor/TestPage";
+import {
+  HomePage,
+  CoursePage,
+  QuestionPage,
+  TestPage,
+} from "../pages/professor";
 
 export function ProfessorRoutes() {
   return (
