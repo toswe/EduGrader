@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from backend.models import Question, Course, Test
+from backend.models import Question, Course, Test, StudentTest
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -23,6 +23,7 @@ class TestSerializer(serializers.ModelSerializer):
         read_only_fields = ("course",)
         extra_kwargs = {"questions": {"required": False}}
 
+    # TODO Validation.
     # def validate(self, data):
     #     questions = data.get("questions")
     #     course = self.instance.course
@@ -32,3 +33,13 @@ class TestSerializer(serializers.ModelSerializer):
     #         raise serializers.ValidationError(error_message)
 
     #     return data
+
+
+class StudentTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentTest
+        fields = "__all__"
+        read_only_fields = (
+            "student",
+            "test",
+        )

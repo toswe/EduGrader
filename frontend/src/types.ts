@@ -29,3 +29,10 @@ export interface ITest {
   course: number;
   questions: IQuestion[] | number[];
 }
+
+export interface IStudentTest {
+  id: number;
+  test: number;
+  student: number;
+  answers: { questionId: number; answer: string }[];
+}

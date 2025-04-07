@@ -8,8 +8,13 @@ from rest_framework.mixins import (
     DestroyModelMixin,
 )
 
-from backend.models import Question, Course, Test
-from backend.serializers import QuestionSerializer, CourseSerializer, TestSerializer
+from backend.models import Question, Course, Test, StudentTest
+from backend.serializers import (
+    QuestionSerializer,
+    CourseSerializer,
+    TestSerializer,
+    StudentTestSerializer,
+)
 
 
 class CourseRView(
@@ -129,3 +134,47 @@ class TestRUDView(
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class StudentTestCRView(
+    GenericAPIView,
+    ListModelMixin,
+    CreateModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = StudentTestSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        print(user)
+        return StudentTest.objects.filter(student=user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
+
+
+# class StudentTestRUDView(
+#     GenericAPIView,
+#     RetrieveModelMixin,
+#     UpdateModelMixin,
+#     DestroyModelMixin,
+# ):
+#     permission_classes = (IsAuthenticated,)
+#     serializer_class = StudentTestSerializer
+
+#     def get_queryset(self):
+#         user = self.request.user
+#         return StudentTest.objects.filter(student=user)
+
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
+
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)

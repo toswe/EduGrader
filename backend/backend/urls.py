@@ -18,7 +18,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from backend.views import QuestionCRView, QuestionRUDView, CourseRView, TestCRView, TestRUDView
+from backend.views import (
+    QuestionCRView,
+    QuestionRUDView,
+    CourseRView,
+    TestCRView,
+    TestRUDView,
+    StudentTestCRView,
+    # StudentTestRUDView,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -33,4 +41,7 @@ urlpatterns = [
     #
     path("courses/<int:pk>/tests/", TestCRView.as_view(), name="tests-CR"),
     path("tests/<int:pk>/", TestRUDView.as_view(), name="tests-RUD"),
+    #
+    path("student-tests/", StudentTestCRView.as_view(), name="user-tests-CR"),
+    # path("student-tests/<int:pk>/", StudentTestRUDView.as_view(), name="user-tests-RUD"),
 ]
