@@ -42,6 +42,6 @@ urlpatterns = [
     path("courses/<int:pk>/tests/", TestCRView.as_view(), name="tests-CR"),
     path("tests/<int:pk>/", TestRUDView.as_view(), name="tests-RUD"),
     #
-    path("student-tests/", StudentTestCRView.as_view(), name="user-tests-CR"),
-    # path("student-tests/<int:pk>/", StudentTestRUDView.as_view(), name="user-tests-RUD"),
+    path("student-tests/", StudentTestCRView.as_view(), name="student-tests-CR"),
+    # path("student-tests/<int:pk>/", StudentTestRUDView.as_view(), name="student-tests-RUD"),
 ]
