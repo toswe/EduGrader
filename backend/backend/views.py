@@ -178,3 +178,18 @@ class StudentTestCRView(
 
 #     def delete(self, request, *args, **kwargs):
 #         return self.destroy(request, *args, **kwargs)
+
+
+class UpcomingTestsView(
+    GenericAPIView,
+    ListModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = TestSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Test.objects.filter(course__users=user)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

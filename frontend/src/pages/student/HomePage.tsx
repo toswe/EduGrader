@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 
 import { AuthData } from "../../auth/AuthWrapper";
-import { fetchStudentTests } from "../../api/student-tests";
-import { IStudentTest } from "../../types";
+import { fetchUpcomingTests, fetchStudentTests } from "../../api/student-tests";
+import { ITest, IStudentTest } from "../../types";
 
 export const HomePage = () => {
   const { user, logout } = AuthData();
 
+  const [upcomingTests, setUpcomingTests] = useState<ITest[]>([]);
   const [studentTests, setStudentTests] = useState<IStudentTest[]>([]);
 
-  const fetchTests = async () => {
-    const tests = await fetchStudentTests();
-    setStudentTests(tests);
+  const fetchTests = () => {
+    fetchUpcomingTests().then((upcomingTests) => {
+      setUpcomingTests(upcomingTests);
+    });
+
+    fetchStudentTests().then((studentTests) => {
+      setStudentTests(studentTests);
+    });
   };
 
   useEffect(() => {
@@ -28,6 +34,14 @@ export const HomePage = () => {
       </div>
       <br />
       <div>
+        <h5>Upcoming Tests:</h5>
+        {upcomingTests.map((test: any) => {
+          return <div key={test.id}>{test.id}</div>;
+        })}
+      </div>
+      <br />
+      <div>
+        <h5>Completed Tests:</h5>
         {studentTests.map((test: any) => {
           return <div key={test.id}>{test.test}</div>;
         })}
