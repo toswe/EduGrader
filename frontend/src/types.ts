@@ -20,14 +20,18 @@ export interface IQuestion {
   id: number;
   question: string;
   answer: string;
-  course: number;
+  course: number | undefined;
 }
 
 export interface ITest {
   id: number;
   name: string;
   course: number;
-  questions: IQuestion[] | number[];
+  questions: number[];
+}
+
+export interface ITestQuestions extends Omit<ITest, "questions"> {
+  questions: IQuestion[];
 }
 
 export interface IStudentTest {

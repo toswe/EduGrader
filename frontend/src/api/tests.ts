@@ -1,6 +1,6 @@
 import axiosInstance from "./api";
 
-import { ITest } from "../types";
+import { ITest, ITestQuestions } from "../types";
 
 export const fetchTests = async (courseId: number): Promise<ITest[]> => {
   return axiosInstance
@@ -20,6 +20,14 @@ export const createTest = async (
 
 export const fetchTest = async (testId: number): Promise<ITest> => {
   return axiosInstance.get(`/tests/${testId}/`).then((res) => res.data);
+};
+
+export const fetchTestWithQuestions = async (
+  testId: number
+): Promise<ITestQuestions> => {
+  return axiosInstance
+    .get(`/tests/${testId}/?full_data=true`)
+    .then((res) => res.data);
 };
 
 export const updateTest = async (

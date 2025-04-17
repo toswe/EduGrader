@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
 import { fetchUpcomingTests, fetchStudentTests } from "../../api/student-tests";
 import { ITest, IStudentTest } from "../../types";
+import { Link } from "react-router";
 
 export const HomePage = () => {
   const { user, logout } = AuthData();
@@ -36,7 +37,11 @@ export const HomePage = () => {
       <div>
         <h5>Upcoming Tests:</h5>
         {upcomingTests.map((test: any) => {
-          return <div key={test.id}>{test.id}</div>;
+          return (
+            <Link key={test.id} to={`/test/${test.id}`}>
+              {test.name}
+            </Link>
+          );
         })}
       </div>
       <br />

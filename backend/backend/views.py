@@ -13,6 +13,7 @@ from backend.serializers import (
     QuestionSerializer,
     CourseSerializer,
     TestSerializer,
+    TestQuestionsSerializer,
     StudentTestSerializer,
 )
 
@@ -127,6 +128,9 @@ class TestRUDView(
         return Test.objects.filter(course__users=user)
 
     def get(self, request, *args, **kwargs):
+        if request.query_params.get("full_data", "false").lower() == "true":
+            self.serializer_class = TestQuestionsSerializer
+
         return self.retrieve(request, *args, **kwargs)
 
     def put(self, request, *args, **kwargs):

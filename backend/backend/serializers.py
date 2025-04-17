@@ -35,6 +35,12 @@ class TestSerializer(serializers.ModelSerializer):
     #     return data
 
 
+class TestQuestionsSerializer(TestSerializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["questions"] = QuestionSerializer(many=True, read_only=True)
+
+
 class StudentTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentTest
