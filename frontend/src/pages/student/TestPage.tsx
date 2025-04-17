@@ -1,43 +1,40 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { fetchTestWithQuestions } from "../../api/tests";
-import { IQuestion, ITestQuestions } from "../../types";
-import { useEffect, useState } from "react";
+import { ITestQuestions } from "../../types";
 
 export const TestPage = () => {
   const { testId } = useParams();
 
   const [test, setTest] = useState<ITestQuestions | null>(null);
-  const [answers, setAnswers] = useState<IQuestion[]>([]);
 
-  const fetchTestData = async () => {
-    if (!testId) {
-      return;
-    }
+  useEffect(() => {
+    // TODO Handle this, maybe redirect
+    if (!testId) return;
 
-    fetchTestWithQuestions(Number(testId)).then((test) => {
-      setTest(test);
-      const initialAnswers = test.questions.map((question) => ({
-        ...question,
-        answer: "",
-      }));
-      setAnswers(initialAnswers);
+    fetchTestWithQuestions(Number(testId)).then((testData) => {
+      setTest({
+        ...testData,
+        questions: testData.questions.map((q) => ({ ...q, answer: "" })),
+      });
     });
-  };
+  }, [testId]);
 
-  const handleInputChange = (index: number, value: string) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[index].answer = value;
-    setAnswers(updatedAnswers);
+  const handleChange = (questionId: number, value: string) => {
+    if (!test) return;
+
+    const newQuestions = test.questions.map((q) =>
+      q.id === questionId ? { ...q, answer: value } : q
+    );
+
+    setTest({ ...test, questions: newQuestions });
   };
 
   const handleSubmit = () => {
-    console.log("Submitted answers:", answers);
+    if (!test) return;
+    console.log("Submitted test:", test);
   };
-
-  useEffect(() => {
-    fetchTestData();
-  }, []);
 
   if (!test) {
     return <div>Loading...</div>;
@@ -54,13 +51,13 @@ export const TestPage = () => {
           handleSubmit();
         }}
       >
-        {test.questions.map((question, index) => (
-          <div key={index}>
+        {test.questions.map((question) => (
+          <div key={question.id}>
             {question.question}
             <br />
             <textarea
-              value={answers[index]?.answer || ""}
-              onChange={(e) => handleInputChange(index, e.target.value)}
+              value={question.answer || ""}
+              onChange={(e) => handleChange(question.id, e.target.value)}
             />
           </div>
         ))}
@@ -69,5 +66,3 @@ export const TestPage = () => {
     </>
   );
 };
-
-/// TODO Try to refactor this to only use one state variable
