@@ -28,4 +28,4 @@ class StudentTest(models.Model):
     student = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     test = models.ForeignKey(Test, null=True, on_delete=models.SET_NULL)
 
-    awnsers = models.JSONField(default=list)
+    answers = models.JSONField(default=list)
