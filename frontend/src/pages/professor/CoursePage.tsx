@@ -36,6 +36,7 @@ export const CoursePage = () => {
         <h3>{course?.name} </h3>
       </div>
       <div>
+        <h4>Questions</h4>
         {questions.map((question) => (
           <div
             key={question.id}
@@ -62,6 +63,7 @@ export const CoursePage = () => {
         </Link>
       </div>
       <div>
+        <h4>Tests</h4>
         {tests.map((test) => (
           <div
             key={test.id}
