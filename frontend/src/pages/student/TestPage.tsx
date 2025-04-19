@@ -2,33 +2,41 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import { fetchTestWithQuestions } from "../../api/tests";
-import { ITestQuestions } from "../../types";
+import { ITestQuestions, IStudentTest } from "../../types";
+
+const createStudentTest = (test: ITestQuestions): IStudentTest => {
+  return {
+    test: test.id,
+    answers: test.questions.map((q) => ({
+      id: q.id,
+      question: q.question,
+      answer: "",
+    })),
+  };
+};
 
 export const TestPage = () => {
   const { testId } = useParams();
 
-  const [test, setTest] = useState<ITestQuestions | null>(null);
+  const [test, setTest] = useState<IStudentTest | null>(null);
 
   useEffect(() => {
     // TODO Handle this, maybe redirect
     if (!testId) return;
 
     fetchTestWithQuestions(Number(testId)).then((testData) => {
-      setTest({
-        ...testData,
-        questions: testData.questions.map((q) => ({ ...q, answer: "" })),
-      });
+      setTest(createStudentTest(testData));
     });
   }, [testId]);
 
   const handleChange = (questionId: number, value: string) => {
     if (!test) return;
 
-    const newQuestions = test.questions.map((q) =>
+    const newAnswers = test.answers.map((q) =>
       q.id === questionId ? { ...q, answer: value } : q
     );
 
-    setTest({ ...test, questions: newQuestions });
+    setTest({ ...test, answers: newAnswers });
   };
 
   const handleSubmit = () => {
@@ -42,16 +50,13 @@ export const TestPage = () => {
 
   return (
     <>
-      <div>
-        <h3>{test.name}</h3>
-      </div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
           handleSubmit();
         }}
       >
-        {test.questions.map((question) => (
+        {test.answers.map((question) => (
           <div key={question.id}>
             {question.question}
             <br />

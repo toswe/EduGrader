@@ -20,7 +20,7 @@ export interface IQuestion {
   id: number;
   question: string;
   answer: string;
-  course: number | undefined;
+  course?: number;
 }
 
 export interface ITest {
@@ -35,8 +35,8 @@ export interface ITestQuestions extends Omit<ITest, "questions"> {
 }
 
 export interface IStudentTest {
-  id: number;
+  id?: number;
+  student?: number;
   test: number;
-  student: number;
-  answers: { questionId: number; answer: string }[];
+  answers: IQuestion[];
 }
