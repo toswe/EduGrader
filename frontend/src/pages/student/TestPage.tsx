@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router";
 
 import { fetchTestWithQuestions } from "../../api/tests";
+import { createStudentTest } from "../../api/student-tests";
 import { ITestQuestions, IStudentTest } from "../../types";
 
-const createStudentTest = (test: ITestQuestions): IStudentTest => {
+const initStudentTest = (test: ITestQuestions): IStudentTest => {
   return {
     test: test.id,
     answers: test.questions.map((q) => ({
@@ -17,6 +19,7 @@ const createStudentTest = (test: ITestQuestions): IStudentTest => {
 
 export const TestPage = () => {
   const { testId } = useParams();
+  const navigate = useNavigate();
 
   const [test, setTest] = useState<IStudentTest | null>(null);
 
@@ -25,7 +28,7 @@ export const TestPage = () => {
     if (!testId) return;
 
     fetchTestWithQuestions(Number(testId)).then((testData) => {
-      setTest(createStudentTest(testData));
+      setTest(initStudentTest(testData));
     });
   }, [testId]);
 
@@ -41,7 +44,7 @@ export const TestPage = () => {
 
   const handleSubmit = () => {
     if (!test) return;
-    console.log("Submitted test:", test);
+    createStudentTest(test).then(() => navigate("/"));
   };
 
   if (!test) {

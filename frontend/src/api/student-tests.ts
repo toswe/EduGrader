@@ -8,3 +8,7 @@ export const fetchUpcomingTests = async (): Promise<ITest[]> => {
 export const fetchStudentTests = async (): Promise<IStudentTest[]> => {
   return axiosInstance.get(`/student-tests/`).then((res) => res.data);
 };
+
+export const createStudentTest = async (test: IStudentTest) => {
+  return axiosInstance.post(`/student-tests/`, test).then((res) => res.data);
+};

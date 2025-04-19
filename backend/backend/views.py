@@ -150,15 +150,19 @@ class StudentTestCRView(
 
     def get_queryset(self):
         user = self.request.user
-        print(user)
         return StudentTest.objects.filter(student=user)
+
+    def perform_create(self, serializer):
+        test_pk = self.request.data.get("test")
+        test = Test.objects.get(pk=test_pk)
+
+        serializer.save(student=self.request.user, test=test)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
-
-#     def post(self, request, *args, **kwargs):
-#         return self.create(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 # class StudentTestRUDView(
