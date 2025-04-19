@@ -14,12 +14,16 @@ const LoginPage = () => {
     null
   );
 
-  const doLogin = async () => {
-    try {
-      await login(formData.userName, formData.password);
-    } catch (error) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setFormData({ [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login(formData.userName, formData.password).catch((error) => {
       setErrorMessage(error);
-    }
+    });
   };
 
   if (user.isAuthenticated) {
@@ -29,28 +33,28 @@ const LoginPage = () => {
   return (
     <div>
       <h2>Login page</h2>
-      <div className="inputs">
-        <div className="input">
+      <form onSubmit={handleSubmit}>
+        <div>
           <input
             value={formData.userName}
-            onChange={(e) => setFormData({ userName: e.target.value })}
+            name="userName"
             type="text"
+            onChange={handleChange}
           />
         </div>
-        <div className="input">
+        <div>
           <input
             value={formData.password}
-            onChange={(e) => setFormData({ password: e.target.value })}
+            name="password"
             type="password"
+            onChange={handleChange}
           />
         </div>
-        <div className="button">
-          <button onClick={doLogin}>Log in</button>
+        <div>
+          <button type="submit">Log in</button>
         </div>
-        {errorMessage ? (
-          <div className="error">{String(errorMessage)}</div>
-        ) : null}
-      </div>
+        {errorMessage ? <div>{String(errorMessage)}</div> : null}
+      </form>
     </div>
   );
 };

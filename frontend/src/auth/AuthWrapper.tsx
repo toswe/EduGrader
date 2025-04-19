@@ -8,7 +8,7 @@ import {
 
 const AuthContext = createContext({
   user: getUserFromStorage(),
-  login: (_username: string, _password: string) => {},
+  login: async (_username: string, _password: string) => {},
   logout: () => {},
 });
 
@@ -17,7 +17,7 @@ export const AuthData = () => useContext(AuthContext);
 export const AuthWrapper = (props: any) => {
   const [user, setUser] = useState(getUserFromStorage());
 
-  const login = (username: string, password: string) => {
+  const login = async (username: string, password: string) => {
     return makeLoginRequest(username, password).then((response) => {
       storeTokens(response);
       setUser(getUserFromStorage());
