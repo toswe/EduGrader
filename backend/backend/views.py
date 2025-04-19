@@ -8,6 +8,8 @@ from rest_framework.mixins import (
     DestroyModelMixin,
 )
 
+from authentification.permissions import IsProfessor, IsStudent
+from authentification.decorators import professor_route, student_route
 from backend.models import Question, Course, Test, StudentTest
 from backend.serializers import (
     QuestionSerializer,
@@ -23,7 +25,7 @@ class CourseRView(
     RetrieveModelMixin,
     ListModelMixin,
 ):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsProfessor)
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
@@ -42,7 +44,7 @@ class QuestionCRView(
     ListModelMixin,
     CreateModelMixin,
 ):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsProfessor)
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
@@ -68,7 +70,7 @@ class QuestionRUDView(
     UpdateModelMixin,
     DestroyModelMixin,
 ):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsProfessor)
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
@@ -110,6 +112,7 @@ class TestCRView(
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    @professor_route
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -133,9 +136,11 @@ class TestRUDView(
 
         return self.retrieve(request, *args, **kwargs)
 
+    @professor_route
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
+    @professor_route
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
 
@@ -161,38 +166,16 @@ class StudentTestCRView(
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+    @student_route
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-
-
-# class StudentTestRUDView(
-#     GenericAPIView,
-#     RetrieveModelMixin,
-#     UpdateModelMixin,
-#     DestroyModelMixin,
-# ):
-#     permission_classes = (IsAuthenticated,)
-#     serializer_class = StudentTestSerializer
-
-#     def get_queryset(self):
-#         user = self.request.user
-#         return StudentTest.objects.filter(student=user)
-
-#     def get(self, request, *args, **kwargs):
-#         return self.retrieve(request, *args, **kwargs)
-
-#     def put(self, request, *args, **kwargs):
-#         return self.update(request, *args, **kwargs)
-
-#     def delete(self, request, *args, **kwargs):
-#         return self.destroy(request, *args, **kwargs)
 
 
 class UpcomingTestsView(
     GenericAPIView,
     ListModelMixin,
 ):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsStudent)
     serializer_class = TestSerializer
 
     def get_queryset(self):
