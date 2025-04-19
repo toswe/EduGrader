@@ -10,3 +10,9 @@ class User(AbstractUser):
             ("PROFESSOR", "Professor"),
         ],
     )
+
+    def is_student(self):
+        return self.type == "STUDENT"
+
+    def is_professor(self):
+        return self.type == "PROFESSOR"

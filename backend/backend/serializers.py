@@ -9,6 +9,19 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = "__all__"
         read_only_fields = ("course",)
 
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        if (
+            (request := self.context.get("request"))
+            and hasattr(request, "user")
+            and request.user.is_professor()
+        ):
+            return data
+
+        data["answer"] = ""
+        return data
+
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
