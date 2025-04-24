@@ -5,7 +5,8 @@ import { Link } from "react-router";
 import { fetchCourse } from "../../api/courses";
 import { fetchQuestions } from "../../api/questions";
 import { fetchTests } from "../../api/tests";
-import { ICourse, IQuestion, ITest } from "../../types";
+import { fetchStudentTests } from "../../api/student-tests";
+import { ICourse, IQuestion, IStudentTest, ITest } from "../../types";
 
 export const CoursePage = () => {
   const { courseId } = useParams();
@@ -13,6 +14,7 @@ export const CoursePage = () => {
   const [course, setCourse] = useState<ICourse | null>(null);
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [tests, setTests] = useState<ITest[]>([]);
+  const [studentTests, setStudentTests] = useState<IStudentTest[]>([]);
 
   useEffect(() => {
     if (courseId) {
@@ -26,6 +28,10 @@ export const CoursePage = () => {
 
       fetchTests(Number(courseId)).then((data) => {
         setTests(data);
+      });
+
+      fetchStudentTests({ course: Number(courseId) }).then((data) => {
+        setStudentTests(data);
       });
     }
   }, []);
@@ -86,6 +92,22 @@ export const CoursePage = () => {
         <Link to={`/course/${courseId}/new-test`}>
           <button>Create test</button>
         </Link>
+      </div>
+      <div>
+        <h4>Student Tests</h4>
+        {studentTests.map((studentTest) => (
+          <div
+            key={studentTest.id}
+            style={{
+              border: "1px solid black",
+              margin: "10px",
+              padding: "5px",
+              borderRadius: "5px",
+            }}
+          >
+            <strong>{studentTest.id}</strong>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -155,7 +155,19 @@ class StudentTestCRView(
 
     def get_queryset(self):
         user = self.request.user
-        return StudentTest.objects.filter(student=user)
+        queryset = StudentTest.objects.all()
+
+        if test_id := self.request.query_params.get("test", False):
+            queryset = queryset.filter(test_id=test_id)
+
+        if course_id := self.request.query_params.get("course", False):
+            queryset = queryset.filter(test__course_id=course_id)
+
+        if user.is_student():
+            return queryset.filter(student=user)
+
+        courses = user.courses.all()
+        return queryset.filter(test__course__in=courses)
 
     def perform_create(self, serializer):
         test_pk = self.request.data.get("test")
