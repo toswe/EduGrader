@@ -9,23 +9,30 @@ class Course(models.Model):
 
 
 class Question(models.Model):
-    course = models.ForeignKey("Course", on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     question = models.TextField()
     answer = models.TextField()
 
 
 class Test(models.Model):
-    course = models.ForeignKey("Course", on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=200)
-    questions = models.ManyToManyField("Question", related_name="tests")
+    questions = models.ManyToManyField(Question, related_name="tests")
 
     is_active = models.BooleanField(default=False)
 
 
 class StudentTest(models.Model):
-    student = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
     test = models.ForeignKey(Test, null=True, on_delete=models.SET_NULL)
 
-    answers = models.JSONField(default=list)
+
+class StudentAnswer(models.Model):
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    test = models.ForeignKey(StudentTest, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
+
+    question_text = models.TextField()
+    answer = models.TextField()
