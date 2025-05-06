@@ -1,4 +1,6 @@
 import axiosInstance from "./api";
+import snakecaseKeys from "snakecase-keys";
+import camelcaseKeys from "camelcase-keys";
 import { ITest, IStudentTest } from "../types";
 
 export const fetchUpcomingTests = async (): Promise<ITest[]> => {
@@ -14,5 +16,7 @@ export const fetchStudentTests = async (
 };
 
 export const createStudentTest = async (test: IStudentTest) => {
-  return axiosInstance.post(`/student-tests/`, test).then((res) => res.data);
+  return axiosInstance
+    .post(`/student-tests/`, snakecaseKeys({ ...test }, { deep: true }))
+    .then((res) => camelcaseKeys(res.data, { deep: true, lowercase: true }));
 };

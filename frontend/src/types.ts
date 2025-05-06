@@ -34,9 +34,17 @@ export interface ITestQuestions extends Omit<ITest, "questions"> {
   questions: IQuestion[];
 }
 
-export interface IStudentTest {
+export interface IStudentAnswer {
+  id?: number;
+  studentTest?: number;
+  question: number;
+  questionText: string;
+  answer: string;
+}
+
+export interface IStudentTest extends Object {
   id?: number;
   student?: number;
   test: number;
-  answers: IQuestion[];
+  answers: IStudentAnswer[];
 }

@@ -10,8 +10,8 @@ const initStudentTest = (test: ITestQuestions): IStudentTest => {
   return {
     test: test.id,
     answers: test.questions.map((q) => ({
-      id: q.id,
-      question: q.question,
+      question: q.id,
+      questionText: q.question,
       answer: "",
     })),
   };
@@ -36,7 +36,7 @@ export const TestPage = () => {
     if (!test) return;
 
     const newAnswers = test.answers.map((q) =>
-      q.id === questionId ? { ...q, answer: value } : q
+      q.question === questionId ? { ...q, answer: value } : q
     );
 
     setTest({ ...test, answers: newAnswers });
@@ -59,13 +59,13 @@ export const TestPage = () => {
           handleSubmit();
         }}
       >
-        {test.answers.map((question) => (
-          <div key={question.id}>
-            {question.question}
+        {test.answers.map((answer) => (
+          <div key={answer.id}>
+            {answer.questionText}
             <br />
             <textarea
-              value={question.answer || ""}
-              onChange={(e) => handleChange(question.id, e.target.value)}
+              value={answer.answer || ""}
+              onChange={(e) => handleChange(answer.question, e.target.value)}
             />
           </div>
         ))}
