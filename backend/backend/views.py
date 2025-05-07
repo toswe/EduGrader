@@ -10,7 +10,7 @@ from rest_framework.mixins import (
 
 from authentification.permissions import IsProfessor, IsStudent
 from authentification.decorators import professor_route, student_route
-from backend.models import Question, Course, Test, StudentTest
+from backend.models import Question, Course, Test, StudentTest, StudentAnswer
 from backend.serializers import (
     QuestionSerializer,
     CourseSerializer,
@@ -169,11 +169,34 @@ class StudentTestCRView(
         courses = user.courses.all()
         return queryset.filter(test__course__in=courses)
 
+    def _create_answers(self, student_test):
+        # TODO This logic should be moved to a serializer.
+        answers = self.request.data.get("answers", [])
+        for answer_data in answers:
+            question_id = answer_data.get("question")
+            answer_text = answer_data.get("answer")
+            if not question_id:
+                continue
+
+            try:
+                question = Question.objects.get(pk=question_id)
+            except Question.DoesNotExist:
+                continue
+
+            StudentAnswer.objects.create(
+                test=student_test,
+                question=question,
+                student=self.request.user,
+                question_text=question.question,
+                answer=answer_text,
+            )
+
     def perform_create(self, serializer):
         test_pk = self.request.data.get("test")
         test = Test.objects.get(pk=test_pk)
 
-        serializer.save(student=self.request.user, test=test)
+        student_test = serializer.save(student=self.request.user, test=test)
+        self._create_answers(student_test)
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
