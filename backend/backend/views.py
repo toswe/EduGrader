@@ -198,6 +198,12 @@ class StudentTestCRView(
         student_test = serializer.save(student=self.request.user, test=test)
         self._create_answers(student_test)
 
+        # TODO This logic should be moved.
+        from threading import Thread
+        from grading.grader import grade_student_test
+
+        Thread(target=grade_student_test, args=(student_test.id,)).start()
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
