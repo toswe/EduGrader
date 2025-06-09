@@ -45,3 +45,10 @@ def grade_student_test(student_test_id):
 
     for answer in student_answers:
         _grade_answer(answer)
+
+
+def grade_test(test_id):
+    student_answers = StudentAnswer.objects.filter(test=test_id)
+
+    for answer in student_answers:
+        _grade_answer(answer)
