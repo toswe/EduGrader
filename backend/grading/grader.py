@@ -10,8 +10,8 @@ def _grade_answer(answer):
 Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
 Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i tačan odgovor.
 Na osnovu toga treba da oceniš odgovor studenta i da odgovoriš na sledeći način:
-1. Ako je odgovor tačan, odgovori sa "T"
-2. Ako je odgovor netačan, odgovori sa "N"
+Prvi red treba da sadrži samo broj na skali od 0 do 100, gde je 100 najbolja ocena a 0 najgora.
+Ostatak odgovora treba da sadrži obrazloženje ocene.
 """
 
     prompt = f"""
@@ -30,13 +30,15 @@ Odgovor studenta:
 {answer.answer}
 ```
 """
+
     result = openai_grader.prompt(prompt, instructions=instructions)
-    is_correct = result.output[0].content[0].text == "T"
+    score = int(result.output[0].content[0].text.split("\n")[0])
 
     AnswerGrade.objects.create(
         student_answer=answer,
-        is_correct=is_correct,
+        prompt=prompt,
         llm_response=result.to_dict(),
+        score=score,
     )
 
 
@@ -48,7 +50,7 @@ def grade_student_test(student_test_id):
 
 
 def grade_test(test_id):
-    student_answers = StudentAnswer.objects.filter(test=test_id)
+    student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
 
     for answer in student_answers:
         _grade_answer(answer)
