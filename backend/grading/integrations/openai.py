@@ -1,7 +1,9 @@
 from openai import OpenAI as OpenAIRaw
 
+from grading.integrations.integration import LLMIntegration
 
-class OpenAI:
+
+class OpenAI(LLMIntegration):
     def __init__(self):
         self.client = OpenAIRaw()  # Api key read from OPENAI_API_KEY env variable by default
 
