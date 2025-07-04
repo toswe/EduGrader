@@ -35,12 +35,17 @@ Odgovor studenta:
 """
 
 
-def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, **kwargs):
+def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=True, **kwargs):
     instructions += SCORING_INSTRUCTIONS
+
+    question = QUESTION_WRAPPER.format(question_text=answer.question_text)
+    correct_answer = CORRECT_ANSWER_WRAPPER.format(correct_answer=answer.question.answer)
+    student_answer = STUDENT_ANSWER_WRAPPER.format(student_answer=answer.answer)
+
     prompt = [
-        QUESTION_WRAPPER.format(question_text=answer.question_text),
-        CORRECT_ANSWER_WRAPPER.format(correct_answer=answer.question.answer),
-        STUDENT_ANSWER_WRAPPER.format(student_answer=answer.answer),
+        question,
+        *([correct_answer] if use_correct_answer else []),
+        student_answer,
     ].join("\n")
 
     result = openai_grader.prompt(prompt, instructions=instructions, **kwargs)
