@@ -212,6 +212,36 @@ class StudentTestCRView(
         return self.create(request, *args, **kwargs)
 
 
+class StudentTestRUDView(
+    GenericAPIView,
+    RetrieveModelMixin,
+    # UpdateModelMixin,
+    # DestroyModelMixin,
+):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = StudentTestSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_student():
+            return StudentTest.objects.filter(student=user)
+
+        courses = user.courses.all()
+        return StudentTest.objects.filter(test__course__in=courses)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    # @student_route
+    # def put(self, request, *args, **kwargs):
+    #     return self.update(request, *args, **kwargs)
+
+    # @student_route
+    # def delete(self, request, *args, **kwargs):
+    #     return self.destroy(request, *args, **kwargs)
+
+
 class UpcomingTestsView(
     GenericAPIView,
     ListModelMixin,

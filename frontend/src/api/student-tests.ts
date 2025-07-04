@@ -20,3 +20,7 @@ export const createStudentTest = async (test: IStudentTest) => {
     .post(`/student-tests/`, snakecaseKeys({ ...test }, { deep: true }))
     .then((res) => camelcaseKeys(res.data, { deep: true, lowercase: true }));
 };
+
+export const fetchStudentTest = async (id: number): Promise<IStudentTest> => {
+  return axiosInstance.get(`/student-tests/${id}/`).then((res) => res.data);
+};

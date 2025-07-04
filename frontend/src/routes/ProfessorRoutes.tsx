@@ -4,6 +4,7 @@ import {
   CoursePage,
   QuestionPage,
   TestPage,
+  StudentTestPage,
 } from "../pages/professor";
 
 export function ProfessorRoutes() {
@@ -16,6 +17,7 @@ export function ProfessorRoutes() {
         <Route path="questions/:questionId" element={<QuestionPage />} />
         <Route path="new-test" element={<TestPage />} />
         <Route path="tests/:testId" element={<TestPage />} />
+        <Route path="student-tests/:studentTestId" element={<StudentTestPage />} />
       </Route>
     </Routes>
   );

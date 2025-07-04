@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router";
 
 import { fetchQuestions } from "../../api/questions";
 import { createTest, fetchTest, updateTest, deleteTest } from "../../api/tests";
-import { IQuestion } from "../../types";
+import { fetchStudentTests } from "../../api/student-tests";
+import { IQuestion, IStudentTest } from "../../types";
 
 export const TestPage = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export const TestPage = () => {
 
   const [errorMessage, setErrorMessage] = useState<string | unknown>("");
   const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const [studentTests, setStudentTests] = useState<IStudentTest[]>([]);
 
   const [formData, setFormData] = useReducer(
     (formData, newItem) => {
@@ -35,6 +37,14 @@ export const TestPage = () => {
             ...data,
             configuration: JSON.stringify(data.configuration, null, 2),
           });
+        })
+        .catch((error) => {
+          setErrorMessage(error);
+        });
+
+      fetchStudentTests({ test: Number(testId) })
+        .then((data) => {
+          setStudentTests(data);
         })
         .catch((error) => {
           setErrorMessage(error);
@@ -118,6 +128,25 @@ export const TestPage = () => {
       {errorMessage ? (
         <div className="error">{String(errorMessage)}</div>
       ) : null}
+
+      <div>
+        {studentTests.length > 0 && (
+          <>
+            <h3>Student Tests</h3>
+            <ul>
+              {studentTests.map((studentTest) => (
+                <li key={studentTest.id}>
+                  <a
+                    href={`/course/${courseId}/student-tests/${studentTest.id}`}
+                  >
+                    {studentTest.id}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
     </div>
   );
 };
