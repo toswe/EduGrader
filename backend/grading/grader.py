@@ -42,11 +42,11 @@ def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=
     correct_answer = CORRECT_ANSWER_WRAPPER.format(correct_answer=answer.question.answer)
     student_answer = STUDENT_ANSWER_WRAPPER.format(student_answer=answer.answer)
 
-    prompt = [
+    prompt = "\n".join([
         question,
         *([correct_answer] if use_correct_answer else []),
         student_answer,
-    ].join("\n")
+    ])
 
     result = openai_grader.prompt(prompt, instructions=instructions, **kwargs)
     score = int(result.output[0].content[0].text.split("\n")[0])

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from backend.models import Question, Course, Test, StudentTest
+from backend.models import Question, Course, Test, StudentAnswer, StudentTest
+from grading.serializers import AnswerGradeSerializer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -54,6 +55,18 @@ class TestQuestionsSerializer(TestSerializer):
         self.fields["questions"] = QuestionSerializer(many=True, read_only=True)
 
 
+class StudentAnswerSerializer(serializers.ModelSerializer):
+    grades = AnswerGradeSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = StudentAnswer
+        fields = "__all__"
+        read_only_fields = (
+            "student_test",
+            "question",
+        )
+
+
 class StudentTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentTest
@@ -62,3 +75,6 @@ class StudentTestSerializer(serializers.ModelSerializer):
             "student",
             "test",
         )
+
+class StudentTestAnswersSerializer(StudentTestSerializer):
+    answers = StudentAnswerSerializer(many=True, read_only=True)

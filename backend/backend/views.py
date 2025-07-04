@@ -17,6 +17,7 @@ from backend.serializers import (
     TestSerializer,
     TestQuestionsSerializer,
     StudentTestSerializer,
+    StudentTestAnswersSerializer,
 )
 
 
@@ -219,7 +220,7 @@ class StudentTestRUDView(
     # DestroyModelMixin,
 ):
     permission_classes = (IsAuthenticated,)
-    serializer_class = StudentTestSerializer
+    serializer_class = StudentTestAnswersSerializer
 
     def get_queryset(self):
         user = self.request.user

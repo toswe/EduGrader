@@ -32,7 +32,7 @@ class StudentTest(models.Model):
 
 class StudentAnswer(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
-    test = models.ForeignKey(StudentTest, on_delete=models.CASCADE)
+    test = models.ForeignKey(StudentTest, on_delete=models.CASCADE, related_name="answers")
     question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
 
     question_text = models.TextField()
