@@ -5,7 +5,7 @@ from grading.models import AnswerGrade
 openai_grader = openai.OpenAI()
 
 
-def _grade_answer(answer, instructions=None):
+def _grade_answer(answer, instructions=None, **kwargs):
     if not instructions:
         instructions = """
 Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
@@ -36,7 +36,7 @@ Odgovor studenta:
 ```
 """
 
-    result = openai_grader.prompt(prompt, instructions=instructions)
+    result = openai_grader.prompt(prompt, instructions=instructions, **kwargs)
     score = int(result.output[0].content[0].text.split("\n")[0])
 
     AnswerGrade.objects.create(
