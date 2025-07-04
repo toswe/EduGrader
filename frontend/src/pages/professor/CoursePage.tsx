@@ -105,7 +105,7 @@ export const CoursePage = () => {
               borderRadius: "5px",
             }}
           >
-            <strong>{studentTest.id}</strong>
+            <a href={`/course/${courseId}/student-tests/${studentTest.id}`}>{studentTest.id}</a>
           </div>
         ))}
       </div>
