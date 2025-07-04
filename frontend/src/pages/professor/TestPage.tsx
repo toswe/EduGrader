@@ -16,7 +16,7 @@ export const TestPage = () => {
     (formData, newItem) => {
       return { ...formData, ...newItem };
     },
-    { name: "", questions: [] }
+    { name: "", configuration: "", questions: [] }
   );
 
   useEffect(() => {
@@ -32,8 +32,8 @@ export const TestPage = () => {
       fetchTest(Number(testId))
         .then((data) => {
           setFormData({
-            name: data.name,
-            questions: data.questions.map((question) => question),
+            ...data,
+            configuration: JSON.stringify(data.configuration, null, 2),
           });
         })
         .catch((error) => {
@@ -53,10 +53,13 @@ export const TestPage = () => {
   };
 
   const saveTest = async () => {
+    const data = {
+      ...formData,
+      course: Number(courseId),
+      configuration: JSON.parse(formData.configuration || "{}"),
+    };
     const createOrUpdateTest = async () => {
-      testId
-        ? updateTest(Number(testId), formData.name, formData.questions)
-        : createTest(Number(courseId), formData.name, formData.questions);
+      testId ? updateTest({ ...data, id: Number(testId) }) : createTest(data);
     };
     makeRequestAndRedirect(() => createOrUpdateTest());
   };
@@ -72,6 +75,16 @@ export const TestPage = () => {
           value={formData.name}
           onChange={(e) => setFormData({ name: e.target.value })}
           type="text"
+        />
+      </div>
+      <div>
+        Config:
+        <br />
+        <textarea
+          value={formData.configuration}
+          onChange={(e) => setFormData({ configuration: e.target.value })}
+          rows={10}
+          cols={50}
         />
       </div>
       <div>

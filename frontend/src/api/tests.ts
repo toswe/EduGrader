@@ -9,12 +9,10 @@ export const fetchTests = async (courseId: number): Promise<ITest[]> => {
 };
 
 export const createTest = async (
-  courseId: number,
-  name: string,
-  questions: number[]
+  data: ITest | Omit<ITest, "id">,
 ): Promise<ITest> => {
   return axiosInstance
-    .post(`courses/${courseId}/tests/`, { name, questions })
+    .post(`courses/${data.course}/tests/`, data) // TODO Change this route to be more RESTful
     .then((res) => res.data);
 };
 
@@ -31,12 +29,10 @@ export const fetchTestWithQuestions = async (
 };
 
 export const updateTest = async (
-  testId: number,
-  name: string,
-  questions: number[]
+  data: ITest,
 ): Promise<ITest> => {
   return axiosInstance
-    .put(`/tests/${testId}/`, { name, questions })
+    .put(`/tests/${data.id}/`, data)
     .then((res) => res.data);
 };
 

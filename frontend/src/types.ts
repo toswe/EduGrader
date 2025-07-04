@@ -28,6 +28,7 @@ export interface ITest {
   name: string;
   course: number;
   questions: number[];
+  configuration: object;
 }
 
 export interface ITestQuestions extends Omit<ITest, "questions"> {
