@@ -20,6 +20,7 @@ class Test(models.Model):
 
     name = models.CharField(max_length=200)
     questions = models.ManyToManyField(Question, related_name="tests")
+    configuration = models.JSONField(default=dict, blank=True)
 
     is_active = models.BooleanField(default=False)
 
