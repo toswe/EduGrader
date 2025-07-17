@@ -28,4 +28,6 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+// TODO Convert all responses to camelCase
+
 export default axiosInstance;

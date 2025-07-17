@@ -22,5 +22,7 @@ export const createStudentTest = async (test: IStudentTest) => {
 };
 
 export const fetchStudentTest = async (id: number): Promise<IStudentTest> => {
-  return axiosInstance.get(`/student-tests/${id}/`).then((res) => res.data);
+  return axiosInstance
+    .get(`/student-tests/${id}/`)
+    .then((res) => camelcaseKeys(res.data, { deep: true, lowercase: true }));
 };

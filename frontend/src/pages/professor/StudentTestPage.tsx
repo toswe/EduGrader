@@ -4,7 +4,7 @@ import { fetchStudentTest } from "../../api/student-tests";
 import { IStudentTest } from "../../types";
 
 export const StudentTestPage = () => {
-  const { studentTestId } = useParams();
+  const { courseId, studentTestId } = useParams();
   const [studentTest, setStudentTest] = useState<IStudentTest | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -35,7 +35,33 @@ export const StudentTestPage = () => {
         <strong>ID:</strong> {studentTest.id}
       </p>
       <p>
-        <strong>Test:</strong> {studentTest.test}
+        <strong>Test:</strong>{" "}
+        <a href={`/course/${courseId}/tests/${studentTest.test}`}>
+          {studentTest.test}
+        </a>
+      </p>
+      <p>
+        Answers:
+        {studentTest.answers.map((answer) => (
+          <div
+            key={answer.id}
+            style={{
+              border: "1px solid black",
+              margin: "10px",
+              padding: "5px",
+              borderRadius: "5px",
+            }}
+          >
+            <strong>Question:</strong> {answer.questionText}
+            <br />
+            <strong>Answer:</strong> {answer.answer}
+            <br />
+            <strong>Score:</strong>{" "}
+            {answer.grades.length > 0
+              ? answer.grades[answer.grades.length - 1].score
+              : "Not graded"}
+          </div>
+        ))}
       </p>
     </div>
   );

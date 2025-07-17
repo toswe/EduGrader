@@ -35,12 +35,21 @@ export interface ITestQuestions extends Omit<ITest, "questions"> {
   questions: IQuestion[];
 }
 
+export interface IAnswerGrade {
+  id?: number;
+  prompt: string;
+  llm_response: any;
+  score: number;
+  student_answer: number; // ID of the student's answer
+}
+
 export interface IStudentAnswer {
   id?: number;
   studentTest?: number;
   question: number;
   questionText: string;
   answer: string;
+  grades: IAnswerGrade[];
 }
 
 export interface IStudentTest extends Object {
