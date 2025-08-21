@@ -9,41 +9,54 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("csv_path", type=str, help="Path to the CSV file")
-        parser.add_argument("--course_id", type=int, help="Optional course ID")
 
     def handle(self, *args, **options):
         csv_path = options["csv_path"]
-        course_id = options.get("course_id")
 
         if not os.path.exists(csv_path):
             raise CommandError(f"The file {csv_path} does not exist.")
 
-        # Determine course
-        if course_id:
-            try:
-                course = Course.objects.get(id=course_id)
-            except Course.DoesNotExist:
-                raise CommandError(f"Course with ID {course_id} does not exist.")
-        else:
-            course_name = os.path.splitext(os.path.basename(csv_path))[0]
-            course = Course.objects.create(name=course_name)
+        course_name = os.path.basename(os.path.dirname(csv_path))
+        course, created = Course.objects.get_or_create(name=course_name)
 
         self.stdout.write(self.style.SUCCESS(f"Using course: {course.name} (ID: {course.id})"))
 
         # Read CSV and create questions
         questions = []
+        updated_rows = []
         with open(csv_path, newline="", encoding="utf-8") as csvfile:
-            reader = csv.reader(csvfile)
+            reader = csv.DictReader(csvfile)
+            fieldnames = reader.fieldnames
+
+            if "ID" not in fieldnames:
+                fieldnames.append("ID")
+
             for row in reader:
-                if len(row) != 2:
-                    self.stdout.write(self.style.WARNING(f"Skipping invalid row: {row}"))
+                if "ID" in row:
+                    # TODO Update existing question if needed
+                    updated_rows.append(row)
                     continue
 
-                question_text, answer_text = row
+                question_text = row.get("Tekst")
+                answer_text = row.get("Tačan odgovor")
+
+                if not question_text or not answer_text:
+                    self.stdout.write(self.style.WARNING(f"Skipping invalid row: {row}"))
+                    updated_rows.append(row)
+                    continue
+
                 question = Question.objects.create(
                     course=course, question=question_text, answer=answer_text
                 )
-                questions.append(question)
+                questions.append(question)  # Add the created question to the list
+                row["ID"] = question.id
+                updated_rows.append(row)
+
+        # Write back to the CSV file with updated IDs
+        with open(csv_path, mode="w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(updated_rows)
 
         if not questions:
             raise CommandError("No valid questions found in the CSV file.")
