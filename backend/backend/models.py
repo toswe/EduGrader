@@ -37,3 +37,5 @@ class StudentAnswer(models.Model):
 
     question_text = models.TextField()
     answer = models.TextField()
+
+    score = models.FloatField(null=True, blank=True)
