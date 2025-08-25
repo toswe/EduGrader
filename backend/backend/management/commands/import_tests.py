@@ -68,6 +68,8 @@ class Command(BaseCommand):
 
         self.stdout.write(
             self.style.SUCCESS(
-                f"Successfully created test '{test.name}' with {len(questions)} questions."
+                f"Successfully created test '{test.name}' (ID: {test.id}) with {len(questions)} questions."
             )
         )
+
+        return test
