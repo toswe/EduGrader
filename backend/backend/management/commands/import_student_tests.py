@@ -2,11 +2,11 @@ import os
 import csv
 from django.core.management.base import BaseCommand, CommandError
 from backend.models import Test, Question, StudentAnswer, StudentTest
-from authentification.models import User  # Import User model
+from authentification.models import User
 
 
 class Command(BaseCommand):
-    help = "Import student tests from a CSV file"
+    help = "Import student test answers from a CSV file."
 
     def add_arguments(self, parser):
         parser.add_argument("csv_path", type=str, help="Path to the CSV file")
@@ -19,7 +19,6 @@ class Command(BaseCommand):
         if not os.path.exists(csv_path):
             raise CommandError(f"The file {csv_path} does not exist.")
 
-        # Validate test
         try:
             test = Test.objects.get(id=test_id)
         except Test.DoesNotExist:
@@ -27,42 +26,35 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS(f"Using test: {test.name} (ID: {test.id})"))
 
-        # Extract student name from filename
-        student_name = os.path.splitext(os.path.basename(csv_path))[0]
-
-        # Create or get the student
-        student, _ = User.objects.get_or_create(username=student_name)
-        self.stdout.write(
-            self.style.SUCCESS(f"Using student: {student.username} (ID: {student.id})")
-        )
-
-        # Read CSV and create student answers
         with open(csv_path, newline="", encoding="utf-8") as csvfile:
-            reader = csv.reader(csvfile)
+            reader = csv.DictReader(csvfile)
+            folder_name = os.path.basename(os.path.dirname(csv_path))
             for row in reader:
-                if len(row) != 2:
-                    self.stdout.write(self.style.WARNING(f"Skipping invalid row: {row}"))
-                    continue
+                student_name_in_file = row["Student"]
+                question_id = row["ID"]
+                answer_text = row["Odgovor"]
+                score = row["Broj poena"]
 
-                question_text, answer_text = row
+                student_name = f"{folder_name}_{student_name_in_file}"
 
-                # Match question by text
-                try:
-                    question = Question.objects.get(question=question_text, course=test.course)
-                except Question.DoesNotExist:
-                    self.stdout.write(
-                        self.style.WARNING(f"Question not found for text: {question_text}")
-                    )
-                    continue
+                student, _ = User.objects.get_or_create(username=student_name)
+                self.stdout.write(self.style.SUCCESS(f"Using student: {student.username} (ID: {student.id})"))
 
-                # Create StudentAnswer
                 student_test, _ = StudentTest.objects.get_or_create(student=student, test=test)
+
+                try:
+                    question = Question.objects.get(id=question_id)
+                except Question.DoesNotExist:
+                    self.stdout.write(self.style.WARNING(f"Question not found: {question_id}"))
+                    continue
+
                 StudentAnswer.objects.create(
                     student=student,
                     test=student_test,
                     question=question,
-                    question_text=question_text,
+                    question_text=question.question,
                     answer=answer_text,
+                    score=score,
                 )
 
         self.stdout.write(self.style.SUCCESS("Successfully imported student answers."))
