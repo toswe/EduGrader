@@ -48,7 +48,7 @@ The command uses the Gemini LLM Integration to generate mock answers for each qu
 
         for question in questions:
             print(f"Simulating answer for question: {question.question}")
-            response = gemini.prompt(
+            response, _ = gemini.prompt(
                 question.question + f"(Odgovoriti u manje od 100 reči, jednostavno formatirano.)"
             )
             print(f"Generated response: {response}")

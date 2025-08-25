@@ -1,8 +1,8 @@
-from grading.integrations import openai
+from grading.integrations.factory import get_integration
 from backend.models import StudentAnswer, Test, StudentTest
 from grading.models import AnswerGrade
 
-openai_grader = openai.OpenAI()
+grader = get_integration("openai")
 
 DEFAULT_INSTRUCTIONS = """
 Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
@@ -42,19 +42,27 @@ def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=
     correct_answer = CORRECT_ANSWER_WRAPPER.format(correct_answer=answer.question.answer)
     student_answer = STUDENT_ANSWER_WRAPPER.format(student_answer=answer.answer)
 
-    prompt = "\n".join([
-        question,
-        *([correct_answer] if use_correct_answer else []),
-        student_answer,
-    ])
+    prompt = "\n".join(
+        [
+            question,
+            *([correct_answer] if use_correct_answer else []),
+            student_answer,
+        ]
+    )
 
-    result = openai_grader.prompt(prompt, instructions=instructions, **kwargs)
-    score = int(result.output[0].content[0].text.split("\n")[0])
+    print(f"Grading {answer.id}")
+    result, response = grader.prompt(prompt, instructions=instructions, **kwargs)
+
+    try:
+        score = int(result.split("\n")[0])
+    except ValueError:
+        raise ValueError("Failed to parse score from the response.")
 
     AnswerGrade.objects.create(
         student_answer=answer,
         prompt=prompt,
-        llm_response=result.to_dict(),
+        instructions=instructions,
+        llm_response=response,
         score=score,
     )
 
@@ -63,6 +71,7 @@ def grade_student_test(student_test_id):
     student_answers = StudentAnswer.objects.filter(test=student_test_id)
     student_test = StudentTest.objects.get(id=student_test_id)
 
+    print(f"Grading student test {student_test.id} for {student_answers.count()} answers")
     for answer in student_answers:
         _grade_answer(answer, **student_test.test.configuration)
 
@@ -71,5 +80,6 @@ def grade_test(test_id):
     student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
     test = Test.objects.get(id=test_id)
 
+    print(f"Grading test {test_id} for {student_answers.count()} answers")
     for answer in student_answers:
         _grade_answer(answer, **test.configuration)

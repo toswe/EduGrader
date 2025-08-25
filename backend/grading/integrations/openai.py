@@ -8,8 +8,9 @@ class OpenAI(LLMIntegration):
         self.client = OpenAIRaw()  # Api key read from OPENAI_API_KEY env variable by default
 
     def prompt(self, input, model="gpt-4o", instructions=None):
-        return self.client.responses.create(
+        response = self.client.responses.create(
             model=model,
             instructions=instructions,
             input=input,
         )
+        return response.output[0].content[0].text, response.to_dict()

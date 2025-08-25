@@ -11,9 +11,10 @@ class Gemini(LLMIntegration):
     def prompt(self, input, model="gemini-2.5-flash", instructions=None):
         response = self.client.models.generate_content(
             model=model,
-            contents=input,
+            contents=instructions + '\n' + input,
             config=types.GenerateContentConfig(
-                thinking_config=types.ThinkingConfig(thinking_budget=0)  # Disables thinking
+                thinking_config=types.ThinkingConfig(thinking_budget=0),  # Disables thinking
             ),
         )
-        return response.text
+        # TODO Convert full response to json
+        return response.text, response.text

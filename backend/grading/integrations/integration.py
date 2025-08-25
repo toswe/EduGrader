@@ -3,4 +3,7 @@ class LLMIntegration:
         pass
 
     def prompt(self, input, model, instructions=None):
+        """
+        Returns text, full_response
+        """
         pass
