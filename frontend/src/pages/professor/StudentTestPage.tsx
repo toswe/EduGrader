@@ -56,9 +56,11 @@ export const StudentTestPage = () => {
             <br />
             <strong>Answer:</strong> {answer.answer}
             <br />
-            <strong>Score:</strong>{" "}
+            <strong>Professor grade:</strong> {answer.score}
+            <br />
+            <strong>LLM score:</strong>{" "}
             {answer.grades && answer.grades.length > 0
-              ? answer.grades[answer.grades.length - 1].score
+              ? (answer.grades[answer.grades.length - 1].score / 10)
               : "Not graded"}
           </div>
         ))}
