@@ -39,12 +39,12 @@ class Command(BaseCommand):
             if 'Pitanje' not in fieldnames:
                 raise CommandError("odgovori.csv must contain 'Pitanje' column")
 
-            if 'ID' not in fieldnames:
-                fieldnames.append('ID')
+            if 'ID pitanja' not in fieldnames:
+                fieldnames.append('ID pitanja')
 
             for row in reader:
                 pitanje = row['Pitanje']
-                row['ID'] = pitanje_to_id.get(pitanje, '')  # Add ID or empty string if not found
+                row['ID pitanja'] = pitanje_to_id.get(pitanje, '')  # Add ID or empty string if not found
                 updated_rows.append(row)
 
         # Write the updated rows back to odgovori.csv

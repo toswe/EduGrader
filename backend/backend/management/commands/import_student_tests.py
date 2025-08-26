@@ -26,19 +26,27 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS(f"Using test: {test.name} (ID: {test.id})"))
 
+        rows_with_ids = []
+
         with open(csv_path, newline="", encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
             folder_name = os.path.basename(os.path.dirname(csv_path))
+            fieldnames = (
+                reader.fieldnames + ["ID"] if "ID" not in reader.fieldnames else reader.fieldnames
+            )
+
             for row in reader:
                 student_name_in_file = row["Student"]
-                question_id = row["ID"]
+                question_id = row["ID pitanja"]
                 answer_text = row["Odgovor"]
                 score = row["Broj poena"]
 
                 student_name = f"{folder_name}_{student_name_in_file}"
 
                 student, _ = User.objects.get_or_create(username=student_name)
-                self.stdout.write(self.style.SUCCESS(f"Using student: {student.username} (ID: {student.id})"))
+                self.stdout.write(
+                    self.style.SUCCESS(f"Using student: {student.username} (ID: {student.id})")
+                )
 
                 student_test, _ = StudentTest.objects.get_or_create(student=student, test=test)
 
@@ -48,7 +56,7 @@ class Command(BaseCommand):
                     self.stdout.write(self.style.WARNING(f"Question not found: {question_id}"))
                     continue
 
-                StudentAnswer.objects.create(
+                answer = StudentAnswer.objects.create(
                     student=student,
                     test=student_test,
                     question=question,
@@ -56,5 +64,14 @@ class Command(BaseCommand):
                     answer=answer_text,
                     score=score,
                 )
+                print(f"Created answer ID {answer.id}")
+                row["ID"] = answer.id
+                rows_with_ids.append(row)
+
+        # Write all rows with IDs back to the file
+        with open(csv_path, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(rows_with_ids)
 
         self.stdout.write(self.style.SUCCESS("Successfully imported student answers."))
