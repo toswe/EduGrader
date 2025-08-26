@@ -25,15 +25,16 @@ class Command(BaseCommand):
         questions = []
         updated_rows = []
         with open(csv_path, newline="", encoding="utf-8") as csvfile:
+            print(f"Reading questions from {csv_path}")
             reader = csv.DictReader(csvfile)
             fieldnames = reader.fieldnames
 
-            if "ID" not in fieldnames:
-                fieldnames.append("ID")
 
             for row in reader:
+                # print(f"Processing row: {row}")
                 if "ID" in row:
                     # TODO Update existing question if needed
+                    print(f"Skipping existing question ID {row['ID']}")
                     updated_rows.append(row)
                     continue
 
@@ -51,7 +52,10 @@ class Command(BaseCommand):
                 questions.append(question)  # Add the created question to the list
                 row["ID"] = question.id
                 updated_rows.append(row)
+                print(f"Created question ID {question.id}")
 
+        if "ID" not in fieldnames:
+            fieldnames.append("ID")
         # Write back to the CSV file with updated IDs
         with open(csv_path, mode="w", newline="", encoding="utf-8") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -71,5 +75,3 @@ class Command(BaseCommand):
                 f"Successfully created test '{test.name}' (ID: {test.id}) with {len(questions)} questions."
             )
         )
-
-        return test
