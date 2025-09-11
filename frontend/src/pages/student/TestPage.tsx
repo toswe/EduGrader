@@ -13,6 +13,7 @@ const initStudentTest = (test: ITestQuestions): IStudentTest => {
       question: q.id,
       questionText: q.question,
       answer: "",
+      score: 0,
     })),
   };
 };
