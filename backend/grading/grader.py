@@ -33,7 +33,13 @@ Odgovor studenta:
 """
 
 
-def _grade_answer(answer, grader, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=True, **kwargs):
+def _grade_answer(
+    answer,
+    grader,
+    instructions=DEFAULT_INSTRUCTIONS,
+    use_correct_answer=True,
+    **kwargs,
+):
     instructions += SCORING_INSTRUCTIONS
 
     question = QUESTION_WRAPPER.format(question_text=answer.question_text)
@@ -65,26 +71,24 @@ def _grade_answer(answer, grader, instructions=DEFAULT_INSTRUCTIONS, use_correct
     )
 
 
+def _grade_answers(student_answers, test, integration="openai"):
+    grader = get_integration(integration)
+    return [
+        _grade_answer(answer, grader=grader, **test.configuration) for answer in student_answers
+    ]
+
+
 def grade_student_test(student_test_id, integration="openai"):
     student_answers = StudentAnswer.objects.filter(test=student_test_id)
     student_test = StudentTest.objects.get(id=student_test_id)
 
-    grader = get_integration(integration)
-
     print(f"Grading student test {student_test.id} for {student_answers.count()} answers")
-    return [
-        _grade_answer(answer, grader=grader, **student_test.test.configuration)
-        for answer in student_answers
-    ]
+    return _grade_answers(student_answers, student_test.test, integration=integration)
+
 
 def grade_test(test_id, integration="openai"):
     student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
     test = Test.objects.get(id=test_id)
 
-    grader = get_integration(integration)
-
     print(f"Grading test {test_id} for {student_answers.count()} answers")
-    return [
-        _grade_answer(answer, grader=grader, **test.configuration)
-        for answer in student_answers
-    ]
+    return _grade_answers(student_answers, test, integration=integration)
