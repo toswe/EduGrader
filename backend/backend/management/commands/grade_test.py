@@ -10,19 +10,19 @@ INSTRUCTIONS_MAP = {
 }
 CONFIGS = [
     {
-        "integration": "openai",
-        "model": "gpt-4o",
-        "instructions": HARD_INSTRUCTIONS,
-    },
-    {
-        "integration": "openai",
-        "model": "gpt-4o",
+        "integration": "deepseek",
+        "model": "deepseek-chat",
         "instructions": DEFAULT_INSTRUCTIONS,
     },
     {
         "integration": "openai",
-        "model": "gpt-4o",
-        "instructions": SOFT_INSTRUCTIONS,
+        "model": "gpt-4o-mini",
+        "instructions": DEFAULT_INSTRUCTIONS,
+    },
+    {
+        "integration": "openai",
+        "model": "gpt-5",
+        "instructions": DEFAULT_INSTRUCTIONS,
     },
 ]
 
@@ -49,6 +49,10 @@ class Command(BaseCommand):
 
             for answer_grade in results:
                 response = answer_grade.llm_response
+                try:
+                    response_text = response["output"][0]["content"][0]["text"]
+                except (KeyError, IndexError):
+                    response_text = "N/A"
                 writer.writerow(
                     {
                         "student_id": answer_grade.student_answer.test.student.id,
@@ -57,7 +61,7 @@ class Command(BaseCommand):
                         "student_answer": answer_grade.student_answer.answer,
                         "professor_score": answer_grade.student_answer.score,
                         "llm_score": answer_grade.score,
-                        "llm_response": response["output"][0]["content"][0]["text"],
+                        "llm_response": response_text,
                         "llm_response_raw": response,
                     }
                 )

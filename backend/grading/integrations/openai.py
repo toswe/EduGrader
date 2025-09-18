@@ -13,4 +13,7 @@ class OpenAI(LLMIntegration):
             instructions=instructions,
             input=input,
         )
-        return response.output[0].content[0].text, response.to_dict()
+        for item in response.output:
+            if hasattr(item, 'content') and item.content:
+                return item.content[0].text, response.to_dict()
+        return None, response.to_dict()
