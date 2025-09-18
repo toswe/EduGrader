@@ -6,6 +6,20 @@ DEFAULT_INSTRUCTIONS = """
 Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
 Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i tačan odgovor.
 """.strip()
+HARD_INSTRUCTIONS = """
+Ti si strog profesor visokoakademske institucije i treba da ocenis odgovore studenata.
+Dobijas pitanje, tacan odgovor kao i odgovor studenta,
+i treba da proveris da li je odgovor studenta adekvatan.
+Svako nepoklapanje se kaznjava sa oduzimanjem petine ukupnih poena.
+Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.
+""".strip()
+SOFT_INSTRUCTIONS = """
+Ti si blag profesor visokog obrazovanja i treba da ocenis odgovore studenata.
+Dobijas pitanje, tacan odgovor kao i odgovor studenta,
+i treba da proveris da li je odgovor studenta adekvatan.
+Fokusiraj se na stavke koje se poklapaju sa studentovim odgovorom.
+""".strip()
+
 SCORING_INSTRUCTIONS = """
 
 Tvoj odgovor treba da bude ocena studentskog odgovora u sledećem formatu:
