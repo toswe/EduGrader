@@ -56,7 +56,7 @@ def _grade_answer(answer, grader, instructions=DEFAULT_INSTRUCTIONS, use_correct
     except ValueError:
         raise ValueError("Failed to parse score from the response.")
 
-    AnswerGrade.objects.create(
+    return AnswerGrade.objects.create(
         student_answer=answer,
         prompt=prompt,
         instructions=instructions,
@@ -72,9 +72,10 @@ def grade_student_test(student_test_id, integration="openai"):
     grader = get_integration(integration)
 
     print(f"Grading student test {student_test.id} for {student_answers.count()} answers")
-    for answer in student_answers:
+    return [
         _grade_answer(answer, grader=grader, **student_test.test.configuration)
-
+        for answer in student_answers
+    ]
 
 def grade_test(test_id, integration="openai"):
     student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
@@ -83,5 +84,7 @@ def grade_test(test_id, integration="openai"):
     grader = get_integration(integration)
 
     print(f"Grading test {test_id} for {student_answers.count()} answers")
-    for answer in student_answers:
+    return [
         _grade_answer(answer, grader=grader, **test.configuration)
+        for answer in student_answers
+    ]
