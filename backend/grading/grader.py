@@ -2,8 +2,6 @@ from grading.integrations.factory import get_integration
 from backend.models import StudentAnswer, Test, StudentTest
 from grading.models import AnswerGrade
 
-grader = get_integration("openai")
-
 DEFAULT_INSTRUCTIONS = """
 Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
 Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i tačan odgovor.
@@ -35,7 +33,7 @@ Odgovor studenta:
 """
 
 
-def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=True, **kwargs):
+def _grade_answer(answer, grader, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=True, **kwargs):
     instructions += SCORING_INSTRUCTIONS
 
     question = QUESTION_WRAPPER.format(question_text=answer.question_text)
@@ -67,19 +65,23 @@ def _grade_answer(answer, instructions=DEFAULT_INSTRUCTIONS, use_correct_answer=
     )
 
 
-def grade_student_test(student_test_id):
+def grade_student_test(student_test_id, integration="openai"):
     student_answers = StudentAnswer.objects.filter(test=student_test_id)
     student_test = StudentTest.objects.get(id=student_test_id)
 
+    grader = get_integration(integration)
+
     print(f"Grading student test {student_test.id} for {student_answers.count()} answers")
     for answer in student_answers:
-        _grade_answer(answer, **student_test.test.configuration)
+        _grade_answer(answer, grader=grader, **student_test.test.configuration)
 
 
-def grade_test(test_id):
+def grade_test(test_id, integration="openai"):
     student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
     test = Test.objects.get(id=test_id)
 
+    grader = get_integration(integration)
+
     print(f"Grading test {test_id} for {student_answers.count()} answers")
     for answer in student_answers:
-        _grade_answer(answer, **test.configuration)
+        _grade_answer(answer, grader=grader, **test.configuration)
