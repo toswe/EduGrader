@@ -9,10 +9,27 @@ INSTRUCTIONS_MAP = {
     SOFT_INSTRUCTIONS: "soft",
 }
 CONFIGS = [
+    # gpt-4o with different instructions
     {
-        "integration": "deepseek",
-        "model": "deepseek-chat",
+        "integration": "openai",
+        "model": "gpt-4o",
+        "instructions": SOFT_INSTRUCTIONS,
+    },
+    {
+        "integration": "openai",
+        "model": "gpt-4o",
         "instructions": DEFAULT_INSTRUCTIONS,
+    },
+    {
+        "integration": "openai",
+        "model": "gpt-4o",
+        "instructions": HARD_INSTRUCTIONS,
+    },
+    # gpt-4o-mini with different instructions
+    {
+        "integration": "openai",
+        "model": "gpt-4o-mini",
+        "instructions": SOFT_INSTRUCTIONS,
     },
     {
         "integration": "openai",
@@ -21,10 +38,56 @@ CONFIGS = [
     },
     {
         "integration": "openai",
+        "model": "gpt-4o-mini",
+        "instructions": HARD_INSTRUCTIONS,
+    },
+    # deepseek-chat with different instructions
+    {
+        "integration": "deepseek",
+        "model": "deepseek-chat",
+        "instructions": SOFT_INSTRUCTIONS,
+    },
+    {
+        "integration": "deepseek",
+        "model": "deepseek-chat",
+        "instructions": DEFAULT_INSTRUCTIONS,
+    },
+    {
+        "integration": "deepseek",
+        "model": "deepseek-chat",
+        "instructions": HARD_INSTRUCTIONS,
+    },
+    # gpt-4o with different temperatures
+    {
+        "integration": "openai",
+        "model": "gpt-4o",
+        "instructions": DEFAULT_INSTRUCTIONS,
+        "temperature": 0.5,
+    },
+    {
+        "integration": "openai",
+        "model": "gpt-4o",
+        "instructions": DEFAULT_INSTRUCTIONS,
+        "temperature": 1,
+    },
+    # gpt-5 with different instructions
+    {
+        "integration": "openai",
+        "model": "gpt-5",
+        "instructions": SOFT_INSTRUCTIONS,
+    },
+    {
+        "integration": "openai",
         "model": "gpt-5",
         "instructions": DEFAULT_INSTRUCTIONS,
     },
+    {
+        "integration": "openai",
+        "model": "gpt-5",
+        "instructions": HARD_INSTRUCTIONS,
+    },
 ]
+
 
 class Command(BaseCommand):
     help = "Grade all student answers for a given test ID"
