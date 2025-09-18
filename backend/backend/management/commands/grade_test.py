@@ -52,7 +52,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f"Grading test: {test.name} (ID: {test.id})"))
 
         # Call the grading function
-        result = grade_test(test_id)
+        result = grade_test(test_id, integration="openai", model="gpt-4o", instructions=None)
 
         self.stdout.write(
             self.style.SUCCESS("Successfully graded all student answers for the test.")
