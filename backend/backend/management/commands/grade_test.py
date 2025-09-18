@@ -70,15 +70,20 @@ class Command(BaseCommand):
         integration = config["integration"]
         model = config["model"]
         instructions = config["instructions"]
+        temperature = config.get("temperature", 0)
 
         self.stdout.write(f"Using config: {config}")
         result = grade_test(
-            test_id, integration=integration, model=model, instructions=instructions
+            test_id,
+            integration=integration,
+            model=model,
+            instructions=instructions,
+            temperature=temperature,
         )
 
         self.stdout.write(self.style.SUCCESS("Successfully graded all student answers."))
 
-        path = f"result.{integration}.{model}.{INSTRUCTIONS_MAP[instructions]}.csv"
+        path = f"result.{integration}.{model}.{INSTRUCTIONS_MAP[instructions]}{f".t-{temperature}" if temperature else ""}.csv"
         self.export_results(result, path)
 
     def handle(self, *args, **options):

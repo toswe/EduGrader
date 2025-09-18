@@ -90,6 +90,7 @@ def _grade_answers(
     integration="openai",
     model="gpt-4o",
     instructions=DEFAULT_INSTRUCTIONS,
+    temperature=0,
 ):
     grader = get_integration(integration)
     return [
@@ -98,6 +99,7 @@ def _grade_answers(
             grader=grader,
             instructions=instructions,
             model=model,
+            temperature=temperature,
         )
         for answer in student_answers
     ]
@@ -116,6 +118,7 @@ def grade_test(
     integration,
     model,
     instructions,
+    temperature=0,
 ):
     student_answers = StudentAnswer.objects.filter(test__test_id=test_id)
 
@@ -125,4 +128,5 @@ def grade_test(
         integration=integration,
         model=model,
         instructions=instructions,
+        temperature=temperature,
     )
