@@ -12,12 +12,13 @@ class DeepSeek(LLMIntegration):
             base_url="https://api.deepseek.com",
         )
 
-    def prompt(self, input, model="deepseek-chat", instructions=None):
+    def prompt(self, input, model="deepseek-chat", instructions=None, temperature=0):
         result = self.client.chat.completions.create(
             model=model,
             messages=[
                 {"role": "system", "content": instructions},
                 {"role": "user", "content": input},
             ],
+            temperature=temperature
         )
         return result.choices[0].message.content, result.to_dict()
