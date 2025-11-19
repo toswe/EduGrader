@@ -47,6 +47,16 @@ Odgovor studenta:
 """
 
 
+def _prompt(grader, prompt, instructions=DEFAULT_INSTRUCTIONS, **kwargs):
+    for i in range(5):
+        result, response = grader.prompt(prompt, instructions=instructions, **kwargs)
+        try:
+            score = int(result.split("\n")[0])
+            return score, response
+        except ValueError:
+            print(f"Failed to parse score from the response, try number {i+1}...")
+
+
 def _grade_answer(
     answer,
     grader,
@@ -69,12 +79,7 @@ def _grade_answer(
     )
 
     print(f"Grading {answer.id}")
-    result, response = grader.prompt(prompt, instructions=instructions, **kwargs)
-
-    try:
-        score = int(result.split("\n")[0])
-    except ValueError:
-        raise ValueError("Failed to parse score from the response.")
+    score, response = _prompt(grader, prompt, instructions=instructions, **kwargs)
 
     return AnswerGrade.objects.create(
         student_answer=answer,
