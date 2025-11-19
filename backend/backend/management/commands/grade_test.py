@@ -146,7 +146,7 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("Successfully graded all student answers."))
 
-        path = f"result.{integration}.{model}.{INSTRUCTIONS_MAP[instructions]}{f".t-{temperature}" if temperature else ""}.csv"
+        path = f"{test_id}.result.{integration}.{model}.{INSTRUCTIONS_MAP[instructions]}{f".t-{temperature}" if temperature else ""}.csv"
         self.export_results(result, path)
 
     def handle(self, *args, **options):
