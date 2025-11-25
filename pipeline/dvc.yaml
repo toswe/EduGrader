@@ -1,14 +1,23 @@
 stages:
-  grade:
-    cmd: python src/pipeline/01_grade.py --in ${data.root}/raw --out ${data.root}/graded --model ${params.models.model} --prompt_file ${params.prompts.professor_answer}
+  merge_inputs:
+    cmd: python src/pipeline/01_merge_inputs.py --questions ${data.root}/raw/questions.csv --answers ${data.root}/raw/student_answers.csv --out ${data.root}/interim/merged.csv
     deps:
-      - src/pipeline/01_grade.py
-      - ${data.root}/raw
+      - src/pipeline/01_merge_inputs.py
+      - ${data.root}/raw/questions.csv
+      - ${data.root}/raw/student_answers.csv
+    outs:
+      - ${data.root}/interim/merged.csv
+
+  grade:
+    cmd: python src/pipeline/02_grade.py --in ${data.root}/interim/merged.csv --out ${data.root}/graded/student_answers.csv --model ${params.models.model} --prompt_file ${params.prompts.professor_answer}
+    deps:
+      - src/pipeline/02_grade.py
+      - ${data.root}/interim/merged.csv
       - params.yaml
       - ${params.models.model}
       - ${params.prompts.professor_answer}
     outs:
-      - ${data.root}/graded
+      - ${data.root}/graded/student_answers.csv
     
   # statistics:
   #   cmd: python src/pipeline/statistics.py --in ${data.root}/graded --out ${data.root}/stats
