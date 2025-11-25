@@ -1,6 +1,12 @@
-from grading.integrations.openai import OpenAI
-from grading.integrations.gemini import Gemini
-from grading.integrations.deepseek import DeepSeek
+try:
+    from grading.integrations.openai import OpenAI
+    from grading.integrations.gemini import Gemini
+    from grading.integrations.deepseek import DeepSeek
+except ModuleNotFoundError:
+    # Fallback to relative imports when running outside Django app context
+    from .openai import OpenAI
+    from .gemini import Gemini
+    from .deepseek import DeepSeek
 from enum import Enum
 
 

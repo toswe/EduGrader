@@ -1,1 +1,4 @@
 dvc
+openai
+google-genai
+python-dotenv

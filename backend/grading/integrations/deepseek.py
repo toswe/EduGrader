@@ -2,7 +2,11 @@ import os
 
 from openai import OpenAI as OpenAIRaw
 
-from grading.integrations.integration import LLMIntegration
+try:
+    from grading.integrations.integration import LLMIntegration
+except ModuleNotFoundError:
+    # Fallback to relative import when running outside Django app context
+    from .integration import LLMIntegration
 
 
 class DeepSeek(LLMIntegration):

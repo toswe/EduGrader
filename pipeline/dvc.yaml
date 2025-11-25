@@ -1,0 +1,19 @@
+stages:
+  grade:
+    cmd: python src/pipeline/01_grade.py --in ${data.root}/raw --out ${data.root}/graded --model ${params.models.model} --prompt_file ${params.prompts.professor_answer}
+    deps:
+      - src/pipeline/01_grade.py
+      - ${data.root}/raw
+      - params.yaml
+      - ${params.models.model}
+      - ${params.prompts.professor_answer}
+    outs:
+      - ${data.root}/graded
+    
+  # statistics:
+  #   cmd: python src/pipeline/statistics.py --in ${data.root}/graded --out ${data.root}/stats
+  #   deps:
+  #     - src/pipeline/statistics.py
+  #     - ${data.root}/graded
+  #   outs:
+  #     - ${data.root}/stats

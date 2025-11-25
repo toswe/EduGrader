@@ -1,0 +1,8 @@
+data:
+  root: data/dzp
+
+params:
+  models:
+    model: params/models/gpt5.yaml
+  prompts:
+    professor_answer: params/prompts/professor_answer/default.yaml
