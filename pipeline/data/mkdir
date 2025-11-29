@@ -22,9 +22,8 @@ cat > "$BASE_DIR/interim/.gitignore" << 'EOF'
 !.gitignore
 EOF
 
-cat > "$BASE_DIR/graded/.gitignore" << 'EOF'
-*
-!.gitignore
+cat > "$BASE_DIR/.gitignore" << 'EOF'
+/graded
 EOF
 
 echo "Directory structure created."
