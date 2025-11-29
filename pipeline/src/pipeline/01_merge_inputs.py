@@ -13,7 +13,7 @@ def vallidate_columns(required_cols: set, reader: csv.DictReader):
 def validate_questions(questions_path: Path) -> dict:
     with questions_path.open("r", encoding="utf-8") as fq:
         q_reader = csv.DictReader(fq)
-        required_q_cols = {"Question", "Text", "Answer"}
+        required_q_cols = {"Question", "Text", "Answer", "Textbook"}
         vallidate_columns(required_q_cols, q_reader)
 
         questions = {}
@@ -29,9 +29,13 @@ def validate_questions(questions_path: Path) -> dict:
             correct_answer = row["Answer"].strip()
             if not correct_answer:
                 raise ValueError(f"Question {q_number} has empty 'Answer' value")
+            textbook = row["Textbook"].strip()
+            if not textbook:
+                raise ValueError(f"Question {q_number} has empty 'Textbook' value")
             questions[q_number] = {
                 "question_text": question_text,
                 "correct_answer": correct_answer,
+                "textbook": textbook,
             }
 
         return questions
@@ -77,6 +81,7 @@ def merge(questions_path: Path, answers_path: Path, merged_path: Path):
             "question_id",
             "question_text",
             "correct_answer",
+            "textbook",
             "student_answer",
             "professor_score",
         ]
@@ -89,6 +94,7 @@ def merge(questions_path: Path, answers_path: Path, merged_path: Path):
                     **a,
                     "question_text": qinfo["question_text"],
                     "correct_answer": qinfo["correct_answer"],
+                    "textbook": qinfo["textbook"],
                 }
             )
 
