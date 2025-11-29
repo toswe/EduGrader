@@ -1,0 +1,1803 @@
+Question,Text,Answer,Comment,Textbook
+1,Koji su svi mogući načini zapisa označenih celih brojeva u binarnom sistemu?,"Mogući zapisi celih brojeva u binarnom sistemu su: znak i apsolutna vrednost, nepotpuni komplement, potpuni komplement i višak K.",,"--- Page 1 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Digitalni zapis podataka
+Predavanje 2
+
+--- Page 2 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Znak i apsolutna vrednost
+
+--- Page 3 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+
+--- Page 4 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Neoznaˇceni i ozna ˇceni brojevi
+Broj je
+neoznaˇcen ako se za zapis broja ne uzima u obzir njegov znak
+Npr. 426 ili 586
+sa zapisom broja (X)N=xk"
+2,Koje su mane zapisa „znak i apsolutna vrednost”?,"Mane zapisa ""znak i apsolutna vrednost"" su dvoznačan zapis nule (npr. u dekadnom sistemu sa tri cifre nula se može zapisati kao 000 i 900) i potreba da se pri računarskim operacijama posebno razmatra cifra za znak.",,"--- Page 1 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Digitalni zapis podataka
+Predavanje 2
+
+--- Page 2 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Znak i apsolutna vrednost
+
+--- Page 3 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+
+--- Page 4 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Neoznaˇceni i ozna ˇceni brojevi
+Broj je
+neoznaˇcen ako se za zapis broja ne uzima u obzir njegov znak
+Npr. 426 ili 586
+sa zapisom broja (X)N=xk"
+3,Koja je razlika između zapisa realnih brojeva u fiksnom i pokretnom zarezu?,"Razlika između zapisa realnih brojeva u fiksnom (nepokretnom) zarezu i pokretnom zarezu je u načinu predstavljanja decimalne tačke (zareza) i raspodeli mesta za cifre.
+
+Fiksni zarez koristi statičnu tačku i fiksnu preciznost. Pogodniji za jednostavne i brze izračune sa poznatim opsegom.
+
+Pokretni zarez omogućava zapis mnogo šireg opsega brojeva zahvaljujući eksponentu. Koristi se za precizne naučne i inženjerske proračune.",,"--- Page 1 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Digitalni zapis podataka
+Predavanje 3
+
+--- Page 2 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Potpuni komplement
+Viˇsakk
+2Zapis realnih brojeva u ra ˇcunarima
+
+--- Page 3 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+2Zapis realnih brojeva u ra ˇcunarima
+
+--- Page 4 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Potpuni komplement
+neka je N0=N"
+4,Šta određuje opseg i preciznost zapisa u nepokretnom zarezu?,"Opseg zavisi od broja cifara izdvojenih za ceo deo broja.
+
+Preciznost zavisi od broja cifara za razlomljeni deo broja.",,"--- Page 1 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Digitalni zapis podataka
+Predavanje 3
+
+--- Page 2 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+Potpuni komplement
+Viˇsakk
+2Zapis realnih brojeva u ra ˇcunarima
+
+--- Page 3 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Sadrˇzaj
+1Zapis ozna ˇcenih brojeva u ra ˇcunarima
+2Zapis realnih brojeva u ra ˇcunarima
+
+--- Page 4 ---
+Zapis ozna ˇcenih brojeva u ra ˇcunarima Zapis realnih brojeva u ra ˇcunarima
+Potpuni komplement
+neka je N0=N"
+5,Kako se tekst zapisuje u računaru? Šta je kodna strana?,"Kako se tekst zapisuje u računaru?
+Tekst u računaru se zapisuje kao niz binarnih kodova koji predstavljaju znakove (slova, cifre, specijalne simbole). Svaki znak ima jedinstvenu numeričku vrednost (kod), koja se pretvara u binarni zapis i čuva u memoriji. Najpoznatiji kodni sistemi su ASCII i Unicode, koji određuju koje brojeve treba dodeliti kojim znakovima.
+
+Šta je kodna strana?
+Kodna strana je deo kodnog sistema koji definiše kako se pojedinačni znakovi (slova, cifre, specijalni simboli) predstavljaju numeričkim vrednostima (kodovima). Drugim rečima, to je tabela ili standard koji povezuje znakove sa njihovim kodovima, omogućavajući računaru da „razume“ i obrađuje tekst.",,"--- Page 1 ---
+IEEE 754 standard sa binarnom osnovom Zapis teksta
+Digitalni zapis podataka
+Predavanje 4
+
+--- Page 2 ---
+IEEE 754 standard sa binarnom osnovom Zapis teksta
+Sadrˇzaj
+1IEEE 754 standard sa binarnom osnovom
+2Zapis teksta
+Kodne strane
+
+--- Page 3 ---
+IEEE 754 standard sa binarnom osnovom Zapis teksta
+Sadrˇzaj
+1IEEE 754 standard sa binarnom osnovom
+2Zapis teksta
+
+--- Page 4 ---
+IEEE 754 standard sa binarnom osnovom Zapis teksta
+IEEE 754 standard sa binarnom osnovom
+U zapisu u dvostrukoj ta ˇcnosti
+znak se kodira sa jednim bitom (0 za +, 1 za -)
+broj bitova za eksponent : 11
+zapisuje se sa uve´ cenjem 1023
+broj bitova za frakciju: 52
+frakcija se predstavlja u obliku 1 :f0, a pri zapisu se prva jedinica ignoriˇ se, tj. zapisuje
+se samo f0
+
+--- Page 5 ---
+IEEE 754 standard sa binarnom osnovom Zapis teksta
+Primer zapisa u dvostrukoj ta ˇcnosti
+Zapisati broj (10:25)10u standardu IEEE 754 u dvostrukoj ta ˇcnosti.
+prevo denje broja u binarni sistem !(10:25)10= (1010 :01)2
+i01234
+Xi105210
+xi0101
+Tabela:ˇSematski prikaz pevo denja broja (10)10u sistem sa osnovom 2
+i 012
+X"
+6,Koja su dva glavna koraka u digitalizaciji zvuka? Objasnite svaki.,"Dva glavna koraka u digitalizaciji zvuka su uzorkovanje i kvantizacija.
+
+Uzorkovanje: To je proces merenja amplitude vazdušnog pritiska u jednako raspoređenim trenucima vremena. Svako pojedinačno merenje naziva se uzorak. Broj uzoraka koji se uzimaju u jednoj sekundi naziva se frekvencija odabiranja ili stopa uzorkovanja (sampling rate). Ovaj korak omogućava da kontinuirani zvučni signal bude predstavljen nizom diskretnih tačaka u vremenu.
+
+Kvantizacija: Nakon uzorkovanja, amplituda svakog uzorka se predstavlja kao ceo broj izražen u binarnom obliku. Pošto se koriste celobrojni nivoi, uzorci se prilagođavaju konačnom broju diskretnih nivoa koji zavise od dubine bita (broja bitova po uzorku). Na primer, dubina bita od 8 znači 256 diskretnih nivoa, dok dubina od 16 bita omogućava 65.536 nivoa. Amplituda svakog uzorka se zaokružuje na najbliži dozvoljeni nivo, što može uneti greške u digitalizaciju zvuka.",,"--- Page 1 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalni zapis podataka
+Predavanje 9
+
+--- Page 2 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 3 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 4 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Vizuelizacija podataka
+Vizuelizacija podataka je graﬁ ˇcko predstavljanje informacija iz podataka
+Omogu´cava
+analizu i formiranje izveˇ staja o karakteristikama podataka i odnosima u njima
+mogu´ cnost analize vizuelnog prikaza velike koliˇ cine podataka
+otkrivanje opˇ stih obrazaca i trendova
+
+--- Page 5 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Skup podataka
+Podaci se ˇcesto prikazuju u obliku tabele u kojoj
+kolone predstavljaju atribute, tj. svojstva entiteta o kojima se ˇcuvaju informacije
+jedan red sadr ˇzi informacije o jednom entitetu (objektu)
+Atr1 Atr2 Atr3 ... AtrM
+Entitet1 2 5 0 ... 1
+Entitet2 0 8 3 ... 2
+... ... ... ... ... ...
+EntitetN 1 0 4 ... 6
+
+--- Page 6 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Skup podataka
+INDEKS IME PREZIME DATUM_UPISA DATUM_RODJENJA MESTO_RODJENJA
+20140021 Milos Peric 2014-07-06 1995-01-20 Beograd
+20140022 Marijana Savkovic 2014-07-05 1995-03-11 Kraljevo
+20130023 Sanja Terzic 2013-07-04 1994-11-09 Beograd
+20130024 Nikola Vukovic 2013-07-04 1994-09-17 NULL
+20140025 Marijana Savkovic 2014-07-06 1995-02-04 Kraljevo
+20140026 Zorica Miladinovic 2014-07-06 1995-10-08 Vranje
+20130027 Milena Stankovic 2013-09-03 NULL NULL
+
+--- Page 7 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Izbor naˇcina vizuelizacije podataka
+Naˇcin prikaza zavisi od podataka
+Bira se podskup atributa (informacija iz podataka) koji se koriste za vizuelizaciju
+Izbor moˇze da uklju ˇci i izdvajanje skupa objekata (entiteta) od interesa
+
+--- Page 8 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Preslikavanje podataka u graﬁ ˇcke elemente
+Objekti, atributi i njihovi odnosi se prevode u graﬁ ˇcke elemente kao ˇsto su taˇcke,
+linije, oblici, boje, ....
+Primer
+Objekti se ˇ cesto prikazuju kao taˇ cke
+Vrednosti atributa mogu da se prikaˇ zu kao pozicija taˇ cke ili kao njene karakteristike
+(boja, veliˇ cina, oblik,...)
+Ako se za predstavljanje koristi pozicija lako se uoˇ cavaju odnosi (grupe, oblik, ...)
+
+--- Page 9 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Histogrami
+Histogram je graﬁ ˇcka reprezentacija distribucije podataka
+Pri pravljenju histograma, prvo se opseg vrednosti podeli u niz intervala (eng.
+bins), a zatim se prebroji koliko vrednosti iz skupa pripada svakom od intervala
+Na x-osi se prikazuju izdvojeni intervali, a na y-osi broj vrednosti iz svakog intervala
+
+
+--- Page 10 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Histogrami
+3D histogram. Izvor: https://matplotlib.org/
+
+--- Page 11 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇSeme sa raspr ˇsenim elementima
+Vrednosti atributa entiteta odre duju njegovu poziciju na graﬁku
+Preko markera se bira na ˇcin prikaza entiteta (krug, X, trougao ...)
+Najˇceˇs´ce se koriste 2D ali postoje i 3D ˇseme
+Vrednosti drugih atributa mogu da se prika ˇzu koriˇs´cenjem oblika, veli ˇcine ili boje
+markera koji predstavljaju entitete
+
+
+--- Page 12 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇSema sa matricom
+ˇSeme sa matricama ili toplotne mape
+Prikazuje tabelarne podatke kao matricu ˇcije su vrednosti obojene
+
+
+--- Page 13 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇCvorovi u mre ˇzi
+Graﬁkon pogodan za prikaz odnosa izme du entiteta u skupu
+Entiteti su predstavljeni ˇcvorovima, a odnosi vezama izme duˇcvorova
+
+
+--- Page 14 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Kruˇzni graﬁkon
+Kruˇzni ili tortni graﬁkon (eng. pie)
+Krug se koristi kao osnova za ilustraciju proporcija izme du vrednosti u atributu
+Duˇzina luka svakog dela je proporcionalna koli ˇcini koju predstavlja
+Svakom delu se obi ˇcno dodeljuje oznaka entiteta koji predstavlja
+
+
+--- Page 15 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 16 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zadatak 3
+Napisati program u pj Python za prikaz informacija iz skupa podataka population.csv.
+csv (eng. comma-separated values) - format zapisa podataka u obliku tabele u kome se
+informacije u jednom redu razdvajaju pomo ´cu ,
+
+--- Page 17 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 18 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zvuk
+Zvuˇcni signal predstavlja promenu pritiska vazduha u zadatoj ta ˇcki posmatranja
+Osnovni parametri koji opisuju zvu ˇcni signal su
+amplituda (koja odgovara ""glasno´ ci"") - mera odstupanja pritiska od srednje
+vrednosti, stanja koje je oznaˇ ceno kao tiˇ sina
+frekvencija (koja odgovara ""visini"") - broj oscilacija u 1 sekundi i izraˇ zava se u Hz
+ljudsko uho ˇcuje raspon frekvencija od 20Hz do 20KHz
+
+--- Page 19 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zvuk
+
+
+--- Page 20 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Digitalizacija zvuka se sastoji od snimanja analognog pojavljivanja zvuka kao niza
+diskretnih doga daja i njegovog kodiranja u binarni sistem
+Za digitalizaciju se koriste ure daji koji spadaju u grupu analogno-digitalnih
+konvertera (ADC)
+Za reprodukciju zvuka koristi se digitalno-analogni konverter (DAC)
+
+--- Page 21 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Putanja zvuka pri digitalizaciji i reprodukciji
+
+
+--- Page 22 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Putanja zvuka pri digitalizaciji i reprodukciji
+Mikrofon detektuje kontinuirano promenljivi pritisak vazduha, snima to kao
+analogni napon i ˇsalje informacije
+ADC izvodi digitalizaciju
+Digitalnog sistema obra duje digitalni zvuk
+DAC pretvara digitalni u analogni zvuk
+Zvuˇcnik pretvara analogni signal u zvu ˇcni talas u vazduhu
+
+--- Page 23 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 24 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Ukljuˇcuje dva glavna koraka
+uzorkovanje
+kvantizaciju
+
+--- Page 25 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Uzorkovanje
+Uzorkovanje je merenje amplitude vazdu ˇsnog pritiska u jednako raspore denim
+trenucima vremena
+Svako merenje je jedan uzorak
+Broj uzoraka uzetih u sekundi ( broj uzoraka/s ) се naziva frekvenciju odabiranja ili
+stopa uzorkovanja (eng. sampling rate)
+Jedinica broj uzoraka/s se naziva Herc (Hz)
+
+--- Page 26 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Uzorkovanje
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 27 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Kvantizacija
+Kvantizacija je predstavljanjе amplitude pojedina ˇcnih uzoraka kao celih brojeva
+izraˇzenih u binarnom obliku
+Zbog kori ˇs´cenja celih brojeva uzorci moraju da se mere u kona ˇcnom broju
+diskretnih nivoa
+Opseg mogu ´cih celih brojeva je odre den dubinom bita (rezolucija) - brojem bitova
+koji se koriste po uzorku
+dubina bita 8 - 256 diskretnih nivoa, dubina bita 16 - 65536 diskretnih nivoa
+Amplituda uzorka mora biti zaokru ˇzena na najbli ˇzi od dozvoljenih diskretnih nivoa
+Diskretizacija prouzrukuje gre ˇske u procesu digitalizacije
+
+--- Page 28 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Viˇsekanalno snimanje zvuka
+Da bi se dobio prostorni ose ´caj zvuka, primenjuje se tehnika vi ˇsekanalnog snimanja
+zvuka
+Svaki kanal se nezavisno snima sa posebnim mikrofonom i reprodukuje na
+posebnom zvu ˇcniku
+Stereo zvuk - snimanje zvuka sa dva kanala
+Surround sistemi - snimanje zvuka sa vi ˇse od dva kanala
+
+--- Page 29 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Pri snimanju zvuka u digitalnom formatu bira se
+stopa uzorkovanja (44100, 48000, ...)
+dubina bita (8,16,32)
+broj kanala (mono (jedan), stereo (dva), viˇ se kanala)
+Uobiˇcajene su postavka za audio kvalitet CD-a: frekvencija uzorkovanja je 44100
+Hz, dubinom bita je 16 bita (tj. dva bajta) po kanalu, i sa dva kanala
+
+--- Page 30 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Primer
+Zvuˇcni talas ima frekvenciju od 440 Hz (ciklusa/s)
+Stopa uzorkovanja je 3520 Hz (uzoraka/s)
+Osam uzoraka za svaki ciklus zvu ˇcnog talasa (crveni krugovi)
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 31 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Stopa uzorkovanja je va ˇzna zaˇcuvanje i reprodukciju signala
+ˇSto je frekvencija signala ve ´ca, potrebno je vi ˇse uzoraka u sekundi (ve ´ca brzina
+uzorkovanja) da bi se on precizno predstavio u digitalnom domenu
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 32 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Ako je stopa uzorkovanja niska, rekonstruisani zvu ˇcni talas je ni ˇze frekvencije od
+originalnog zvuka
+Alijasing – neta ˇcna digitalizacija koja je rezultat nedovoljne brzine uzorkovanja
+
+--- Page 33 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Da bi jednofrekventni zvu ˇcni talas bio ispravno digitalizovan, stopa uzorkovanja
+mora biti najmanje dvostruko ve ´ca od frekvencije zvu ˇcnog talasa
+Uopˇstenije, za zvuk sa vi ˇse frekventnih komponenti, stopa uzorkovanja mora biti
+najmanje dvostruko ve ´ca od komponente sa najvi ˇsom frekvencijom
+
+--- Page 34 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Ako je dat zvuk sa maksimalnom frekvencijskom komponentom od fHz, potrebna
+brzina uzorkovanja je najmanje 2fda bi se izbegao alijasing
+Minimalna prihvatljiva stopa uzorkovanja ( 2f) naziva se Nyquist stopa
+
+--- Page 35 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Ako je stopa uzorkovanja f, komponenta zvuka najvi ˇse frekvencije koja se mo ˇze
+ispravno uzorkovati je f/2
+Najviˇsa komponenta frekvencije koja se mo ˇze ispravno uzorkovati naziva se Nyquist
+frekvencija
+
+--- Page 36 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Standardne stope uzorkovanja u okru ˇzenjima za digitalno snimanje zvuka su
+dovoljno visoke da zahvate sve frekvencije u opsegu koji ˇcovek mo ˇze daˇcuje
+Najviˇsa zvuˇcna frekvencija je oko 20000 Hz
+Stopa uzorkovanja za CD je 44100 Hz (44,1 kHz)
+Stopa uzorkovanja 48 kHz je tako deˇsiroko podr ˇzana
+Stope uzorkovanja idu ˇcak do 192 kHz
+
+--- Page 37 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Greˇska kvantizacije
+Dubina bita odre duje preciznost sa kojom se predstavlja amplituda uzorka
+Sa dubinom bita od n, mogu´ce je 2nnivoa kvantizacije
+Polovina nivoa kvantizacije je ispod horizontalne ose, tj. 2n"
+7,Koje su prednosti i mane rasterskog prikaza slike u odnosu na vektorski?,"Prednosti rasterskog prikaza:
+Rasterska slika se sastoji od mreže piksela koji mogu precizno prikazati složene i detaljne fotografije i slike sa mnogo boja i nijansi, što je idealno za digitalne fotografije i skenirane slike. Omogućava prikaz realističnih slika sa bogatim bojama i detaljima.
+
+Mane rasterskog prikaza:
+Rasterska slika ima fiksirani broj piksela, što znači da se kvalitet slike smanjuje pri uvećavanju (pikselaizacija). Takođe, zahteva veću količinu memorije, koja zavisi od broja piksela i broja boja. Ne može se lako skalirati bez gubitka kvaliteta.
+
+Za razliku od toga, vektorski prikaz:
+Koristi matematičke formule za predstavljanje figura i može se skalirati na bilo koju veličinu bez gubitka kvaliteta, jer se čuvaju parametri oblika, a ne pojedinačni pikseli. Međutim, nije pogodan za prikaz složenih fotografija ili realističnih slika.",,"--- Page 1 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Digitalni zapis podataka
+Predavanje 7
+
+--- Page 2 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2SVG
+
+--- Page 3 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2SVG
+
+--- Page 4 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Predstavljanje crte ˇza na raˇcunaru
+Dva naˇcina
+vektorski
+rasterski
+
+--- Page 5 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Rasterski na ˇcin predstavljanja slike
+Slika se sastoji od mre ˇze kvadrati ´ca u obliku matrice koji se nazivaju pikseli (eng.
+pixel, picture element)
+Pikseli su gradivne jedinice rasterske slike i ˇcuvaju informaciju o boji, intenzitetu,
+osvetljenosti, transparentnosti i sl.
+Pikseli se najce ˇs´ce predstavljaju kao krugovi ili kvadrati sa sredi ˇstem uˇcvorovima
+celobrojne mre ˇze
+Slika sadr ˇzi ﬁksiran broj piksela kojim se deﬁni ˇse kvalitet slike i on odgovara
+rezoluciji slike
+Koliˇcina memorije potrebna za ˇcuvanje rasterske slike zavisi od broja upotrebljenih
+piksela i broja boja koje su na raspolaganju
+Rasterske slike se dobijaju digitalnim fotoaparatima, skeniranjem slika ili
+odgovaraju ´cim softverom za pravljenje rasterskih slika
+
+--- Page 6 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Vektorski na ˇcin predstavljanja slike
+Osnova vektorske graﬁke je analiti ˇcka geometrija
+Slika je predstavljena kao kolekcija geometrijskih ﬁgura (ta ˇcke, prave, krive,
+poligoni, putanje, . . .) ˇcija se reprezentacija zasniva na matematickim jedna ˇcinama
+Za svaku ﬁguru ˇcuvaju se njeni parametri i njen polo ˇzaj na slici
+Npr. zaˇcuvanje vektorske slike kruga potrebno je zapamtiti njegov
+polupreˇ cnik
+koordinate centra kruga
+stil
+boju linije
+boju unutraˇ snjosti kruga
+
+--- Page 7 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Vektorski na ˇcin predstavljanja slike
+Memorija koju slika zauzima zavisi od njenog sadr ˇzaja,ˇcesto je manja od rasterske
+slike
+Memorija koju zauzima vektorska slika koja sadr ˇzi samo jedan krug manja je od
+memorije koju zauzima vektorska slika iste dimenzije koja sadr ˇzi na hiljade krugova
+
+--- Page 8 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Vektorski na ˇcin predstavljanja slike
+Vektorska graﬁka se prevashodno koristi kada je
+potreban visok stepen geometrijske preciznosti i jednostavno prikazivanje
+kompleksnih informacija pomo´ cu geometrijskih primitiva (npr. inˇ zenjerstvo,
+arhitektura),
+potrebno omogu´ citi skaliranje bez gubitka na kvalitetu slike ( fontovi, logotipovi
+kompanija, ˇ stampani materijal velikog formata)
+Nije pogodna za predstavljanje fotograﬁja ili fotorealisti ˇcnih slika
+Potreban je poseban softver za njihovu obradu
+
+--- Page 9 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Naˇcini predstavljanja slike
+(a) Rasterska slika
+ (b) Vektrska slika
+Izvor: Sneˇ zana Dordevi´ c, Raˇ cunarska graﬁka
+
+--- Page 10 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Vektorski na ˇcin predstavljanja slike
+format slike - na ˇcin na koji je slika snimljena u datoteku
+Vektorski formati:
+EPS – Encapsulated PostScript
+PDF - Portable Document Format
+AI - Adobe Illustrator Artwork AI
+SVG - Scalable Vector Graphics
+
+--- Page 11 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2SVG
+
+--- Page 12 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Scalable Vector Graphics (SVG)
+Scalable Vector Graphics (SVG) je format za vektorske slike zasnovan na XML-u
+za opis 2D crte ˇza
+SVG standard razvijen od strane World Wide Web Consortium (W3C)
+Podrˇzava interakciju i animaciju
+
+--- Page 13 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Scalable Vector Graphics (SVG)
+SVG slike se mogu:
+prikazati u bilo kojoj veliˇ cini bez gubitka kvaliteta
+lako menjati izmenom teksta unutar njih
+pretraˇ zivati
+
+--- Page 14 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Scalable Vector Graphics (SVG)
+Svaka SVG slika po ˇcinje sa <svg>elementom
+Atributi widthand heightelementa <svg>deﬁniˇsuˇsirinu i visinu SVG slike
+Atribut xmlnsoznaˇcava prostor imena (eng. namespace) u kome su deﬁnisane
+oznake elemenata
+xmlns=""http://www.w3.org/2000/svg""
+Primer: plavi krug
+
+--- Page 15 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Osnovne geometrijske ﬁgure u SVG
+Svaka geometrijska ﬁgura se zadaje pomo ´cu posebnog elementa ˇciji atributi
+deﬁniˇsu njenu poziciju i veli ˇcinu
+Osnovne geometrijske ﬁgure u SVG
+Linija
+Pravugaonik
+Krug
+Elipsa
+Spojene linije
+Mnogougao (poligon)
+
+--- Page 16 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Atributi elemenata za na ˇcin iscrtavanja
+U okviru oznake elementa mogu se zadati podaci o stilu iscrtavanja elementa pomo ´cu
+atributa:
+stroke - boja linije (npr. stroke=""red""ili stroke=""rgb(0,0,255)"")
+stroke-width - debljina (npr. stroke-width=""5"")
+ﬁll - boja oblika unutar njegove konture (npr. ﬁll=""#ﬀ0000""ili ﬁll=""blue""ili
+ﬁll=""none"")
+moˇze se koristiti atribut style za opis iscrtavanja u obliku style=""atr1:vred1;
+atr2:vred2;...atrN:vredN;""(npr. style=""ﬁll:cyan;stroke:red;"")
+
+--- Page 17 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Linija u SVG
+element <line>
+crta liniju izme du dve taˇcke
+atributi za opis:
+x1 - x koordinata prve taˇ cke
+y1 - y koordinata prve taˇ cke
+x2 - x koordinata druge taˇ cke
+y2 - y koordinata druge taˇ cke
+Primer: linija
+
+--- Page 18 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Linija u SVG
+
+
+--- Page 19 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Pravugaonik u SVG
+element <rect>
+atributi za opis:
+x - x pozicija levog gornjeg ugla
+y - y pozicija levog gornjeg ugla
+width - ˇ sirina
+height - visina
+rx - x polupreˇ cnik za zakrivljenost kod temena
+ry - y polupreˇ cnik za zakrivljenost kod temena
+Primer: pravugaonik
+
+--- Page 20 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Pravugaonik u SVG
+
+
+--- Page 21 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Krug u SVG
+element <circle>
+atributi za opis:
+cx - x pozicija centra
+cy - y pozicija centra
+r - polupreˇ cnik
+Primer: krug
+
+--- Page 22 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Krug u SVG
+
+
+--- Page 23 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Elipsa u SVG
+element <ellipse>
+opˇstiji oblik elementa <circle>
+atributa za opis:
+rx - horizontalni polupreˇ cnik
+ry - vertikalni polupreˇ cnik
+cx - x koordinata centra
+cy - y koordinata centra
+Primer: elipsa
+
+--- Page 24 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Elipsa u SVG
+
+
+--- Page 25 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Spojene linije u SVG
+element <polyline>
+grupa povezanih pravih linija
+atribut za opis:
+points - lista taˇ caka u kojoj je svaka taˇ cka oznaˇ cena sa x i y koordinatom u obliku x,y
+Primer: linije
+
+--- Page 26 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Spojene linije u SVG
+
+
+--- Page 27 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Mnogougao u SVG
+element <polygone>
+sastoji se od grupe pravih linija koje povezuju listu zadatih ta ˇcaka priˇcemu se
+povezuju i prva i poslednja ta ˇcka u listi
+atribut za opis:
+points - lista taˇ caka u kojoj je svaka taˇ cka oznaˇ cena sa x i y koordinatom u obliku x,y
+Primer: trougao
+
+--- Page 28 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Mnogougao u SVG
+
+
+--- Page 29 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Putanja u SVG
+element <path>
+najopˇstiji oblik pomo ´cu kog se mogu crtati ostali osnovni elementi
+pravi sloˇzene oblike kombinovanjem vi ˇse pravih ili zakrivljenih linija
+atribut za opis:
+d - lista taˇ caka i druge informacije o tome kako nacrtati putanju
+Primer: zvezda
+
+--- Page 30 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Putanja u SVG
+Neke komande za crtanje putanje
+M x y - (Move To) pomeri se na taˇ cku (x, y)
+L x y - (Line To) nacrtaj liniju od teku´ ce pozicije do taˇ cke (x, y)
+H x - (Horizontal line) crtanje horizontalne linije
+V y - (Vertical line) crtanje vertikalne linije
+Z - (Close Path) - crtanje prave linije od trenutne pozicije do poˇ cetne pozicije
+
+--- Page 31 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Putanja u SVG
+
+
+--- Page 32 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Text u SVG
+element <text>
+atributi za opis:
+x - x pozicija
+y - y pozicija
+font-size - atribut za veli ˇcinu slova
+Primer: tekst
+
+
+--- Page 33 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije
+Objekti crte ˇza se lako menjaju (pove ´cavaju, smanjuju, pomeraju...) jednostavnom
+izmenom odgovaraju ´ceg parametra
+Nove vrednosti ostalih parametara se izra ˇcunaju u zavisnosti od zahtevane
+promene, a zatim se u skladu sa tim nacrta i nova slik
+Delovi slike koji nisu obuhva ´ceni transformacijom se ne menjaju
+Translacija, skaliranje i rotacija su osnovni deo velikog broja graﬁ ˇckih aplikacija
+
+--- Page 34 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije - translacija
+translate(a, b) - translacija (pomeranje) oblika za a po x osi i b po y osi, tj.
+xnovo=xstaro+a
+ynovo=ystaro+b
+Primer: translacija
+
+
+--- Page 35 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije - rotacija
+rotate(d,x,y) -rotacija oblika za doko taˇcke (x, y)
+ako (x, y) nije navedeno, rotacija je oko koordinatnog po ˇcetka
+rotacija je u smeru kazaljke na satu
+Primer: rotacija
+
+
+--- Page 36 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije - skaliranje
+skaliranje - transformacija promene veli ˇcine objekta
+taˇcke se mogu skalirati du ˇz x i duˇz y ose i nije neophodno da faktori skaliranja po x
+i po y osi budu jednaki
+scale(a,b) - skaliranje svake ta ˇcke oblika a puta po x osi i b puta po y osi
+Primer: skaliranje
+
+
+--- Page 37 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije - smicanje
+smicanje ili isko ˇsenje - transformacija isko ˇsenja objekta u pravcu neke od
+koordinatnih osa, dok pritom vrednost druge koordinate ostaje ista
+skewX(d) - isko ˇsenje po x osi za d
+skewY(d) - isko ˇsenje po y osi za d
+Primer: isko ˇsenja
+
+--- Page 38 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Transformacije - smicanje
+
+
+--- Page 39 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Zadatak 1
+Koriˇs´cenjem tekstualnog editora napraviti SVG sliku izgleda
+
+
+--- Page 40 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Zadatak 2
+Koriˇs´cenjem tekstualnog editora napraviti SVG sliku izgleda
+
+
+--- Page 41 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Litearatura
+dr Vesna Marinkovi ´c, dr Predrag Jani ˇci´c, Materijali za kurs Ra ˇcunarska graﬁka
+https://poincare.matf.bg.ac.rs/ vesna.marinkovic/graﬁka/rg.pdf
+Glava 10 - str. 228 - 232
+SVG Tutorial
+https://www.w3schools.com/graphics/svg_intro.asp
+
+--- Page 42 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Koriˇs´cen materijal za pripremu slajdova
+dr Vesna Marinkovi ´c, dr Predrag Jani ˇci´c, Materijali za kurs Ra ˇcunarska graﬁka
+https://poincare.matf.bg.ac.rs/ vesna.marinkovic/graﬁka
+SVG Tutorial
+https://www.w3schools.com/graphics/svg_intro.asp
+
+--- Page 43 ---
+Predstavljanje crte ˇza na raˇcunaru SVG
+Ilustracije
+Vektorska i rasterska graﬁka:
+https://www.youtube.com/watch?v=p2thSkOa_Xg
+SVG https://www.youtube.com/watch?v=ZUh021S6kpg
+
+"
+8,Koja je razlika između GIF i JPEG formata?,"Razlika između GIF i JPEG formata:
+
+GIF format koristi tabelu boja (globalnu ili lokalnu) za mapiranje boja i koristi kompresiju bez gubitaka, što ga čini pogodnim za računalno generisane slike, dijagrame i slike sa ograničenim brojem boja. GIF može sadržati više definicija slika u jednoj datoteci.
+
+JPEG format koristi kompresiju sa gubicima koja smanjuje veličinu slike tako što iskorišćava karakteristike ljudskog oka, koje je manje osetljivo na promene boja i osvetljenja nego na oblike i površine. JPEG je najčešće korišćen za fotografije, gde je potrebna dobra reprodukcija boja uz manju veličinu fajla.",,"--- Page 1 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Digitalni zapis podataka
+Predavanje 8
+
+--- Page 2 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2Neki formati slika
+3Zadaci
+
+--- Page 3 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2Neki formati slika
+3Zadaci
+
+--- Page 4 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Rasterski na ˇcin predstavljanja slike
+Slika se sastoji od mre ˇze kvadrati ´ca u obliku matrice koji se nazivaju pikseli (eng.
+pixel, picture element)
+Pikseli su gradivne jedinice rasterske slike i ˇcuvaju informaciju o boji, intenzitetu,
+osvetljenosti, transparentnosti i sl.
+Rasterske ili bitmapirane slike
+Slika sadr ˇzi ﬁksiran broj piksela kojim se deﬁni ˇse kvalitet slike i on odgovara
+rezoluciji slike
+Rezolucija se izra ˇzava prema
+broju piksela po horizontali i vertikali (1280x1024 pix) ili broju piksela (10 Mpix)
+broju taˇ caka po inˇ cu (dpi (eng. dots per inch)) ili broju piksela po inˇ cu (ppi (eng.
+pixel per inch))
+Koliˇcina memorije potrebna za ˇcuvanje rasterske slike zavisi od broja upotrebljenih
+piksela i broja boja koje su na raspolaganju
+Rasterske slike se dobijaju digitalnim fotoaparatima, skeniranjem slika ili
+odgovaraju ´cim softverom za pravljenje rasterskih slika
+
+--- Page 5 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Rasterski na ˇcin predstavljanja slike
+Prednosti
+realistiˇ cne slike
+uve´ canje kompleksnosti ne utiˇ ce na koliˇ cinu memorije potrebnu za ˇ cuvanje slike
+Mane
+promena veliˇ cine slike dovodi do njene deformacije
+pri smanjivanju slike deo informacija se nepovratno gubi, pa se ponovnim
+pove´ canjem ne dobija polazna slika
+pri znaˇ cajnijem uve´ canju slika postaje nazubljena i mutna
+
+--- Page 6 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+1-bitne slike
+Najjednostavniji tip slike
+Slika se sastoji od ON/OFF bitova
+Podaci o jednom pikselu se ˇcuvaju u jednom bitu
+Naziva se binarna slika ili 1-bitna mohohromatska jer ne sadr ˇzi boje
+Koliko bajtova je potrebno za ˇcuvanje slike veli ˇcine 32x60?
+3260=8=240
+Pogodne su za slike sa jednostavnom graﬁkom i tekst
+Faks maˇsine koriste ovaj format
+
+--- Page 7 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+8-bitne slike
+Svaki piksel slike ˇcuva vrednost sive boje koja je izme du 0 i 255
+Slika sivih tonova
+Zaˇcuvanje informacije o jednom pikselu potreban je 1 bajt
+Koliko bajtova je potrebno za ˇcuvanje slike veli ˇcine 32x60?
+3260=1920
+
+--- Page 8 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+24-bitne slike u boji
+True color
+Svaki piksel slike ˇcuva se sa 3 bajta
+3 bajta se obi ˇcno predstavljaju boju zadatu sa RGB kolor modelom
+svaki kanal ima vrednosti u intervalu 0-255
+broj razliˇcitih boja: 256 256256=16777216
+Koliko bajtova je potrebno za ˇcuvanje slike veli ˇcine 32x60?
+32603=5760
+
+--- Page 9 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Joˇs neki naˇciniˇcuvanja boje
+30-bitne slike u boji (deep color) - 10 bitova po kanalu
+36-bitne slike u boji (deep color) - 12 bitova po kanalu
+48-bitne slike u boji (deep color) - 16 bitova po kanalu
+
+--- Page 10 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Pregledne tabele boja
+Pregledna tabela boja (eng. Look-up Table (LUT) ili Colormap)
+Sadrˇzi podatke za mapiranje boja u obliku indeks:vrednost boje gde je boja zadata
+pomo´cu kolor modela, npr. 24-bitnog RGB modela
+Ideja: pri ˇcuvanju podataka o slici u memoriji, svaki piksel se opisuje pomo ´cu
+indeksa iz LUT, a pri prikazivanju ili obradi slike pretra ˇzuje se LUT da bi se
+odredila ta ˇcna boja dodeljena pikselu
+indeksi su obi ˇcno 8-bitni brojevi, a boje zadate pomo ´cu 24-bitnog RGB modela
+Prednosti: koristi se manje memorije za ˇcuvanje slike i laka zamena vrednosti u
+LUT
+Mane: koristi se najvi ˇse 256 razli ˇcitih boja i problem pri konverziji proizvoljne boje
+iz 24-bitnog kolor modela
+
+--- Page 11 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Pregledne tabele boja
+LUT Izvor:ZN. Li, M. Drew, J. Liu, Fundamentals of Multimedia
+
+--- Page 12 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Kvalitet slike
+Kvalitet prikaza slike zavisi od rezolucije (broja piksela) i broja nijansi boja koje
+svaki piksel mo ˇze da prika ˇze
+Izvor: Sneˇ zana Dordevi´ c, Raˇ cunarska graﬁka
+
+--- Page 13 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Viˇsebajtne jedinice
+Osnova 10 Osnova 2
+Vrednost Oznaka Naziv Vrednost Oznaka Naziv
+1000 kB kilobyte 1024 KiB kibibyte
+10002MB megabyte 10242MiB mebibyte
+10003GB gigabyte 10243GiB gibibyte
+10004TB terabyte 10244TiB tebibyte
+10005PB petabyte 10245PiB pebibyte
+
+--- Page 14 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2Neki formati slika
+3Zadaci
+
+--- Page 15 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+ˇCuvanje u memoriji
+Dva naˇcinaˇcuvanja podataka o slici
+bez kompresije - ˇ cuva se informacija o svakom pikselu sa odre denim brojem bitova
+sa kompresijom
+Kompresija je smanjenje koli ˇcine podataka potrebnih za predstavljanje slike u
+memoriji.
+Kompresija bez o ˇste´cenja ( eng. losless compression) - rekonstruisana slika identi ˇcna
+je originalnoj
+Kompresija sa o ˇste´cenjem (eng. lossy compression) - rekonstruisana slika razlikuje se
+od originalne u nekoj meri
+
+--- Page 16 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+GIF
+Graphics Interchange Format (GIF)
+Prvobitno razvijen za prenos graﬁ ˇckih slika preko telefonskih linija preko modem
+8-bitne slike u boji
+Najprikladniji za slike sa malo karakteristi ˇcnih boja
+Koristi progresivan prikaza zasnovanog na preplitanju redova u 4 prolaza
+Dve verzije
+GIF87a
+GIF89a - podrˇ zava jednostavnu animaciju dodavanjem posebnih blokova u opisu za
+kontrolu graﬁke koji obezbe duju jednostavnu kontrolu nad vremenom kaˇ snjenja,
+indeksom transparentnosti itd.
+
+--- Page 17 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Pregledne tabele boja
+Prikaz zasnovan na preplitanju redova Izvor:ZN. Li, M. Drew, J. Liu, Fundamentals of
+Multimedia
+
+--- Page 18 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+GIF
+Format GIF87a datoteke. Izvor: ZN. Li, M. Drew, J. Liu, Fundamentals of Multimedia
+
+--- Page 19 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+GIF
+Format GIF datoteke:
+Potpis (eng. Signature) zauzima 6 bajtova: GIF87a
+Opis ekrana (eng. Screen Descriptor) skup atributa koji zauzimaju 7 bajtova: ˇsirina,
+visina, da li je data globalna tabela boja, boja pozadine, broj bitova po pikselu
+Datoteka mo ˇze sadrˇzati viˇse od jedne deﬁnicije slike. Svaka deﬁnicija ima
+opis slike (eng. Image Descriptor): pozicija poˇ cetka slike u pikselima, ˇ sirina, visina,
+da li koristi lokalnu ili globalnu tabelu boja ...
+lokalnu tabelu boja (eng. Local Color Map) za mapiranje 8 bitova u 24-bitne RGB
+vrednosti
+rasterske podatke (eng. raster data) koji su kompresovani
+za zapis dijagrama i sliˇ cnih raˇ cunarski generisanih slika
+globalna tabela boja (eng. Global color map) koja se navodi ukoliko se ne koristi
+lokalna tabela boja
+
+--- Page 20 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+JPEG
+JPEG - Joint Photographic Experts Group
+Naziv prema radnoj grupi koja ga je deﬁnisala
+Primenjuje se kompresija sa gubicima da bi se smanjila potrebna memorija za
+ˇcuvanje
+Kompresija se zasniva se na osobini ljudskog oka da bolje detektuje povr ˇsine i
+oblike nego varijacije u boji i osvatljenju
+Korisnik mo ˇze da kontroli ˇse stepen kompresije
+Veliˇcina slike mo ˇze da se smanji nekoliko desetina puta a da se pri tome ne izgubi
+mnogo na kvalitetu prikaza slike
+obiˇcno se koristi za fotograﬁje
+
+--- Page 21 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+PNG
+PNG - Portable Network Graphics
+PNG standard je napravljen sa ciljem da zameni GIF standard i da ga pro ˇsiri
+Podrˇzava koriˇs´cenje do 16 bitova za svaki kanal boje po pikselu, tj. 48-bitne boje
+Podrˇzava kompresiju bez gubitaka i sa gubicima
+za zapis dijagrama i sli ˇcnih raˇcunarski generisanih slika
+
+--- Page 22 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+BMP
+BMP - BitMap
+Podrˇzava koriˇs´cenje razli ˇcitih formata za ˇcuvanje podataka o pikselu: indeksirane
+boje, 16, 24 i 32-bitne boje
+Slike mogu biti koprimovane ili ne
+Ako se koriste 16-bitne i 32-bitne boje, ne koristi se kompresija
+
+--- Page 23 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Sadrˇzaj
+1Predstavljanje crte ˇza na raˇcunaru
+2Neki formati slika
+3Zadaci
+
+--- Page 24 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Zadatak 1
+Napisati u pj Python
+program koji iz gif animacije izdvaja
+sve koriˇs´cene slike i ˇcuva ih u png
+formatu
+program koji iz na osnovu png slika
+pravi gif animaciju
+
+
+--- Page 25 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Zadatak 2
+Napisati u pj Python program koji u slici
+logo.png menja rozu boju (255, 42, 127,
+255) u plavu (0, 0, 255, 255).
+
+
+--- Page 26 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Koriˇs´cen materijal za pripremu slajdova
+dr Vesna Marinkovi ´c, dr Predrag Jani ˇci´c, Materijali za kurs Ra ˇcunarska graﬁka
+https://poincare.matf.bg.ac.rs/ vesna.marinkovic/graﬁka/rg
+Sneˇzana Dordevi´c, Raˇcunarska graﬁka
+ZN. Li, M. Drew, J. Liu, Fundamentals of Multimedia
+
+--- Page 27 ---
+Predstavljanje crte ˇza na raˇcunaru Neki formati slika Zadaci
+Ilustracije
+JPG, PNG, SVG https://www.youtube.com/watch?v=tbfguZBDHPE
+JPEG, GIF, PNG https://www.youtube.com/watch?v=ww12lImOJ38
+
+"
+9,Šta je histogram i šta se predstavlja na x i y osi?,"Histogram je grafiˇcka reprezentacija distribucije podataka.
+
+Na x-osi se prikazuju izdvojeni intervali, a na y-osi broj vrednosti iz svakog intervala",,"--- Page 1 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalni zapis podataka
+Predavanje 9
+
+--- Page 2 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 3 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 4 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Vizuelizacija podataka
+Vizuelizacija podataka je graﬁ ˇcko predstavljanje informacija iz podataka
+Omogu´cava
+analizu i formiranje izveˇ staja o karakteristikama podataka i odnosima u njima
+mogu´ cnost analize vizuelnog prikaza velike koliˇ cine podataka
+otkrivanje opˇ stih obrazaca i trendova
+
+--- Page 5 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Skup podataka
+Podaci se ˇcesto prikazuju u obliku tabele u kojoj
+kolone predstavljaju atribute, tj. svojstva entiteta o kojima se ˇcuvaju informacije
+jedan red sadr ˇzi informacije o jednom entitetu (objektu)
+Atr1 Atr2 Atr3 ... AtrM
+Entitet1 2 5 0 ... 1
+Entitet2 0 8 3 ... 2
+... ... ... ... ... ...
+EntitetN 1 0 4 ... 6
+
+--- Page 6 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Skup podataka
+INDEKS IME PREZIME DATUM_UPISA DATUM_RODJENJA MESTO_RODJENJA
+20140021 Milos Peric 2014-07-06 1995-01-20 Beograd
+20140022 Marijana Savkovic 2014-07-05 1995-03-11 Kraljevo
+20130023 Sanja Terzic 2013-07-04 1994-11-09 Beograd
+20130024 Nikola Vukovic 2013-07-04 1994-09-17 NULL
+20140025 Marijana Savkovic 2014-07-06 1995-02-04 Kraljevo
+20140026 Zorica Miladinovic 2014-07-06 1995-10-08 Vranje
+20130027 Milena Stankovic 2013-09-03 NULL NULL
+
+--- Page 7 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Izbor naˇcina vizuelizacije podataka
+Naˇcin prikaza zavisi od podataka
+Bira se podskup atributa (informacija iz podataka) koji se koriste za vizuelizaciju
+Izbor moˇze da uklju ˇci i izdvajanje skupa objekata (entiteta) od interesa
+
+--- Page 8 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Preslikavanje podataka u graﬁ ˇcke elemente
+Objekti, atributi i njihovi odnosi se prevode u graﬁ ˇcke elemente kao ˇsto su taˇcke,
+linije, oblici, boje, ....
+Primer
+Objekti se ˇ cesto prikazuju kao taˇ cke
+Vrednosti atributa mogu da se prikaˇ zu kao pozicija taˇ cke ili kao njene karakteristike
+(boja, veliˇ cina, oblik,...)
+Ako se za predstavljanje koristi pozicija lako se uoˇ cavaju odnosi (grupe, oblik, ...)
+
+--- Page 9 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Histogrami
+Histogram je graﬁ ˇcka reprezentacija distribucije podataka
+Pri pravljenju histograma, prvo se opseg vrednosti podeli u niz intervala (eng.
+bins), a zatim se prebroji koliko vrednosti iz skupa pripada svakom od intervala
+Na x-osi se prikazuju izdvojeni intervali, a na y-osi broj vrednosti iz svakog intervala
+
+
+--- Page 10 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Histogrami
+3D histogram. Izvor: https://matplotlib.org/
+
+--- Page 11 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇSeme sa raspr ˇsenim elementima
+Vrednosti atributa entiteta odre duju njegovu poziciju na graﬁku
+Preko markera se bira na ˇcin prikaza entiteta (krug, X, trougao ...)
+Najˇceˇs´ce se koriste 2D ali postoje i 3D ˇseme
+Vrednosti drugih atributa mogu da se prika ˇzu koriˇs´cenjem oblika, veli ˇcine ili boje
+markera koji predstavljaju entitete
+
+
+--- Page 12 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇSema sa matricom
+ˇSeme sa matricama ili toplotne mape
+Prikazuje tabelarne podatke kao matricu ˇcije su vrednosti obojene
+
+
+--- Page 13 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+ˇCvorovi u mre ˇzi
+Graﬁkon pogodan za prikaz odnosa izme du entiteta u skupu
+Entiteti su predstavljeni ˇcvorovima, a odnosi vezama izme duˇcvorova
+
+
+--- Page 14 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Kruˇzni graﬁkon
+Kruˇzni ili tortni graﬁkon (eng. pie)
+Krug se koristi kao osnova za ilustraciju proporcija izme du vrednosti u atributu
+Duˇzina luka svakog dela je proporcionalna koli ˇcini koju predstavlja
+Svakom delu se obi ˇcno dodeljuje oznaka entiteta koji predstavlja
+
+
+--- Page 15 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 16 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zadatak 3
+Napisati program u pj Python za prikaz informacija iz skupa podataka population.csv.
+csv (eng. comma-separated values) - format zapisa podataka u obliku tabele u kome se
+informacije u jednom redu razdvajaju pomo ´cu ,
+
+--- Page 17 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 18 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zvuk
+Zvuˇcni signal predstavlja promenu pritiska vazduha u zadatoj ta ˇcki posmatranja
+Osnovni parametri koji opisuju zvu ˇcni signal su
+amplituda (koja odgovara ""glasno´ ci"") - mera odstupanja pritiska od srednje
+vrednosti, stanja koje je oznaˇ ceno kao tiˇ sina
+frekvencija (koja odgovara ""visini"") - broj oscilacija u 1 sekundi i izraˇ zava se u Hz
+ljudsko uho ˇcuje raspon frekvencija od 20Hz do 20KHz
+
+--- Page 19 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Zvuk
+
+
+--- Page 20 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Digitalizacija zvuka se sastoji od snimanja analognog pojavljivanja zvuka kao niza
+diskretnih doga daja i njegovog kodiranja u binarni sistem
+Za digitalizaciju se koriste ure daji koji spadaju u grupu analogno-digitalnih
+konvertera (ADC)
+Za reprodukciju zvuka koristi se digitalno-analogni konverter (DAC)
+
+--- Page 21 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Putanja zvuka pri digitalizaciji i reprodukciji
+
+
+--- Page 22 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Putanja zvuka pri digitalizaciji i reprodukciji
+Mikrofon detektuje kontinuirano promenljivi pritisak vazduha, snima to kao
+analogni napon i ˇsalje informacije
+ADC izvodi digitalizaciju
+Digitalnog sistema obra duje digitalni zvuk
+DAC pretvara digitalni u analogni zvuk
+Zvuˇcnik pretvara analogni signal u zvu ˇcni talas u vazduhu
+
+--- Page 23 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Sadrˇzaj
+1Vizuelizacija podataka
+2Zadatak
+3Zvuk
+4Digitalizacija zvuka
+
+--- Page 24 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Ukljuˇcuje dva glavna koraka
+uzorkovanje
+kvantizaciju
+
+--- Page 25 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Uzorkovanje
+Uzorkovanje je merenje amplitude vazdu ˇsnog pritiska u jednako raspore denim
+trenucima vremena
+Svako merenje je jedan uzorak
+Broj uzoraka uzetih u sekundi ( broj uzoraka/s ) се naziva frekvenciju odabiranja ili
+stopa uzorkovanja (eng. sampling rate)
+Jedinica broj uzoraka/s se naziva Herc (Hz)
+
+--- Page 26 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Uzorkovanje
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 27 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Kvantizacija
+Kvantizacija je predstavljanjе amplitude pojedina ˇcnih uzoraka kao celih brojeva
+izraˇzenih u binarnom obliku
+Zbog kori ˇs´cenja celih brojeva uzorci moraju da se mere u kona ˇcnom broju
+diskretnih nivoa
+Opseg mogu ´cih celih brojeva je odre den dubinom bita (rezolucija) - brojem bitova
+koji se koriste po uzorku
+dubina bita 8 - 256 diskretnih nivoa, dubina bita 16 - 65536 diskretnih nivoa
+Amplituda uzorka mora biti zaokru ˇzena na najbli ˇzi od dozvoljenih diskretnih nivoa
+Diskretizacija prouzrukuje gre ˇske u procesu digitalizacije
+
+--- Page 28 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Viˇsekanalno snimanje zvuka
+Da bi se dobio prostorni ose ´caj zvuka, primenjuje se tehnika vi ˇsekanalnog snimanja
+zvuka
+Svaki kanal se nezavisno snima sa posebnim mikrofonom i reprodukuje na
+posebnom zvu ˇcniku
+Stereo zvuk - snimanje zvuka sa dva kanala
+Surround sistemi - snimanje zvuka sa vi ˇse od dva kanala
+
+--- Page 29 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Pri snimanju zvuka u digitalnom formatu bira se
+stopa uzorkovanja (44100, 48000, ...)
+dubina bita (8,16,32)
+broj kanala (mono (jedan), stereo (dva), viˇ se kanala)
+Uobiˇcajene su postavka za audio kvalitet CD-a: frekvencija uzorkovanja je 44100
+Hz, dubinom bita je 16 bita (tj. dva bajta) po kanalu, i sa dva kanala
+
+--- Page 30 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Primer
+Zvuˇcni talas ima frekvenciju od 440 Hz (ciklusa/s)
+Stopa uzorkovanja je 3520 Hz (uzoraka/s)
+Osam uzoraka za svaki ciklus zvu ˇcnog talasa (crveni krugovi)
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 31 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Stopa uzorkovanja je va ˇzna zaˇcuvanje i reprodukciju signala
+ˇSto je frekvencija signala ve ´ca, potrebno je vi ˇse uzoraka u sekundi (ve ´ca brzina
+uzorkovanja) da bi se on precizno predstavio u digitalnom domenu
+Izvor: J. Burg et al. Digital Sound & Music: Concepts, Applications, and Science
+
+--- Page 32 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Digitalizacija zvuka
+Ako je stopa uzorkovanja niska, rekonstruisani zvu ˇcni talas je ni ˇze frekvencije od
+originalnog zvuka
+Alijasing – neta ˇcna digitalizacija koja je rezultat nedovoljne brzine uzorkovanja
+
+--- Page 33 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Da bi jednofrekventni zvu ˇcni talas bio ispravno digitalizovan, stopa uzorkovanja
+mora biti najmanje dvostruko ve ´ca od frekvencije zvu ˇcnog talasa
+Uopˇstenije, za zvuk sa vi ˇse frekventnih komponenti, stopa uzorkovanja mora biti
+najmanje dvostruko ve ´ca od komponente sa najvi ˇsom frekvencijom
+
+--- Page 34 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Ako je dat zvuk sa maksimalnom frekvencijskom komponentom od fHz, potrebna
+brzina uzorkovanja je najmanje 2fda bi se izbegao alijasing
+Minimalna prihvatljiva stopa uzorkovanja ( 2f) naziva se Nyquist stopa
+
+--- Page 35 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Ako je stopa uzorkovanja f, komponenta zvuka najvi ˇse frekvencije koja se mo ˇze
+ispravno uzorkovati je f/2
+Najviˇsa komponenta frekvencije koja se mo ˇze ispravno uzorkovati naziva se Nyquist
+frekvencija
+
+--- Page 36 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Nyquist teorema
+Standardne stope uzorkovanja u okru ˇzenjima za digitalno snimanje zvuka su
+dovoljno visoke da zahvate sve frekvencije u opsegu koji ˇcovek mo ˇze daˇcuje
+Najviˇsa zvuˇcna frekvencija je oko 20000 Hz
+Stopa uzorkovanja za CD je 44100 Hz (44,1 kHz)
+Stopa uzorkovanja 48 kHz je tako deˇsiroko podr ˇzana
+Stope uzorkovanja idu ˇcak do 192 kHz
+
+--- Page 37 ---
+Vizuelizacija podataka Zadatak Zvuk Digitalizacija zvuka
+Greˇska kvantizacije
+Dubina bita odre duje preciznost sa kojom se predstavlja amplituda uzorka
+Sa dubinom bita od n, mogu´ce je 2nnivoa kvantizacije
+Polovina nivoa kvantizacije je ispod horizontalne ose, tj. 2n"
+10,Objasni razliku između hard diska i keš memorije po brzini i svrsi,"Brzina: Keš memorija je mnogo brža od hard diska.
+
+Svrha: Hard disk služi za dugotrajno skladištenje podataka, dok je keš memorija namenjena za brzo privremeno čuvanje podataka radi ubrzanja procesorskih operacija.",,"--- Page 1 ---
+Zapis 3D modela Hardver
+Digitalni zapis podataka
+Predavanje 11
+
+--- Page 2 ---
+Zapis 3D modela Hardver
+Sadrˇzaj
+1Zapis 3D modela
+2Hardver
+
+--- Page 3 ---
+Zapis 3D modela Hardver
+Sadrˇzaj
+1Zapis 3D modela
+2Hardver
+
+--- Page 4 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Model je apstraktna reprezentacija objekta
+Trodimenzionalno (3D) modelovanje je tehnika kompjuterske graﬁke za
+proizvodnju 3D digitalnog prikaza bilo kog objekta ili povr ˇsine
+Modelovanje - pravljenje matemati ˇcke speciﬁkacije tela i njegovih vizualnih
+svojstava na na ˇcin koji je mogu ´ce saˇcuvati na ra ˇcunaru
+Rezultat se naziva 3D model
+U 3D modelu objekat je predstavljen pomo ´cu kolekcije ta ˇcaka u 3D prostoru,
+povezanih razli ˇcitim geometrijskim entitetima kao ˇsto su trouglovi, linije,
+zakrivljene povr ˇsine itd.
+
+--- Page 5 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Razliˇciti naˇcini modelovanja sfere polupre ˇcnika r
+matematiˇ ckom jednaˇ cinom
+mreˇ zom poligona
+Izvor: Vesna Marinkovi´ c, Raˇ cunarska graﬁka
+
+--- Page 6 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Modeli se mogu sastojati od velikog broja geometrijskih primitiva. Neke od
+primitiva koje su direktno podr ˇzane u hardveru jesu ta ˇcke, duˇzi i poligoni (npr.
+trouglovi).
+Izvor: Vesna Marinkovi´ c, Raˇ cunarska graﬁka
+
+--- Page 7 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Sloˇzeni objekti mogu se dobiti od jednostavnijih objekata koji se mogu napraviti od
+joˇs jednostavnijih objekata i tako sve dok se ne stigne do osnovnih geometrijskih
+primitiva (tipa sfera, valjaka, kupa i kocki) koje se mogu direktno nacrtati
+Izvor: Vesna Marinkovi´ c, Raˇ cunarska graﬁka
+
+--- Page 8 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+3D modeli se prave pomo ´cu
+specijalizovanih softvera za 3D produkciju
+primeri 3D graﬁˇ ckih aplikacija: Autodesk’s Auto CAD, Autodesk’s Maya, Autodesk’s
+3D Studio Max
+skeniranjem objekata iz stvarnog sveta u skup ta ˇcaka podataka koji se koriste za
+digitalno predstavljanje objekata. Na ovaj na ˇcin objekat je mogu ´ce digitalno
+analizirati, kao i iskoristiti dobijene skenirane podatke za izradu objekta na 3D
+ˇstampaˇcu.
+Izvor: https://www.artec3d.com/portable-3d-scanners/artec-micro
+
+--- Page 9 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Modeli mogu da prikazuju stvarne objekte (npr. zgradu ili atome) ili zami ˇsljene
+objekte
+Modeli mogu poticati iz razli ˇcitih domena (arhitekture, biologije, umetnosti ...)
+Primeri
+raˇ cunarske igre koriste soﬁsticirane 3D modele i algoritme renderovanja
+ﬁlmska industrija koristi 3D modelovanje kako bi se stvorili sintetiˇ cka okruˇ zenja,
+objekti i realistiˇ cni likovi
+vizualizacija informacija uz pomo´ c graﬁkona
+dizajniranje delova i proizvoda na raˇ cunarima (eng. Computer Aided Design, CAD),
+a zatim, koriˇ s´ cenjem ovih virtuelnih dizajna, za vo denje procesa proizvodnje (eng.
+Computer Aided Manufacturing, CAM)
+simulacija u svrhe treniranja (voˇ znje, letenja)
+virtuelna realnost radi zabave (virtuelna putovanja, posete muzejima)
+
+--- Page 10 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Renderovanje - proces kreiranja realisti ˇcne 2D digitalne slike na osnovu (2D ili 3D)
+modela i modela pona ˇsanja svetlosti
+U okviru renderovanja se odre duje boja svakog piksela
+Modelovanje obuhvata pravljenje modela objekata na sceni, primenu materijala na
+modele, postavljanje modela na scenu, modelovanje izvora svetlosti koji postoje na
+sceni, pozicioniranje svetla na sceni, postavljanje kamere, dok renderovanje
+podrazumeva pravljenje dvodimenzione slike
+Animacija - proces kreiranja nizova slika koje, kada se prika ˇzu brzo jedna za
+drugom, daju utisak glatkog kretanja
+
+--- Page 11 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+Najˇceˇs´ci formati za ˇcuvanje 3D podataka su
+OBJ (Wavefront)
+3DS - binarni format, Autodesk 3ds Max
+OFF (Object File Format)
+
+--- Page 12 ---
+Zapis 3D modela Hardver
+Zapis 3D modela
+OBJ format je jednostavan format za ˇcuvanje podataka o 3D geometrijskom opisu
+tela pomo ´cu temena, teksture, i lica koja ˇcine poligoni deﬁnisani pomo ´cu temena
+
+--- Page 13 ---
+Zapis 3D modela Hardver
+Elementi datoteke OBJ format
+Osnovni elementi su:
+temena (eng. vertex)
+linija sa opisom poˇ cinje slovom vpa slede koordinate (x,y,z)
+neke aplikacije podrˇ zavaju i zadavanje boje sa 3 vrednosti izme du 0 i 1 odmah iza
+koordinata
+primer: v 0.5 0.2 0.8 1.0
+lica (eng. faces)
+koristi se za deﬁnisanje poligona
+deﬁniˇ su se navo denjem liste temena
+linija sa opisom poˇ cinje slovom fpa slede indeksi temena
+indeks prvog navedenog temena u datoteci je 1, a svakom narednom temenu se
+indeks pove´ cava za 1
+primer: f 2 3 4
+
+--- Page 14 ---
+Zapis 3D modela Hardver
+Elementi datoteke OBJ format
+Osnovni elementi su:
+linija /poligonalna linija
+linija sa opisom poˇ cinje slovom lpa slede indeksi temena
+primer: l 2 3 4
+grupisanje poligona
+linija sa opisom poˇ cinje slovom gpa slede ime grupe
+primer: g Tetraedar
+
+--- Page 15 ---
+Zapis 3D modela Hardver
+Elementi datoteke OBJ format
+Vizuelni opis poligona deﬁnisanih u obj datoteci se ˇcuva u datotekama sa
+ekstenzijom .mtl
+MTL (eng. Material Template Library) datoteka - biblioteka materijala
+U okviru MTL datoteke deﬁni ˇsu se materijali , tj. kako ´ce se izvr ˇsiti senˇcenje
+povrˇsina, odnosno osobine reﬂeksije svetlosti prema Fongovom modelu osvetljenja
+
+--- Page 16 ---
+Zapis 3D modela Hardver
+Elementi datoteke OBJ format
+Prema Fongovom modelu ukupna osvetljenost se izra ˇzava kao kombinacija
+ambijentalne, difuzne i spekularne komponente
+Fongovom model je empirijski model i opisuje na ˇcin na koji povr ˇsina reﬂektuje
+svetlost kao kombinaciju difuzne reﬂeksije hrapavijih povr ˇsina sa spekularnom
+reﬂeksijom glatkih povr ˇsina
+Razlika izme du spekularne i difuzne reﬂeksije. Izvor: Vesna Marinkovi´ c, Raˇ cunarska graﬁka
+
+--- Page 17 ---
+Zapis 3D modela Hardver
+Elementi datoteke OBJ format
+Renderovanje uz prikaz doprinosa svake od tri komponenti koje uˇ cestvuju u Fongovoj jednaˇ cini
+osvetljenosti: a) ambijentalna b) difuzna c) spekularna d) rezultat dobijen sumiranjem svih
+doprinosa. Izvor: Vesna Marinkovi´ c, Raˇ cunarska graﬁka
+
+--- Page 18 ---
+Zapis 3D modela Hardver
+Elementi MTL datoteke
+Osnovni elementi su:
+deﬁnisanje materijala
+linija sa opisom poˇ cinje sa newmtlpa sledi naziv materijala
+primer: newmtl crvena
+ambijentalna svetlost
+linija sa opisom poˇ cinje sa Kapa sledi navo denje RGB boje sa vrednostima kanala u
+opsegu [0;1]
+primer: Ka 0 0 0
+difuzna svetlost
+linija sa opisom poˇ cinje sa Kdpa sledi navo denje RGB boje sa vrednostima kanala u
+opsegu [0;1]
+primer: Kd 0.8 0.2 0.2
+
+--- Page 19 ---
+Zapis 3D modela Hardver
+Elementi MTL datoteke
+Osnovni elementi su:
+spekularna svetlost
+linija sa opisom poˇ cinje sa Kspa sledi navo denje RGB boje sa vrednostima kanala u
+opsegu [0;1]
+primer: Ks 0.5 0.5 0.5
+teˇzina spekularne svetlosti
+deﬁniˇ se sjaj
+linija sa opisom poˇ cinje sa Nspa sledi vrednost u opsegu [0;1000 ]
+primer: Ns 10
+transparentnost
+linija sa opisom poˇ cinje sa dpa sledi vrednost u opsegu [0;1]
+1 oznaˇ cava neprozirnost
+primer: d 1
+
+--- Page 20 ---
+Zapis 3D modela Hardver
+Elementi MTL datoteke
+Osnovni elementi su:
+linija za uvo denje podataka iz datoteke sa materijalima u OBJ datoteci mtllib
+ime.mtl
+
+--- Page 21 ---
+Zapis 3D modela Hardver
+Sadrˇzaj
+1Zapis 3D modela
+2Hardver
+
+--- Page 22 ---
+Zapis 3D modela Hardver
+Raˇcunari
+Za funkcionisanje modernih ra ˇcunara neophodni su hardver i softver
+Softver (programski sistem ra ˇcunara)ˇcine raˇcunarski programi i prate ´ci podaci koji
+odre duju izraˇcunavanja koja vr ˇsi raˇcunar
+Hardver (tehni ˇcki sistem ra ˇcunara)ˇcine opipljive, ﬁzi ˇcke komponente ra ˇcunara
+U hardver spadaju
+procesor - centralna procesorska jedinica (engl. Central Processing Unit, CPU) koja
+obra duje podatke
+glavna memorija (engl. main memory) sadrˇ zi podatke koji se obra duju i trenutno
+pokrenute programe
+graﬁˇ cka karta - jedinica za obradu i prikaz vizuelnih podataka na izlaznim ure dajima
+razliˇ citi periferijski ure daji ili ulazno-izlazne jedinice (engl. input-output devices, IO
+devices) za komunikaciju korisnika sa sistemom i za trajno skladiˇ stenje podataka i
+programa: miˇ sevi, tastature, ekrani, ˇ stampaˇ ci, diskovi, a koje sluˇ ze
+
+--- Page 23 ---
+Zapis 3D modela Hardver
+Hardver ra ˇcunara
+Matiˇcna ploˇca (engl. motherboard) je ˇstampana plo ˇca na koju se priklju ˇcuju
+procesor, memorijski ˇcipovi i svi periferijski ure daji
+Veza izme du komponenti uspostavlja se hardverskim sklopovima koji se nazivaju
+magistrale (engl. bus)
+
+--- Page 24 ---
+Zapis 3D modela Hardver
+Hardver ra ˇcunara
+
+
+--- Page 25 ---
+Zapis 3D modela Hardver
+Procesor
+Procesor se sastoji od
+kontrolne jedinice CU (engl. Control Unit) - upravlja njegovim radom
+aritmetiˇcko-logiˇcke jedinice ALU (engl. Arithmetic Logic Unit) - zadu ˇzena za
+izvo denje aritmeti ˇckih operacija (sabiranje, oduzimanje, mno ˇzenje, pore denje, . . . )
+i logiˇckih operacija (konjunkcija, negacija,. . . ) nad brojevima
+registara koji privremeno mogu da ˇcuvaju podatke i imaju ˇsirinu 8 bitova, 16
+bitova, 32 bita ili 64 bita
+CPU Izvor: Filip Mari´ c, Predrag Janiˇ ci´ c, Programiranje 1
+
+--- Page 26 ---
+Zapis 3D modela Hardver
+Procesor
+ALU izvrˇsava operacije nad podacima koji su sme ˇsteni u registrima i rezultate
+ponovo sme ˇsta u registre
+CUˇcita instrukciju po instrukciju programa zapisanog u memoriji i na osnovu njih
+odre duje slede´cu akciju sistema (npr. izvr ˇsi odre denu aritmeti ˇcku operaciju nad
+sadrˇzajem u registrima procesora)
+Brzina procesora meri se u milionima operacija u sekundi (engl. Million Instructions
+Per Second, MIPS) ili u broju operacija u pokretnom zarezu u sekundi (engl.
+FLoating Point Operations per Second, FLOPS)
+Standardni procesori rade oko 10 GFLOPS (deset milijardi operacija u pokretnom
+zarezu po sekundi)
+Procesori mogu da imaju i nekoliko jezgara (engl. core) koja istovremeno izvr ˇsavaju
+instrukcije i time omogu ´cuju tzv. paralelno izvr ˇsavanje
+
+--- Page 27 ---
+Zapis 3D modela Hardver
+Procesor
+Bitne karakteristike
+broj jezgara (obi ˇcno 1, 2, 4, 6, 8, pa i vi ˇse)
+ˇsirina reˇci (32 bita ili 64 bita)
+radni takt (obi ˇcno nekoliko GHz) - u ˇcestalost impulsa koji generi ˇse sat (clock)-
+specijalno elektronsko kolo kojim se iniciraju operacije procesora; ve ´ci radni takt
+omogu´cava izvrˇsavanje ve ´ceg broja operacija u jedinici vremena
+
+--- Page 28 ---
+Zapis 3D modela Hardver
+Graﬁˇcka karta
+Komponenta namenjena za obradu i prikaz vizuelnih podataka na izlazni ure dajima
+Sadrˇzi video memoriju i graﬁ ˇcki procesor
+Video memorija - od 128 MB do 4GB
+
+--- Page 29 ---
+Zapis 3D modela Hardver
+Graﬁˇcki procesor
+Graﬁˇcki procesor (engl. Graphics Processing Unit, GPU)
+Prvobitna namena - izra ˇcunavanja u vezi sa graﬁkom ra ˇcunara
+Zbog paralelizovane srukture koriste se i za zra ˇcunavanja koja se vr ˇse paralelno nad
+velikim skupom podataka
+
+--- Page 30 ---
+Zapis 3D modela Hardver
+Povezivanje graﬁ ˇcke karte sa izlaznim ure dajima
+VGA (eng. Video Graphics Array) - stariji izlaz (monitori)
+DVI (eng. Digital Visual Interface) - projektori ...
+HDMI (eng. High-Deﬁnition Multimedia Interface) - noviji izlaz (monitori, video
+konzole)
+DP (eng. Display Port ) - najnoviji izlaz za povezivanje sa monitorom
+
+
+--- Page 31 ---
+Zapis 3D modela Hardver
+Glavna memorija
+Koristi se za skladi ˇstenje podataka i programa
+Naziva se i RAM (engl. random access memory)
+Predstavlja linearno ure deni niz registara i svaki registar ima svoju adresu
+
+--- Page 32 ---
+Zapis 3D modela Hardver
+Glavna memorija
+Osnovni parametri memorija su
+kapacitet izra ˇzen u GB
+vreme pristupa - vreme potrebno da se memorija pripremi za ˇcitanje odnosno upis
+podataka izra ˇzeno u nanosekundama (ns)
+protok - koli ˇcina podataka koja se prenosi po sekundi
+
+--- Page 33 ---
+Zapis 3D modela Hardver
+Hijerarhija memorija
+Hijerarhija memorija koje slu ˇze da unaprede funkcionisanje sistema
+Unutraˇsnje memorije - memorije vezane za procesor koje se koriste isklju ˇcivo dok je
+raˇcunar uklju ˇcen
+Spoljne memorije - memorije za skladi ˇstenje podataka u trenucima kada ra ˇcunar
+nije uklju ˇcen
+Pre upotrebe se podaci prebacuju iz spoljnih u unutra ˇsnju memoriju
+Memorijska hijerarhija predstavlja se piramidom
+
+--- Page 34 ---
+Zapis 3D modela Hardver
+Hijerarhija memorija
+Hijerarhija memorije Izvor: Filip Mari´ c, Predrag Janiˇ ci´ c, Programiranje 1
+
+--- Page 35 ---
+Zapis 3D modela Hardver
+Hijerarhija memorija
+Registri procesora predstavljaju najbr ˇzu memoriju jer se sve aritmeti ˇcke i logiˇcke
+operacije izvode upravo nad podacima koji se nalaze u njima
+Keˇs (engl. cache) je mala koli ˇcina brze memorije (obi ˇcno nekoliko MB) izme du
+procesora i glavne memorije u cilju ubrzanja rada ra ˇcunara
+Glavna memorija ˇcuva sve podatke i programe koje procesor izvr ˇsava
+Mali deo glavne memorije ˇcini ROM (engl. read only memory) - nepromenljiva
+memorija koja sadr ˇzi osnovne programe koji slu ˇze za kontrolu odre denih
+komponenata ra ˇcunara (na primer, osnovni ulazno-izlazni sistem BIOS)
+
+--- Page 36 ---
+Zapis 3D modela Hardver
+Hijerarhija memorija
+Spoljne memorije ˇcuvaju podatke trajno
+hard diskovi (engl. hard disk ) (u GB ili TB)
+prenosne spoljne memorije: USB ﬂeˇ s-memorije i optiˇ cki diskovi (CD, DVD, Blu-ray)
+
+--- Page 37 ---
+Zapis 3D modela Hardver
+Ulazni ure daji
+tastature (sa ra ˇcunarom se povezuju be ˇziˇcno ili kablom)
+miˇsevi (sa ra ˇcunarom se povezuju be ˇziˇcno ili kablom)
+taˇcped
+skeneri - sliku sa papira prenosi na ra ˇcunar
+
+--- Page 38 ---
+Zapis 3D modela Hardver
+Izlazni ure daji
+monitori
+tankog i ravnog ekrana (engl. ﬂat panel display),
+obiˇ cno zasnovani na tehnologiji teˇ cnih kristala (engl. liquid crystal display, LCD) koji
+su osvetljeni pozadinskim LED osvetljenjem
+ˇstampaˇci
+
+--- Page 39 ---
+Zapis 3D modela Hardver
+Korisni linkovi
+3D viewer
+https://3dviewer.net/
+OBJ Model Viewer
+https://sourceforge.net/projects/objmodelviewer/ﬁles/latest/download
+
+--- Page 40 ---
+Zapis 3D modela Hardver
+Linkovi
+How to Use AI to Create 3D Models (ChatGPT and Blender)
+https://www.youtube.com/watch?v=x60zHw_z4NM
+
+--- Page 41 ---
+Zapis 3D modela Hardver
+Koriˇs´cen materijal za pripremu slajdova
+Filip Mari ´c, Predrag Jani ˇci´c, Programiranje 1, 2021.
+dr Vesna Marinkovi ´c, dr Predrag Jani ˇci´c, Materijali za kurs Ra ˇcunarska graﬁka
+http://poincare.matf.bg.ac.rs/ vesnam/graﬁka/rg.pdf
+Faxin Yu, Hao Luo, Zheming Lu, Pinghui Wang, Three-Dimensional Model
+Analysis and Processing
+
+"
