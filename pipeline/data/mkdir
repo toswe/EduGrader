@@ -1,0 +1,30 @@
+#!/bin/bash
+if [ -z "$1" ]; then
+    echo "Usage: ./mkdir dir_name"
+    exit 1
+fi
+
+DIR_NAME="$1"
+BASE_DIR="$(dirname "$0")/$DIR_NAME"
+
+# Check if directory already exists
+if [ -d "$BASE_DIR" ]; then
+    echo "Error: Directory '$DIR_NAME' already exists"
+    exit 1
+fi
+
+mkdir -p "$BASE_DIR/raw"
+mkdir -p "$BASE_DIR/interim"
+mkdir -p "$BASE_DIR/graded"
+
+cat > "$BASE_DIR/interim/.gitignore" << 'EOF'
+*
+!.gitignore
+EOF
+
+cat > "$BASE_DIR/graded/.gitignore" << 'EOF'
+*
+!.gitignore
+EOF
+
+echo "Directory structure created."
