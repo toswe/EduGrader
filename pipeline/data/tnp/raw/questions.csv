@@ -1,0 +1,19 @@
+Question,Text,Answer,Textbook
+1,Definišite pojmove „netikecija“ i „flejmovanje“.,"Netikecija je skup pravila lepog i pravilnog ponasanja na internetu.
+Flejmovanje je neprihvatljivo ponasanje na mrezi – vredjanje, napadanje
+i izrazavanje agresije u elektronskoj komunikaciji.",https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+2,Iz koliko delova se sastoji LaTeX dokument i šta se u njima navodi?,"LaTeX dokument se sastoji iz dva dela:
+1) Preambula – navode se opste karakteristike dokumenta
+   (npr. tip dokumenta, paketi i podesavanja).
+2) Glavni deo – nalazi se izmedju komandi
+   \begin{document} i \end{document}
+   i u njemu ide sadrzaj dokumenta.",https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+3,Definišite pojmove TeX i LaTeX. Koja je razlika?,"TeX je sistem koji je napravio Donald Knuth za pripremu teksta.
+LaTeX je makro-paket nad TeX-om koji je napravio Leslie Lamport
+i olaksava rad tako sto automatizuje mnoge zadatke.
+Razlika je u tome sto je TeX osnovni mehanizam, a LaTeX je
+prosireni sistem koji koristi TeX i pojednostavljuje upotrebu.",https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+4,Zapišite u LaTeX-u formulu: ∫ od α do β x dx,"$$\int_{\alpha}^{\beta} x \, dx$$",https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+5,"Zapišite u LaTeX-u formulu:
+
+Proizvod i = 1 do j, proizvod j = i+1 do 2003 (i^j – j^i)",$$\prod_{i=1}^{j} \prod_{j=i+1}^{2003} (i^j - j^i)$$,https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
