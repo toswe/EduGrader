@@ -1,0 +1,93 @@
+Question,Text,Answer,Textbook
+1,"Napisati izraz koji je tačan ako i samo ako su i-ta i j-ta binarna cifra broja unsigned X jednake (cifre se broje od cifre najmanje težine, s desna na levo, počev od 0).",((X >> i) & 1) == ((X >> j) & 1),"""Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab""
+"
+2,"Ako f(n) pripada klasi O(nlogn), a g(n) pripada klasi O(n²), onda f(n)+g(n) pripada klasi (izabrati sve ispravne odgovore):
+a. O(nlogn)
+b. O(n²)
+c. O(nlogn+n²)
+d. O(n²logn)",b i c,"Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+3,"Koja je vremenska, a koja prostorna složenost funkcije f?
+int f(unsigned int n) {
+return n>0 ? f(n/3) : 5
+}",vremenska = prostorna = O(logn),"Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+4,"Da li je pristup n-tom elementu efikasniji za niz, ili za povezanu listu?
+Da li je pristup n-tom elementu efikasniji za niz, ili za dinamički niz?
+Molim Vas obrazložite odgovor.","Za niz. Za niz je O(1), za listu O(n)
+Isto je. U oba slucaja je O(1)","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+5,"Složenost umetanja novog čvora na nasumičnu poziciju (rand()%n, gde je n dužina liste) u
+jednostruko povezanu listu je O(____).",O(n),"Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+6,"Koliko tačkica ispisuje poziv f(3) za narednu funkciju f?
+
+void f(unsigned n) {
+    if (n > 0) {
+        f(n-1);
+        putchar('.');
+        f(n-1);
+    }
+}",Ispisuje 7 tackica. T(n)=2⋅T(n-1)+1 sa baznim slucˇajem: T(0)=0,"Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+7,"Niz niski potrebno je sortirati opadajuće prema poslednjem karakteru u nisci, a korišćenjem sistemske funkcije qsort. Implementirati potrebnu funkciju poređenja.","int compare_by_last_char_desc(const void *a, const void *b) {
+    const char *str1 = *(const char **)a;
+    const char *str2 = *(const char **)b;
+
+    // Uzmi poslednji karakter svake niske
+    char last1 = str1[strlen(str1) - 1];
+    char last2 = str2[strlen(str2) - 1];
+
+    // Sortiranje opadajuće, pa se poredi obrnutim redosledom
+    if (last1 < last2) return 1;
+    if (last1 > last2) return -1;
+    return 0;
+}","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+8,Koje su mane rekurzije?,"Rekurzija može otežati razumevanje i održavanje koda, posebno kod složenijih problema, jer logika često nije intuitivna i može dovesti do skrivenih grešaka ili neefikasnosti ako se ne koristi pažljivo.","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+9,"Napisati iterativnu (nerekurzivnu) verziju sledeće funkcije:
+void f(int x){
+    if (g(x))
+        a(x);
+    else {
+        b(x);
+        f(p(x));
+    }
+}","void f(int x) {
+    while (!g(x)) {
+        b(x);
+        x = p(x);
+    }
+    a(x);
+}","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+10,Koji ulazni niz predstavlja najgori slučaj za algoritam sortiranja selection sort?,"Ako gledamo broj zamena, najgori slučaj je kada je niz potpuno obrnut","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+11,Ukratko objasniti šta je „fragmentacija memorije“? Navesti primere.,"Fragmentacija memorije je stanje kada je slobodna memorija u računaru podeljena na male, nepovezane delove (fragmente), zbog čega nije moguće alocirati veće neprekidne blokove memorije, iako ukupno ima dovoljno slobodne memorije.","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
+12,"Prirodni brojevi od 1 do 15, u nekom poretku, čitaju se sa ulaza i smeštaju u uređeno binarno
+stablo. Navesti primer poretka ovih brojeva na ulazu tako da se dobija:
+a. stablo najmanje moguće dubine?
+b. stablo najveće moguće dubine?","Primer poretka za najmanju dubinu:
+
+8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13, 15
+
+Primer poretka za najveću dubinu:
+
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
+","Kurs: Programiranje 2
+Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
+Slajdovi: https://matfp2.github.io/p2m/#2_tab"
