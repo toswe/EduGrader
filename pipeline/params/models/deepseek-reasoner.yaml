@@ -1,0 +1,3 @@
+integration: deepseek
+model: deepseek-reasoner
+temperature: 0.0

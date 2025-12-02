@@ -1,0 +1,3 @@
+integration: deepseek
+model: deepseek-chat
+temperature: 0.0
