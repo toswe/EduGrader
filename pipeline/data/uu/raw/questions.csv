@@ -1,0 +1,32 @@
+Question,Text,Answer,Textbook
+1,Navesti pet osnovnih slojeva prema TCP/IP modelu na kojem je zasnovan Internet.,"Pet osnovnih slojeva TCP/IP modela:
+Aplikativni sloj
+Transportni sloj
+Mrežni (internet) sloj
+Vezni sloj (sloj mrežnog interfejsa)
+Fizički sloj",https://www.vebp.matf.bg.ac.rs/predavanja/01_02_mreze.pdf
+2,"Koji se jezici koriste za izradu veb stranice? Koji se koristi za strukturisanje sadržaja, koji za stilizovanje izgleda, a koji za definisanje ponašanja?","Jezici za izradu veb stranice:
+HTML -- strukturisanje sadržaja
+CSS -- stilizovanje izgleda
+JavaScript -- definisanje ponašanja",https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf
+3,Koji su osnovni tipovi podataka definisani u programskom jeziku JavaScript?,"Osnovni tipovi podataka:
+
+number – brojevni tip (celobrojni i realni)
+
+string – niske karaktera
+
+boolean – logički tip (true, false)
+
+object – objektni tip (svi objekti, nema klasa)
+
+function – funkcijski tip (podtip objektnog tipa)
+
+undefined – neinicijalizovane promenljive",https://www.vebp.matf.bg.ac.rs/predavanja/05_javascript.pdf
+4,"Šta je efekat JavaScript naredbe:
+ 
+document.getElementById(""x"").style.color = ""green"";","menja boju teksta HTML elementa sa id=""x"" u zelenu.",https://www.vebp.matf.bg.ac.rs/predavanja/05_javascript.pdf
+5,Šta je HTML <canvas>? Kako se uključuje <canvas> element u HTML dokument?,"<canvas> je element koji omogućava crtanje grafike (2D i 3D) putem JavaScript-a direktno u veb stranici.
+
+Kako se uključuje <canvas> u HTML?
+
+<canvas id=""myCanvas"" width=""400"" height=""300""></canvas>",fill in pls
