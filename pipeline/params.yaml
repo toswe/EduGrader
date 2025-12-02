@@ -1,5 +1,6 @@
-data:
-  root: data/dzp
+datasets:
+  - dzp
+  - p2_1
 
 params:
   models:
