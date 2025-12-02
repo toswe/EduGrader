@@ -1,0 +1,9 @@
+Question,Text,Answer,Textbook
+1,Koja su dva osnovna načina organizacije računara u mreži?,"Mreža ravnopravnih računara (peer-to-peer, P2P) i klijent-server mreža.",https://www.vebp.matf.bg.ac.rs/#2_tab
+2,Koji su osnovni slojevi TCP/IP modela prema kojem je Internet organizovan?,"Fizički sloj, vezni (link) sloj, mrežni (internet) sloj, transportni sloj i aplikacioni sloj.",https://www.vebp.matf.bg.ac.rs/#2_tab
+3,"Koji se jezik koristi za navođenje sadržaja veb strane, koji za njen izgled, a koji za njeno ponašanje?","HTML za sadržaj, CSS za izgled (stil), JavaScript za ponašanje stranice.",https://www.vebp.matf.bg.ac.rs/#2_tab
+4,Šta znači da je jezik JavaScript dinamički tipiziran jezik?,Tip promenljive određuje se u vreme izvršavanja i promenljiva može da promeni tip tokom svog životnog veka.,https://www.vebp.matf.bg.ac.rs/#2_tab
+5,Šta je DOM?,"DOM (Document Object Model) je hijerarhijsko, stablo reprezentovanje HTML/XML dokumenta koje omogućava programima da pristupe elementima i dinamički menjaju njegov sadržaj, strukturu i stil.",https://www.vebp.matf.bg.ac.rs/#2_tab
+6,Šta je efekat JavaScript naredbe: document.getElementById('x1').style.color = 'red';,"Elementu koji ima id=""x1"" postavlja boju teksta na crvenu.",https://www.vebp.matf.bg.ac.rs/#2_tab
+7,Šta radi sledeći SQL upit: SELECT * FROM Predmet WHERE Naziv LIKE 'Uvod%' AND Espb > 6;,Vraća sve kolone (sve zapise) iz tabele Predmet za predmete čiji naziv počinje sa 'Uvod' i koji imaju više od 6 ESPB.,https://www.vebp.matf.bg.ac.rs/#2_tab
+8,Opisati sintaksu foreach petlje u PHP-u.,Osnovni oblici su: foreach ($niz as $vrednost) { ... } i foreach ($niz as $kljuc => $vrednost) { ... }; prolazi redom kroz sve elemente kolekcije bez eksplicitnog korišćenja indeksâ.,https://www.vebp.matf.bg.ac.rs/#2_tab

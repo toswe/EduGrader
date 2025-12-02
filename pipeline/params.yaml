@@ -1,4 +1,8 @@
 datasets:
+  - tnp_sept
+  - p2_sept2
+  - vp_sept
+  - vp_jun
   - tnp_jan
   - uu
   - p2_2

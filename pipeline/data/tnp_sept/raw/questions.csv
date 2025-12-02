@@ -1,0 +1,6 @@
+Question,Text,Answer,Textbook
+1,Navedite 5 koraka do uspešnog tehničkog i naučnog pisanja.,"Priprema – izbor teme, proučavanje literature; Istraživanje – pronalaženje podataka; Organizovanje, Pisanje i Revizija – uklanjanje nedostataka.",https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+2,Navedite prvu i poslednju komandu u (svakom) LaTeX dokumentu.,\begin{document} ... \end{document},https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+3,Kom pristupu u računarskoj pripremi teksta za štampu TEX pripada i zašto?,Procesivnom pristupu,https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+4,Zapišite u LaTeX-u sledeću formulu: a = √b + c + √b + c,$ a = \sqrt{b+c} + \sqrt{b+c} $,https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
+5,Navedite komandu u LaTeX-u za uključivanje slike u dokument.,\includegraphics{slika.jpg},https://www.itkomunikacija.matf.bg.ac.rs/skripta/snki.pdf
