@@ -4,6 +4,6 @@ datasets:
 
 params:
   models:
-    model: params/models/gpt5.yaml
+    model: params/models/4o-mini.yaml
   prompts:
     professor_answer: params/prompts/professor_answer/default.yaml
