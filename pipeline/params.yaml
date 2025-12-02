@@ -4,6 +4,6 @@ datasets:
 
 params:
   models:
-    model: params/models/4o-mini.yaml
+    model: gpt-4o-mini
   prompts:
-    professor_answer: params/prompts/professor_answer/default.yaml
+    strictness: default

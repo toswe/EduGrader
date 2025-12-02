@@ -12,28 +12,28 @@ stages:
   grade_correct:
     foreach: ${datasets}
     do:
-      cmd: python src/pipeline/02_grade_with_correct_answer.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded-correct.csv --model ${params.models.model} --prompt_file ${params.prompts.professor_answer}
+      cmd: python src/pipeline/02_grade_with_correct_answer.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv --model params/models/${params.models.model}.yaml --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
       deps:
         - src/pipeline/02_grade_with_correct_answer.py
         - data/${item}/interim/merged.csv
         - params.yaml
-        - ${params.models.model}
-        - ${params.prompts.professor_answer}
+        - params/models/${params.models.model}.yaml
+        - params/prompts/strictness/${params.prompts.strictness}.yaml
       outs:
-        - data/${item}/graded/graded-correct.csv
+        - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
 
   # grade_textbook:
   #   foreach: ${datasets}
   #   do:
-  #     cmd: python src/pipeline/03_grade_with_textbook.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded-textbook.csv --model ${params.models.model} --prompt_file ${params.prompts.professor_answer}
+  #     cmd: python src/pipeline/03_grade_with_textbook.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv --model params/models/${params.models.model}.yaml --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
   #     deps:
   #       - src/pipeline/03_grade_with_textbook.py
   #       - data/${item}/interim/merged.csv
   #       - params.yaml
-  #       - ${params.models.model}
-  #       - ${params.prompts.professor_answer}
+  #       - params/models/${params.models.model}.yaml
+  #       - params/prompts/strictness/${params.prompts.strictness}.yaml
   #     outs:
-  #       - data/${item}/graded/graded-textbook.csv
+  #       - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
 
   # statistics:
   #   cmd: python src/pipeline/statistics.py --in ${data.root}/graded --out ${data.root}/stats
