@@ -2,7 +2,11 @@ stages:
   merge_inputs:
     foreach: ${datasets}
     do:
-      cmd: python src/pipeline/01_merge_inputs.py --questions data/${item}/raw/questions.csv --answers data/${item}/raw/student_answers.csv --out data/${item}/interim/merged.csv
+      cmd: >
+        python src/pipeline/01_merge_inputs.py
+        --questions data/${item}/raw/questions.csv
+        --answers data/${item}/raw/student_answers.csv
+        --out data/${item}/interim/merged.csv
       deps:
         - src/pipeline/01_merge_inputs.py
         - data/${item}/raw/questions.csv
@@ -12,7 +16,12 @@ stages:
   grade_correct:
     foreach: ${datasets}
     do:
-      cmd: python src/pipeline/02_grade_with_correct_answer.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv --model params/models/${params.models.model}.yaml --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
+      cmd: >
+        python src/pipeline/02_grade_with_correct_answer.py
+        --in data/${item}/interim/merged.csv
+        --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
+        --model params/models/${params.models.model}.yaml
+        --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
       deps:
         - src/pipeline/02_grade_with_correct_answer.py
         - data/${item}/interim/merged.csv
@@ -25,7 +34,12 @@ stages:
   # grade_textbook:
   #   foreach: ${datasets}
   #   do:
-  #     cmd: python src/pipeline/03_grade_with_textbook.py --in data/${item}/interim/merged.csv --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv --model params/models/${params.models.model}.yaml --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
+  #     cmd: >
+  #       python src/pipeline/03_grade_with_textbook.py
+  #       --in data/${item}/interim/merged.csv
+  #       --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
+  #       --model params/models/${params.models.model}.yaml
+  #       --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
   #     deps:
   #       - src/pipeline/03_grade_with_textbook.py
   #       - data/${item}/interim/merged.csv
