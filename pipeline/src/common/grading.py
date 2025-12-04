@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 from typing import Tuple
+import time
 import yaml
 
 
@@ -52,17 +53,26 @@ def grade_answer(
 
     last_text = ""
     last_full_response = None
-    for _ in range(max_retries):
-        text, full_response = grader.prompt(
-            prompt,
-            model=model,
-            instructions=full_instructions,
-            temperature=temperature,
-        )
-        last_text, last_full_response = text, full_response
-        score, explanation = parse_score_from_response(text)
-        if score is not None:
-            return score, explanation, str(full_response)
+    for attempt in range(max_retries):
+        try:
+            text, full_response = grader.prompt(
+                prompt,
+                model=model,
+                instructions=full_instructions,
+                temperature=temperature,
+            )
+            last_text, last_full_response = text, full_response
+            score, explanation = parse_score_from_response(text)
+            if score is not None:
+                return score, explanation, str(full_response)
+        except Exception as e:
+            # transient API/connection error; backoff and retry
+            last_text = f"ERROR: {e}"
+            last_full_response = None
+            if attempt < max_retries - 1:
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            break
 
     return ERROR_SCORE, last_text, str(last_full_response)
 
