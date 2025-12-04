@@ -8,7 +8,7 @@ prompt:
     Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.
   textbook: |
     Ti si strog profesor visokoakademske institucije i treba da ocenis odgovore studenata.
-    Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao poglavlje udzbenika iz kojeg je pitanje postavljeno,
+    Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i udzbenik iz kojeg je pitanje postavljeno,
     i treba da proveris da li je odgovor studenta adekvatan.
     Svako nepoklapanje se kaznjava sa oduzimanjem petine ukupnih poena.
     Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.

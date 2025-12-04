@@ -25,7 +25,7 @@ TEXTBOOK_GRADING_TEMPLATE = """Pitanje:\n```
 \nOdgovor studenta:\n```
 {student_answer}
 ```
-\nRelevantni pasusi iz udžbenika:\n```
+\Udžbenik:\n```
 {textbook}
 ```
 """
