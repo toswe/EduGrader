@@ -13,41 +13,41 @@ stages:
         - data/${item}/raw/student_answers.csv
       outs:
         - data/${item}/interim/merged.csv
-  grade_correct:
-    foreach: ${datasets}
-    do:
-      cmd: >
-        python src/pipeline/02_grade_with_correct_answer.py
-        --in data/${item}/interim/merged.csv
-        --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
-        --model params/models/${params.models.model}.yaml
-        --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
-      deps:
-        - src/pipeline/02_grade_with_correct_answer.py
-        - data/${item}/interim/merged.csv
-        - params.yaml
-        - params/models/${params.models.model}.yaml
-        - params/prompts/strictness/${params.prompts.strictness}.yaml
-      outs:
-        - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
-
-  # grade_textbook:
+  # grade_correct:
   #   foreach: ${datasets}
   #   do:
   #     cmd: >
-  #       python src/pipeline/03_grade_with_textbook.py
+  #       python src/pipeline/02_grade_with_correct_answer.py
   #       --in data/${item}/interim/merged.csv
-  #       --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
+  #       --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
   #       --model params/models/${params.models.model}.yaml
   #       --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
   #     deps:
-  #       - src/pipeline/03_grade_with_textbook.py
+  #       - src/pipeline/02_grade_with_correct_answer.py
   #       - data/${item}/interim/merged.csv
   #       - params.yaml
   #       - params/models/${params.models.model}.yaml
   #       - params/prompts/strictness/${params.prompts.strictness}.yaml
   #     outs:
-  #       - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
+  #       - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.correct.csv
+
+  grade_textbook:
+    foreach: ${datasets}
+    do:
+      cmd: >
+        python src/pipeline/03_grade_with_textbook.py
+        --in data/${item}/interim/merged.csv
+        --out data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
+        --model params/models/${params.models.model}.yaml
+        --prompt_file params/prompts/strictness/${params.prompts.strictness}.yaml
+      deps:
+        - src/pipeline/03_grade_with_textbook.py
+        - data/${item}/interim/merged.csv
+        - params.yaml
+        - params/models/${params.models.model}.yaml
+        - params/prompts/strictness/${params.prompts.strictness}.yaml
+      outs:
+        - data/${item}/graded/graded.${params.prompts.strictness}.${params.models.model}.textbook.csv
 
   # statistics:
   #   cmd: python src/pipeline/statistics.py --in ${data.root}/graded --out ${data.root}/stats
