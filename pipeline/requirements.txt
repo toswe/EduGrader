@@ -2,3 +2,5 @@ dvc
 openai
 google-genai
 python-dotenv
+PyPDF2
+requests

@@ -2,6 +2,10 @@ import argparse
 import sys
 from pathlib import Path
 from dotenv import load_dotenv
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
@@ -18,17 +22,13 @@ from common.grading import (
     grade_answer,
     write_with_additional_fields,
 )
+from common.pdf_extraction import extract_pdf
 
-TEXTBOOK_GRADING_TEMPLATE = """Pitanje:\n```
-{question_text}
-```
-\nOdgovor studenta:\n```
-{student_answer}
-```
-\Udžbenik:\n```
-{textbook}
-```
-"""
+TEXTBOOK_GRADING_TEMPLATE = (
+    "Pitanje:\n```\n{question_text}\n```\n"
+    "\nOdgovor studenta:\n```\n{student_answer}\n```\n"
+    "\nUdžbenik:\n```\n{textbook}\n```\n"
+)
 
 
 def main():
@@ -48,9 +48,15 @@ def main():
     temperature = float(model_cfg.get("temperature", 0.0) or 0.0)
 
     def row_updater(row: dict):
+        textbook_src = row.get("textbook", "")
+        logger.info(f"Fetching textbook for question: {row.get('question_text', '')[:50]}...")
+        textbook_text = extract_pdf(textbook_src)
+        if not textbook_text:
+            logger.error(f"Failed to fetch textbook text from source: {textbook_src}")
+            raise Exception(f"Failed to fetch textbook text from source: {textbook_src}")
         prompt = TEXTBOOK_GRADING_TEMPLATE.format(
             question_text=row["question_text"],
-            textbook=row.get("textbook", ""),
+            textbook=textbook_text,
             student_answer=row["student_answer"],
         )
         score, explanation, response = grade_answer(
@@ -69,9 +75,12 @@ def main():
         )
         return row
 
+    in_path = Path(args.input_file)
+    out_path = Path(args.output_file)
+
     write_with_additional_fields(
-        Path(args.input_file),
-        Path(args.output_file),
+        in_path,
+        out_path,
         [
             "textbook_score",
             "textbook_explanation",
