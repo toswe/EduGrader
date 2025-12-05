@@ -29,4 +29,4 @@ document.getElementById(""x"").style.color = ""green"";","menja boju teksta HTML
 
 Kako se uključuje <canvas> u HTML?
 
-<canvas id=""myCanvas"" width=""400"" height=""300""></canvas>",fill in pls
+<canvas id=""myCanvas"" width=""400"" height=""300""></canvas>",https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf

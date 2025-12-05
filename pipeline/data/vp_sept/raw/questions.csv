@@ -1,36 +1,21 @@
 Question,Text,Answer,Textbook
-1,Šta je to računarska mreža?,Računarska mreža je skup međusobno povezanih računara i drugih uređaja koji razmenjuju podatke preko komunikacionog kanala uz podršku odgovarajućeg softvera.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-2,Koja su dva osnovna načina organizacije računara u mreži?,Peer‑to‑peer i klijent–server organizacija.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-3,Šta je to topologija mreže?,Topologija mreže je fizički ili logički raspored uređaja (čvorova) i veza u računarskoj mreži.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-4,Koji su osnovni slojevi TCP/IP modela prema kome je Internet organizovan?,"Aplikativni, transportni, mrežni, vezni, fizički","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-5,"Koji se jezici koriste za navođenje sadržaja veb strane, koji za njen izgled i koji za njeno ponašanje?","HTML za sadržaj, CSS za izgled, JavaScript za ponašanje veb strane.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-6,Navesti tri različite vrednosti atributa name elementa <meta>.,"Na primer: author, keywords, description.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-7,Koji HTML elementi se koriste za podelu strane na manje logičke celine?,"Strukturni blok elementi: <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>, kao i opšti <div>.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
+1,Šta je to računarska mreža?,Računarska mreža je skup međusobno povezanih računara i drugih uređaja koji razmenjuju podatke preko komunikacionog kanala uz podršku odgovarajućeg softvera.,"https://www.vebp.matf.bg.ac.rs/predavanja/01_02_mreze.pdf"
+2,Koja su dva osnovna načina organizacije računara u mreži?,Peer‑to‑peer i klijent–server organizacija.,"https://www.vebp.matf.bg.ac.rs/predavanja/01_02_mreze.pdf"
+3,Šta je to topologija mreže?,Topologija mreže je fizički ili logički raspored uređaja (čvorova) i veza u računarskoj mreži.,"https://www.vebp.matf.bg.ac.rs/predavanja/03_veb.pdf"
+4,Koji su osnovni slojevi TCP/IP modela prema kome je Internet organizovan?,"Aplikativni, transportni, mrežni, vezni, fizički","https://www.vebp.matf.bg.ac.rs/predavanja/01_02_mreze.pdf"
+5,"Koji se jezici koriste za navođenje sadržaja veb strane, koji za njen izgled i koji za njeno ponašanje?","HTML za sadržaj, CSS za izgled, JavaScript za ponašanje veb strane.","https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf"
+6,Navesti tri različite vrednosti atributa name elementa <meta>.,"Na primer: author, keywords, description.","https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf"
+7,Koji HTML elementi se koriste za podelu strane na manje logičke celine?,"Strukturni blok elementi: <header>, <nav>, <main>, <section>, <article>, <aside>, <footer>, kao i opšti <div>.","https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf"
 8,Napisati HTML kod kojim se generiše opisna lista: vežbe – praktični rad na računarima; predavanja – izlaganje osnovnih teorijskih koncepata.,"<dl>
   <dt>Vežbe</dt>
   <dd>Praktični rad na računarima</dd>
   <dt>Predavanja</dt>
   <dd>Izlaganje osnovnih teorijskih koncepata</dd>
- </dl>","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-9,"Šta je efekat pravila: header a, footer a { font-family: ""Times New Roman"", serif; }?","Svim linkovima <a> unutar elemenata <header> i <footer> postavlja se font-family na ""Times New Roman"", serif.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-10,Šta znači da je jezik JavaScript dinamički tipiziran jezik?,Tip promenljive određuje se u vreme izvršavanja i promenljiva može da menja tip; pri deklaraciji se tip eksplicitno ne navodi.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-11,Koji su osnovni tipovi podataka definisani u JavaScript jeziku?,"Na primer: number, string, boolean, object, function, undefined, null.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-12,Šta je DOM?,DOM (Document Object Model) je objektni model dokumenta – hijerarhijska struktura čvorova preko koje skript jezici mogu da čitaju i menjaju sadržaj i izgled HTML/XML dokumenta.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-13,"Šta je efekat JavaScript naredbe: document.getElementById(""x"").style.color = ""red""; ?","Menja stil tako da boja teksta (color) elementa sa id=""x"" postaje crvena.","materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-14,Šta radi sledeći SQL upit: SELECT * FROM Predmet WHERE Naziv LIKE 'Uvod%' AND Espb > 6; ?,Vraća sve predmete iz tabele Predmet čiji naziv počinje sa 'Uvod' i koji imaju Espb veću od 6.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
-15,Opisati sintaksu foreach petlje u PHP-u.,Osnovni oblici su: foreach ($niz as $vrednost) { ... } i foreach ($niz kao $kljuc => $vrednost) { ... }.,"materijali su dati na sledecem linku: 
-https://www.vebp.matf.bg.ac.rs/#2_tab"
+ </dl>","https://www.vebp.matf.bg.ac.rs/predavanja/03_html.pdf"
+9,"Šta je efekat pravila: header a, footer a { font-family: ""Times New Roman"", serif; }?","Svim linkovima <a> unutar elemenata <header> i <footer> postavlja se font-family na ""Times New Roman"", serif.","https://www.vebp.matf.bg.ac.rs/predavanja/04_css.pdf"
+10,Šta znači da je jezik JavaScript dinamički tipiziran jezik?,Tip promenljive određuje se u vreme izvršavanja i promenljiva može da menja tip; pri deklaraciji se tip eksplicitno ne navodi.,"https://www.vebp.matf.bg.ac.rs/predavanja/05_javascript.pdf"
+11,Koji su osnovni tipovi podataka definisani u JavaScript jeziku?,"Na primer: number, string, boolean, object, function, undefined, null.","https://www.vebp.matf.bg.ac.rs/predavanja/05_javascript.pdf"
+12,Šta je DOM?,DOM (Document Object Model) je objektni model dokumenta – hijerarhijska struktura čvorova preko koje skript jezici mogu da čitaju i menjaju sadržaj i izgled HTML/XML dokumenta.,"https://www.vebp.matf.bg.ac.rs/predavanja/06_dom.pdf"
+13,"Šta je efekat JavaScript naredbe: document.getElementById(""x"").style.color = ""red""; ?","Menja stil tako da boja teksta (color) elementa sa id=""x"" postaje crvena.","https://www.vebp.matf.bg.ac.rs/predavanja/06_dom.pdf"
+14,Šta radi sledeći SQL upit: SELECT * FROM Predmet WHERE Naziv LIKE 'Uvod%' AND Espb > 6; ?,Vraća sve predmete iz tabele Predmet čiji naziv počinje sa 'Uvod' i koji imaju Espb veću od 6.,"https://www.vebp.matf.bg.ac.rs/predavanja/08_09_baze.pdf"
+15,Opisati sintaksu foreach petlje u PHP-u.,Osnovni oblici su: foreach ($niz as $vrednost) { ... } i foreach ($niz kao $kljuc => $vrednost) { ... }.,"https://www.vebp.matf.bg.ac.rs/predavanja/10_11_php.pdf"

@@ -1,9 +1,7 @@
 Question,Text,Answer,Comment,Textbook,ID
 1,Napišati izraz koji koristi bitovske operatore koji je tačan ako i samo ako su svi bitovi u poslednjem bajtu broja unsigned x jednaki nuli.,"(x & 0xFF) == 0 ili  !(x & 0xFF)
 ili
-(x & 0xFF << sizeof(unsigned) * 8 - 8) == 0","Oba rezultata su tacna. Nije bilo precizno definisano sta znaci ""poslednji bajt""","Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",92
+(x & 0xFF << sizeof(unsigned) * 8 - 8) == 0","Oba rezultata su tacna. Nije bilo precizno definisano sta znaci ""poslednji bajt""","https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",92
 2,"Ako f(n) ∈ O(n log n) i g(n) ∈ O(n²), tada f(n)+g(n) pripada klasi (izabrati sve ispravne odgovore):
 Opcije:
 O(n log n)
@@ -11,9 +9,7 @@ O(n²)
 O(n² log n)
 O(n³)","Obavezno: O(n²)
 
-Opcionalno (šira klasa): O(n² log n), O(n³)",,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",93
+Opcionalno (šira klasa): O(n² log n), O(n³)",,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",93
 3,"Koja je vremenska, a koja prostorna složenost funkcije f?
 
 int f(unsigned int n) {
@@ -21,9 +17,7 @@ int f(unsigned int n) {
     return f(n-1) + 1;
 }","Vremenska složenost: O(n)
 
-Prostorna složenost: O(n)",,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",94
+Prostorna složenost: O(n)",,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",94
 4,Navesti prednosti korišćenja niza u odnosu na jednostruko povezanu listu.,"Ovo je glavna prednost:
 Brz pristup elementima (indeksiranje): 
  - Niz omogućava konstantno vreme pristupa elementima: O(1) za a[i] 
@@ -38,15 +32,11 @@ Bolja iskorišćenost memorije:
 - Niz ne zahteva dodatnu memoriju za pokazivače (kao što lista ima next)
 - Manji memorijski overhead
 
-",Dovoljno je samo nabrojati prednosti bez navodjenja detalja i razloga. Prvi razlog je najvaznije da se navede. Nemoj kaznjavati studenta ako navede i vise cinjenica od trazenih.,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",95
+",Dovoljno je samo nabrojati prednosti bez navodjenja detalja i razloga. Prvi razlog je najvaznije da se navede. Nemoj kaznjavati studenta ako navede i vise cinjenica od trazenih.,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",95
 5,"Koja je vremenska složenost pretrage elementa u jednostruko povezanoj listi koja ima k elemenata i čuva cele brojeve iz opsega [-n,n]? Da li se može postići bolja složenost nekom drugom strukturom podataka? Ako da, kojom?","Vremenska složenost pretrage u jednostruko povezanoj listi sa k elemenata je:
 O(k)
 
-Bolja složenost se može postići korišćenjem: nizova (binarna pretraga) pod pretpostavkom da je niz sortiran ili balansiranih stabala pretrage - O(logk)",,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",96
+Bolja složenost se može postići korišćenjem: nizova (binarna pretraga) pod pretpostavkom da je niz sortiran ili balansiranih stabala pretrage - O(logk)",,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",96
 6,"Napisati iterativnu (nerekurzivnu) verziju sledeće funkcije:
 
 void f(unsigned int x, unsigned int y) {
@@ -63,26 +53,18 @@ void f(unsigned int x, unsigned int y) {
         x = new_x;
         y = new_y;
     }
-}",,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",97
-7,"Kakva mora biti funkcija f, ako se više njenih instanci može istovremeno naći na steku?",Rekurzivna,,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",98
+}",,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",97
+7,"Kakva mora biti funkcija f, ako se više njenih instanci može istovremeno naći na steku?",Rekurzivna,,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",98
 8,"Nacrtati uređeno binarno stablo nastalo ubacivanjem redom brojeva: 10, 6, 15, 4, 8, 12, 18. Navesti redosled čvorova u KDL i LKD obliku.","        10
        /   \
       6     15
      / \   /  \
     4   8 12  18
 KDL: 10 – 15 – 18 – 12 – 6 – 8 – 4
-LKD: 4 – 6 – 8 – 10 – 12 – 15 – 18",,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",99
+LKD: 4 – 6 – 8 – 10 – 12 – 15 – 18",,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",99
 9,"Da bi se primenilo binarno pretraživanje niza, elementi niza:
 
 Mogućnosti:
 a) …neophodno je…
 b) …poželjno je…
-c) …ne smeju…",a) neophodno je,,"Kurs: Programiranje 2
-Knjiga: https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf
-Slajdovi: https://matfp2.github.io/p2m/#2_tab",100
+c) …ne smeju…",a) neophodno je,,"https://poincare.matf.bg.ac.rs/~predrag.janicic/books/p2-a4.pdf",100
