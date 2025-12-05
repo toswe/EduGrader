@@ -4,10 +4,10 @@ import yaml
 from pathlib import Path
 
 MODELS = [
-    # "gpt-4o",
-    # "gpt-4o-mini",
-    # "gpt-5",
-    # "deepseek-chat",
+    "gpt-4o-mini",
+    "gpt-4o",
+    "gpt-5",
+    "deepseek-chat",
     "deepseek-reasoner",
 ]
 
