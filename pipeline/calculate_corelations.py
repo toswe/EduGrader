@@ -111,7 +111,7 @@ def compute_metrics(csv_path: Path) -> Dict[str, Optional[float]]:
                     if prof_val is not None:
                         break
 
-            if prof_val is not None and llm_val is not None:
+            if prof_val is not None and llm_val is not None and 0 <= llm_val:
                 prof.append(prof_val)
                 llm.append(llm_val)
 
