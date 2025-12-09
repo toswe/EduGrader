@@ -16,6 +16,7 @@ class OpenAI(LLMIntegration):
             "model": model,
             "instructions": instructions,
             "input": input,
+            "truncation": "auto",
         }
         if temperature != 0:
             params["temperature"] = temperature
