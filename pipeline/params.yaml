@@ -1,16 +1,15 @@
 datasets:
-  - tnp_sept
-  - p2_sept2
-  - vp_sept
-  - vp_jun
-  - tnp_jan
-  - uu
-  - p2_2
-  - dzp
-  - p2_1
-
+- tnp_sept
+- p2_sept2
+- vp_sept
+- vp_jun
+- tnp_jan
+- uu
+- p2_2
+- dzp
+- p2_1
 params:
   models:
-    model: gpt-4o-mini
+    model: deepseek-reasoner
   prompts:
-    strictness: default
+    strictness: soft

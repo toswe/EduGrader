@@ -1,0 +1,1502 @@
+schema: '2.0'
+stages:
+  merge_inputs@dzp:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/dzp/raw/questions.csv
+      --answers data/dzp/raw/student_answers.csv --out data/dzp/interim/merged.csv\n"
+    deps:
+    - path: data/dzp/raw/questions.csv
+      hash: md5
+      md5: 22d667755e0f7fdf5012d909ad2e4c47
+      size: 67238
+      isexec: true
+    - path: data/dzp/raw/student_answers.csv
+      hash: md5
+      md5: 4b9634079b1d9e64002dde30e9acf46f
+      size: 2962
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/dzp/interim/merged.csv
+      hash: md5
+      md5: 743235aca71773cbef5066f610b033c3
+      size: 70198
+  merge_inputs@p2_1:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_1/raw/questions.csv
+      --answers data/p2_1/raw/student_answers.csv --out data/p2_1/interim/merged.csv\n"
+    deps:
+    - path: data/p2_1/raw/questions.csv
+      hash: md5
+      md5: e17ab13fd9b378d0c92ed6bf80932dd3
+      size: 3656
+      isexec: true
+    - path: data/p2_1/raw/student_answers.csv
+      hash: md5
+      md5: f5042dd4434c64ff3489173f8a6defa6
+      size: 12313
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_1/interim/merged.csv
+      hash: md5
+      md5: 868f677275295da683dd0100fbbb509f
+      size: 68009
+  grade@dzp:
+    cmd: python src/pipeline/02_grade.py --in data/dzp/interim/merged.csv --out 
+      data/dzp/graded --model params/models/4o-mini.yaml --prompt_file 
+      params/prompts/professor_answer/default.yaml
+    deps:
+    - path: data/dzp/interim/merged.csv
+      hash: md5
+      md5: 743235aca71773cbef5066f610b033c3
+      size: 70198
+    - path: params.yaml
+      hash: md5
+      md5: 46d5506ce80a622cb539a6569d06a4e1
+      size: 162
+    - path: params/models/4o-mini.yaml
+      hash: md5
+      md5: 596920630bc1f0bd588f148a1942a24c
+      size: 56
+    - path: params/prompts/professor_answer/default.yaml
+      hash: md5
+      md5: a93d28b0b73c664aaedf1286ba5ab8cf
+      size: 476
+    - path: src/pipeline/02_grade.py
+      hash: md5
+      md5: 0dc42a45f2d1a2e456ca5ed680b4a40e
+      size: 5842
+    outs:
+    - path: data/dzp/graded
+      hash: md5
+      md5: 672efb85ebf778638451ba501955b9ce.dir
+      size: 127666
+      nfiles: 1
+  grade_correct@dzp:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/dzp/interim/merged.csv
+      --out data/dzp/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/dzp/interim/merged.csv
+      hash: md5
+      md5: 743235aca71773cbef5066f610b033c3
+      size: 70198
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/dzp/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: e51fdbca5fafcc02233389797ae2cd14
+      size: 89545
+  grade_correct@p2_1:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_1/interim/merged.csv
+      --out data/p2_1/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_1/interim/merged.csv
+      hash: md5
+      md5: 868f677275295da683dd0100fbbb509f
+      size: 68009
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_1/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: 577580f713420d0f6840d95744c149ab
+      size: 298639
+  merge_inputs@p2_2:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_2/raw/questions.csv
+      --answers data/p2_2/raw/student_answers.csv --out data/p2_2/interim/merged.csv\n"
+    deps:
+    - path: data/p2_2/raw/questions.csv
+      hash: md5
+      md5: 7ffdbfba18037109471a6ee7afa474d7
+      size: 3959
+    - path: data/p2_2/raw/student_answers.csv
+      hash: md5
+      md5: dbec8a33ed2f87f933c509f35d3a68dd
+      size: 14988
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_2/interim/merged.csv
+      hash: md5
+      md5: d928f933a5375cff69f17e0d9db2972b
+      size: 57828
+  merge_inputs@uu:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/uu/raw/questions.csv
+      --answers data/uu/raw/student_answers.csv --out data/uu/interim/merged.csv\n"
+    deps:
+    - path: data/uu/raw/questions.csv
+      hash: md5
+      md5: d6f5fda605e1982790d499cf78ce29da
+      size: 1646
+    - path: data/uu/raw/student_answers.csv
+      hash: md5
+      md5: 4f4ebf4f6466e47a4432cf2a80ec39b7
+      size: 1683
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/uu/interim/merged.csv
+      hash: md5
+      md5: 0aa97cd5ed06f55759c98fa7b8f47e07
+      size: 4950
+  merge_inputs@tnp:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/tnp/raw/questions.csv
+      --answers data/tnp/raw/student_answers.csv --out data/tnp/interim/merged.csv\n"
+    deps:
+    - path: data/tnp/raw/questions.csv
+      hash: md5
+      md5: bb01d0b912ad58fc1dfe87a52985e929
+      size: 1501
+      isexec: true
+    - path: data/tnp/raw/student_answers.csv
+      hash: md5
+      md5: b4e1e1db66c45edb4d663ee0a0035361
+      size: 2085
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/tnp/interim/merged.csv
+      hash: md5
+      md5: 362e7c30c5274d76a0d13099a170950b
+      size: 7997
+  merge_inputs@tnp_sept:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/tnp_sept/raw/questions.csv
+      --answers data/tnp_sept/raw/student_answers.csv --out data/tnp_sept/interim/merged.csv\n"
+    deps:
+    - path: data/tnp_sept/raw/questions.csv
+      hash: md5
+      md5: e1daae2c597c14f450abad85239eb2c2
+      size: 932
+      isexec: true
+    - path: data/tnp_sept/raw/student_answers.csv
+      hash: md5
+      md5: 3e7e3c67eedc174f5bcf864ebc9d14de
+      size: 1809
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/tnp_sept/interim/merged.csv
+      hash: md5
+      md5: 33317574bfcca92fd93e68f9fe8ea6d8
+      size: 5420
+  merge_inputs@p2_sept2:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_sept2/raw/questions.csv
+      --answers data/p2_sept2/raw/student_answers.csv --out data/p2_sept2/interim/merged.csv\n"
+    deps:
+    - path: data/p2_sept2/raw/questions.csv
+      hash: md5
+      md5: ea0b7952fd178414b80123c395a75b88
+      size: 3931
+      isexec: true
+    - path: data/p2_sept2/raw/student_answers.csv
+      hash: md5
+      md5: 10d46a5e4cb94e5251286f6dcf132b04
+      size: 47246
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_sept2/interim/merged.csv
+      hash: md5
+      md5: 7c17294ef35d1a76988cb449721371d8
+      size: 109186
+  merge_inputs@vp_sept:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/vp_sept/raw/questions.csv
+      --answers data/vp_sept/raw/student_answers.csv --out data/vp_sept/interim/merged.csv\n"
+    deps:
+    - path: data/vp_sept/raw/questions.csv
+      hash: md5
+      md5: 7089465e21a070d8e0d8a8ad919ec155
+      size: 3525
+      isexec: true
+    - path: data/vp_sept/raw/student_answers.csv
+      hash: md5
+      md5: ba2cefec5c86f6c3c103fcd6c6efa69d
+      size: 3770
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/vp_sept/interim/merged.csv
+      hash: md5
+      md5: 6916ed5f0fadb9458975d6a95de1a31e
+      size: 10654
+  merge_inputs@vp_jun:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/vp_jun/raw/questions.csv
+      --answers data/vp_jun/raw/student_answers.csv --out data/vp_jun/interim/merged.csv\n"
+    deps:
+    - path: data/vp_jun/raw/questions.csv
+      hash: md5
+      md5: ce2623d7ce550b203532873018ffb613
+      size: 1973
+      isexec: true
+    - path: data/vp_jun/raw/student_answers.csv
+      hash: md5
+      md5: 2ce8fe83a4bc137db987074683be0ec5
+      size: 2883
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/vp_jun/interim/merged.csv
+      hash: md5
+      md5: 41d71178bf620cfe17b666d813391722
+      size: 6787
+  merge_inputs@tnp_jan:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/tnp_jan/raw/questions.csv
+      --answers data/tnp_jan/raw/student_answers.csv --out data/tnp_jan/interim/merged.csv\n"
+    deps:
+    - path: data/tnp_jan/raw/questions.csv
+      hash: md5
+      md5: bb01d0b912ad58fc1dfe87a52985e929
+      size: 1501
+      isexec: true
+    - path: data/tnp_jan/raw/student_answers.csv
+      hash: md5
+      md5: b4e1e1db66c45edb4d663ee0a0035361
+      size: 2085
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/tnp_jan/interim/merged.csv
+      hash: md5
+      md5: 362e7c30c5274d76a0d13099a170950b
+      size: 7997
+  grade_correct@tnp_sept:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_sept/interim/merged.csv
+      --out data/tnp_sept/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/tnp_sept/interim/merged.csv
+      hash: md5
+      md5: 33317574bfcca92fd93e68f9fe8ea6d8
+      size: 5420
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/tnp_sept/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: 9a310ff600867cfb3a7a199209a8ebe1
+      size: 31920
+  grade_correct@p2_sept2:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_sept2/interim/merged.csv
+      --out data/p2_sept2/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_sept2/interim/merged.csv
+      hash: md5
+      md5: 7c17294ef35d1a76988cb449721371d8
+      size: 109186
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_sept2/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: a8ec4702b2c9851fe45ded0fef2684a1
+      size: 436071
+  grade_correct@vp_sept:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_sept/interim/merged.csv
+      --out data/vp_sept/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/vp_sept/interim/merged.csv
+      hash: md5
+      md5: 6916ed5f0fadb9458975d6a95de1a31e
+      size: 10654
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/vp_sept/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: 171c294b54cce8d07d5dd2317283fcc4
+      size: 55351
+  grade_correct@vp_jun:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_jun/interim/merged.csv
+      --out data/vp_jun/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/vp_jun/interim/merged.csv
+      hash: md5
+      md5: 41d71178bf620cfe17b666d813391722
+      size: 6787
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/vp_jun/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: bb05b5668d9f01a989ae0a4178b26719
+      size: 31310
+  grade_correct@tnp_jan:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_jan/interim/merged.csv
+      --out data/tnp_jan/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/tnp_jan/interim/merged.csv
+      hash: md5
+      md5: 362e7c30c5274d76a0d13099a170950b
+      size: 7997
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/tnp_jan/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: 99d1116e2b1cff1223053f32eb2d2236
+      size: 35907
+  grade_correct@uu:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/uu/interim/merged.csv
+      --out data/uu/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/uu/interim/merged.csv
+      hash: md5
+      md5: 0aa97cd5ed06f55759c98fa7b8f47e07
+      size: 4950
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/uu/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: a923dcaad175cbd83a388a5c761cbe73
+      size: 21510
+  grade_correct@p2_2:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_2/interim/merged.csv
+      --out data/p2_2/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_2/interim/merged.csv
+      hash: md5
+      md5: d928f933a5375cff69f17e0d9db2972b
+      size: 57828
+    - path: params.yaml
+      hash: md5
+      md5: babdfb62228439b3d9ef5500dcb76afc
+      size: 161
+    - path: params/models/deepseek-chat.yaml
+      hash: md5
+      md5: 24e01b0178eaa6a07313b93802ce8a56
+      size: 60
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_2/graded/graded.soft.deepseek-chat.correct.csv
+      hash: md5
+      md5: 1775f60b31fab3412129284e9ce668e0
+      size: 267694
+  grade_textbook@tnp_sept:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/tnp_sept/interim/merged.csv
+      --out data/tnp_sept/graded/graded.soft.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/tnp_sept/interim/merged.csv
+      hash: md5
+      md5: 33317574bfcca92fd93e68f9fe8ea6d8
+      size: 5420
+    - path: params.yaml
+      hash: md5
+      md5: 579d83182446bba68c6cadbee49a51cd
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/tnp_sept/graded/graded.soft.gpt-4o.textbook.csv
+      hash: md5
+      md5: cc631ef6001314065bb10eaa3269f114
+      size: 12038
+  grade_textbook@p2_sept2:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/p2_sept2/interim/merged.csv
+      --out data/p2_sept2/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/p2_sept2/interim/merged.csv
+      hash: md5
+      md5: 7c17294ef35d1a76988cb449721371d8
+      size: 109186
+    - path: params.yaml
+      hash: md5
+      md5: 7a53148290b10301cbb9795f679a0e93
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/p2_sept2/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: a450283c36ba9d35c38e48dddb752fd6
+      size: 700540
+  grade_textbook@vp_sept:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/vp_sept/interim/merged.csv
+      --out data/vp_sept/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/vp_sept/interim/merged.csv
+      hash: md5
+      md5: 6916ed5f0fadb9458975d6a95de1a31e
+      size: 10654
+    - path: params.yaml
+      hash: md5
+      md5: 7a53148290b10301cbb9795f679a0e93
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/vp_sept/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: 383b82b2c1a46d75a537d8e9f01276db
+      size: 93601
+  grade_textbook@vp_jun:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/vp_jun/interim/merged.csv
+      --out data/vp_jun/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/vp_jun/interim/merged.csv
+      hash: md5
+      md5: 41d71178bf620cfe17b666d813391722
+      size: 6787
+    - path: params.yaml
+      hash: md5
+      md5: 7a53148290b10301cbb9795f679a0e93
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/vp_jun/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: 87db937e90d6b6a601209ad7ca84edf2
+      size: 50638
+  grade_textbook@tnp_jan:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/tnp_jan/interim/merged.csv
+      --out data/tnp_jan/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/tnp_jan/interim/merged.csv
+      hash: md5
+      md5: 362e7c30c5274d76a0d13099a170950b
+      size: 7997
+    - path: params.yaml
+      hash: md5
+      md5: 7a53148290b10301cbb9795f679a0e93
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/tnp_jan/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: 2abfca8d182d59b1fa3988c3f93bdf2a
+      size: 68168
+  grade_textbook@uu:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/uu/interim/merged.csv
+      --out data/uu/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/uu/interim/merged.csv
+      hash: md5
+      md5: 0aa97cd5ed06f55759c98fa7b8f47e07
+      size: 4950
+    - path: params.yaml
+      hash: md5
+      md5: 7a53148290b10301cbb9795f679a0e93
+      size: 154
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/uu/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: 754a10267ee888f52241928805885f6d
+      size: 33050
+  grade_textbook@p2_2:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/p2_2/interim/merged.csv
+      --out data/p2_2/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/p2_2/interim/merged.csv
+      hash: md5
+      md5: d928f933a5375cff69f17e0d9db2972b
+      size: 57828
+    - path: params.yaml
+      hash: md5
+      md5: 011e468191c90906013e2414740586d0
+      size: 98
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/p2_2/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: 19f977cbde677d7ee8a9521b9a23ebd3
+      size: 456765
+  grade_textbook@dzp:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/dzp/interim/merged.csv
+      --out data/dzp/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/hard.yaml\n"
+    deps:
+    - path: data/dzp/interim/merged.csv
+      hash: md5
+      md5: 743235aca71773cbef5066f610b033c3
+      size: 70198
+    - path: params.yaml
+      hash: md5
+      md5: 011e468191c90906013e2414740586d0
+      size: 98
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/hard.yaml
+      hash: md5
+      md5: 366fbfe586d6cacf8deec13866517a23
+      size: 829
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/dzp/graded/graded.hard.gpt-4o.textbook.csv
+      hash: md5
+      md5: f09cfd1d475807a80e001781ffaa3bce
+      size: 97928
+  grade_textbook@p2_1:
+    cmd: "python src/pipeline/03_grade_with_textbook.py --in data/p2_1/interim/merged.csv
+      --out data/p2_1/graded/graded.default.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
+      --prompt_file params/prompts/strictness/default.yaml\n"
+    deps:
+    - path: data/p2_1/interim/merged.csv
+      hash: md5
+      md5: 868f677275295da683dd0100fbbb509f
+      size: 68009
+    - path: params.yaml
+      hash: md5
+      md5: 9134038449b5cc89470556353b2dd79d
+      size: 101
+    - path: params/models/gpt-4o.yaml
+      hash: md5
+      md5: cad8034dd124cccf428b1e1188bdbe7b
+      size: 51
+    - path: params/prompts/strictness/default.yaml
+      hash: md5
+      md5: 70d21729f8c1eb84ac2f44742050c6d4
+      size: 467
+    - path: src/pipeline/03_grade_with_textbook.py
+      hash: md5
+      md5: 1bf57474373affd786848db2c1fa188c
+      size: 2969
+    outs:
+    - path: data/p2_1/graded/graded.default.gpt-4o.textbook.csv
+      hash: md5
+      md5: 4252f9be5ac30456fd1d36d42ade81ad
+      size: 517243
+  generate_answers@tnp_sept:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/tnp_sept/raw/questions.csv
+      --out data/tnp_sept/interim/questions.generated.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/tnp_sept/raw/questions.csv
+      hash: md5
+      md5: e1daae2c597c14f450abad85239eb2c2
+      size: 932
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/tnp_sept/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 66daf7afb3ba7100817d40fada47f017
+      size: 3487
+  merge_generated@tnp_sept:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/tnp_sept/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/tnp_sept/raw/student_answers.csv --out data/tnp_sept/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/tnp_sept/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 66daf7afb3ba7100817d40fada47f017
+      size: 3487
+    - path: data/tnp_sept/raw/student_answers.csv
+      hash: md5
+      md5: 3e7e3c67eedc174f5bcf864ebc9d14de
+      size: 1809
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/tnp_sept/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: b923ea8484f6f3cf1563e6ce22317eae
+      size: 15632
+  generate_answers@p2_sept2:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/p2_sept2/raw/questions.csv
+      --out data/p2_sept2/interim/questions.generated.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/p2_sept2/raw/questions.csv
+      hash: md5
+      md5: ea0b7952fd178414b80123c395a75b88
+      size: 3931
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/p2_sept2/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 417ac417e71ac8c5a74510ff0775ba05
+      size: 6319
+  generate_answers@vp_sept:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/vp_sept/raw/questions.csv
+      --out data/vp_sept/interim/questions.generated.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/vp_sept/raw/questions.csv
+      hash: md5
+      md5: 7089465e21a070d8e0d8a8ad919ec155
+      size: 3525
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/vp_sept/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 7e18a944000e23fbd8d856134344467f
+      size: 8764
+  generate_answers@vp_jun:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/vp_jun/raw/questions.csv
+      --out data/vp_jun/interim/questions.generated.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/vp_jun/raw/questions.csv
+      hash: md5
+      md5: ce2623d7ce550b203532873018ffb613
+      size: 1973
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/vp_jun/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 8d8da8c971a53fd81ddf43ab3914d113
+      size: 4616
+  generate_answers@tnp_jan:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/tnp_jan/raw/questions.csv
+      --out data/tnp_jan/interim/questions.generated.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/tnp_jan/raw/questions.csv
+      hash: md5
+      md5: bb01d0b912ad58fc1dfe87a52985e929
+      size: 1501
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/tnp_jan/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 1f6510746ada8144242a6d42d8fed8a4
+      size: 3323
+  generate_answers@uu:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/uu/raw/questions.csv
+      --out data/uu/interim/questions.generated.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/uu/raw/questions.csv
+      hash: md5
+      md5: d6f5fda605e1982790d499cf78ce29da
+      size: 1646
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/uu/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: c332cc7e23bcbc49cc28e90d83171b18
+      size: 2633
+  generate_answers@p2_2:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/p2_2/raw/questions.csv
+      --out data/p2_2/interim/questions.generated.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/p2_2/raw/questions.csv
+      hash: md5
+      md5: 7ffdbfba18037109471a6ee7afa474d7
+      size: 3959
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/p2_2/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 7006208a648a94f0f842b07a6bbda9f1
+      size: 6488
+  generate_answers@dzp:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/dzp/raw/questions.csv
+      --out data/dzp/interim/questions.generated.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/dzp/raw/questions.csv
+      hash: md5
+      md5: 22d667755e0f7fdf5012d909ad2e4c47
+      size: 67238
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/dzp/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: eeaf955c2d717fa0db2b27eccc9368e4
+      size: 67437
+  generate_answers@p2_1:
+    cmd: "python src/pipeline/04_generate_answers.py --questions data/p2_1/raw/questions.csv
+      --out data/p2_1/interim/questions.generated.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml\n"
+    deps:
+    - path: data/p2_1/raw/questions.csv
+      hash: md5
+      md5: e17ab13fd9b378d0c92ed6bf80932dd3
+      size: 3656
+      isexec: true
+    - path: params.yaml
+      hash: md5
+      md5: 77ea7226505f06834248f3c967248c46
+      size: 168
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: src/pipeline/04_generate_answers.py
+      hash: md5
+      md5: fc77f337df4a75b7e698f8c37b32cb9e
+      size: 4077
+    outs:
+    - path: data/p2_1/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 3f0352983ecfc375f54d1e6f08696939
+      size: 4901
+  merge_generated@p2_sept2:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_sept2/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/p2_sept2/raw/student_answers.csv --out data/p2_sept2/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/p2_sept2/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 417ac417e71ac8c5a74510ff0775ba05
+      size: 6319
+    - path: data/p2_sept2/raw/student_answers.csv
+      hash: md5
+      md5: 10d46a5e4cb94e5251286f6dcf132b04
+      size: 47246
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_sept2/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 5f119c38c38a1678b38409f35caa8788
+      size: 147282
+  merge_generated@vp_sept:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/vp_sept/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/vp_sept/raw/student_answers.csv --out data/vp_sept/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/vp_sept/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 7e18a944000e23fbd8d856134344467f
+      size: 8764
+    - path: data/vp_sept/raw/student_answers.csv
+      hash: md5
+      md5: ba2cefec5c86f6c3c103fcd6c6efa69d
+      size: 3770
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/vp_sept/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 28d79a768933cb3652ef5b7fa322df94
+      size: 21198
+  merge_generated@vp_jun:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/vp_jun/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/vp_jun/raw/student_answers.csv --out data/vp_jun/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/vp_jun/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 8d8da8c971a53fd81ddf43ab3914d113
+      size: 4616
+    - path: data/vp_jun/raw/student_answers.csv
+      hash: md5
+      md5: 2ce8fe83a4bc137db987074683be0ec5
+      size: 2883
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/vp_jun/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 818c46bb657dd3e8053041dabfc75175
+      size: 12069
+  merge_generated@tnp_jan:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/tnp_jan/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/tnp_jan/raw/student_answers.csv --out data/tnp_jan/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/tnp_jan/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 1f6510746ada8144242a6d42d8fed8a4
+      size: 3323
+    - path: data/tnp_jan/raw/student_answers.csv
+      hash: md5
+      md5: b4e1e1db66c45edb4d663ee0a0035361
+      size: 2085
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/tnp_jan/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: d4a0414cc0e06312f5545737fa767ce9
+      size: 15257
+  merge_generated@uu:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/uu/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/uu/raw/student_answers.csv --out data/uu/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/uu/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: c332cc7e23bcbc49cc28e90d83171b18
+      size: 2633
+    - path: data/uu/raw/student_answers.csv
+      hash: md5
+      md5: 4f4ebf4f6466e47a4432cf2a80ec39b7
+      size: 1683
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/uu/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 46e7a1bda7c46da221750885fcb21209
+      size: 6912
+  merge_generated@p2_2:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_2/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/p2_2/raw/student_answers.csv --out data/p2_2/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/p2_2/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 7006208a648a94f0f842b07a6bbda9f1
+      size: 6488
+    - path: data/p2_2/raw/student_answers.csv
+      hash: md5
+      md5: dbec8a33ed2f87f933c509f35d3a68dd
+      size: 14988
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_2/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 8ad7d898c05095f6ab99eab0a7c8c174
+      size: 85779
+  merge_generated@dzp:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/dzp/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/dzp/raw/student_answers.csv --out data/dzp/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/dzp/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: eeaf955c2d717fa0db2b27eccc9368e4
+      size: 67437
+    - path: data/dzp/raw/student_answers.csv
+      hash: md5
+      md5: 4b9634079b1d9e64002dde30e9acf46f
+      size: 2962
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/dzp/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 057588d63ae1e8b61a8dbe759c020ffb
+      size: 70410
+  merge_generated@p2_1:
+    cmd: "python src/pipeline/01_merge_inputs.py --questions data/p2_1/interim/questions.generated.deepseek-reasoner.csv
+      --answers data/p2_1/raw/student_answers.csv --out data/p2_1/interim/merged.generated.deepseek-reasoner.csv\n"
+    deps:
+    - path: data/p2_1/interim/questions.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 3f0352983ecfc375f54d1e6f08696939
+      size: 4901
+    - path: data/p2_1/raw/student_answers.csv
+      hash: md5
+      md5: f5042dd4434c64ff3489173f8a6defa6
+      size: 12313
+      isexec: true
+    - path: src/pipeline/01_merge_inputs.py
+      hash: md5
+      md5: 4a2aed814ef56eb1e6da911b41575c7e
+      size: 4359
+    outs:
+    - path: data/p2_1/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: d01b8fbf51532b82726ee110f7330f71
+      size: 94733
+  grade_generated@tnp_sept:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_sept/interim/merged.generated.deepseek-reasoner.csv
+      --out data/tnp_sept/graded/graded.generated.soft.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/tnp_sept/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: b923ea8484f6f3cf1563e6ce22317eae
+      size: 15632
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/tnp_sept/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: e8a026990757e4620be14bd64cf57fcc
+      size: 121960
+  grade_generated@p2_sept2:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_sept2/interim/merged.generated.deepseek-reasoner.csv
+      --out data/p2_sept2/graded/graded.generated.soft.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_sept2/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 5f119c38c38a1678b38409f35caa8788
+      size: 147282
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_sept2/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: f12b55871d6c8575297b2eff6ead8030
+      size: 1107641
+  grade_generated@vp_sept:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_sept/interim/merged.generated.deepseek-reasoner.csv
+      --out data/vp_sept/graded/graded.generated.soft.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/vp_sept/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 28d79a768933cb3652ef5b7fa322df94
+      size: 21198
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/vp_sept/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: db7077304bdc2b1ab1593cea8f7ba9b5
+      size: 138062
+  grade_generated@vp_jun:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_jun/interim/merged.generated.deepseek-reasoner.csv
+      --out data/vp_jun/graded/graded.generated.soft.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/vp_jun/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 818c46bb657dd3e8053041dabfc75175
+      size: 12069
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/vp_jun/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: 41d9cbec891fa7457f74c085447463c1
+      size: 82157
+  grade_generated@tnp_jan:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_jan/interim/merged.generated.deepseek-reasoner.csv
+      --out data/tnp_jan/graded/graded.generated.soft.deepseek-reasoner.csv --model
+      params/models/deepseek-reasoner.yaml --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/tnp_jan/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: d4a0414cc0e06312f5545737fa767ce9
+      size: 15257
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/tnp_jan/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: c6fb31a10014d96f690b147280440960
+      size: 108389
+  grade_generated@uu:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/uu/interim/merged.generated.deepseek-reasoner.csv
+      --out data/uu/graded/graded.generated.soft.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/uu/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 46e7a1bda7c46da221750885fcb21209
+      size: 6912
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/uu/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: fa16a3e795f28f444cd9bc9881f80976
+      size: 41270
+  grade_generated@p2_2:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_2/interim/merged.generated.deepseek-reasoner.csv
+      --out data/p2_2/graded/graded.generated.soft.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_2/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 8ad7d898c05095f6ab99eab0a7c8c174
+      size: 85779
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_2/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: e83db4bbcb07687a6b30ac3419efa5fc
+      size: 699779
+  grade_generated@dzp:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/dzp/interim/merged.generated.deepseek-reasoner.csv
+      --out data/dzp/graded/graded.generated.soft.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/dzp/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: 057588d63ae1e8b61a8dbe759c020ffb
+      size: 70410
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/dzp/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: 690aa8db96d34711e8479b6408d93eb7
+      size: 113283
+  grade_generated@p2_1:
+    cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_1/interim/merged.generated.deepseek-reasoner.csv
+      --out data/p2_1/graded/graded.generated.soft.deepseek-reasoner.csv --model params/models/deepseek-reasoner.yaml
+      --prompt_file params/prompts/strictness/soft.yaml\n"
+    deps:
+    - path: data/p2_1/interim/merged.generated.deepseek-reasoner.csv
+      hash: md5
+      md5: d01b8fbf51532b82726ee110f7330f71
+      size: 94733
+    - path: params.yaml
+      hash: md5
+      md5: 8a79a3723c563cc0c8cddb1459629bc6
+      size: 165
+    - path: params/models/deepseek-reasoner.yaml
+      hash: md5
+      md5: d4bd0f3da47f32d84b08a01543ce7a57
+      size: 64
+    - path: params/prompts/strictness/soft.yaml
+      hash: md5
+      md5: a4a1aff6af3b2acb47a7627ab3fee619
+      size: 660
+    - path: src/pipeline/02_grade_with_correct_answer.py
+      hash: md5
+      md5: 624a2712fdc95fc8d0b2ace104de23fd
+      size: 2390
+    outs:
+    - path: data/p2_1/graded/graded.generated.soft.deepseek-reasoner.csv
+      hash: md5
+      md5: 59d126e6bfe9a15028059a78b2735582
+      size: 893541
