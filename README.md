@@ -6,6 +6,13 @@ Full‑stack platform for course and test management with automated grading.
 
 - `backend/`: Django REST API for authentication, courses/tests, and grading
 - `frontend/`: React + TypeScript + Vite single‑page application (student & professor flows)
+- `thesis/`: Master's thesis (LaTeX), compiled automatically via GitHub Actions
+
+## Thesis
+
+[![Compile thesis](https://github.com/toswe/Master/actions/workflows/thesis.yml/badge.svg)](https://github.com/toswe/Master/actions/workflows/thesis.yml)
+
+**[View the latest PDF](https://toswe.github.io/Master/main.pdf)** (compiled automatically on every push to `main`).
 
 ## Quick start (Docker)
 

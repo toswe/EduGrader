@@ -1,0 +1,51 @@
+name: Compile thesis
+
+on:
+  push:
+    paths:
+      - "thesis/**"
+      - ".github/workflows/thesis.yml"
+  pull_request:
+    paths:
+      - "thesis/**"
+      - ".github/workflows/thesis.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Tectonic
+        uses: wtfjoke/setup-tectonic@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache Tectonic bundle
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/Tectonic
+          key: tectonic-${{ runner.os }}-${{ hashFiles('thesis/**/*.tex') }}
+          restore-keys: |
+            tectonic-${{ runner.os }}-
+
+      - name: Compile thesis
+        working-directory: thesis
+        run: tectonic main.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis-pdf
+          path: thesis/main.pdf
+
+      - name: Publish PDF to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: thesis
+          publish_branch: gh-pages
+          keep_files: false
+          exclude_assets: "poglavlja,figures,*.tex,*.bib,*.md,*.aux,*.bbl,*.blg,*.log,*.out,*.toc,*.synctex.gz"
