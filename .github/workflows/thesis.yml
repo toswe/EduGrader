@@ -11,6 +11,15 @@ on:
       - ".github/workflows/thesis.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,18 +43,30 @@ jobs:
         working-directory: thesis
         run: tectonic main.tex
 
-      - name: Upload PDF
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
           name: thesis-pdf
           path: thesis/main.pdf
 
-      - name: Publish PDF to GitHub Pages
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Stage Pages site
+        run: |
+          mkdir -p _site
+          cp thesis/main.pdf _site/main.pdf
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: thesis
-          publish_branch: gh-pages
-          keep_files: false
-          exclude_assets: "poglavlja,figures,*.tex,*.bib,*.md,*.aux,*.bbl,*.blg,*.log,*.out,*.toc,*.synctex.gz"
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
