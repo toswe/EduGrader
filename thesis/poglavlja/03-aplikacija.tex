@@ -1,0 +1,129 @@
+% 3. Veb aplikacija EduGrader
+\section{Veb aplikacija EduGrader}
+\label{sec:aplikacija}
+
+EduGrader je veb aplikacija za automatsko ocenjivanje odgovora otvorenog tipa sa studentskih ispita pomoću velikih jezičkih modela.
+Predstavlja produkcioni deo sistema, namenjen svakodnevnoj upotrebi u nastavi, i implementirana je kao modularna platforma organizovana u tri sloja (slika~\ref{fig:architecture}):
+
+\begin{itemize}
+    \item \textbf{Klijentski sloj.} Jednostranična aplikacija (SPA) izgrađena u tehnologijama React~19 i TypeScript, koju poslužuje Nginx server.
+    Pruža interaktivne prikaze za nastavnike i studente, uključujući otpremanje CSV datoteka, izbor modela i parametara i prikaz rezultata.
+    Kroz ovaj interfejs nastavnici otpremaju studentske odgovore, biraju željeni jezički model, režim ocenjivanja (PRA ili GRA) i nivo strogosti, nakon čega sistem generiše predloge ocena sa obrazloženjima za svaki odgovor.
+    Autentifikacija se obavlja putem JWT tokena (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
+    \item \textbf{Serverski sloj.} REST API izgrađen u tehnologijama Python~3, Django~5.1 i Django REST Framework.
+    Odgovoran je za generisanje promptova, izvršavanje modela, parsiranje izlaza i upravljanje konfiguracijom ocenjivanja.
+    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM, sa entitetima za kurseve, testove, pitanja, studentske odgovore i ocene.
+    Čuva ocene, povratne informacije, promptove i metapodatke, čime podržava reproducibilnost i različite vrste analiza.
+\end{itemize}
+
+Ovakav slojeviti dizajn omogućava da se logika ocenjivanja i ponašanje modela razvijaju nezavisno od korisničkog interfejsa, uz očuvanje sledivosti svih odluka o ocenjivanju.
+Klijentski i serverski deo komuniciraju isključivo preko REST API-ja.
+
+% --- DIJAGRAM ARHITEKTURE (TikZ) ---
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.6cm and 0.8cm,
+    box/.style={draw, rounded corners=3pt, minimum height=0.9cm, text centered, font=\small},
+    arr/.style={-{Stealth[length=2.5mm]}, thick},
+    darr/.style={-{Stealth[length=2.5mm]}, thick, densely dashed},
+    lbl/.style={font=\scriptsize, midway, fill=white, inner sep=1pt},
+]
+
+% ---- Klijentski sloj ----
+\node[box, fill=red!8, minimum width=3.8cm, minimum height=1.6cm] (fe) {};
+\node[font=\small\bfseries, anchor=north] at (fe.north) {Klijentski sloj};
+\node[font=\scriptsize, anchor=south] at (fe.south) {React 19 + TypeScript};
+\node[font=\scriptsize] at (fe.center) {UI za ocenjivanje \textbar{} JWT};
+
+% ---- Serverski sloj ----
+\node[box, fill=red!8, minimum width=5.6cm, minimum height=3.4cm, right=2.2cm of fe] (be) {};
+\node[font=\small\bfseries, anchor=north] at (be.north) {Serverski sloj};
+\node[font=\scriptsize, anchor=north, yshift=-3mm] at (be.north) {Django 5.1 + DRF (Python 3)};
+
+% Unutrašnje komponente
+\node[box, fill=red!15, minimum width=4.4cm, font=\scriptsize] at ([yshift=-2mm]be.center) (gm) {Modul za ocenjivanje};
+\node[box, fill=red!22, minimum width=4.4cm, font=\scriptsize, below=0.3cm of gm] (factory) {Fabrika LLM integracija};
+
+% ---- Baza podataka ----
+\node[box, fill=yellow!15, minimum width=2.8cm, minimum height=1.2cm, below=1.4cm of be] (db) {};
+\node[font=\small\bfseries] at ([yshift=1.5mm]db.center) {Baza podataka};
+\node[font=\scriptsize] at ([yshift=-3mm]db.center) {kursevi, testovi, ocene};
+
+% ---- LLM API-ji ----
+\node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=0.8cm]
+  (openai) {\scriptsize OpenAI API\\[-1pt]\tiny gpt-4o-mini, gpt-4o, gpt-5.1};
+
+\node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=-0.8cm]
+  (deepseek) {\scriptsize DeepSeek API\\[-1pt]\tiny deepseek-chat, deepseek-reasoner};
+
+% ---- DVC pipeline ----
+\node[box, fill=purple!8, minimum width=3.8cm, minimum height=1.6cm, below=1.4cm of fe] (pipe) {};
+\node[font=\small\bfseries, anchor=north] at (pipe.north) {DVC \emph{pipeline}};
+\node[font=\scriptsize] at (pipe.center) {Grupni eksperimenti};
+\node[font=\scriptsize, anchor=south] at (pipe.south) {spajanje \textrightarrow{} ocenjivanje};
+
+% ---- Strelice ----
+\draw[arr] (fe.east) -- node[lbl, above] {REST API} (be.west |- fe.east);
+\draw[arr] (be.south) -- node[lbl, right] {ORM} (db.north);
+\draw[arr] (factory.east) -- ++(0.6,0) |- (openai.west);
+\draw[arr] (factory.east) -- ++(0.6,0) |- (deepseek.west);
+\draw[darr] (pipe.east) -- ++(0.8,0) |- node[lbl, below, pos=0.25] {koristi} (factory.west);
+
+\end{tikzpicture}%
+}
+\caption{Arhitektura sistema EduGrader.
+Klijentski sloj komunicira sa serverskim slojem preko REST API-ja.
+Serverski sloj pristupa jezičkim modelima kroz jedinstven integracioni sloj (projektni obrazac fabrika) koji apstrahuje API-je pojedinačnih provajdera.
+Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti integracioni sloj za grupne eksperimente.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Klijentska aplikacija}
+\label{sec:webapp}
+
+Klijentska aplikacija realizovana je kao jednostranična aplikacija u biblioteci React (verzija 19) sa TypeScript jezikom, uz Vite kao alat za izgradnju i razvojno okruženje.
+Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena na dva modula sa odvojenim pravima pristupa:
+
+\begin{itemize}
+    \item \textbf{Nastavnički modul} omogućava pregled predmeta, kreiranje testova i pitanja, pokretanje automatskog ocenjivanja i pregled ocenjenih studentskih testova sa predlozima ocena i obrazloženjima modela.
+    \item \textbf{Studentski modul} omogućava pregled nadolazećih testova, izradu testa i uvid u rezultate već urađenih testova.
+\end{itemize}
+
+Autentifikacija koristi JWT tokene koji se čuvaju u \emph{session storage}-u pregledača; uloge (nastavnik ili student) ugrađene su u token i na osnovu njih se sprovodi kontrola pristupa rutama.
+U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu, dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
+
+\subsection{Serverska aplikacija}
+
+Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django konvencijom razdvajanja odgovornosti:
+
+\begin{itemize}
+    \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik, izdavanje i osvežavanje JWT tokena, kao i klase dozvola (engl. \emph{permission classes}) kojima se pojedinačni API pozivi ograničavaju na odgovarajuću ulogu.
+    \item \textbf{Glavna aplikacija} definiše domenske modele --- kurs, pitanje, test, studentski test i studentski odgovor --- zajedno sa serijalizatorima i CRUD API endpointima.
+    Studentski odgovor čuva i ocenu koju je dodelio nastavnik, što omogućava kasnije poređenje sa ocenama modela.
+    \item \textbf{Aplikacija za ocenjivanje} sadrži logiku ocenjivanja i integracije sa jezičkim modelima.
+    Za svaki ocenjeni odgovor kreira zapis koji čuva korišćeni prompt, instrukcije, kompletan odgovor modela i izdvojenu numeričku ocenu, čime je svaka odluka sistema naknadno proverljiva.
+\end{itemize}
+
+Celokupan sistem je dokerizovan: jedan kontejner izvršava Django aplikaciju, a drugi Nginx koji poslužuje klijentsku aplikaciju i prosleđuje API saobraćaj, čime se postiže jednostavno pokretanje i prenosivost okruženja.
+
+\subsection{Integracija jezičkih modela}
+\label{sec:integracije}
+
+Jezičkim modelima pristupa se isključivo preko API-ja provajdera u oblaku; nijedan model se ne izvršava lokalno.
+Da bi podrška za više provajdera bila jedinstvena, sistem implementira projektni obrazac fabrika sa zajedničkim apstraktnim interfejsom \texttt{LLMIntegration}, koji definiše metodu \texttt{prompt()} sa ulaznim tekstom, identifikatorom modela, sistemskim instrukcijama i temperaturom kao parametrima.
+Metoda vraća par: izdvojeni tekstualni odgovor i kompletan odgovor API-ja (koji se čuva radi sledivosti).
+
+Obezbeđene su konkretne implementacije:
+
+\begin{itemize}
+    \item \textbf{OpenAI} --- koristi zvanični OpenAI Python SDK.
+    Podržani modeli: \emph{gpt-4o-mini-2024-07-18}, \emph{gpt-4o-2024-08-06} i \emph{gpt-5.1-2025-11-13}.
+    \item \textbf{DeepSeek} --- koristi OpenAI-kompatibilni API endpoint preko istog SDK-a, sa promenjenom baznom adresom.
+    Podržani modeli: \emph{deepseek-chat} (V3) i \emph{deepseek-reasoner} (R1).
+\end{itemize}
+
+Na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}) fabrička funkcija instancira odgovarajuću klasu.
+Ova apstrakcija omogućava dodavanje novog provajdera implementacijom jedne klase, bez izmena u logici ocenjivanja --- isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
+API ključevi čuvaju se kao promenljive okruženja i nikada nisu ugrađeni u izvorni kod.

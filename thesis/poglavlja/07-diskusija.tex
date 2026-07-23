@@ -1,0 +1,54 @@
+% 6. Diskusija
+\section{Diskusija}
+\label{sec:diskusija}
+
+\subsection{Poređenje sa prethodnim istraživanjima}
+\label{sec:poredjenje}
+
+Da bi se dobijeni rezultati smestili u kontekst šire literature, tabela~\ref{tab:prior-study} poredi vrednosti PCC-a postignute u ovom istraživanju sa vrednostima iz prethodnih studija.
+Kao što se vidi, EduGrader --- naročito sa modelom za rezonovanje GPT-5.1 --- postiže znatno višu usklađenost između veštačke inteligencije i ljudskih ocenjivača od objavljenih rezultata sa kojima je poređen.
+
+\begin{table}[ht]
+\centering
+\caption{Poređenje sa prethodno objavljenim rezultatima}
+\label{tab:prior-study}
+\begin{tabular}{lll}
+\toprule
+Pristup & Model & PCC \\
+\midrule
+Jukjevič~\cite{jukiewicz2024future}       & gpt-3.5-turbo & 0.81 \\
+Kuli i Jusuf~\cite{kooli2025transforming} & ChatGPT       & 0.45 \\
+Lundgren~\cite{lundgren2024large}         & gpt-4         & 0.43 \\
+Naš pristup                               & gpt-5.1       & \textbf{0.90} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+U našim eksperimentima, najbolja konfiguracija (GPT-5.1, neutralna strogost) postiže PCC $= 0{,}90$, čime premašuje vrednost koju je prijavio Jukjevič (0{,}81, koristeći gpt-3.5-turbo za ocenjivanje programerskih zadataka)~\cite{jukiewicz2024future} i znatno nadmašuje korelacije iz studija koje su koristile ChatGPT ili GPT-4 za ocenjivanje odgovora otvorenog tipa i eseja (PCC $= 0{,}43$--$0{,}45$)~\cite{kooli2025transforming,lundgren2024large}.
+Iako ova poređenja treba tumačiti sa oprezom zbog razlika u skupovima podataka i formatima zadataka, dva faktora verovatno doprinose višoj usklađenosti u našoj postavci.
+Prvo, EduGrader evaluira širi skup savremenih modela, uključujući GPT-4o, GPT-4o-mini, DeepSeek-Chat i, posebno, modele usmerene na rezonovanje (GPT-5.1, DeepSeek-Reasoner).
+Ovi modeli pokazuju snažnije semantičko razumevanje i stabilnije ponašanje kroz konfiguracije strogosti, što se ogleda ne samo u višim vrednostima PCC-a već i u nižim odnosima RMSE/STDDEV, koji se često približavaju tipičnoj varijabilnosti ljudskog ocenjivanja.
+Drugo, zadaci u našem skupu podataka sastoje se prvenstveno od kratkih teorijskih pitanja iz STEM oblasti (nauka, tehnologija, inženjerstvo i matematika).
+Očekivani odgovori su često kratka tekstualna objašnjenja ili mali izrazi nalik kodu, koji su po pravilu manje dvosmisleni od dugih eseja u društvenim ili političkim naukama.
+Vredi napomenuti i da su naši nalazi u skladu sa prethodnim istraživanjima po tome što su ljudski ocenjivači u proseku nešto blaži, pokazujući veću toleranciju prema delimično ispravnom rezonovanju i nepotpunim odgovorima~\cite{jukiewicz2024future}.
+
+\subsection{Ograničenja}
+\label{sec:ogranicenja}
+
+Uprkos snažnim ukupnim performansama, ograničenja ostaju: ponašanje modela može se promeniti kako se API-ji razvijaju, evaluacioni skup podataka je vezan za konkretne domene, a povremeno prestrogo kažnjavanje ili pogrešno tumačenje odgovora i dalje je moguće.
+Iz ovih razloga, ljudski nadzor ostaje neophodan.
+EduGrader je zamišljen kao pomoćni sistem koji unapređuje doslednost i smanjuje opterećenje nastavnika, uz očuvanje autoriteta nastavnika za dvosmislene slučajeve i konačne odluke o ocenama.
+U toj ulozi, podesiva strogost i objašnjiva povratna informacija čine EduGrader praktičnom i transparentnom dopunom tradicionalnih tokova provere znanja.
+
+\subsection{Pravci budućeg rada}
+\label{sec:buduci-rad}
+
+Nekoliko pravaca može dodatno unaprediti tačnost, robusnost i pedagoški uticaj sistema EduGrader:
+\begin{itemize}
+    \item \textbf{Samoprovera i probni ispiti:} omogućiti studentima da iz nastavnih materijala generišu personalizovana probna pitanja i dobijaju kontinuiranu formativnu povratnu informaciju tokom semestra.
+    \item \textbf{Usmeravanje zasnovano na pouzdanosti:} analizirati slaganje između više jezičkih modela radi procene pouzdanosti ocene.
+    Slučajevi niske pouzdanosti mogu se automatski označavati za pojačanu pažnju nastavnika, čime se obezbeđuje pouzdaniji nadzor.
+    \item \textbf{Ansambl ocenjivanje:} kombinovati modele za rezonovanje i standardne modele (npr.\ usrednjavanjem ili većinskim glasanjem) radi stabilnijih i robusnijih ishoda ocenjivanja nego što ih daje bilo koji pojedinačni model.
+    \item \textbf{Longitudinalna kalibracija:} pratiti raskorake između ocena sistema i nastavnika kroz više semestara, radi automatskog podešavanja parametara strogosti i održavanja doslednih standarda ocenjivanja tokom vremena.
+    \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim zadacima, kreativnim zadacima i višejezičnim okruženjima, kako bi se ispitala njegova uopštivost izvan STEM disciplina, koje po pravilu uključuju strukturiranije i manje dvosmislene odgovore.
+\end{itemize}

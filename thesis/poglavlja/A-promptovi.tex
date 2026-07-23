@@ -1,0 +1,149 @@
+% Dodatak A: Šabloni promptova i primeri ocenjivanja
+\section{Šabloni promptova i primeri ocenjivanja}
+\label{app:promptovi}
+
+Ovaj dodatak sadrži materijale koji podržavaju transparentnost i reproducibilnost sistema EduGrader: osnovne šablone promptova korišćene u eksperimentima i nekoliko reprezentativnih primera ocenjivanja koje je sistem proizveo.
+Šabloni promptova opisuju kako se studentski odgovori evaluiraju pod različitim konfiguracijama strogosti.
+Prikazani su originalni promptovi korišćeni u eksperimentima.
+
+\medskip
+\noindent\textbf{Napomena.} Ocene su prikazane na skali 0--10.
+
+\subsection*{Prompt za blago ocenjivanje}
+
+\begin{tcolorbox}[promptbox]
+
+Ti si veoma blag profesor koji ocenjuje studentske odgovore.
+
+\vspace{2mm}
+
+\textbf{Pravila ocenjivanja:}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Cilj je da se prepozna razumevanje koncepta bez obzira na formulaciju odgovora.
+\item Nedostajući detalji ili neprecizna terminologija se ne kažnjavaju.
+\item Sinonimi, parafraziranje i primeri su prihvatljivi.
+\item Kazni samo odgovore koji pokazuju potpuno pogrešno razumevanje ili su van teme.
+\item U slučaju nedoumice dodeli više poena.
+\item Prazan odgovor dobija 0 poena.
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection*{Podrazumevani prompt (neutralna konfiguracija)}
+
+\begin{tcolorbox}[promptbox]
+
+Ti si profesor na univerzitetu koji ocenjuje studentske odgovore na ispitna pitanja.
+
+\vspace{2mm}
+
+\textbf{Pravila ocenjivanja:}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Uporedi studentski odgovor sa tačnim odgovorom i proceni stepen poklapanja.
+\item Odgovor ne mora biti identičan tačnom odgovoru ako student pokazuje razumevanje koncepta.
+\item Sinonimi, parafraziranje i drugačiji redosled informacija su prihvatljivi ako je suština tačna.
+\item Odgovori napisani na različitim jezicima ili pismima (ćirilica/latinica, srpski/engleski) ne treba da budu kažnjeni ako je sadržaj tačan.
+\item Ako je odgovor delimično tačan, dodeli proporcionalan broj poena.
+\item Ako odgovor sadrži netačne tvrdnje koje nisu deo tačnog odgovora, oduzmi poene proporcionalno.
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection*{Prompt za strogo ocenjivanje}
+
+\begin{tcolorbox}[promptbox]
+
+Ti si veoma strog profesor koji rigorozno ocenjuje studentske odgovore.
+
+\vspace{2mm}
+
+\textbf{Pravila ocenjivanja:}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Strogo uporedi studentski odgovor sa tačnim odgovorom.
+\item Svaka stavka iz tačnog odgovora koja nedostaje znači oduzimanje poena.
+\item Netačne ili neprecizne tvrdnje se kažnjavaju.
+\item Površni ili previše opšti odgovori bez konkretnih detalja dobijaju manje poena.
+\item Nepotpun odgovor ne može dobiti više od polovine poena.
+\item Sinonimi i parafraziranje su prihvatljivi samo ako precizno pokrivaju suštinu tačnog odgovora.
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection*{Reprezentativni primeri ocenjivanja}
+
+Naredni primeri ilustruju tipične izlaze sistema EduGrader.
+
+\subsection*{Primer A: Detekcija stepena broja dva}
+
+\begin{tcolorbox}[promptbox]
+
+\textbf{Pitanje}
+
+Napisati C funkciju koja vraća 1 ako je broj stepen broja dva, a 0 u suprotnom.
+
+\medskip
+\textbf{Referentni odgovor}
+
+\begin{verbatim}
+int isPowerOfTwo(unsigned x) {
+    return x != 0 && (x & (x - 1)) == 0;
+}
+\end{verbatim}
+
+\medskip
+\textbf{Studentski odgovor}
+
+\begin{verbatim}
+int isPowerOfTwo(unsigned x) {
+    return (x & (x - 1)) == 0;
+}
+\end{verbatim}
+
+\medskip
+\textbf{Ocene}
+
+Nastavnik: 7/10 \hfill Sistem: 8/10
+
+\medskip
+\textbf{Obrazloženje sistema}
+
+Student pravilno primenjuje standardnu bitovsku tehniku za detekciju stepena broja dva koristeći izraz \texttt{(x \& (x - 1)) == 0}.
+Međutim, rešenje ne obrađuje granični slučaj kada je \texttt{x == 0}.
+Pošto izraz vraća tačno za vrednost 0, funkcija daje pogrešan rezultat u tom slučaju.
+Rešenje je gotovo tačno, ali nije potpuno.
+
+\end{tcolorbox}
+
+\subsection*{Primer B: Stek i hip memorija}
+
+\begin{tcolorbox}[promptbox]
+
+\textbf{Pitanje}
+
+Koja je razlika između stek memorije i hip memorije u C-u?
+Ukratko objasniti.
+
+\medskip
+\textbf{Studentski odgovor}
+
+Stek je memorija koju program koristi za pozive funkcija i lokalne promenljive.
+Hip je memorija koja čuva globalne promenljive i velike podatke.
+Stek je brži, hip je sporiji.
+
+\medskip
+\textbf{Ocene}
+
+Nastavnik: 6/10 \hfill Sistem: 6/10
+
+\medskip
+\textbf{Obrazloženje sistema}
+
+Student tačno navodi da se stek koristi za pozive funkcija i lokalne promenljive i da je generalno brži.
+Međutim, tvrdnja da hip čuva globalne promenljive je netačna.
+Globalne promenljive se nalaze u statičkoj memoriji, a ne u hipu.
+Takođe, odgovor ne objašnjava dinamičku alokaciju niti razlike u životnom veku memorije.
+
+\end{tcolorbox}

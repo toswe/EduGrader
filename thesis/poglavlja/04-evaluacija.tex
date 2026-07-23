@@ -1,0 +1,42 @@
+% 4. Sistem za automatizovanu evaluaciju modela
+\section{Sistem za automatizovanu evaluaciju modela}
+\label{sec:pipeline}
+
+Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela, organizovan kao DVC \emph{pipeline} (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}}.
+DVC omogućava deklarativno opisivanje faza obrade sa eksplicitnim zavisnostima i izlazima: svaka faza se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili, što eksperimente čini reproducibilnim i štedi troškove API poziva.
+
+\subsection{Format ulaznih podataka}
+
+Svaki od devet skupova podataka (šest kurseva, pri čemu su za pojedine kurseve obuhvaćeni odvojeni ispitni rokovi) opisan je dvema CSV datotekama:
+
+\begin{itemize}
+    \item \texttt{questions.csv} --- po jedan red za svako pitanje, sa kolonama: identifikator pitanja, tekst pitanja, tačan odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
+    \item \texttt{student\_answers.csv} --- po jedan red za svaki studentski odgovor, sa kolonama: identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
+\end{itemize}
+
+\subsection{Faze obrade}
+
+Prva faza (\emph{spajanje ulaza}) validira i spaja ove dve datoteke u jedinstvenu tabelu.
+Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka --- svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
+Ovakve stroge provere pokazale su se ključnim za kvalitet eksperimenata, jer su greške u ručno pripremanim podacima otkrivane pre nego što bi izazvale skupe, delimično neispravne eksperimente.
+
+Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
+Postoje dve varijante ove faze, koje odgovaraju režimima ocenjivanja:
+
+\begin{itemize}
+    \item \textbf{PRA varijanta} u prompt uključuje pitanje, tačan odgovor nastavnika i studentski odgovor.
+    \item \textbf{GRA varijanta} umesto tačnog odgovora uključuje sadržaj nastavnog materijala.
+    Materijal se preuzima sa zadate adrese kao PDF, tekst se izdvaja bibliotekom PyPDF2, a rezultat kešira na disku (po heš vrednosti adrese), tako da se svaki udžbenik preuzima i obrađuje samo jednom.
+\end{itemize}
+
+U oba slučaja sistemska instrukcija se sastoji od prompta strogosti (blag, neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza: prvi red odgovora mora sadržati samo ocenu na skali 0--100, a ostatak obrazloženje.
+Numerička ocena se parsira iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
+Ako parsiranje ne uspe ili API poziv privremeno otkaže, poziv se ponavlja do tri puta sa rastućim odlaganjem; trajno neuspešni redovi označavaju se specijalnom vrednošću i isključuju iz analize.
+
+\subsection{Automatizacija eksperimenata i analiza}
+
+Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka.
+Pomoćna skripta automatizuje ovaj proces: za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline}, pri čemu ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
+
+Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike} --- Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV --- po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
+Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.

@@ -1,0 +1,17 @@
+% 7. Zaključak
+\section{Zaključak}
+\label{sec:zakljucak}
+
+U ovom radu predstavljen je EduGrader, višemodelska platforma otvorenog koda za ocenjivanje pitanja otvorenog tipa uz podršku veštačke inteligencije i pod nadzorom nastavnika.
+Sistem objedinjuje više velikih jezičkih modela (GPT-4o, GPT-4o-mini, DeepSeek-Chat i dva modela usmerena na rezonovanje, GPT-5.1 i DeepSeek-Reasoner) u podesiv tok ocenjivanja koji podržava evaluaciju i u PRA i u GRA režimu.
+EduGrader je evaluiran na 686 autentičnih studentskih odgovora sa šest univerzitetskih kurseva na dve institucije, koji obuhvataju kratke činjeničke odgovore, teorijska objašnjenja, izraze nalik kodu i dodatni skup dužih odgovora esejskog tipa.
+
+Empirijski rezultati pokazuju da PRA režim dosledno daje višu usklađenost sa ljudskim ocenjivačima od GRA režima, kroz sve modele i konfiguracije strogosti.
+Modeli usmereni na rezonovanje, naročito GPT-5.1, postižu najjače slaganje sa ljudskim ocenjivanjem, dostižući Pirsonov koeficijent korelacije od 0{,}90 u neutralnom PRA režimu.
+Ovi ishodi povoljno se porede sa prethodno objavljenim rezultatima u literaturi i sugerišu da, za evaluirane tipove odgovora --- a posebno za relativno strukturirana STEM pitanja --- savremeni veliki jezički modeli mogu aproksimirati obrasce ljudskog ocenjivanja sa odstupanjima uporedivim sa prirodnom ljudskom varijabilnošću.
+Istovremeno, analize otkrivaju sistematske razlike između modela, režima ocenjivanja i konfiguracija strogosti, što naglašava važnost pažljivog izbora modela i parametara pri stvarnoj primeni.
+
+Iako EduGrader donosi značajne dobitke u efikasnosti, podesivu strogost i detaljno generisanje povratnih informacija, rezultati potvrđuju da su sistemi veštačke inteligencije najefikasniji kada se koriste kao pomoćni alati, a ne kao zamena za čoveka.
+Ljudski nadzor ostaje neophodan za pravednost, kontekstualno tumačenje i rešavanje dvosmislenih ili graničnih slučajeva.
+
+Objavljivanjem sistema EduGrader kao projekta otvorenog koda nastoji se podstaći transparentnost, reproducibilnost i zajedničko unapređivanje sistema.

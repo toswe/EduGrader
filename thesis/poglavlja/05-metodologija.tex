@@ -1,0 +1,142 @@
+% 4. Metodologija evaluacije
+\section{Metodologija evaluacije}
+\label{sec:metodologija}
+
+EduGrader je projektovan kao platforma za ocenjivanje uz podršku veštačke inteligencije koja velike jezičke modele uključuje u tok provere znanja pod nadzorom nastavnika.
+Primarni cilj sistema je unapređenje efikasnosti i doslednosti ocenjivanja uz očuvanje pedagoške transparentnosti i ljudske odgovornosti.
+U ovom poglavlju opisana je metodologija evaluacije pouzdanosti ocena koje EduGrader generiše, skupovi podataka na kojima je sistem testiran i konfiguracije modela obuhvaćene eksperimentima.
+
+\subsection{Metrike i evaluacija}
+\label{sec:metrike}
+
+Da bi se procenilo slaganje ocena generisanih veštačkom inteligencijom sa ljudskim sudom, izlazi sistema EduGrader upoređeni su sa ocenama koje su dodelila dva univerzitetska nastavnika.
+Svaki nastavnik je ocenio drugačiji podskup od ukupno 686 odgovora (192 odnosno 485 odgovora).
+Ovakva postavka omogućila je poređenje performansi sistema sa više ljudskih ocenjivača, umesto sa jednim jedinstvenim standardom.
+Svaki odgovor ocenjen je prema standardnim kriterijumima ocenjivanja koji se koriste na datom kursu.
+Ocene su dodeljivane na skali 0--10, na osnovu stepena konceptualne tačnosti i potpunosti odgovora.
+Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne koncepte, da li nedostaju važni elementi i da li je rezonovanje delimično tačno, ali nepotpuno.
+Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji, dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
+Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema pomoću metrika opisanih u nastavku.
+
+Korišćena su četiri statistička pokazatelja koji obuhvataju komplementarne aspekte pouzdanosti ocenjivanja: Pirsonov koeficijent korelacije (PCC), kvadratno ponderisana Koenova kapa, odnos prosečnih ocena (engl. \emph{Mean Ratio}) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
+
+PCC~\cite{sedgwick2012pearson} meri jačinu linearne povezanosti između ocena koje su dodelili ljudi i ocena koje je dodelio sistem.
+Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu pozitivnu linearnu vezu, $0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
+Pre sprovođenja analize, raspodela razlika u ocenama ispitana je Šapiro--Vilkovim testom i vizuelnim pregledom Q--Q dijagrama.
+Rezultati nisu ukazali na značajna odstupanja od normalnosti ($p > 0{,}05$), što opravdava upotrebu parametarske mere korelacije.
+Važno je istaći da PCC meri linearnu povezanost, a ne apsolutno slaganje.
+Iz tog razloga, PCC je dopunjen ponderisanom kapom kao merom slaganja i metrikama zasnovanim na grešci koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
+
+Kao dopunu PCC-u, izveštavamo i kvadratno ponderisanu Koenovu kapu, koja je prikladna za ordinalne ocene.
+Za razliku od PCC-a, koji meri linearnu povezanost, ponderisana kapa meri slaganje uzimajući u obzir uređenu prirodu skale ocenjivanja 0--10 i jače kažnjava veća neslaganja od manjih.
+
+Odnos prosečnih ocena sažima opšte tendencije u ocenjivanju.
+Razlike između prosečne ocene sistema i prosečne ocene nastavnika ukazuju na sistematsku blagost ili strogost, ali ne odražavaju usklađenost u variranju ocena.
+
+Koren srednje kvadratne greške (RMSE)~\cite{hodson2022root} obuhvata prosečnu veličinu razlika između ljudskih ocena i ocena sistema; manja vrednost RMSE ukazuje na jače slaganje.
+Odnos RMSE/STDDEV~\cite{chai2014root} meri koliko se ocene sistema slažu sa ljudskim ocenama u odnosu na prirodnu varijabilnost samih ljudskih ocena --- odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
+Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje, vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja, dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
+
+\subsection{Prikupljanje podataka}
+\label{sec:podaci}
+
+Empirijska evaluacija sistema EduGrader sprovedena je na autentičnim odgovorima sa teorijskih ispita, prikupljenim tokom više ispitnih rokova na dva univerziteta u Srbiji.
+
+Dobijeni skup podataka obuhvata \textbf{šest univerzitetskih kurseva} i pokriva više akademskih nivoa, uključujući osnovne i master studije.
+Sadrži mešavinu konceptualnih pitanja i zadataka vezanih za programiranje, čime pruža raznovrstan i heterogen reper za evaluaciju sistema za automatsko ocenjivanje.
+Kursevi obuhvaćeni skupom podataka su:
+
+\begin{itemize}
+    \item Programiranje 2 (Prog 2): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Tehničko i naučno pisanje (TSW): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Veb programiranje (WP): kurs četvrte godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Digitalno čuvanje podataka (DDS): kurs master studija, Univerzitet umetnosti;
+    \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti;
+    \item Istraživanje podataka (DM): kurs treće godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu.
+\end{itemize}
+
+Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici, referentne odgovore (kada su dostupni), napomene nastavnika i relevantne nastavne materijale korišćene u pripremi ispita.
+Ukupno, skup sadrži \textbf{686 studentskih odgovora}, što predstavlja realističan reper za evaluaciju doslednosti ocenjivanja kroz različite discipline, akademske nivoe i formate pitanja.
+U zavisnosti od kursa, odgovori uključuju \textbf{kratka tekstualna objašnjenja}, \textbf{duga tekstualna objašnjenja} i \textbf{odgovore u obliku koda}.
+Tabela~\ref{tab:dataset} sumira strukturu skupa podataka, uključujući broj odgovora i njihove tipove za svaki kurs.
+
+Radi bolje karakterizacije podataka, dodatno je prikazana raspodela tipova odgovora i prosečna dužina odgovora.
+Ove statistike daju uvid u varijabilnost složenosti odgovora i pomažu u kontekstualizaciji težine automatskog ocenjivanja kroz različite formate pitanja.
+Pored raspodele tipova odgovora, analizirana je i tipična dužina odgovora --- kako referentnih rešenja koja su pripremili nastavnici, tako i automatski generisanih referentnih odgovora i samih studentskih odgovora.
+Ova informacija je relevantna jer dužina odgovora može uticati na težinu automatskog ocenjivanja, naročito kod dugih objašnjenja.
+
+Tabela~\ref{tab:response_length} takođe pokazuje da su generisani referentni odgovori često znatno duži od odgovora koje su pripremili nastavnici, naročito kod pitanja gde se očekuju kratki odgovori.
+Na više kurseva nastavnici očekuju sažete odgovore (npr.\ jedan izraz ili kratku konstataciju), dok odgovori koje generišu jezički modeli po pravilu uključuju i dodatna objašnjenja zašto je odgovor tačan.
+Kao rezultat, generisani odgovori sadrže više kontekstualnih informacija nego što izvorno ispitno pitanje strogo zahteva.
+
+\begin{table}[ht]
+\centering
+\caption{Struktura skupa podataka po kursevima (broj studentskih odgovora po tipu pitanja)}
+\label{tab:dataset}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Kurs} &
+\textbf{Odgovori} &
+\textbf{Kratak tekst} &
+\textbf{Dug tekst} &
+\textbf{Kod} \\
+\midrule
+Programiranje 2 (Prog 2) & 480 & 380 & 0 & 100 \\
+Tehničko i naučno pisanje (TSW) & 40 & 8 & 0 & 32 \\
+Veb programiranje (WP) & 50 & 26 & 0 & 24 \\
+Digitalno čuvanje podataka (DDS) & 10 & 10 & 0 & 0 \\
+HTML5 i JavaScript za video-igre (HTML5) & 10 & 4 & 0 & 6 \\
+Istraživanje podataka (DM) & 96 & 0 & 96 & 0 \\
+\midrule
+\textbf{Ukupno} & \textbf{686} & \textbf{428 (62{,}4\%)} & \textbf{96 (14\%)} & \textbf{162 (23{,}6\%)} \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{Prosečna dužina odgovora po tipu pitanja i izvoru odgovora}
+\label{tab:response_length}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Tip pitanja} &
+\textbf{\shortstack{Odgovor nastavnika\\pros.\ reči}} &
+\textbf{\shortstack{Odgovor nastavnika\\pros.\ znakova}} &
+\textbf{\shortstack{Generisani odgovor\\pros.\ reči}} &
+\textbf{\shortstack{Generisani odgovor\\pros.\ znakova}} &
+\textbf{\shortstack{Studentski odgovor\\pros.\ reči}} &
+\textbf{\shortstack{Studentski odgovor\\pros.\ znakova}} \\
+\midrule
+Kratak tekst & 20.9 & 130.5 & 201.7 & 1341.9 & 24.7 & 143.2 \\
+Dug tekst    & 411.7 & 2867.7 & 479.9 & 3483.5 & 289.6 & 1889.3 \\
+Kod          & 22.2 & 137.4 & 162.7 & 1144.3 & 15.9 & 102.5 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\subsection{Modeli i konfiguracije}
+\label{sec:modeli}
+
+EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele opšte namene i modele optimizovane za rezonovanje:
+\begin{itemize}
+    \item standardni modeli: GPT-4o, GPT-4o-mini, DeepSeek-Chat;
+    \item modeli za rezonovanje: GPT-5.1, DeepSeek-Reasoner.
+\end{itemize}
+Svaki model evaluiran je u tri konfiguracije strogosti ocenjivanja: blagoj, neutralnoj i strogoj.
+Ove konfiguracije realizovane su pažljivo projektovanim promptovima koji simuliraju različite filozofije ocenjivanja uobičajene u akademskoj praksi.
+Na primer, stroga konfiguracija naglašava preciznost i potpunost (npr.\ „Ti si veoma strog profesor koji rigorozno ocenjuje studentske odgovore''), dok blaga konfiguracija nagrađuje delimičnu tačnost i konceptualno razumevanje.
+Ovakav dizajn odražava nalaze prethodnih studija koje pokazuju da i ljudski ocenjivači značajno variraju u strogosti~\cite{jukiewicz2024future}.
+
+Pored toga, EduGrader podržava dva komplementarna režima ocenjivanja:
+\begin{itemize}
+    \item PRA, u kome se studentski odgovori porede sa tačnim odgovorima i napomenama za ocenjivanje koje je pripremio nastavnik;
+    \item GRA, u kome model najpre generiše referentni odgovor na osnovu priloženih nastavnih materijala, a zatim studentski odgovor ocenjuje u odnosu na taj generisani standard.
+\end{itemize}
+Ovakav dvorežimski dizajn omogućava evaluaciju kako u scenarijima sa dobro definisanim ključem za ocenjivanje, tako i u situacijama kada nastavnici ne obezbeđuju eksplicitna referentna rešenja.
+
+Svi eksperimenti sprovedeni su na srpskom jeziku, uključujući ispitna pitanja, studentske odgovore i referentne odgovore.
+Budući da je srpski jezik sa ograničenim resursima, slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju, ovo istraživanje proširuje oblast ocenjivanja uz podršku veštačke inteligencije izvan dominantnog engleskog konteksta.

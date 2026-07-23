@@ -1,0 +1,70 @@
+% 1. Uvod
+\section{Uvod}
+\label{sec:uvod}
+
+Ocenjivanje retko predstavlja najzanimljiviji deo nastave, ali često neprimetno oblikuje način na koji studenti uče.
+Kada je povratna informacija pravovremena i konkretna, studenti mogu da prepoznaju i isprave nesporazume pre nego što se oni ustale.
+Kada kasni, kada je neodređena ili nedosledna, provera znanja postaje formalnost, a učenje usporava.
+Ovaj izazov je posebno vidljiv na velikim univerzitetskim kursevima, gde nastavnici i saradnici moraju da ocene stotine odgovora otvorenog tipa u kratkim rokovima.
+Za razliku od pitanja sa ponuđenim odgovorima, kratka objašnjenja i mini-eseji ne mogu se proveriti prostim uparivanjem obrazaca.
+Oni zahtevaju tumačenje: prepoznavanje delimično ispravnog rezonovanja, razlikovanje sitnih jezičkih nepreciznosti od konceptualnih praznina i odlučivanje koliko neki propust treba da utiče na ocenu.
+Zbog toga ocenjivanje odgovora otvorenog tipa ostaje skupo i teško skalabilno.
+Ono je, takođe, sklono nedoslednosti: čak i uz detaljna uputstva za ocenjivanje, dva ocenjivača mogu isti odgovor protumačiti različito, naročito kada su odgovori dvosmisleni, pisani u žurbi ili strukturno nejasni~\cite{jonsson2007use,stemler2004comparison,brookhart2016century}.
+Za nastavnike ovo opterećenje ograničava koliko često mogu da koriste bogatija pitanja zasnovana na objašnjenjima.
+Za studente to često znači da povratna informacija stiže prekasno da bi bila korisna --- ili ne stiže uopšte.
+
+Ranije generacije sistema za automatsku proveru znanja dobro su funkcionisale samo kada su odgovori bili strogo ograničeni, kao kod testova sa ponuđenim odgovorima, pitanja dopunjavanja ili kratkih odgovora sa predvidljivom formulacijom~\cite{shermis2003automated,brew2013automated,ramesh2022automated}.
+Napredak u obradi prirodnog jezika proširio je ove mogućnosti, ali su se mnogi pristupi i dalje oslanjali na obimno ručno projektovanje atributa, uske domene ili velike označene skupove podataka~\cite{sebastiani2002machine,collobert2008unified,banko2001scaling}.
+Savremeni veliki jezički modeli (engl. \emph{large language models}, LLM), međutim, označavaju prekretnicu: oni mogu neposredno da tumače slobodan tekst i rezonuju o njegovom značenju.
+Time je postalo izvodljivo projektovati alate koji ocenjuju odgovore otvorenog tipa, obrazlažu dodeljene ocene prirodnim jezikom i ukazuju na ono što u odgovoru nedostaje, a ne samo na ono što je pogrešno~\cite{kasneci2023chatgpt,zhai2023chatgpt}.
+
+\subsection{Motivacija}
+
+Primarni cilj ovog rada jeste unapređenje obrazovnog procesa kroz pouzdanu automatizaciju ocenjivanja.
+Postojeći način provere znanja zahteva značajnu angažovanost nastavnika, što dovodi do kašnjenja povratnih informacija i ograničava učestalost testiranja.
+Pouzdan automatizovani sistem za ocenjivanje omogućio bi:
+\begin{itemize}
+    \item \textbf{Povećanje učestalosti testiranja:} redovnije provere znanja omogućavaju studentima da kontinuirano prate svoj napredak i identifikuju oblasti koje zahtevaju dodatni rad.
+    \item \textbf{Unapređenje procesa učenja:} automatsko ocenjivanje pruža brzu i detaljnu analizu odgovora, čime studenti dobijaju uvid u sopstvene greške dok je gradivo još sveže.
+    \item \textbf{Smanjenje opterećenja nastavnika:} automatizacijom rutinskog dela ocenjivanja oslobađa se vreme koje nastavnici mogu usmeriti ka individualnoj podršci studentima.
+\end{itemize}
+
+Ipak, upotreba velikih jezičkih modela u ocenjivanju otvara važna praktična i pedagoška pitanja.
+Koliko su njihove ocene dosledne kroz različite predmete i tipove pitanja?
+Mogu li nastavnici kalibrisati strogost ocenjivanja prema očekivanjima konkretnog kursa?
+Šta se dešava kada potpun referentni odgovor nije dostupan?
+I, što je ključno, kako očuvati ljudsku odgovornost za konačne ocene, a iskoristiti efikasnost automatizacije?
+
+\subsection{Sistem EduGrader i doprinosi rada}
+
+U ovom radu predstavljen je EduGrader, platforma za ocenjivanje uz podršku veštačke inteligencije, projektovana za proveru znanja putem pitanja otvorenog tipa u visokom obrazovanju, pod nadzorom nastavnika.
+EduGrader objedinjuje više velikih jezičkih modela --- GPT-4o\footnote{\url{https://platform.openai.com/docs/models/gpt-4o}}, GPT-4o-mini\footnote{\url{https://platform.openai.com/docs/models/gpt-4o-mini}}, DeepSeek-Chat\footnote{\url{https://api-docs.deepseek.com/}} i dva modela usmerena na rezonovanje, GPT-5.1\footnote{\url{https://platform.openai.com/docs/models/gpt-5}} i DeepSeek-Reasoner\footnote{\url{https://api-docs.deepseek.com/guides/reasoning\_model}} --- u jedinstven, transparentan tok ocenjivanja koji prioritet daje kontroli nastavnika.
+Sistem podržava tri profila strogosti ocenjivanja --- blag, neutralan i strog --- što odražava stvarnu nastavnu praksu, u kojoj neki kursevi nagrađuju delimično ispravno rezonovanje, dok drugi zahtevaju preciznu terminologiju i potpuna rešenja.
+
+EduGrader nudi dva komplementarna režima ocenjivanja:
+\begin{itemize}
+    \item \textbf{Režim sa zadatim referentnim odgovorom} (engl. \emph{provided-reference-answer}, PRA), u kome se studentski odgovori porede sa referentnim odgovorima koje je pripremio nastavnik (po potrebi dopunjenim napomenama za ocenjivanje).
+    \item \textbf{Režim sa generisanim referentnim odgovorom} (engl. \emph{generated-reference-answer}, GRA), u kome sistem najpre sam konstruiše referentni odgovor na osnovu nastavnih materijala --- beležaka sa predavanja, skripti i udžbenika --- a zatim studentske odgovore ocenjuje u odnosu na tako generisani standard.
+\end{itemize}
+
+U oba režima izlaz sistema ne čini samo numerička ocena (0--10), već i jasno obrazloženje koje ukazuje na jake strane odgovora, koncepte koji nedostaju i praznine u rezonovanju.
+Cilj je povratna informacija koja je studentima upotrebljiva, a nastavnicima proverljiva, umesto ocene koja dolazi iz „crne kutije''.
+
+Svi eksperimenti sprovedeni su na srpskom jeziku --- jeziku sa ograničenim resursima, slabo zastupljenom u podacima na kojima se veliki jezički modeli obučavaju --- čime se istraživanje ocenjivanja uz podršku veštačke inteligencije proširuje izvan dominantnog engleskog konteksta.
+Sistem je evaluiran na 686 autentičnih studentskih odgovora prikupljenih na dva univerziteta i šest kurseva, koji obuhvataju različite tipove odgovora: kratke činjeničke odgovore, otvorena tekstualna objašnjenja i odgovore u obliku koda.
+Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da se modeli usmereni na rezonovanje najbolje slažu sa ljudskim ocenjivačima.
+U najboljoj konfiguraciji (GPT-5.1, neutralna strogost) EduGrader postiže Pirsonov koeficijent korelacije (PCC) od 0{,}90 u odnosu na ljudsko ocenjivanje.
+
+Konačno, EduGrader je zamišljen kao asistent za ocenjivanje, a ne kao zamena za sud nastavnika.
+On smanjuje repetitivno opterećenje i povećava doslednost, ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
+Iz tog razloga EduGrader sledi princip čoveka u petlji (engl. \emph{human-in-the-loop}) i objavljen je kao softver otvorenog koda, čime se podstiču transparentnost, reproducibilnost i prilagodljivost različitim institucijama.
+
+\subsection{Struktura rada}
+
+Ostatak rada organizovan je na sledeći način.
+U poglavlju~\ref{sec:pregled} dat je pregled oblasti i srodnih istraživanja primene veštačke inteligencije u ocenjivanju.
+Poglavlje~\ref{sec:aplikacija} opisuje veb aplikaciju EduGrader i sloj za integraciju jezičkih modela, a poglavlje~\ref{sec:pipeline} sistem za automatizovanu evaluaciju modela kojim su sprovedeni eksperimenti.
+U poglavlju~\ref{sec:metodologija} predstavljena je metodologija evaluacije --- korišćene metrike, skupovi podataka i konfiguracije modela.
+Poglavlje~\ref{sec:rezultati} donosi rezultate eksperimenata, uključujući poređenje PRA i GRA režima, analizu uticaja temperature, Bland--Altmanovu analizu slaganja i analizu stabilnosti ocenjivanja kroz višestruka pokretanja.
+U poglavlju~\ref{sec:diskusija} rezultati su upoređeni sa prethodnim istraživanjima i razmotreni su pravci budućeg rada, dok poglavlje~\ref{sec:zakljucak} zaključuje rad.
+Dodatak~\ref{app:promptovi} sadrži šablone promptova korišćene u eksperimentima i reprezentativne primere ocenjivanja.

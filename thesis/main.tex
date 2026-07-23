@@ -1,0 +1,127 @@
+% ============================================================
+% Master rad — Evaluacija pouzdanosti velikih jezičkih modela
+%              u automatskom ocenjivanju studentskih odgovora
+% Autor: Svetozar Iković, Matematički fakultet, UB
+%
+% NAPOMENA: preambula je namerno minimalna i modularna — ako
+% fakultet zahteva zvanični šablon, menja se samo ovaj fajl,
+% a poglavlja u poglavlja/ ostaju netaknuta.
+% ============================================================
+\documentclass[12pt,a4paper]{article}
+
+% --- Jezik i pismo (srpski, latinica) ---
+% Preambula radi i pod pdfLaTeX-om (inputenc/fontenc) i pod
+% XeTeX/LuaTeX-om (fontspec) — Tectonic koristi XeTeX.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+\else
+  \usepackage{fontspec} % podrazumevani font je Latin Modern
+\fi
+\usepackage[serbian]{babel}
+
+% --- Matematika, grafika, tabele ---
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+
+% --- Prompt kutije (kao u ComSIS radu) ---
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\tcbset{
+  promptbox/.style={
+    colback=gray!3,
+    colframe=black,
+    boxrule=0.4pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=6pt, bottom=6pt,
+    breakable
+  }
+}
+
+% --- Dijagram arhitekture ---
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+% --- Kod ---
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  framerule=0.3pt,
+  captionpos=b,
+  showstringspaces=false
+}
+
+% --- Ostalo ---
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+% Marker za nedovršene delove — pretragom po \todo lako se
+% nalazi šta je preostalo; pre predaje ne sme ostati nijedan.
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+
+% Razmak i uvlačenje pasusa
+\usepackage{setspace}
+\onehalfspacing
+
+\begin{document}
+
+% ------------------------------------------------------------
+% Naslovna strana
+% ------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    {\Large\bfseries Univerzitet u Beogradu\\Matematički fakultet\par}
+    \vspace{3cm}
+    {\LARGE\bfseries Evaluacija pouzdanosti velikih jezičkih modela u automatskom ocenjivanju studentskih odgovora\par}
+    \vspace{1cm}
+    {\large Master rad\par}
+    \vspace{2cm}
+    {\Large Autor: Svetozar Iković\par}
+    \vfill
+    {\large Mentor: dr Jelena Graovac\par}
+    \vspace{1cm}
+    {\large Beograd, 2026.\par}
+\end{titlepage}
+
+% ------------------------------------------------------------
+% Zahvalnica, rezime, sadržaj
+% ------------------------------------------------------------
+\input{poglavlja/00-rezime}
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------
+% Poglavlja
+% ------------------------------------------------------------
+\input{poglavlja/01-uvod}
+\input{poglavlja/02-pregled}
+\input{poglavlja/03-aplikacija}
+\input{poglavlja/04-evaluacija}
+\input{poglavlja/05-metodologija}
+\input{poglavlja/06-rezultati}
+\input{poglavlja/07-diskusija}
+\input{poglavlja/08-zakljucak}
+
+% ------------------------------------------------------------
+% Literatura
+% ------------------------------------------------------------
+\bibliographystyle{plain}
+\bibliography{literatura}
+
+% ------------------------------------------------------------
+% Dodaci
+% ------------------------------------------------------------
+\appendix
+\input{poglavlja/A-promptovi}
+
+\end{document}
