@@ -53,7 +53,7 @@ Klijentski i serverski deo komuniciraju isključivo preko REST API-ja.
 
 % ---- LLM API-ji ----
 \node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=0.8cm]
-  (openai) {\scriptsize OpenAI API\\[-1pt]\tiny gpt-4o-mini, gpt-4o, gpt-5.1};
+  (openai) {\scriptsize OpenAI API\\[-1pt]\tiny gpt-4o-mini, gpt-4o, gpt-5};
 
 \node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=-0.8cm]
   (deepseek) {\scriptsize DeepSeek API\\[-1pt]\tiny deepseek-chat, deepseek-reasoner};
@@ -100,7 +100,7 @@ Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django 
 
 \begin{itemize}
     \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik, izdavanje i osvežavanje JWT tokena, kao i klase dozvola (engl. \emph{permission classes}) kojima se pojedinačni API pozivi ograničavaju na odgovarajuću ulogu.
-    \item \textbf{Glavna aplikacija} definiše domenske modele --- kurs, pitanje, test, studentski test i studentski odgovor --- zajedno sa serijalizatorima i CRUD API endpointima.
+    \item \textbf{Glavna aplikacija} definiše domenske modele, kurs, pitanje, test, studentski test i studentski odgovor, zajedno sa serijalizatorima i CRUD API endpointima.
     Studentski odgovor čuva i ocenu koju je dodelio nastavnik, što omogućava kasnije poređenje sa ocenama modela.
     \item \textbf{Aplikacija za ocenjivanje} sadrži logiku ocenjivanja i integracije sa jezičkim modelima.
     Za svaki ocenjeni odgovor kreira zapis koji čuva korišćeni prompt, instrukcije, kompletan odgovor modela i izdvojenu numeričku ocenu, čime je svaka odluka sistema naknadno proverljiva.
@@ -118,12 +118,12 @@ Metoda vraća par: izdvojeni tekstualni odgovor i kompletan odgovor API-ja (koji
 Obezbeđene su konkretne implementacije:
 
 \begin{itemize}
-    \item \textbf{OpenAI} --- koristi zvanični OpenAI Python SDK.
-    Podržani modeli: \emph{gpt-4o-mini-2024-07-18}, \emph{gpt-4o-2024-08-06} i \emph{gpt-5.1-2025-11-13}.
-    \item \textbf{DeepSeek} --- koristi OpenAI-kompatibilni API endpoint preko istog SDK-a, sa promenjenom baznom adresom.
+    \item \textbf{OpenAI}, koristi zvanični OpenAI Python SDK.
+    Podržani modeli: \emph{gpt-4o-mini}, \emph{gpt-4o} i \emph{gpt-5-2025-08-07}.
+    \item \textbf{DeepSeek}, koristi OpenAI-kompatibilni API endpoint preko istog SDK-a, sa promenjenom baznom adresom.
     Podržani modeli: \emph{deepseek-chat} (V3) i \emph{deepseek-reasoner} (R1).
 \end{itemize}
 
 Na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}) fabrička funkcija instancira odgovarajuću klasu.
-Ova apstrakcija omogućava dodavanje novog provajdera implementacijom jedne klase, bez izmena u logici ocenjivanja --- isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
+Ova apstrakcija omogućava dodavanje novog provajdera implementacijom jedne klase, bez izmena u logici ocenjivanja, isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
 API ključevi čuvaju se kao promenljive okruženja i nikada nisu ugrađeni u izvorni kod.

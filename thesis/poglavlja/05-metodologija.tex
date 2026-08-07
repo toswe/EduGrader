@@ -34,7 +34,7 @@ Odnos prosečnih ocena sažima opšte tendencije u ocenjivanju.
 Razlike između prosečne ocene sistema i prosečne ocene nastavnika ukazuju na sistematsku blagost ili strogost, ali ne odražavaju usklađenost u variranju ocena.
 
 Koren srednje kvadratne greške (RMSE)~\cite{hodson2022root} obuhvata prosečnu veličinu razlika između ljudskih ocena i ocena sistema; manja vrednost RMSE ukazuje na jače slaganje.
-Odnos RMSE/STDDEV~\cite{chai2014root} meri koliko se ocene sistema slažu sa ljudskim ocenama u odnosu na prirodnu varijabilnost samih ljudskih ocena --- odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
+Odnos RMSE/STDDEV~\cite{chai2014root} meri koliko se ocene sistema slažu sa ljudskim ocenama u odnosu na prirodnu varijabilnost samih ljudskih ocena, odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
 Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje, vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja, dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
 
 \subsection{Prikupljanje podataka}
@@ -62,7 +62,7 @@ Tabela~\ref{tab:dataset} sumira strukturu skupa podataka, uključujući broj odg
 
 Radi bolje karakterizacije podataka, dodatno je prikazana raspodela tipova odgovora i prosečna dužina odgovora.
 Ove statistike daju uvid u varijabilnost složenosti odgovora i pomažu u kontekstualizaciji težine automatskog ocenjivanja kroz različite formate pitanja.
-Pored raspodele tipova odgovora, analizirana je i tipična dužina odgovora --- kako referentnih rešenja koja su pripremili nastavnici, tako i automatski generisanih referentnih odgovora i samih studentskih odgovora.
+Pored raspodele tipova odgovora, analizirana je i tipična dužina odgovora, kako referentnih rešenja koja su pripremili nastavnici, tako i automatski generisanih referentnih odgovora i samih studentskih odgovora.
 Ova informacija je relevantna jer dužina odgovora može uticati na težinu automatskog ocenjivanja, naročito kod dugih objašnjenja.
 
 Tabela~\ref{tab:response_length} takođe pokazuje da su generisani referentni odgovori često znatno duži od odgovora koje su pripremili nastavnici, naročito kod pitanja gde se očekuju kratki odgovori.
@@ -124,7 +124,7 @@ Kod          & 22.2 & 137.4 & 162.7 & 1144.3 & 15.9 & 102.5 \\
 EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele opšte namene i modele optimizovane za rezonovanje:
 \begin{itemize}
     \item standardni modeli: GPT-4o, GPT-4o-mini, DeepSeek-Chat;
-    \item modeli za rezonovanje: GPT-5.1, DeepSeek-Reasoner.
+    \item modeli za rezonovanje: GPT-5, DeepSeek-Reasoner.
 \end{itemize}
 Svaki model evaluiran je u tri konfiguracije strogosti ocenjivanja: blagoj, neutralnoj i strogoj.
 Ove konfiguracije realizovane su pažljivo projektovanim promptovima koji simuliraju različite filozofije ocenjivanja uobičajene u akademskoj praksi.

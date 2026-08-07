@@ -10,14 +10,14 @@ DVC omogućava deklarativno opisivanje faza obrade sa eksplicitnim zavisnostima 
 Svaki od devet skupova podataka (šest kurseva, pri čemu su za pojedine kurseve obuhvaćeni odvojeni ispitni rokovi) opisan je dvema CSV datotekama:
 
 \begin{itemize}
-    \item \texttt{questions.csv} --- po jedan red za svako pitanje, sa kolonama: identifikator pitanja, tekst pitanja, tačan odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
-    \item \texttt{student\_answers.csv} --- po jedan red za svaki studentski odgovor, sa kolonama: identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
+    \item \texttt{questions.csv}, po jedan red za svako pitanje, sa kolonama: identifikator pitanja, tekst pitanja, tačan odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
+    \item \texttt{student\_answers.csv}, po jedan red za svaki studentski odgovor, sa kolonama: identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
 \end{itemize}
 
 \subsection{Faze obrade}
 
 Prva faza (\emph{spajanje ulaza}) validira i spaja ove dve datoteke u jedinstvenu tabelu.
-Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka --- svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
+Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka, svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
 Ovakve stroge provere pokazale su se ključnim za kvalitet eksperimenata, jer su greške u ručno pripremanim podacima otkrivane pre nego što bi izazvale skupe, delimično neispravne eksperimente.
 
 Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
@@ -38,5 +38,5 @@ Ako parsiranje ne uspe ili API poziv privremeno otkaže, poziv se ponavlja do tr
 Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka.
 Pomoćna skripta automatizuje ovaj proces: za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline}, pri čemu ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
 
-Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike} --- Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV --- po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
+Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike}, Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV, po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
