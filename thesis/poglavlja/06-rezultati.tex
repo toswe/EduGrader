@@ -249,7 +249,7 @@ Ovaj raskorak između opisne i proceduralne tačnosti smanjuje slaganje sa ljuds
 Ovakvo ponašanje može se ublažiti uključivanjem kratke napomene nastavnika koja eksplicitno naglašava da li je tačno objašnjenje samo po sebi dovoljno ili student mora u potpunosti da izvrši traženi zadatak.
 Takvo usmerenje pomaže modelu da kriterijume ocenjivanja bolje uskladi sa očekivanjima nastavnika.
 
-Kod skupova podataka gde se očekuju duži, opisniji odgovori (npr.\ DDS, DM i HTML5), razlike između PRA i GRA su znatno manje.
+Kod skupova podataka gde se očekuju duži, opisniji odgovori (npr.\ DDS i HTML5), razlike između PRA i GRA su znatno manje.
 U tim slučajevima generisani referentni odgovori po strukturi i nivou detalja liče na odgovore nastavnika, što vodi sličnom ponašanju pri ocenjivanju i uporedivim vrednostima PCC-a u oba režima.
 
 \begin{table}[ht]
@@ -266,7 +266,6 @@ TSW    & \textbf{0.94} & 0.88 & 0.92 & 0.91 & \textbf{0.94} \\
 WP     & 0.78 & 0.67 & 0.78 & 0.77 & \textbf{0.87} \\
 DDS    & 0.91 & 0.88 & 0.77 & \textbf{0.95} & 0.92 \\
 HTML5  & 0.96 & 0.93 & \textbf{0.97} & 0.96 & \textbf{0.97} \\
-DM     & 0.82 & 0.84 & 0.87 & 0.75 & \textbf{0.91} \\
 \bottomrule
 \end{tabular}
 }
@@ -286,7 +285,6 @@ TSW    & 0.51 & 0.78 & \textbf{0.84} & 0.64 & 0.57 \\
 WP     & 0.62 & 0.66 & \textbf{0.82} & 0.80 & 0.76 \\
 DDS    & 0.81 & 0.66 & \textbf{0.89} & 0.87 & \textbf{0.89} \\
 HTML5  & 0.95 & 0.92 & 0.98 & 0.97 & \textbf{0.99} \\
-DM     & 0.82 & 0.83 & 0.85 & 0.75 & \textbf{0.92} \\
 \bottomrule
 \end{tabular}
 }
@@ -298,7 +296,7 @@ DM     & 0.82 & 0.83 & 0.85 & 0.75 & \textbf{0.92} \\
 Budući da su izlazi velikih jezičkih modela inherentno stohastički, stabilnost ocenjivanja dodatno je procenjena ponavljanjem istog zadatka ocenjivanja tri nezavisna puta, koristeći GPT-5 sa temperaturom 0{,}2 i podrazumevanim (neutralnim) promptom strogosti.
 Tabela~\ref{tab:variability} sumira rezultate.
 
-Nad svih 686 pitanja, agregirane metrike pokazale su zanemarljivu varijaciju između pokretanja: PCC $= 0{,}899 \pm 0{,}002$, ponderisana kapa $= 0{,}896 \pm 0{,}002$, odnos prosečnih ocena $= 0{,}962 \pm 0{,}002$ i RMSE/STDDEV $= 0{,}448 \pm 0{,}003$.
+Agregirane metrike, preuzete iz objavljene evaluacije sistema i računate nad širim skupom odgovora od onog opisanog u odeljku~\ref{sec:podaci}, pokazale su zanemarljivu varijaciju između pokretanja: PCC $= 0{,}899 \pm 0{,}002$, ponderisana kapa $= 0{,}896 \pm 0{,}002$, odnos prosečnih ocena $= 0{,}962 \pm 0{,}002$ i RMSE/STDDEV $= 0{,}448 \pm 0{,}003$.
 Na nivou pojedinačnih pitanja, 82\% ocena bilo je identično u sva tri pokretanja, a 97\% se razlikovalo za najviše 1 poen na skali 0--10, uz prosečnu maksimalnu razliku od 0{,}21 poena.
 
 Na nivou skupova podataka, varijabilnost je ostala niska u svim slučajevima, sa najmanjim standardnim devijacijama kod najstabilnijih podskupova i nešto višom varijabilnošću kod manjih skupova podataka.
@@ -306,7 +304,8 @@ Na nivou skupova podataka, varijabilnost je ostala niska u svim slučajevima, sa
 \begin{table}[ht]
 \centering
 \caption{Analiza varijabilnosti ocenjivanja modela GPT-5 za PRA režim kroz tri nezavisna pokretanja ($t=0{,}2$, podrazumevana strogost).
-Svako polje prikazuje prosek $\pm$ standardnu devijaciju nad 3 pokretanja.}
+Svako polje prikazuje prosek $\pm$ standardnu devijaciju nad 3 pokretanja.
+Red \emph{SVI} preuzet je iz objavljene evaluacije sistema i računat je nad širim skupom odgovora od onog opisanog u odeljku~\ref{sec:podaci}.}
 \label{tab:variability}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lcccc}
@@ -318,7 +317,6 @@ TSW    & 0.953 $\pm$ 0.006 & 0.886 $\pm$ 0.013 & 0.979 $\pm$ 0.002 & 0.328 $\pm$
 WP     & 0.855 $\pm$ 0.006 & 0.747 $\pm$ 0.011 & 0.930 $\pm$ 0.002 & 0.694 $\pm$ 0.030 \\
 DDS    & 0.882 $\pm$ 0.016 & 0.823 $\pm$ 0.034 & 0.869 $\pm$ 0.010 & 0.622 $\pm$ 0.026 \\
 HTML5  & 0.969 $\pm$ 0.004 & 0.959 $\pm$ 0.006 & 0.898 $\pm$ 0.008 & 0.311 $\pm$ 0.019 \\
-DM     & 0.915 $\pm$ 0.005 & 0.894 $\pm$ 0.005 & 1.109 $\pm$ 0.003 & 0.466 $\pm$ 0.012 \\
 \midrule
 SVI    & 0.899 $\pm$ 0.002 & 0.896 $\pm$ 0.002 & 0.962 $\pm$ 0.002 & 0.448 $\pm$ 0.003 \\
 \bottomrule

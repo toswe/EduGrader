@@ -10,7 +10,7 @@ U ovom poglavlju opisana je metodologija evaluacije pouzdanosti ocena koje EduGr
 \label{sec:metrike}
 
 Da bi se procenilo slaganje ocena generisanih veštačkom inteligencijom sa ljudskim sudom, izlazi sistema EduGrader upoređeni su sa ocenama koje su dodelila dva univerzitetska nastavnika.
-Svaki nastavnik je ocenio drugačiji podskup od ukupno 686 odgovora (192 odnosno 485 odgovora).
+Svaki nastavnik je ocenio drugačiji podskup od ukupno 583 odgovora, pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju.
 Ovakva postavka omogućila je poređenje performansi sistema sa više ljudskih ocenjivača, umesto sa jednim jedinstvenim standardom.
 Svaki odgovor ocenjen je prema standardnim kriterijumima ocenjivanja koji se koriste na datom kursu.
 Ocene su dodeljivane na skali 0--10, na osnovu stepena konceptualne tačnosti i potpunosti odgovora.
@@ -42,7 +42,7 @@ Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje, vrednost
 
 Empirijska evaluacija sistema EduGrader sprovedena je na autentičnim odgovorima sa teorijskih ispita, prikupljenim tokom više ispitnih rokova na dva univerziteta u Srbiji.
 
-Dobijeni skup podataka obuhvata \textbf{šest univerzitetskih kurseva} i pokriva više akademskih nivoa, uključujući osnovne i master studije.
+Dobijeni skup podataka obuhvata \textbf{pet univerzitetskih kurseva} i pokriva više akademskih nivoa, uključujući osnovne i master studije.
 Sadrži mešavinu konceptualnih pitanja i zadataka vezanih za programiranje, čime pruža raznovrstan i heterogen reper za evaluaciju sistema za automatsko ocenjivanje.
 Kursevi obuhvaćeni skupom podataka su:
 
@@ -51,19 +51,18 @@ Kursevi obuhvaćeni skupom podataka su:
     \item Tehničko i naučno pisanje (TSW): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
     \item Veb programiranje (WP): kurs četvrte godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
     \item Digitalno čuvanje podataka (DDS): kurs master studija, Univerzitet umetnosti;
-    \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti;
-    \item Istraživanje podataka (DM): kurs treće godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu.
+    \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti.
 \end{itemize}
 
 Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici, referentne odgovore (kada su dostupni), napomene nastavnika i relevantne nastavne materijale korišćene u pripremi ispita.
-Ukupno, skup sadrži \textbf{686 studentskih odgovora}, što predstavlja realističan reper za evaluaciju doslednosti ocenjivanja kroz različite discipline, akademske nivoe i formate pitanja.
-U zavisnosti od kursa, odgovori uključuju \textbf{kratka tekstualna objašnjenja}, \textbf{duga tekstualna objašnjenja} i \textbf{odgovore u obliku koda}.
+Ukupno, skup sadrži \textbf{583 studentska odgovora}, što predstavlja realističan reper za evaluaciju doslednosti ocenjivanja kroz različite discipline, akademske nivoe i formate pitanja.
+U zavisnosti od kursa, odgovori uključuju \textbf{kratka tekstualna objašnjenja} i \textbf{odgovore u obliku koda}.
 Tabela~\ref{tab:dataset} sumira strukturu skupa podataka, uključujući broj odgovora i njihove tipove za svaki kurs.
 
 Radi bolje karakterizacije podataka, dodatno je prikazana raspodela tipova odgovora i prosečna dužina odgovora.
 Ove statistike daju uvid u varijabilnost složenosti odgovora i pomažu u kontekstualizaciji težine automatskog ocenjivanja kroz različite formate pitanja.
 Pored raspodele tipova odgovora, analizirana je i tipična dužina odgovora, kako referentnih rešenja koja su pripremili nastavnici, tako i automatski generisanih referentnih odgovora i samih studentskih odgovora.
-Ova informacija je relevantna jer dužina odgovora može uticati na težinu automatskog ocenjivanja, naročito kod dugih objašnjenja.
+Ova informacija je relevantna jer dužina odgovora može uticati na težinu automatskog ocenjivanja.
 
 Tabela~\ref{tab:response_length} takođe pokazuje da su generisani referentni odgovori često znatno duži od odgovora koje su pripremili nastavnici, naročito kod pitanja gde se očekuju kratki odgovori.
 Na više kurseva nastavnici očekuju sažete odgovore (npr.\ jedan izraz ili kratku konstataciju), dok odgovori koje generišu jezički modeli po pravilu uključuju i dodatna objašnjenja zašto je odgovor tačan.
@@ -74,26 +73,26 @@ Kao rezultat, generisani odgovori sadrže više kontekstualnih informacija nego 
 \caption{Struktura skupa podataka po kursevima (broj studentskih odgovora po tipu pitanja)}
 \label{tab:dataset}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{lcccc}
+\begin{tabular}{lccc}
 \toprule
 \textbf{Kurs} &
 \textbf{Odgovori} &
 \textbf{Kratak tekst} &
-\textbf{Dug tekst} &
 \textbf{Kod} \\
 \midrule
-Programiranje 2 (Prog 2) & 480 & 380 & 0 & 100 \\
-Tehničko i naučno pisanje (TSW) & 40 & 8 & 0 & 32 \\
-Veb programiranje (WP) & 50 & 26 & 0 & 24 \\
-Digitalno čuvanje podataka (DDS) & 10 & 10 & 0 & 0 \\
-HTML5 i JavaScript za video-igre (HTML5) & 10 & 4 & 0 & 6 \\
-Istraživanje podataka (DM) & 96 & 0 & 96 & 0 \\
+Programiranje 2 (Prog 2) & 477 & 362 & 115 \\
+Tehničko i naučno pisanje (TSW) & 40 & 20 & 20 \\
+Veb programiranje (WP) & 46 & 40 & 6 \\
+Digitalno čuvanje podataka (DDS) & 10 & 10 & 0 \\
+HTML5 i JavaScript za video-igre (HTML5) & 10 & 10 & 0 \\
 \midrule
-\textbf{Ukupno} & \textbf{686} & \textbf{428 (62{,}4\%)} & \textbf{96 (14\%)} & \textbf{162 (23{,}6\%)} \\
+\textbf{Ukupno} & \textbf{583} & \textbf{442 (75{,}8\%)} & \textbf{141 (24{,}2\%)} \\
 \bottomrule
 \end{tabular}
 }
 \end{table}
+
+Pitanje je svrstano u kategoriju \emph{kod} ukoliko se od studenta traži da napiše programski kod, izraz ili \LaTeX{} naredbu, a u kategoriju \emph{kratak tekst} ukoliko se očekuje prozni odgovor, čak i kada se u samom pitanju navodi isečak koda.
 
 \begin{table}[ht]
 \centering
@@ -111,7 +110,6 @@ Istraživanje podataka (DM) & 96 & 0 & 96 & 0 \\
 \textbf{\shortstack{Studentski odgovor\\pros.\ znakova}} \\
 \midrule
 Kratak tekst & 20.9 & 130.5 & 201.7 & 1341.9 & 24.7 & 143.2 \\
-Dug tekst    & 411.7 & 2867.7 & 479.9 & 3483.5 & 289.6 & 1889.3 \\
 Kod          & 22.2 & 137.4 & 162.7 & 1144.3 & 15.9 & 102.5 \\
 \bottomrule
 \end{tabular}
