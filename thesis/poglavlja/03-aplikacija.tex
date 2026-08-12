@@ -3,21 +3,23 @@
 \label{sec:aplikacija}
 
 EduGrader je veb aplikacija za automatsko ocenjivanje odgovora otvorenog tipa sa studentskih ispita pomoću velikih jezičkih modela.
-Predstavlja produkcioni deo sistema, namenjen svakodnevnoj upotrebi u nastavi, i implementirana je kao modularna platforma organizovana u tri sloja (slika~\ref{fig:architecture}):
+To je deo sistema namenjen upotrebi u nastavi, organizovan u tri sloja (slika~\ref{fig:architecture}):
 
 \begin{itemize}
     \item \textbf{Klijentski sloj.} Jednostranična aplikacija (SPA) izgrađena u tehnologijama React~19 i TypeScript, koju poslužuje Nginx server.
-    Pruža odvojene prikaze za nastavnike i studente: nastavnici upravljaju kursevima, testovima i pitanjima i pregledaju rešene testove, dok studenti rešavaju testove i uvidom u rezultate prate svoj napredak.
-    Na prikazu rešenog testa, uz svaki odgovor prikazuju se i ocena nastavnika i ocena koju je predložio jezički model, čime nastavnik zadržava punu kontrolu nad konačnom odlukom.
+    Prikazi za nastavnike i studente su odvojeni: nastavnici upravljaju kursevima,
+    testovima i pitanjima i pregledaju rešene testove, a studenti rešavaju testove i prate svoje rezultate.
+    Na prikazu rešenog testa, uz svaki odgovor stoje i ocena nastavnika i ocena koju je predložio jezički model; konačnu odluku donosi nastavnik.
     Autentifikacija se obavlja putem JWT tokena (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
     \item \textbf{Serverski sloj.} REST API izgrađen u tehnologijama Python~3, Django~5.1 i Django REST Framework.
-    Izlaže CRUD operacije nad domenskim modelima i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela, parsiranje izlaza i trajno čuvanje rezultata.
-    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM, sa entitetima za kurseve, testove, pitanja, studentske odgovore i ocene.
-    Čuva ocene, povratne informacije, promptove i metapodatke, čime podržava reproducibilnost i različite vrste analiza.
+    Izlaže CRUD operacije nad domenskim modelima i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela,
+    parsiranje izlaza i trajno čuvanje rezultata.
+    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM, sa entitetima za kurseve,
+    testove, pitanja, studentske odgovore i ocene.
+    Pored samih ocena čuvaju se i povratne informacije, promptovi i metapodaci, potrebni za kasnije analize.
 \end{itemize}
 
-Ovakav slojeviti dizajn omogućava da se logika ocenjivanja i ponašanje modela razvijaju nezavisno od korisničkog interfejsa, uz očuvanje sledivosti svih odluka o ocenjivanju.
-Klijentski i serverski deo komuniciraju isključivo preko REST API-ja.
+Logika ocenjivanja i ponašanje modela tako se razvijaju nezavisno od korisničkog interfejsa; klijentski i serverski deo komuniciraju isključivo preko REST API-ja.
 
 % --- DIJAGRAM ARHITEKTURE (TikZ) ---
 \begin{figure}[htbp]
@@ -83,7 +85,7 @@ Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti 
 \subsection{Klijentska aplikacija}
 \label{sec:webapp}
 
-Klijentska aplikacija realizovana je kao jednostranična aplikacija u biblioteci React (verzija 19) sa TypeScript jezikom, uz Vite kao alat za izgradnju i razvojno okruženje.
+Klijentska aplikacija je jednostranična aplikacija u biblioteci React (verzija 19) sa TypeScript jezikom, uz Vite kao alat za izgradnju i razvojno okruženje.
 Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena na dva modula sa odvojenim pravima pristupa:
 
 \begin{itemize}
@@ -91,34 +93,38 @@ Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena
     \item \textbf{Studentski modul} omogućava pregled nadolazećih testova, izradu testa i uvid u rezultate već urađenih testova.
 \end{itemize}
 
-Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa: logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje, a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz DVC \emph{pipeline}, nad podacima pripremljenim u vidu CSV datoteka.
-Izbor modela, režima ocenjivanja i nivoa strogosti zadaje se na tom nivou, kroz parametarske datoteke, a ne kroz veb interfejs.
+Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa: logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje,
+a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz DVC \emph{pipeline}, nad podacima pripremljenim u vidu CSV datoteka.
+Izbor modela, režima ocenjivanja i nivoa strogosti zadaje se kroz parametarske datoteke tog \emph{pipeline}-a, a ne kroz veb interfejs.
 
 Autentifikacija koristi JWT tokene koji se čuvaju u \emph{session storage}-u pregledača; uloge (nastavnik ili student) ugrađene su u token i na osnovu njih se sprovodi kontrola pristupa rutama.
-U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu, dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
+U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu,
+dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
 
 \subsection{Serverska aplikacija}
 
 Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django konvencijom razdvajanja odgovornosti:
 
 \begin{itemize}
-    \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik, izdavanje i osvežavanje JWT tokena, kao i klase dozvola (engl. \emph{permission classes}) kojima se pojedinačni API pozivi ograničavaju na odgovarajuću ulogu.
-    \item \textbf{Glavna aplikacija} definiše domenske modele, kurs, pitanje, test, studentski test i studentski odgovor, zajedno sa serijalizatorima i CRUD API endpointima.
+    \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik, izdavanje i osvežavanje JWT tokena,
+    kao i klase dozvola (engl. \emph{permission classes}) kojima se pojedinačni API pozivi ograničavaju na odgovarajuću ulogu.
+    \item \textbf{Glavna aplikacija} definiše domenske modele, kurs, pitanje,
+    test, studentski test i studentski odgovor, zajedno sa serijalizatorima i CRUD API endpointima.
     Studentski odgovor čuva i ocenu koju je dodelio nastavnik, što omogućava kasnije poređenje sa ocenama modela.
     \item \textbf{Aplikacija za ocenjivanje} sadrži logiku ocenjivanja i integracije sa jezičkim modelima.
-    Za svaki ocenjeni odgovor kreira zapis koji čuva korišćeni prompt, instrukcije, kompletan odgovor modela i izdvojenu numeričku ocenu, čime je svaka odluka sistema naknadno proverljiva.
+    Za svaki ocenjeni odgovor kreira zapis sa korišćenim promptom, instrukcijama, kompletnim odgovorom modela i izdvojenom numeričkom ocenom, pa je svaka ocena naknadno proverljiva.
 \end{itemize}
 
-Celokupan sistem je dokerizovan: jedan kontejner izvršava Django aplikaciju, a drugi Nginx koji poslužuje klijentsku aplikaciju i prosleđuje API saobraćaj, čime se postiže jednostavno pokretanje i prenosivost okruženja.
+Sistem je dokerizovan: jedan kontejner izvršava Django aplikaciju, a drugi Nginx koji poslužuje klijentsku aplikaciju i prosleđuje API saobraćaj.
 
 \subsection{Integracija jezičkih modela}
 \label{sec:integracije}
 
 Jezičkim modelima pristupa se isključivo preko API-ja provajdera u oblaku; nijedan model se ne izvršava lokalno.
-Da bi podrška za više provajdera bila jedinstvena, sistem implementira projektni obrazac fabrika sa zajedničkim apstraktnim interfejsom \texttt{LLMIntegration}, koji definiše metodu \texttt{prompt()} sa ulaznim tekstom, identifikatorom modela, sistemskim instrukcijama i temperaturom kao parametrima.
-Metoda vraća par: izdvojeni tekstualni odgovor i kompletan odgovor API-ja (koji se čuva radi sledivosti).
+Više provajdera pokriveno je projektnim obrascem fabrika, sa apstraktnim interfejsom \texttt{LLMIntegration} i metodom \texttt{prompt()} čiji su parametri ulazni tekst, identifikator modela, sistemske instrukcije i temperatura.
+Metoda vraća par: izdvojeni tekstualni odgovor i kompletan odgovor API-ja, koji se čuva radi sledivosti.
 
-Obezbeđene su konkretne implementacije:
+Implementirane su dve integracije:
 
 \begin{itemize}
     \item \textbf{OpenAI}, koristi zvanični OpenAI Python SDK.
@@ -127,8 +133,8 @@ Obezbeđene su konkretne implementacije:
     Podržani modeli: \emph{deepseek-chat} (V3) i \emph{deepseek-reasoner} (R1).
 \end{itemize}
 
-Uz njih je prisutna i implementacija za Gugl Gemini, koja nije korišćena u eksperimentima opisanim u ovom radu.
+Uz njih postoji i implementacija za Gugl Gemini, koja nije korišćena u eksperimentima opisanim u ovom radu.
 
-Na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}) fabrička funkcija instancira odgovarajuću klasu.
-Ova apstrakcija omogućava dodavanje novog provajdera implementacijom jedne klase, bez izmena u logici ocenjivanja, isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
+Fabrička funkcija instancira odgovarajuću klasu na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}).
+Nov provajder se tako dodaje implementacijom jedne klase, bez izmena u logici ocenjivanja; isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
 API ključevi čuvaju se kao promenljive okruženja i nikada nisu ugrađeni u izvorni kod.

@@ -2,8 +2,8 @@
 \section{Šabloni promptova i primeri ocenjivanja}
 \label{app:promptovi}
 
-Ovaj dodatak sadrži materijale koji podržavaju transparentnost i reproducibilnost sistema EduGrader: šablone promptova korišćene u eksperimentima i nekoliko reprezentativnih primera ocenjivanja koje je sistem proizveo.
-Promptovi su preneti verbatim iz konfiguracionih datoteka sistema, uključujući izvorne nedoslednosti u dijakritici, koje su zadržane jer su modeli primili upravo takav tekst.
+Dodatak sadrži šablone promptova korišćene u eksperimentima i nekoliko primera ocenjivanja koje je sistem proizveo.
+Promptovi su preneti verbatim iz konfiguracionih datoteka, sa izvornim nedoslednostima u dijakritici, jer su modeli primili upravo takav tekst.
 
 \medskip
 \noindent\textbf{Napomena.} Model ocenjuje na skali 0--100, a ocene se u analizi i u primerima ispod preslikavaju na skalu 0--10, radi poređenja sa ocenama nastavnika.
@@ -56,12 +56,12 @@ Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.
 
 \end{tcolorbox}
 
-Neutralna konfiguracija je namerno najkraća i ne uvodi dodatna pravila; blaga i stroga usmeravaju pažnju modela na poklapanja odnosno na nepoklapanja, a stroga uz to zadaje i eksplicitnu meru kazne.
+Neutralna konfiguracija je namerno najkraća i ne uvodi dodatna pravila; blaga i stroga usmeravaju pažnju modela na poklapanja odnosno na nepoklapanja, a stroga zadaje i meru kazne.
 
 \subsection*{Prompt za generisanje referentnog odgovora (GRA režim)}
 
 U prvom koraku GRA režima model iz nastavnog materijala konstruiše referentni odgovor, koristeći sledeću instrukciju.
-Ovaj korak ne zavisi od konfiguracije strogosti; ona se primenjuje tek u drugom koraku, pri ocenjivanju, i to istim promptovima kao u PRA režimu.
+Korak ne zavisi od konfiguracije strogosti; ona se primenjuje tek pri ocenjivanju, i to istim promptovima kao u PRA režimu.
 
 \begin{tcolorbox}[promptbox]
 
@@ -75,8 +75,8 @@ Odgovor treba da bude precizan i dužine od 2 do 5 rečenica.
 
 \subsection*{Promptovi za razmatrani treći režim}
 
-Za varijantu sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) definisane su odgovarajuće instrukcije, koje se od PRA verzija razlikuju samo u opisu priloženog materijala.
-Neutralna verzija navedena je kao ilustracija; budući da ovaj režim nije sproveden do kraja, njegovi rezultati se u radu ne koriste.
+Instrukcije za varijantu sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) razlikuju se od PRA verzija samo u opisu priloženog materijala.
+Kao ilustracija navedena je neutralna verzija.
 
 \begin{tcolorbox}[promptbox, title={Neutralna konfiguracija, varijanta sa nastavnim materijalom}]
 
@@ -144,7 +144,7 @@ Delimični poeni za pokušaj raščlanjivanja rekurzije, ali računanje i zaklju
 \end{tcolorbox}
 
 Primer ilustruje tipičan izvor neslaganja: student je postupak razložio korektno, ali je konačan broj pogrešan.
-Nastavnik je pokušaj nagradio polovinom poena, dok je model, uz tačno izvedenu rekurentnu relaciju, veću težinu dao netačnom rezultatu.
+Nastavnik je pokušaj nagradio polovinom poena, dok je model veću težinu dao netačnom rezultatu.
 
 \subsection*{Primer B: sistem ocenjuje blaže od nastavnika}
 
@@ -165,7 +165,8 @@ Isto je. U oba slučaja je $O(1)$.
 \medskip
 \textbf{Studentski odgovor}
 
-pristup n-tom elementu je laksi za niz, posto se elementi u nizu dodaju uz numeraciju, dok se kod listi pokazuje sa liste na listu bez znanja reda, sto bi znacilo da bi nam trebala petlja sa brojacem n dok ne dodjemo do n tog elemta liste
+pristup n-tom elementu je laksi za niz, posto se elementi u nizu dodaju uz numeraciju,
+dok se kod listi pokazuje sa liste na listu bez znanja reda, sto bi znacilo da bi nam trebala petlja sa brojacem n dok ne dodjemo do n tog elemta liste
 
 \medskip
 \textbf{Ocene}
@@ -175,12 +176,15 @@ Nastavnik: 5/10 \hfill Sistem: 6/10
 \medskip
 \textbf{Obrazloženje sistema}
 
-Student je tačno objasnio prvi deo: pristup n-tom elementu je efikasniji za niz nego za povezanu listu, jer se u listi mora prolaziti element po element (linearno), dok je u nizu direktan pristup.
+Student je tačno objasnio prvi deo: pristup n-tom elementu je efikasniji za niz nego za povezanu listu,
+jer se u listi mora prolaziti element po element (linearno), dok je u nizu direktan pristup.
 Međutim, nije odgovorio na drugi deo pitanja (niz vs.\ dinamički niz).
-Tačan odgovor za drugi deo je da je pristup n-tom elementu isti ($O(1)$) i za statički i za dinamički niz, jer oba koriste kontinuirani blok memorije i omogućavaju indeksirani pristup.
+Tačan odgovor za drugi deo je da je pristup n-tom elementu isti ($O(1)$) i za statički i za dinamički niz,
+jer oba koriste kontinuirani blok memorije i omogućavaju indeksirani pristup.
 
 \end{tcolorbox}
 
 Pitanje se sastoji od dva dela, a student je odgovorio samo na prvi.
-Model je taj propust ispravno identifikovao i eksplicitno naveo tačan odgovor na izostavljeni deo, ali je odgovoru ipak dodelio nešto više od polovine poena, dok je nastavnik dodelio tačno polovinu.
-Oba primera pokazuju da su obrazloženja sistema sadržajno tačna i proverljiva, čak i kada numerička ocena odstupa od nastavničke, što je i osnov za upotrebu sistema kao pomoći nastavniku, a ne kao njegove zamene.
+Model je propust identifikovao i naveo tačan odgovor na izostavljeni deo,
+ali je odgovoru ipak dodelio nešto više od polovine poena, dok je nastavnik dodelio tačno polovinu.
+U oba primera obrazloženje sistema je sadržajno tačno i proverljivo i kada numerička ocena odstupa od nastavničke.

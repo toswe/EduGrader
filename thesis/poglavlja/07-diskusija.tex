@@ -5,8 +5,7 @@
 \subsection{Poređenje sa prethodnim istraživanjima}
 \label{sec:poredjenje}
 
-Da bi se dobijeni rezultati smestili u kontekst šire literature, tabela~\ref{tab:prior-study} poredi vrednosti PCC-a postignute u ovom istraživanju sa vrednostima iz prethodnih studija.
-Kao što se vidi, EduGrader, naročito sa modelom za rezonovanje GPT-5, postiže znatno višu usklađenost između veštačke inteligencije i ljudskih ocenjivača od objavljenih rezultata sa kojima je poređen.
+Tabela~\ref{tab:prior-study} smešta vrednosti PCC-a postignute u ovom istraživanju u kontekst prethodnih studija.
 
 \begin{table}[ht]
 \centering
@@ -24,51 +23,53 @@ Naš pristup                               & gpt-5       & \textbf{0{,}89} \\
 \end{tabular}
 \end{table}
 
-U našim eksperimentima, najbolja konfiguracija (GPT-5, blaga strogost) postiže PCC $= 0{,}89$, čime premašuje vrednost koju je prijavio Jukjevič (0{,}81, koristeći gpt-3.5-turbo za ocenjivanje programerskih zadataka)~\cite{jukiewicz2024future} i znatno nadmašuje korelacije iz studija koje su koristile ChatGPT ili GPT-4 za ocenjivanje odgovora otvorenog tipa i eseja (PCC $= 0{,}43$--$0{,}45$)~\cite{kooli2025transforming,lundgren2024large}.
-Iako ova poređenja treba tumačiti sa oprezom zbog razlika u skupovima podataka i formatima zadataka, dva faktora verovatno doprinose višoj usklađenosti u našoj postavci.
-Prvo, EduGrader evaluira širi skup savremenih modela, uključujući GPT-4o, GPT-4o-mini, DeepSeek-Chat i, posebno, modele usmerene na rezonovanje (GPT-5, DeepSeek-Reasoner).
-Ovi modeli pokazuju snažnije semantičko razumevanje i stabilnije ponašanje kroz konfiguracije strogosti, što se ogleda ne samo u višim vrednostima PCC-a već i u nižim odnosima RMSE/STDDEV, koji se često približavaju tipičnoj varijabilnosti ljudskog ocenjivanja.
-Drugo, zadaci u našem skupu podataka sastoje se prvenstveno od kratkih teorijskih pitanja iz STEM oblasti (nauka, tehnologija, inženjerstvo i matematika).
-Očekivani odgovori su često kratka tekstualna objašnjenja ili mali izrazi nalik kodu, koji su po pravilu manje dvosmisleni od dugih eseja u društvenim ili političkim naukama.
-Vredi napomenuti i da su naši nalazi u skladu sa prethodnim istraživanjima po tome što su ljudski ocenjivači u proseku nešto blaži, pokazujući veću toleranciju prema delimično ispravnom rezonovanju i nepotpunim odgovorima~\cite{jukiewicz2024future}.
+Najbolja konfiguracija (GPT-5, blaga strogost) postiže PCC $= 0{,}89$,
+iznad vrednosti koju je prijavio Jukjevič (0{,}81, uz gpt-3.5-turbo za ocenjivanje programerskih zadataka)~\cite{jukiewicz2024future}
+i daleko iznad korelacija iz studija koje su koristile ChatGPT ili GPT-4 za ocenjivanje odgovora otvorenog tipa i eseja (PCC $= 0{,}43$--$0{,}45$)~\cite{kooli2025transforming,lundgren2024large}.
+Poređenja treba tumačiti sa oprezom, jer se skupovi podataka i formati zadataka razlikuju,
+ali dva faktora verovatno doprinose višoj usklađenosti u ovoj postavci.
+Prvo, evaluirani su noviji modeli, pre svega oni usmereni na rezonovanje (GPT-5, DeepSeek-Reasoner),
+koji stabilnije zadržavaju ponašanje kroz konfiguracije strogosti i uz visok PCC daju i niske odnose RMSE/STDDEV, blizu tipične varijabilnosti ljudskog ocenjivanja.
+Drugo, skup podataka sastoji se prvenstveno od kratkih teorijskih pitanja iz STEM oblasti (nauka,
+tehnologija, inženjerstvo i matematika), gde se očekuju kratka objašnjenja ili mali izrazi nalik kodu, manje dvosmisleni od dugih eseja u društvenim ili političkim naukama.
+Nalazi se poklapaju sa prethodnim istraživanjima i po tome što su ljudski ocenjivači u proseku nešto blaži, tolerantniji prema delimično ispravnom rezonovanju i nepotpunim odgovorima~\cite{jukiewicz2024future}.
 
 \subsection{Ograničenja}
 \label{sec:ogranicenja}
 
-Uprkos snažnim ukupnim performansama, ograničenja ostaju: ponašanje modela može se promeniti kako se API-ji razvijaju, evaluacioni skup podataka je vezan za konkretne domene, a povremeno prestrogo kažnjavanje ili pogrešno tumačenje odgovora i dalje je moguće.
+Ponašanje modela može se promeniti kako se API-ji razvijaju, evaluacioni skup podataka vezan je za konkretne domene,
+a prestrogo kažnjavanje i pogrešno tumačenje odgovora javljaju se i u najboljim konfiguracijama.
 
 Nekoliko ograničenja odnosi se na samu postavku evaluacije:
 
 \begin{itemize}
     \item \textbf{Jedno pokretanje po konfiguraciji.}
-    Svaka kombinacija modela, strogosti i režima izvršena je jednom,
-    pa glavni rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
-    Uticaj temperature ispitan je odvojeno (odeljak~\ref{sec:rezultati-temperatura}) i nije primećen,
+    Svaka kombinacija modela, strogosti i režima izvršena je jednom, pa glavni rezultati ne govore o varijabilnosti između ponovljenih pokretanja istog modela.
+    Temperatura je zadržana na podrazumevanoj vrednosti provajdera; njen uticaj ispitan je odvojeno (odeljak~\ref{sec:rezultati-temperatura}) i nije primećen,
     ali samo za jedan model, jednu konfiguraciju strogosti i deo skupova podataka.
     \item \textbf{Nepotpuni treći režim.}
-    Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik})
-    pokrenuto je samo za dva modela,
+    Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenuto je samo za dva modela,
     jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim.
-    Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje
-    sa nastavnicima (odeljak~\ref{sec:rezultati-udzbenik}),
-    ali pitanje ostaje otvoreno za modele usmerene na rezonovanje, koji u ovom režimu nisu pokretani.
-    \item \textbf{Neujednačena veličina skupova.} Kurs Programiranje 2 nosi 477 od ukupno 583 odgovora, dok kursevi DDS i HTML5 imaju po deset. Objedinjene metrike zato pretežno odražavaju jedan kurs, a vrednosti po manjim kursevima osetljive su na pojedinačne odgovore.
-    \item \textbf{Dva ljudska ocenjivača.} Referentne ocene dodelila su dva nastavnika, svaki na svom podskupu kurseva, pa nije bilo preklapanja koje bi omogućilo procenu pouzdanosti među ocenjivačima. Slaganje sistema poredi se sa jednim nastavnikom po odgovoru, a ne sa konsenzusom.
+    Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje sa nastavnicima (odeljak~\ref{sec:rezultati-udzbenik}); za modele usmerene na rezonovanje režim nije pokretan, pa za njih nalaza nema.
+    \item \textbf{Neujednačena veličina skupova.} Kurs Programiranje 2 nosi 477 od ukupno 583 odgovora, dok kursevi DDS i HTML5 imaju po deset.
+    Objedinjene metrike zato pretežno odražavaju jedan kurs, a vrednosti po manjim kursevima osetljive su na pojedinačne odgovore.
+    \item \textbf{Dva ljudska ocenjivača.} Referentne ocene dodelila su dva nastavnika, svaki na svom podskupu kurseva,
+    pa nije bilo preklapanja koje bi omogućilo procenu pouzdanosti među ocenjivačima.
+    Slaganje sistema poredi se sa jednim nastavnikom po odgovoru, a ne sa konsenzusom.
 \end{itemize}
 
-Iz ovih razloga, ljudski nadzor ostaje neophodan.
-EduGrader je zamišljen kao pomoćni sistem koji unapređuje doslednost i smanjuje opterećenje nastavnika, uz očuvanje autoriteta nastavnika za dvosmislene slučajeve i konačne odluke o ocenama.
-U toj ulozi, podesiva strogost i objašnjiva povratna informacija čine EduGrader praktičnom i transparentnom dopunom tradicionalnih tokova provere znanja.
+Zbog svega toga ljudski nadzor ostaje neophodan.
+EduGrader je zamišljen kao pomoćni sistem koji smanjuje opterećenje nastavnika,
+dok odluka o dvosmislenim slučajevima i konačna ocena ostaju u rukama nastavnika.
 
 \subsection{Pravci budućeg rada}
 \label{sec:buduci-rad}
 
-Nekoliko pravaca može dodatno unaprediti tačnost, robusnost i pedagoški uticaj sistema EduGrader:
+Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
 \begin{itemize}
-    \item \textbf{Samoprovera i probni ispiti:} omogućiti studentima da iz nastavnih materijala generišu personalizovana probna pitanja i dobijaju kontinuiranu formativnu povratnu informaciju tokom semestra.
-    \item \textbf{Usmeravanje zasnovano na pouzdanosti:} analizirati slaganje između više jezičkih modela radi procene pouzdanosti ocene.
-    Slučajevi niske pouzdanosti mogu se automatski označavati za pojačanu pažnju nastavnika, čime se obezbeđuje pouzdaniji nadzor.
-    \item \textbf{Ansambl ocenjivanje:} kombinovati modele za rezonovanje i standardne modele (npr.\ usrednjavanjem ili većinskim glasanjem) radi stabilnijih i robusnijih ishoda ocenjivanja nego što ih daje bilo koji pojedinačni model.
-    \item \textbf{Longitudinalna kalibracija:} pratiti raskorake između ocena sistema i nastavnika kroz više semestara, radi automatskog podešavanja parametara strogosti i održavanja doslednih standarda ocenjivanja tokom vremena.
-    \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim zadacima, kreativnim zadacima i višejezičnim okruženjima, kako bi se ispitala njegova uopštivost izvan STEM disciplina, koje po pravilu uključuju strukturiranije i manje dvosmislene odgovore.
+    \item \textbf{Samoprovera i probni ispiti:} omogućiti studentima da iz nastavnih materijala generišu probna pitanja i tokom semestra dobijaju formativnu povratnu informaciju.
+    \item \textbf{Usmeravanje zasnovano na pouzdanosti:} slaganje između više jezičkih modela iskoristiti kao meru pouzdanosti ocene i slučajeve niske pouzdanosti automatski označavati za proveru nastavnika.
+    \item \textbf{Ansambl ocenjivanje:} kombinovati modele za rezonovanje i standardne modele (npr.\ usrednjavanjem ili većinskim glasanjem) radi stabilnijih ocena od onih koje daje pojedinačni model.
+    \item \textbf{Longitudinalna kalibracija:} pratiti raskorake između ocena sistema i nastavnika kroz više semestara i na osnovu njih automatski podešavati parametre strogosti.
+    \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim i kreativnim zadacima i u višejezičnim okruženjima, izvan STEM disciplina sa njihovim strukturiranijim odgovorima.
 \end{itemize}
