@@ -47,3 +47,112 @@ Svaka kombinacija pokrenuta je jednom, pa rezultati ne obuhvataju procenu varija
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike}, Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV, po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
+
+\subsection{Reprodukcija eksperimenata}
+\label{sec:reprodukcija}
+
+Izvorni kod sistema, ulazni podaci i sve ocenjene datoteke javno su dostupni
+u repozitorijumu projekta\footnote{\url{https://github.com/toswe/Master}},
+tako da se svaki opisani eksperiment može ponoviti.
+Struktura dela repozitorijuma koji se odnosi na evaluaciju prikazana je u nastavku.
+
+\begin{tcolorbox}[promptbox, title={Organizacija evaluacione infrastrukture}]
+\begin{verbatim}
+pipeline/
+  dvc.yaml
+  params.yaml
+  params/models/*.yaml
+  params/prompts/strictness/*.yaml
+  src/pipeline/01_merge_inputs.py
+  src/pipeline/02_grade_with_correct_answer.py
+  src/pipeline/03_grade_with_textbook.py
+  src/pipeline/04_generate_answers.py
+  src/common/grading.py
+  src/common/pdf_extraction.py
+  run_all_models.py
+  calculate_corelations.py
+  data/<skup>/raw/questions.csv
+  data/<skup>/raw/student_answers.csv
+  data/<skup>/graded/graded.*.csv
+  data/<skup>/graded/correlation_results.csv
+  data/correlation_summary.csv
+\end{verbatim}
+\end{tcolorbox}
+
+Datoteka \texttt{dvc.yaml} opisuje faze obrade sa njihovim zavisnostima i izlazima,
+a \texttt{params.yaml} sadrži spisak skupova podataka
+i izbor modela i nivoa strogosti za tekuće pokretanje.
+Svaki model opisan je zasebnom datotekom u \texttt{params/models},
+koja navodi provajdera i tačan identifikator modela.
+Datoteke u \texttt{params/prompts/strictness} opisuju nivoe strogosti,
+a svaka od njih sadrži tekst sistemske instrukcije u obe varijante,
+sa zadatim referentnim odgovorom i sa nastavnim materijalom.
+
+Podaci su razdvojeni na ručno pripremljene ulaze i izvedene rezultate.
+U direktorijumu \texttt{raw} nalaze se samo dve ulazne datoteke po skupu podataka,
+opisane na početku ovog poglavlja,
+dok direktorijum \texttt{graded} sadrži izlaze ocenjivanja,
+po jednu datoteku za svaku pokrenutu kombinaciju modela, strogosti i režima.
+Ime izlazne datoteke potpuno određuje konfiguraciju kojom je proizvedena, po tri obrasca:
+
+\begin{itemize}
+    \item \texttt{graded.<strogost>.<model>.correct.csv} za PRA režim;
+    \item \texttt{graded.generated.<strogost>.<model>.csv} za GRA režim;
+    \item \texttt{graded.<strogost>.<model>.textbook.csv} za varijantu sa nastavnim materijalom u promptu, o kojoj je reč u odeljku~\ref{sec:rezim-udzbenik}.
+\end{itemize}
+
+Oznaka \texttt{generated} stoji pre nivoa strogosti,
+a oznake \texttt{correct} i \texttt{textbook} posle imena modela.
+Analitička skripta iz ovih imena rekonstruiše konfiguraciju svake datoteke,
+pa dodatna evidencija o pokrenutim eksperimentima nije potrebna.
+
+Za pokretanje ocenjivanja potreban je Python 3 sa zavisnostima navedenim
+u datoteci \texttt{requirements.txt} i pristupni ključevi za korišćene provajdere.
+Ključevi se zadaju kroz dve promenljive okruženja:
+
+\begin{itemize}
+    \item \texttt{OPENAI\_API\_KEY}, za modele porodice GPT;
+    \item \texttt{DEEPSEEK\_API\_KEY}, za DeepSeek modele.
+\end{itemize}
+
+Sistem ih čita iz datoteke \texttt{.env.dev} u korenu repozitorijuma,
+koja se ne čuva u sistemu za kontrolu verzija.
+Same komande pokreću se iz direktorijuma \texttt{pipeline}.
+
+\begin{tcolorbox}[promptbox, title={Pokretanje}]
+\begin{verbatim}
+dvc repro
+python run_all_models.py
+python calculate_corelations.py
+\end{verbatim}
+\end{tcolorbox}
+
+Prva komanda pokreće faze obrade za konfiguraciju zapisanu u parametarskoj datoteci,
+uz preskakanje faza čiji se ulazi nisu promenili.
+Druga komanda sprovodi ceo eksperiment tako što redom upisuje
+svaku od petnaest kombinacija u tu datoteku i ponovo pokreće \emph{pipeline}.
+Treća komanda prolazi kroz ocenjene datoteke svih skupova podataka,
+za svaki skup zapisuje metrike u njegov direktorijum \texttt{graded},
+a sve rezultate objedinjuje u zbirnu tabelu \texttt{correlation\_summary.csv},
+čije su kolone sledeće:
+
+\begin{tcolorbox}[promptbox, title={Kolone zbirne tabele}]
+\begin{verbatim}
+dataset_name, model_name, strictness_level,
+method, correlation, average_professor_score,
+average_llm_score, average_score_ratio, rmse,
+professor_stddev, rmse_stddev_ratio
+\end{verbatim}
+\end{tcolorbox}
+
+Prve četiri kolone određuju konfiguraciju, a ostale sadrže metrike opisane u odeljku~\ref{sec:metrike}.
+
+Pošto su ocenjene datoteke zadržane u repozitorijumu,
+ponovno izračunavanje metrika ne zahteva ni jedan poziv jezičkom modelu.
+Dovoljno je pokrenuti analitičku skriptu
+i vrednosti prikazane u poglavlju~\ref{sec:rezultati} ponovo se dobijaju iz već postojećih ocena,
+bez pristupnih ključeva i bez troškova.
+Kako su rezultati zapisani po ispitnim rokovima,
+vrednosti po kursevima u tabelama poglavlja~\ref{sec:rezultati}
+dobijene su objedinjavanjem rokova koji pripadaju istom kursu,
+prema Tabeli~\ref{tab:dataset}.
