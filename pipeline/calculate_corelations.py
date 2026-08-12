@@ -49,6 +49,8 @@ def count_original_rows(dataset: str) -> Optional[int]:
 FNAME_PATTERNS = [
     # DVC-generated: graded.<strictness>.<model>.<method>.csv
     re.compile(r"^graded\.(?P<strictness>[^.]+)\.(?P<model>[^.]+)\.(?P<method>correct|textbook)\.csv$"),
+    # DVC-generated: graded.generated.<strictness>.<model>.csv
+    re.compile(r"^graded\.generated\.(?P<strictness>[^.]+)\.(?P<model>[^.]+)\.csv$"),
 ]
 
 
@@ -57,11 +59,16 @@ def parse_filename(fname: str) -> Optional[Dict[str, str]]:
     for pat in FNAME_PATTERNS:
         m = pat.match(name)
         if m:
-            return {
+            result = {
                 "strictness": m.group("strictness"),
                 "model": m.group("model"),
-                "method": m.group("method"),
             }
+            # Check if method group exists (first pattern), otherwise it's generated
+            if "method" in m.groupdict():
+                result["method"] = m.group("method")
+            else:
+                result["method"] = "generated"
+            return result
     return None
 
 
@@ -215,11 +222,12 @@ def main() -> None:
                     continue
 
             metrics = compute_metrics(f)
+            method_name = "correct_answer" if meta["method"] == "correct" else ("generated_answer" if meta["method"] == "generated" else "textbook_based")
             row = {
                 "dataset_name": dataset,
                 "model_name": meta["model"],
                 "strictness_level": meta["strictness"],
-                "method": "correct_answer" if meta["method"] == "correct" else "textbook_based",
+                "method": method_name,
                 "correlation": "" if metrics["correlation"] is None else f"{metrics['correlation']:.6f}",
                 "average_professor_score": "" if metrics["average_professor_score"] is None else f"{metrics['average_professor_score']:.6f}",
                 "average_llm_score": "" if metrics["average_llm_score"] is None else f"{metrics['average_llm_score']:.6f}",
