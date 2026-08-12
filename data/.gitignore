@@ -1,2 +1,7 @@
 *
 !.gitignore
+
+# Keep dataset contents ignored by default, but allow temperature experiment outputs.
+!*/
+!*/results/
+!*/results/gpt-4o.default.t-*.csv
