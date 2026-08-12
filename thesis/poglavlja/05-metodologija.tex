@@ -18,17 +18,12 @@ Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne k
 Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji, dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
 Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema, preslikanom na istu skalu 0--10, pomoću metrika opisanih u nastavku.
 
-Korišćena su četiri statistička pokazatelja koji obuhvataju komplementarne aspekte pouzdanosti ocenjivanja: Pirsonov koeficijent korelacije (PCC), kvadratno ponderisana Koenova kapa, odnos prosečnih ocena (engl. \emph{Mean Ratio}) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
+Korišćena su tri statistička pokazatelja koji obuhvataju komplementarne aspekte pouzdanosti ocenjivanja: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena (engl. \emph{Mean Ratio}) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
 
 PCC~\cite{sedgwick2012pearson} meri jačinu linearne povezanosti između ocena koje su dodelili ljudi i ocena koje je dodelio sistem.
 Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu pozitivnu linearnu vezu, $0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
-Pre sprovođenja analize, raspodela razlika u ocenama ispitana je Šapiro--Vilkovim testom i vizuelnim pregledom Q--Q dijagrama.
-Rezultati nisu ukazali na značajna odstupanja od normalnosti ($p > 0{,}05$), što opravdava upotrebu parametarske mere korelacije.
-Važno je istaći da PCC meri linearnu povezanost, a ne apsolutno slaganje.
-Iz tog razloga, PCC je dopunjen ponderisanom kapom kao merom slaganja i metrikama zasnovanim na grešci koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
-
-Kao dopunu PCC-u, izveštavamo i kvadratno ponderisanu Koenovu kapu, koja je prikladna za ordinalne ocene.
-Za razliku od PCC-a, koji meri linearnu povezanost, ponderisana kapa meri slaganje uzimajući u obzir uređenu prirodu skale ocenjivanja 0--10 i jače kažnjava veća neslaganja od manjih.
+Važno je istaći da PCC meri linearnu povezanost, a ne apsolutno slaganje: sistem koji sve ocene dosledno umanjuje za istu vrednost postigao bi savršenu korelaciju uz očigledno pogrešne ocene.
+Iz tog razloga, PCC je dopunjen metrikama koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
 
 Odnos prosečnih ocena sažima opšte tendencije u ocenjivanju.
 Razlike između prosečne ocene sistema i prosečne ocene nastavnika ukazuju na sistematsku blagost ili strogost, ali ne odražavaju usklađenost u variranju ocena.
@@ -53,6 +48,9 @@ Kursevi obuhvaćeni skupom podataka su:
     \item Digitalno čuvanje podataka (DDS): kurs master studija, Univerzitet umetnosti;
     \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti.
 \end{itemize}
+
+Podaci su organizovani po ispitnim rokovima, a ne po kursevima: ukupno devet skupova podataka odgovara devet ispitnih rokova, koji se grupišu u pet navedenih kurseva (tri roka za Programiranje 2, po dva za Tehničko i naučno pisanje i Veb programiranje, i po jedan za Digitalno čuvanje podataka i HTML5).
+Svi eksperimenti izvršavaju se nad pojedinačnim rokovima, dok se rezultati u poglavlju~\ref{sec:rezultati} prikazuju objedinjeno i po kursevima.
 
 Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici, referentne odgovore (kada su dostupni), napomene nastavnika i relevantne nastavne materijale korišćene u pripremi ispita.
 Ukupno, skup sadrži \textbf{583 studentska odgovora}, što predstavlja realističan reper za evaluaciju doslednosti ocenjivanja kroz različite discipline, akademske nivoe i formate pitanja.
@@ -126,7 +124,9 @@ EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele op�
 \end{itemize}
 Svaki model evaluiran je u tri konfiguracije strogosti ocenjivanja: blagoj, neutralnoj i strogoj.
 Ove konfiguracije realizovane su pažljivo projektovanim promptovima koji simuliraju različite filozofije ocenjivanja uobičajene u akademskoj praksi.
-Na primer, stroga konfiguracija naglašava preciznost i potpunost (npr.\ „Ti si veoma strog profesor koji rigorozno ocenjuje studentske odgovore''), dok blaga konfiguracija nagrađuje delimičnu tačnost i konceptualno razumevanje.
+Na primer, stroga konfiguracija predstavlja model kao „strogog profesora visokoakademske institucije'', usmerava mu pažnju na stavke koje se ne poklapaju sa studentskim odgovorom i zadaje eksplicitnu meru kazne (oduzimanje petine poena po nepoklapanju), dok blaga konfiguracija usmerava pažnju na stavke koje se poklapaju.
+Neutralna konfiguracija ne uvodi nikakvo dodatno pravilo i predstavlja osnovnu postavku ocenjivanja.
+Puni tekstovi svih promptova navedeni su u dodatku~\ref{app:promptovi}.
 Ovakav dizajn odražava nalaze prethodnih studija koje pokazuju da i ljudski ocenjivači značajno variraju u strogosti~\cite{jukiewicz2024future}.
 
 Pored toga, EduGrader podržava dva komplementarna režima ocenjivanja:
@@ -138,3 +138,21 @@ Ovakav dvorežimski dizajn omogućava evaluaciju kako u scenarijima sa dobro def
 
 Svi eksperimenti sprovedeni su na srpskom jeziku, uključujući ispitna pitanja, studentske odgovore i referentne odgovore.
 Budući da je srpski jezik sa ograničenim resursima, slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju, ovo istraživanje proširuje oblast ocenjivanja uz podršku veštačke inteligencije izvan dominantnog engleskog konteksta.
+
+\subsection{Razmatran treći režim: ocenjivanje direktno iz nastavnog materijala}
+\label{sec:rezim-udzbenik}
+
+Pored dva režima opisana u prethodnom odeljku, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
+U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom, a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
+Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor, ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
+Pristup je motivisan idejom da bi izostavljanje posredničkog koraka moglo da spreči gubitak informacija pri generisanju referentnog odgovora, naročito kod pitanja čiji odgovor zahteva širi kontekst.
+
+Ovaj režim implementiran je i pokrenut, ali \textbf{nije sproveden do kraja}, i njegovi rezultati se u ovom radu ne koriste za izvođenje zaključaka.
+Razlog je cena: budući da ceo udžbenik ulazi u svaki poziv, veličina prompta raste za red veličine.
+Medijana broja tokena u promptu iznosila je oko $14\,500$ za kurs Programiranje 2, naspram oko $260$ tokena u PRA režimu za istu grupu pitanja, dakle približno \textbf{55 puta više}.
+Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima, pri čemu je pokrio samo oko trećine planirane mreže konfiguracija; njeno kompletiranje zahtevalo bi približno $119$ miliona tokena.
+
+Zbog toga su u ovom režimu evaluirani samo modeli GPT-4o-mini i GPT-4o, dok modeli usmereni na rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
+Ocenjivanje je u potpunosti sprovedeno jedino za model GPT-4o-mini, kroz sve tri konfiguracije strogosti; za model GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
+Ocenjene datoteke zadržane su u repozitorijumu radi sledivosti, ali se, u skladu sa nepotpunom pokrivenošću, u poglavlju~\ref{sec:rezultati} ne prikazuju uz rezultate PRA i GRA režima.
+Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.

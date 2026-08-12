@@ -7,11 +7,11 @@ Predstavlja produkcioni deo sistema, namenjen svakodnevnoj upotrebi u nastavi, i
 
 \begin{itemize}
     \item \textbf{Klijentski sloj.} Jednostranična aplikacija (SPA) izgrađena u tehnologijama React~19 i TypeScript, koju poslužuje Nginx server.
-    Pruža interaktivne prikaze za nastavnike i studente, uključujući otpremanje CSV datoteka, izbor modela i parametara i prikaz rezultata.
-    Kroz ovaj interfejs nastavnici otpremaju studentske odgovore, biraju željeni jezički model, režim ocenjivanja (PRA ili GRA) i nivo strogosti, nakon čega sistem generiše predloge ocena sa obrazloženjima za svaki odgovor.
+    Pruža odvojene prikaze za nastavnike i studente: nastavnici upravljaju kursevima, testovima i pitanjima i pregledaju rešene testove, dok studenti rešavaju testove i uvidom u rezultate prate svoj napredak.
+    Na prikazu rešenog testa, uz svaki odgovor prikazuju se i ocena nastavnika i ocena koju je predložio jezički model, čime nastavnik zadržava punu kontrolu nad konačnom odlukom.
     Autentifikacija se obavlja putem JWT tokena (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
     \item \textbf{Serverski sloj.} REST API izgrađen u tehnologijama Python~3, Django~5.1 i Django REST Framework.
-    Odgovoran je za generisanje promptova, izvršavanje modela, parsiranje izlaza i upravljanje konfiguracijom ocenjivanja.
+    Izlaže CRUD operacije nad domenskim modelima i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela, parsiranje izlaza i trajno čuvanje rezultata.
     \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM, sa entitetima za kurseve, testove, pitanja, studentske odgovore i ocene.
     Čuva ocene, povratne informacije, promptove i metapodatke, čime podržava reproducibilnost i različite vrste analiza.
 \end{itemize}
@@ -87,9 +87,12 @@ Klijentska aplikacija realizovana je kao jednostranična aplikacija u biblioteci
 Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena na dva modula sa odvojenim pravima pristupa:
 
 \begin{itemize}
-    \item \textbf{Nastavnički modul} omogućava pregled predmeta, kreiranje testova i pitanja, pokretanje automatskog ocenjivanja i pregled ocenjenih studentskih testova sa predlozima ocena i obrazloženjima modela.
+    \item \textbf{Nastavnički modul} omogućava pregled predmeta, kreiranje testova i pitanja i pregled rešenih studentskih testova, sa prikazom nastavničke ocene uz predlog ocene jezičkog modela za svaki odgovor.
     \item \textbf{Studentski modul} omogućava pregled nadolazećih testova, izradu testa i uvid u rezultate već urađenih testova.
 \end{itemize}
+
+Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa: logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje, a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz DVC \emph{pipeline}, nad podacima pripremljenim u vidu CSV datoteka.
+Izbor modela, režima ocenjivanja i nivoa strogosti zadaje se na tom nivou, kroz parametarske datoteke, a ne kroz veb interfejs.
 
 Autentifikacija koristi JWT tokene koji se čuvaju u \emph{session storage}-u pregledača; uloge (nastavnik ili student) ugrađene su u token i na osnovu njih se sprovodi kontrola pristupa rutama.
 U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu, dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
@@ -119,10 +122,12 @@ Obezbeđene su konkretne implementacije:
 
 \begin{itemize}
     \item \textbf{OpenAI}, koristi zvanični OpenAI Python SDK.
-    Podržani modeli: \emph{gpt-4o-mini}, \emph{gpt-4o} i \emph{gpt-5-2025-08-07}.
+    Podržani modeli: \emph{gpt-4o-mini}, \emph{gpt-4o} i \emph{gpt-5}.
     \item \textbf{DeepSeek}, koristi OpenAI-kompatibilni API endpoint preko istog SDK-a, sa promenjenom baznom adresom.
     Podržani modeli: \emph{deepseek-chat} (V3) i \emph{deepseek-reasoner} (R1).
 \end{itemize}
+
+Uz njih je prisutna i implementacija za Gugl Gemini, koja nije korišćena u eksperimentima opisanim u ovom radu.
 
 Na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}) fabrička funkcija instancira odgovarajuću klasu.
 Ova apstrakcija omogućava dodavanje novog provajdera implementacijom jedne klase, bez izmena u logici ocenjivanja, isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.

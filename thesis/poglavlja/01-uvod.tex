@@ -56,7 +56,7 @@ Zbog toga su sve ocene u ovom radu, i sistemske i nastavničke, prikazane na ska
 Svi eksperimenti sprovedeni su na srpskom jeziku, jeziku sa ograničenim resursima, slabo zastupljenom u podacima na kojima se veliki jezički modeli obučavaju, čime se istraživanje ocenjivanja uz podršku veštačke inteligencije proširuje izvan dominantnog engleskog konteksta.
 Sistem je evaluiran na 583 autentična studentska odgovora prikupljena na dva univerziteta i pet kurseva, koji obuhvataju različite tipove odgovora: kratke činjeničke odgovore, otvorena tekstualna objašnjenja i odgovore u obliku koda.
 Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da se modeli usmereni na rezonovanje najbolje slažu sa ljudskim ocenjivačima.
-U najboljoj konfiguraciji (GPT-5, neutralna strogost) EduGrader postiže Pirsonov koeficijent korelacije (PCC) od 0{,}90 u odnosu na ljudsko ocenjivanje.
+U najboljoj konfiguraciji (GPT-5, blaga strogost) EduGrader postiže Pirsonov koeficijent korelacije (PCC) od 0{,}89 u odnosu na ljudsko ocenjivanje, a u neutralnoj konfiguraciji 0{,}88.
 
 Konačno, EduGrader je zamišljen kao asistent za ocenjivanje, a ne kao zamena za sud nastavnika.
 On smanjuje repetitivno opterećenje i povećava doslednost, ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
@@ -68,6 +68,6 @@ Ostatak rada organizovan je na sledeći način.
 U poglavlju~\ref{sec:pregled} dat je pregled oblasti i srodnih istraživanja primene veštačke inteligencije u ocenjivanju.
 Poglavlje~\ref{sec:aplikacija} opisuje veb aplikaciju EduGrader i sloj za integraciju jezičkih modela, a poglavlje~\ref{sec:pipeline} sistem za automatizovanu evaluaciju modela kojim su sprovedeni eksperimenti.
 U poglavlju~\ref{sec:metodologija} predstavljena je metodologija evaluacije, korišćene metrike, skupovi podataka i konfiguracije modela.
-Poglavlje~\ref{sec:rezultati} donosi rezultate eksperimenata, uključujući poređenje PRA i GRA režima, analizu uticaja temperature, Bland--Altmanovu analizu slaganja i analizu stabilnosti ocenjivanja kroz višestruka pokretanja.
+Poglavlje~\ref{sec:rezultati} donosi rezultate eksperimenata, uključujući poređenje PRA i GRA režima kroz modele i nivoe strogosti, analizu uticaja konfiguracije strogosti i analizu korelacije po pojedinačnim kursevima.
 U poglavlju~\ref{sec:diskusija} rezultati su upoređeni sa prethodnim istraživanjima i razmotreni su pravci budućeg rada, dok poglavlje~\ref{sec:zakljucak} zaključuje rad.
 Dodatak~\ref{app:promptovi} sadrži šablone promptova korišćene u eksperimentima i reprezentativne primere ocenjivanja.

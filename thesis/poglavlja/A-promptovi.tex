@@ -2,148 +2,185 @@
 \section{Šabloni promptova i primeri ocenjivanja}
 \label{app:promptovi}
 
-Ovaj dodatak sadrži materijale koji podržavaju transparentnost i reproducibilnost sistema EduGrader: osnovne šablone promptova korišćene u eksperimentima i nekoliko reprezentativnih primera ocenjivanja koje je sistem proizveo.
-Šabloni promptova opisuju kako se studentski odgovori evaluiraju pod različitim konfiguracijama strogosti.
-Prikazani su originalni promptovi korišćeni u eksperimentima.
+Ovaj dodatak sadrži materijale koji podržavaju transparentnost i reproducibilnost sistema EduGrader: šablone promptova korišćene u eksperimentima i nekoliko reprezentativnih primera ocenjivanja koje je sistem proizveo.
+Promptovi su preneti verbatim iz konfiguracionih datoteka sistema, uključujući izvorne nedoslednosti u dijakritici, koje su zadržane jer su modeli primili upravo takav tekst.
 
 \medskip
-\noindent\textbf{Napomena.} Ocene su prikazane na skali 0--10.
+\noindent\textbf{Napomena.} Model ocenjuje na skali 0--100, a ocene se u analizi i u primerima ispod preslikavaju na skalu 0--10, radi poređenja sa ocenama nastavnika.
 
-\subsection*{Prompt za blago ocenjivanje}
+\subsection*{Uputstvo o formatu izlaza}
+
+Sledeće uputstvo dodaje se na kraj sistemske instrukcije u svim konfiguracijama strogosti i u svim režimima ocenjivanja:
 
 \begin{tcolorbox}[promptbox]
 
-Ti si veoma blag profesor koji ocenjuje studentske odgovore.
+Tvoj odgovor treba da bude ocena studentskog odgovora u sledećem formatu:
 
-\vspace{2mm}
+Prvi red treba da sadrži samo broj na skali od 0 do 100, gde je 100 najbolja ocena a 0 najgora.
 
-\textbf{Pravila ocenjivanja:}
-
-\begin{itemize}[leftmargin=1.5em]
-\item Cilj je da se prepozna razumevanje koncepta bez obzira na formulaciju odgovora.
-\item Nedostajući detalji ili neprecizna terminologija se ne kažnjavaju.
-\item Sinonimi, parafraziranje i primeri su prihvatljivi.
-\item Kazni samo odgovore koji pokazuju potpuno pogrešno razumevanje ili su van teme.
-\item U slučaju nedoumice dodeli više poena.
-\item Prazan odgovor dobija 0 poena.
-\end{itemize}
+Ostatak odgovora treba da sadrži obrazloženje ocene.
 
 \end{tcolorbox}
 
-\subsection*{Podrazumevani prompt (neutralna konfiguracija)}
+\subsection*{Promptovi strogosti za PRA režim}
 
-\begin{tcolorbox}[promptbox]
+U PRA režimu prompt uz sistemsku instrukciju sadrži pitanje, tačan odgovor nastavnika i studentski odgovor, svaki u zasebnom bloku.
 
-Ti si profesor na univerzitetu koji ocenjuje studentske odgovore na ispitna pitanja.
+\begin{tcolorbox}[promptbox, title={Blaga konfiguracija}]
 
-\vspace{2mm}
+Ti si blag profesor visokog obrazovanja i treba da ocenis odgovore studenata.
 
-\textbf{Pravila ocenjivanja:}
+Dobijas pitanje, tacan odgovor kao i odgovor studenta, i treba da proveris da li je odgovor studenta adekvatan.
 
-\begin{itemize}[leftmargin=1.5em]
-\item Uporedi studentski odgovor sa tačnim odgovorom i proceni stepen poklapanja.
-\item Odgovor ne mora biti identičan tačnom odgovoru ako student pokazuje razumevanje koncepta.
-\item Sinonimi, parafraziranje i drugačiji redosled informacija su prihvatljivi ako je suština tačna.
-\item Odgovori napisani na različitim jezicima ili pismima (ćirilica/latinica, srpski/engleski) ne treba da budu kažnjeni ako je sadržaj tačan.
-\item Ako je odgovor delimično tačan, dodeli proporcionalan broj poena.
-\item Ako odgovor sadrži netačne tvrdnje koje nisu deo tačnog odgovora, oduzmi poene proporcionalno.
-\end{itemize}
+Fokusiraj se na stavke koje se poklapaju sa studentovim odgovorom.
 
 \end{tcolorbox}
 
-\subsection*{Prompt za strogo ocenjivanje}
+\begin{tcolorbox}[promptbox, title={Neutralna (podrazumevana) konfiguracija}]
+
+Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
+
+Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i tačan odgovor.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[promptbox, title={Stroga konfiguracija}]
+
+Ti si strog profesor visokoakademske institucije i treba da ocenis odgovore studenata.
+
+Dobijas pitanje, tacan odgovor kao i odgovor studenta, i treba da proveris da li je odgovor studenta adekvatan.
+
+Svako nepoklapanje se kaznjava sa oduzimanjem petine ukupnih poena.
+
+Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.
+
+\end{tcolorbox}
+
+Neutralna konfiguracija je namerno najkraća i ne uvodi dodatna pravila; blaga i stroga usmeravaju pažnju modela na poklapanja odnosno na nepoklapanja, a stroga uz to zadaje i eksplicitnu meru kazne.
+
+\subsection*{Prompt za generisanje referentnog odgovora (GRA režim)}
+
+U prvom koraku GRA režima model iz nastavnog materijala konstruiše referentni odgovor, koristeći sledeću instrukciju.
+Ovaj korak ne zavisi od konfiguracije strogosti; ona se primenjuje tek u drugom koraku, pri ocenjivanju, i to istim promptovima kao u PRA režimu.
 
 \begin{tcolorbox}[promptbox]
 
-Ti si veoma strog profesor koji rigorozno ocenjuje studentske odgovore.
+Ti si profesor visokog obrazovanja i treba da odgovoriš na pitanje na osnovu relevantnog sadržaja iz udžbenika.
 
-\vspace{2mm}
+Generiši koncizan odgovor koji direktno odgovara na postavljeno pitanje.
 
-\textbf{Pravila ocenjivanja:}
+Odgovor treba da bude precizan i dužine od 2 do 5 rečenica.
 
-\begin{itemize}[leftmargin=1.5em]
-\item Strogo uporedi studentski odgovor sa tačnim odgovorom.
-\item Svaka stavka iz tačnog odgovora koja nedostaje znači oduzimanje poena.
-\item Netačne ili neprecizne tvrdnje se kažnjavaju.
-\item Površni ili previše opšti odgovori bez konkretnih detalja dobijaju manje poena.
-\item Nepotpun odgovor ne može dobiti više od polovine poena.
-\item Sinonimi i parafraziranje su prihvatljivi samo ako precizno pokrivaju suštinu tačnog odgovora.
-\end{itemize}
+\end{tcolorbox}
+
+\subsection*{Promptovi za razmatrani treći režim}
+
+Za varijantu sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) definisane su odgovarajuće instrukcije, koje se od PRA verzija razlikuju samo u opisu priloženog materijala.
+Neutralna verzija navedena je kao ilustracija; budući da ovaj režim nije sproveden do kraja, njegovi rezultati se u radu ne koriste.
+
+\begin{tcolorbox}[promptbox, title={Neutralna konfiguracija, varijanta sa nastavnim materijalom}]
+
+Ti si profesor visokog obrazovanja i treba da oceniš odgovor studenta na postavljeno pitanje.
+
+Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i udzbenik iz kojeg je pitanje postavljeno.
 
 \end{tcolorbox}
 
 \subsection*{Reprezentativni primeri ocenjivanja}
 
-Naredni primeri ilustruju tipične izlaze sistema EduGrader.
+Naredni primeri preuzeti su iz rezultata ocenjivanja modelom GPT-5 u neutralnoj konfiguraciji PRA režima, sa kursa Programiranje 2.
+Izabrani su tako da ilustruju oba smera odstupanja od nastavničke ocene.
 
-\subsection*{Primer A: Detekcija stepena broja dva}
-
-\begin{tcolorbox}[promptbox]
-
-\textbf{Pitanje}
-
-Napisati C funkciju koja vraća 1 ako je broj stepen broja dva, a 0 u suprotnom.
-
-\medskip
-\textbf{Referentni odgovor}
-
-\begin{verbatim}
-int isPowerOfTwo(unsigned x) {
-    return x != 0 && (x & (x - 1)) == 0;
-}
-\end{verbatim}
-
-\medskip
-\textbf{Studentski odgovor}
-
-\begin{verbatim}
-int isPowerOfTwo(unsigned x) {
-    return (x & (x - 1)) == 0;
-}
-\end{verbatim}
-
-\medskip
-\textbf{Ocene}
-
-Nastavnik: 7/10 \hfill Sistem: 8/10
-
-\medskip
-\textbf{Obrazloženje sistema}
-
-Student pravilno primenjuje standardnu bitovsku tehniku za detekciju stepena broja dva koristeći izraz \texttt{(x \& (x - 1)) == 0}.
-Međutim, rešenje ne obrađuje granični slučaj kada je \texttt{x == 0}.
-Pošto izraz vraća tačno za vrednost 0, funkcija daje pogrešan rezultat u tom slučaju.
-Rešenje je gotovo tačno, ali nije potpuno.
-
-\end{tcolorbox}
-
-\subsection*{Primer B: Stek i hip memorija}
+\subsection*{Primer A: sistem ocenjuje strože od nastavnika}
 
 \begin{tcolorbox}[promptbox]
 
 \textbf{Pitanje}
 
-Koja je razlika između stek memorije i hip memorije u C-u?
-Ukratko objasniti.
+Koliko tačkica ispisuje poziv \texttt{f(3)} za narednu funkciju \texttt{f}?
+
+\begin{verbatim}
+void f(unsigned n) {
+    if (n > 0) {
+        f(n-1);
+        putchar('.');
+        f(n-1);
+    }
+}
+\end{verbatim}
+
+\medskip
+\textbf{Referentni odgovor nastavnika}
+
+Ispisuje 7 tackica. $T(n) = 2 \cdot T(n-1) + 1$ sa baznim slučajem $T(0) = 0$.
 
 \medskip
 \textbf{Studentski odgovor}
 
-Stek je memorija koju program koristi za pozive funkcija i lokalne promenljive.
-Hip je memorija koja čuva globalne promenljive i velike podatke.
-Stek je brži, hip je sporiji.
+\begin{verbatim}
+Ispisuje 6 tacaka
+f(3), 3>0,
+f(2), 2>0,
+f(1), 1>0,
+f(0), . ,f(0)
+f(1) 1>0, . , f(0)
+f(2) . f(1), 1>0, .
+. .
+\end{verbatim}
 
 \medskip
 \textbf{Ocene}
 
-Nastavnik: 6/10 \hfill Sistem: 6/10
+Nastavnik: 5/10 \hfill Sistem: 3/10
 
 \medskip
 \textbf{Obrazloženje sistema}
 
-Student tačno navodi da se stek koristi za pozive funkcija i lokalne promenljive i da je generalno brži.
-Međutim, tvrdnja da hip čuva globalne promenljive je netačna.
-Globalne promenljive se nalaze u statičkoj memoriji, a ne u hipu.
-Takođe, odgovor ne objašnjava dinamičku alokaciju niti razlike u životnom veku memorije.
+Netačan je krajnji rezultat: \texttt{f(3)} ispisuje 7 tačkica, ne 6.
+Ispravno je $T(n) = 2 \cdot T(n-1) + 1$ sa $T(0) = 0$, pa je $T(1) = 1$, $T(2) = 3$, $T(3) = 7$.
+U vašem tragu izvršavanja propušten je barem jedan ispis (npr.\ kod jedne od \texttt{f(1)} grana), što je dovelo do pogrešnog prebrojavanja.
+Delimični poeni za pokušaj raščlanjivanja rekurzije, ali računanje i zaključak nisu tačni.
 
 \end{tcolorbox}
+
+Primer ilustruje tipičan izvor neslaganja: student je postupak razložio korektno, ali je konačan broj pogrešan.
+Nastavnik je pokušaj nagradio polovinom poena, dok je model, uz tačno izvedenu rekurentnu relaciju, veću težinu dao netačnom rezultatu.
+
+\subsection*{Primer B: sistem ocenjuje blaže od nastavnika}
+
+\begin{tcolorbox}[promptbox]
+
+\textbf{Pitanje}
+
+Da li je pristup n-tom elementu efikasniji za niz, ili za povezanu listu?
+Da li je pristup n-tom elementu efikasniji za niz, ili za dinamički niz?
+Molim Vas obrazložite odgovor.
+
+\medskip
+\textbf{Referentni odgovor nastavnika}
+
+Za niz. Za niz je $O(1)$, za listu $O(n)$.
+Isto je. U oba slučaja je $O(1)$.
+
+\medskip
+\textbf{Studentski odgovor}
+
+pristup n-tom elementu je laksi za niz, posto se elementi u nizu dodaju uz numeraciju, dok se kod listi pokazuje sa liste na listu bez znanja reda, sto bi znacilo da bi nam trebala petlja sa brojacem n dok ne dodjemo do n tog elemta liste
+
+\medskip
+\textbf{Ocene}
+
+Nastavnik: 5/10 \hfill Sistem: 6/10
+
+\medskip
+\textbf{Obrazloženje sistema}
+
+Student je tačno objasnio prvi deo: pristup n-tom elementu je efikasniji za niz nego za povezanu listu, jer se u listi mora prolaziti element po element (linearno), dok je u nizu direktan pristup.
+Međutim, nije odgovorio na drugi deo pitanja (niz vs.\ dinamički niz).
+Tačan odgovor za drugi deo je da je pristup n-tom elementu isti ($O(1)$) i za statički i za dinamički niz, jer oba koriste kontinuirani blok memorije i omogućavaju indeksirani pristup.
+
+\end{tcolorbox}
+
+Pitanje se sastoji od dva dela, a student je odgovorio samo na prvi.
+Model je taj propust ispravno identifikovao i eksplicitno naveo tačan odgovor na izostavljeni deo, ali je odgovoru ipak dodelio nešto više od polovine poena, dok je nastavnik dodelio tačno polovinu.
+Oba primera pokazuju da su obrazloženja sistema sadržajno tačna i proverljiva, čak i kada numerička ocena odstupa od nastavničke, što je i osnov za upotrebu sistema kao pomoći nastavniku, a ne kao njegove zamene.

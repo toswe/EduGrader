@@ -21,22 +21,29 @@ Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pita
 Ovakve stroge provere pokazale su se ključnim za kvalitet eksperimenata, jer su greške u ručno pripremanim podacima otkrivane pre nego što bi izazvale skupe, delimično neispravne eksperimente.
 
 Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
-Postoje dve varijante ove faze, koje odgovaraju režimima ocenjivanja:
+Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz odeljka~\ref{sec:modeli}:
 
 \begin{itemize}
     \item \textbf{PRA varijanta} u prompt uključuje pitanje, tačan odgovor nastavnika i studentski odgovor.
-    \item \textbf{GRA varijanta} umesto tačnog odgovora uključuje sadržaj nastavnog materijala.
-    Materijal se preuzima sa zadate adrese kao PDF, tekst se izdvaja bibliotekom PyPDF2, a rezultat kešira na disku (po heš vrednosti adrese), tako da se svaki udžbenik preuzima i obrađuje samo jednom.
+    \item \textbf{GRA varijanta} umesto tačnog odgovora nastavnika koristi referentni odgovor koji model sam generiše iz nastavnog materijala.
+    Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF, tekst se izdvaja bibliotekom PyPDF2 i kešira na disku (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom), a model iz njega konstruiše koncizan referentni odgovor dužine dve do pet rečenica.
+    U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, istim postupkom kao u PRA varijanti.
+    Time se za svaki skup podataka dobija tabela pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim, pa se ocenjivanje sprovodi ponovnom upotrebom iste komponente kao u PRA varijanti.
+    \item \textbf{Varijanta sa nastavnim materijalom u promptu} ne koristi referentni odgovor, već ceo izvučeni tekst udžbenika umeće u svaki prompt za ocenjivanje.
+    Ova varijanta razmatrana je, ali nije sprovedena do kraja i njeni rezultati se ne koriste u analizi; razlozi su izloženi u odeljku~\ref{sec:rezim-udzbenik}.
 \end{itemize}
 
-U oba slučaja sistemska instrukcija se sastoji od prompta strogosti (blag, neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza: prvi red odgovora mora sadržati samo ocenu na skali 0--100, a ostatak obrazloženje.
+U svim varijantama sistemska instrukcija se sastoji od prompta strogosti (blag, neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza: prvi red odgovora mora sadržati samo ocenu na skali 0--100, a ostatak obrazloženje.
+Temperatura se ne postavlja eksplicitno, pa modeli rade na podrazumevanoj vrednosti svog provajdera.
 Numerička ocena se parsira iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
-Ako parsiranje ne uspe ili API poziv privremeno otkaže, poziv se ponavlja do tri puta sa rastućim odlaganjem; trajno neuspešni redovi označavaju se specijalnom vrednošću i isključuju iz analize.
+Ako parsiranje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
+Trajno neuspešni redovi označavaju se specijalnom negativnom vrednošću i isključuju iz analize.
 
 \subsection{Automatizacija eksperimenata i analiza}
 
-Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka.
+Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka, dakle 135 pokretanja po režimu ocenjivanja.
 Pomoćna skripta automatizuje ovaj proces: za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline}, pri čemu ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
+Svaka kombinacija pokrenuta je jednom, pa rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike}, Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV, po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
