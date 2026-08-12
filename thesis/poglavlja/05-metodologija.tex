@@ -107,8 +107,8 @@ Pitanje je svrstano u kategoriju \emph{kod} ukoliko se od studenta traži da nap
 \textbf{\shortstack{Studentski odgovor\\pros.\ reči}} &
 \textbf{\shortstack{Studentski odgovor\\pros.\ znakova}} \\
 \midrule
-Kratak tekst & 20.9 & 130.5 & 201.7 & 1341.9 & 24.7 & 143.2 \\
-Kod          & 22.2 & 137.4 & 162.7 & 1144.3 & 15.9 & 102.5 \\
+Kratak tekst & 20{,}9 & 130{,}5 & 201{,}7 & 1341{,}9 & 24{,}7 & 143{,}2 \\
+Kod          & 22{,}2 & 137{,}4 & 162{,}7 & 1144{,}3 & 15{,}9 & 102{,}5 \\
 \bottomrule
 \end{tabular}
 }
@@ -136,6 +136,12 @@ Pored toga, EduGrader podržava dva komplementarna režima ocenjivanja:
 \end{itemize}
 Ovakav dvorežimski dizajn omogućava evaluaciju kako u scenarijima sa dobro definisanim ključem za ocenjivanje, tako i u situacijama kada nastavnici ne obezbeđuju eksplicitna referentna rešenja.
 
+Mreža konfiguracija ne varira temperaturu,
+parametar koji upravlja slučajnošću pri uzorkovanju odgovora modela.
+Da bi se proverilo da taj izbor ne utiče na rezultate,
+temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o;
+nalazi su izloženi u odeljku~\ref{sec:rezultati-temperatura}.
+
 Svi eksperimenti sprovedeni su na srpskom jeziku, uključujući ispitna pitanja, studentske odgovore i referentne odgovore.
 Budući da je srpski jezik sa ograničenim resursima, slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju, ovo istraživanje proširuje oblast ocenjivanja uz podršku veštačke inteligencije izvan dominantnog engleskog konteksta.
 
@@ -147,12 +153,12 @@ U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće di
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor, ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
 Pristup je motivisan idejom da bi izostavljanje posredničkog koraka moglo da spreči gubitak informacija pri generisanju referentnog odgovora, naročito kod pitanja čiji odgovor zahteva širi kontekst.
 
-Ovaj režim implementiran je i pokrenut, ali \textbf{nije sproveden do kraja}, i njegovi rezultati se u ovom radu ne koriste za izvođenje zaključaka.
+Ovaj režim implementiran je i pokrenut, ali \textbf{nije sproveden za sve modele},
+pa se njegovi rezultati prikazuju odvojeno od glavnih, u odeljku~\ref{sec:rezultati-udzbenik}.
 Razlog je cena: budući da ceo udžbenik ulazi u svaki poziv, veličina prompta raste za red veličine.
 Medijana broja tokena u promptu iznosila je oko $14\,500$ za kurs Programiranje 2, naspram oko $260$ tokena u PRA režimu za istu grupu pitanja, dakle približno \textbf{55 puta više}.
 Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima, pri čemu je pokrio samo oko trećine planirane mreže konfiguracija; njeno kompletiranje zahtevalo bi približno $119$ miliona tokena.
 
 Zbog toga su u ovom režimu evaluirani samo modeli GPT-4o-mini i GPT-4o, dok modeli usmereni na rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
 Ocenjivanje je u potpunosti sprovedeno jedino za model GPT-4o-mini, kroz sve tri konfiguracije strogosti; za model GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
-Ocenjene datoteke zadržane su u repozitorijumu radi sledivosti, ali se, u skladu sa nepotpunom pokrivenošću, u poglavlju~\ref{sec:rezultati} ne prikazuju uz rezultate PRA i GRA režima.
 Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.

@@ -40,8 +40,18 @@ Uprkos snažnim ukupnim performansama, ograničenja ostaju: ponašanje modela mo
 Nekoliko ograničenja odnosi se na samu postavku evaluacije:
 
 \begin{itemize}
-    \item \textbf{Jedno pokretanje po konfiguraciji.} Svaka kombinacija modela, strogosti i režima izvršena je jednom, i to na podrazumevanoj temperaturi provajdera, pa rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela ni uticaja temperature na doslednost ocenjivanja.
-    \item \textbf{Nepotpuni treći režim.} Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) sprovedeno je samo delimično, jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim. Pitanje da li bi izostavljanje posredničkog referentnog odgovora poboljšalo slaganje sa nastavnicima ostaje otvoreno.
+    \item \textbf{Jedno pokretanje po konfiguraciji.}
+    Svaka kombinacija modela, strogosti i režima izvršena je jednom,
+    pa glavni rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
+    Uticaj temperature ispitan je odvojeno (odeljak~\ref{sec:rezultati-temperatura}) i nije primećen,
+    ali samo za jedan model, jednu konfiguraciju strogosti i deo skupova podataka.
+    \item \textbf{Nepotpuni treći režim.}
+    Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik})
+    pokrenuto je samo za dva modela,
+    jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim.
+    Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje
+    sa nastavnicima (odeljak~\ref{sec:rezultati-udzbenik}),
+    ali pitanje ostaje otvoreno za modele usmerene na rezonovanje, koji u ovom režimu nisu pokretani.
     \item \textbf{Neujednačena veličina skupova.} Kurs Programiranje 2 nosi 477 od ukupno 583 odgovora, dok kursevi DDS i HTML5 imaju po deset. Objedinjene metrike zato pretežno odražavaju jedan kurs, a vrednosti po manjim kursevima osetljive su na pojedinačne odgovore.
     \item \textbf{Dva ljudska ocenjivača.} Referentne ocene dodelila su dva nastavnika, svaki na svom podskupu kurseva, pa nije bilo preklapanja koje bi omogućilo procenu pouzdanosti među ocenjivačima. Slaganje sistema poredi se sa jednim nastavnikom po odgovoru, a ne sa konsenzusom.
 \end{itemize}

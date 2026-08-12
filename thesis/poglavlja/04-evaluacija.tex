@@ -27,14 +27,19 @@ Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz
     \item \textbf{PRA varijanta} u prompt uključuje pitanje, tačan odgovor nastavnika i studentski odgovor.
     \item \textbf{GRA varijanta} umesto tačnog odgovora nastavnika koristi referentni odgovor koji model sam generiše iz nastavnog materijala.
     Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF, tekst se izdvaja bibliotekom PyPDF2 i kešira na disku (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom), a model iz njega konstruiše koncizan referentni odgovor dužine dve do pet rečenica.
-    U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, istim postupkom kao u PRA varijanti.
-    Time se za svaki skup podataka dobija tabela pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim, pa se ocenjivanje sprovodi ponovnom upotrebom iste komponente kao u PRA varijanti.
+    U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, ponovnom upotrebom iste komponente kao u PRA varijanti, nad tabelom pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim.
     \item \textbf{Varijanta sa nastavnim materijalom u promptu} ne koristi referentni odgovor, već ceo izvučeni tekst udžbenika umeće u svaki prompt za ocenjivanje.
-    Ova varijanta razmatrana je, ali nije sprovedena do kraja i njeni rezultati se ne koriste u analizi; razlozi su izloženi u odeljku~\ref{sec:rezim-udzbenik}.
+    Ova varijanta nije pokrenuta za sve modele; razlozi su izloženi u odeljku~\ref{sec:rezim-udzbenik},
+    a rezultati za pokrivene modele prikazani su odvojeno u odeljku~\ref{sec:rezultati-udzbenik}.
 \end{itemize}
 
 U svim varijantama sistemska instrukcija se sastoji od prompta strogosti (blag, neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza: prvi red odgovora mora sadržati samo ocenu na skali 0--100, a ostatak obrazloženje.
-Temperatura se ne postavlja eksplicitno, pa modeli rade na podrazumevanoj vrednosti svog provajdera.
+Parametarske datoteke modela zadaju temperaturu $0$,
+ali je integracioni sloj za OpenAI izostavlja iz zahteva kada je jednaka nuli,
+pa modeli porodice GPT zapravo rade na podrazumevanoj vrednosti svog provajdera,
+dok se modelima DeepSeek vrednost $0$ uvek prosleđuje.
+Temperatura se ni u jednom slučaju ne varira kroz konfiguracije;
+njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
 Numerička ocena se parsira iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
 Ako parsiranje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
 Trajno neuspešni redovi označavaju se specijalnom negativnom vrednošću i isključuju iz analize.
@@ -44,6 +49,8 @@ Trajno neuspešni redovi označavaju se specijalnom negativnom vrednošću i isk
 Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka, dakle 135 pokretanja po režimu ocenjivanja.
 Pomoćna skripta automatizuje ovaj proces: za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline}, pri čemu ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
 Svaka kombinacija pokrenuta je jednom, pa rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
+Dva dodatna eksperimenta izvan ove mreže, sa nastavnim materijalom u promptu
+i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatni}.
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke, uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike}, Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV, po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
@@ -71,11 +78,14 @@ pipeline/
   src/common/pdf_extraction.py
   run_all_models.py
   calculate_corelations.py
+  calculate_temperature.py
   data/<skup>/raw/questions.csv
   data/<skup>/raw/student_answers.csv
   data/<skup>/graded/graded.*.csv
   data/<skup>/graded/correlation_results.csv
   data/correlation_summary.csv
+  data/temperature_summary.csv
+data/<rok>/results/gpt-4o.default.t-*.csv
 \end{verbatim}
 \end{tcolorbox}
 
@@ -156,3 +166,25 @@ Kako su rezultati zapisani po ispitnim rokovima,
 vrednosti po kursevima u tabelama poglavlja~\ref{sec:rezultati}
 dobijene su objedinjavanjem rokova koji pripadaju istom kursu,
 prema Tabeli~\ref{tab:dataset}.
+
+Jedini eksperiment koji nije pokrenut kroz opisani \emph{pipeline} je eksperiment sa temperaturom
+(odeljak~\ref{sec:rezultati-temperatura}).
+On je sproveden ranije, kroz upravljačku komandu same aplikacije,
+sa istim promptom i istim formatom izlaza,
+pa se njegove ocenjene datoteke nalaze izvan direktorijuma \texttt{pipeline}
+i imenovane su po ispitnim rokovima iz baze aplikacije
+(\texttt{p2} i \texttt{p2\_jul\_2} odgovaraju skupovima \texttt{p2\_1} i \texttt{p2\_2},
+a \texttt{uu} i \texttt{dzp} zovu se isto u oba slučaja).
+Skripta \texttt{calculate\_temperature.py} uparuje te datoteke sa odgovarajućim
+pokretanjem iz \emph{pipeline}-a i računa iste metrike,
+pa se tabela~\ref{tab:temperatura} dobija jednom komandom, takođe bez ijednog poziva jezičkom modelu:
+
+\begin{tcolorbox}[promptbox, title={Reprodukcija eksperimenta sa temperaturom}]
+\begin{verbatim}
+python calculate_temperature.py
+\end{verbatim}
+\end{tcolorbox}
+
+Pošto dva izvora koriste različite identifikatore studenata,
+uparivanje se sprovodi po redosledu studenata i pitanja,
+uz proveru poklapanja nastavničkih ocena red po red.
