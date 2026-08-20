@@ -35,7 +35,8 @@ Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz
     \item \textbf{PRA varijanta} u prompt uključuje pitanje, tačan odgovor nastavnika i studentski odgovor.
     \item \textbf{GRA varijanta} umesto tačnog odgovora nastavnika koristi referentni odgovor koji model sam generiše iz nastavnog materijala.
     Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF,
-    tekst se izdvaja bibliotekom PyPDF2 i kešira na disku (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom),
+    tekst se izdvaja bibliotekom PyPDF2 i kešira (engl. \emph{cache}) na disku
+    (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom),
     a model iz njega konstruiše koncizan referentni odgovor dužine dve do pet rečenica.
     U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, ponovnom upotrebom iste komponente kao u PRA varijanti,
     nad tabelom pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim.

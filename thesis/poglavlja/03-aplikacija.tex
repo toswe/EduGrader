@@ -10,11 +10,11 @@ To je deo sistema namenjen upotrebi u nastavi, organizovan u tri sloja (slika~\r
     Prikazi za nastavnike i studente su odvojeni: nastavnici upravljaju kursevima,
     testovima i pitanjima i pregledaju rešene testove, a studenti rešavaju testove i prate svoje rezultate.
     Na prikazu rešenog testa, uz svaki odgovor stoje i ocena nastavnika i ocena koju je predložio jezički model; konačnu odluku donosi nastavnik.
-    Autentifikacija se obavlja putem JWT tokena (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
+    Autentifikacija se obavlja putem JWT-a (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
     \item \textbf{Serverski sloj.} REST API izgrađen u tehnologijama Python~3, Django~5.1 i Django REST Framework.
     Izlaže CRUD operacije nad domenskim modelima i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela,
     parsiranje izlaza i trajno čuvanje rezultata.
-    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM nad sistemom \emph{SQLite}, sa entitetima za kurseve,
+    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM nad sistemom SQLite, sa entitetima za kurseve,
     testove, pitanja, studentske odgovore i ocene.
     Pored samih ocena čuvaju se i povratne informacije, promptovi i metapodaci, potrebni za kasnije analize.
 \end{itemize}
@@ -98,11 +98,12 @@ Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena
 
 Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa:
 logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje,
-a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz DVC \emph{pipeline}, nad podacima pripremljenim u vidu CSV datoteka.
+a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz liniju obrade (engl. \emph{pipeline}) u sistemu DVC,
+nad podacima pripremljenim u vidu CSV datoteka.
 Izbor modela, režima ocenjivanja i nivoa strogosti zadaje se kroz parametarske datoteke tog \emph{pipeline}-a, a ne kroz veb interfejs.
 
-Autentifikacija koristi JWT tokene koji se čuvaju u \emph{session storage}-u pregledača;
-uloge (nastavnik ili student) ugrađene su u token i na osnovu njih se sprovodi kontrola pristupa rutama.
+Autentifikacija koristi JWT, koji se čuva u \emph{session storage}-u pregledača;
+uloge (nastavnik ili student) ugrađene su u njega i na osnovu njih se sprovodi kontrola pristupa rutama.
 U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu,
 dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
 
@@ -112,10 +113,11 @@ Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django 
 
 \begin{itemize}
     \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik,
-    izdavanje i osvežavanje JWT tokena,
+    izdavanje i osvežavanje JWT-a,
     kao i klase dozvola (engl. \emph{permission classes}) kojima se pojedinačni API pozivi ograničavaju na odgovarajuću ulogu.
     \item \textbf{Glavna aplikacija} definiše domenske modele, kurs, pitanje,
-    test, studentski test i studentski odgovor, zajedno sa serijalizatorima i CRUD API endpointima.
+    test, studentski test i studentski odgovor,
+    zajedno sa serijalizatorima i CRUD \emph{endpoint}-ima, adresama REST API-ja preko kojih se izvode pojedinačne operacije nad njima.
     Studentski odgovor čuva i ocenu koju je dodelio nastavnik, što omogućava kasnije poređenje sa ocenama modela.
     \item \textbf{Aplikacija za ocenjivanje} sadrži logiku ocenjivanja i integracije sa jezičkim modelima.
     Za svaki ocenjeni odgovor kreira zapis sa korišćenim promptom, instrukcijama,
@@ -127,7 +129,8 @@ Sistem je dokerizovan: jedan kontejner izvršava Django aplikaciju, a drugi Ngin
 \subsection{Integracija jezičkih modela}
 \label{sec:integracije}
 
-Jezičkim modelima pristupa se isključivo preko API-ja provajdera u oblaku; nijedan model se ne izvršava lokalno.
+Jezičkim modelima pristupa se isključivo preko API-ja provajdera (engl. \emph{provider}) u oblaku;
+nijedan model se ne izvršava lokalno.
 Više provajdera pokriveno je projektnim obrascem fabrika,
 sa apstraktnim interfejsom \texttt{LLMIntegration} i metodom \texttt{prompt()} čiji su parametri ulazni tekst,
 identifikator modela, sistemske instrukcije i temperatura.
@@ -138,7 +141,7 @@ Implementirane su dve integracije:
 \begin{itemize}
     \item \textbf{OpenAI}, koristi zvanični OpenAI Python SDK.
     Podržani modeli: \texttt{gpt-\allowbreak 4o-\allowbreak mini}, \texttt{gpt-4o} i \texttt{gpt-5}.
-    \item \textbf{DeepSeek}, koristi OpenAI-kompatibilni API endpoint preko istog SDK-a, sa promenjenom baznom adresom.
+    \item \textbf{DeepSeek}, koristi OpenAI-kompatibilni API \emph{endpoint} preko istog SDK-a, sa promenjenom baznom adresom.
     Podržani modeli: \texttt{deepseek-chat} (V3) i \texttt{deepseek-reasoner} (R1).
 \end{itemize}
 
