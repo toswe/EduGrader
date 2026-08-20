@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { fetchStudentTest } from "../../api/student-tests";
-import { IStudentTest } from "../../types";
+import { updateStudentAnswerScore } from "../../api/student-answers";
+import { IStudentAnswer, IStudentTest } from "../../types";
 import { BackLink } from "../../components/BackLink";
 
 // Both scales are 0-10: the professor grades on it directly, the LLM returns 0-100.
@@ -9,6 +10,68 @@ const formatScore = (score?: number | null) =>
   score === undefined || score === null
     ? "not graded"
     : `${Math.round(score * 10) / 10} / 10`;
+
+const AnswerCard = ({
+  answer,
+  index,
+}: {
+  answer: IStudentAnswer;
+  index: number;
+}) => {
+  const [score, setScore] = useState(answer.score ?? "");
+  const [errorMessage, setErrorMessage] = useState<string | unknown>("");
+
+  const grades = answer.grades ?? [];
+  const llmGrade = grades[grades.length - 1];
+
+  const saveScore = async () => {
+    updateStudentAnswerScore(Number(answer.id), Number(score)).catch(
+      (error) => {
+        setErrorMessage(error);
+      }
+    );
+  };
+
+  return (
+    <div className="card stack">
+      <div className="card-header">
+        <div>
+          <span className="field-label">Question {index + 1}</span>
+          {answer.questionText}
+        </div>
+        <div className="row">
+          <span className="badge">
+            LLM <b>{formatScore(llmGrade && llmGrade.score / 10)}</b>
+          </span>
+        </div>
+      </div>
+      <div>
+        <span className="field-label">Answer</span>
+        <div className="answer-text">{answer.answer}</div>
+      </div>
+      <div className="row">
+        <label htmlFor={`score-${answer.id}`}>Grade</label>
+        <input
+          id={`score-${answer.id}`}
+          className="score-input"
+          value={score}
+          type="number"
+          min="0"
+          max="10"
+          step="0.1"
+          onChange={(e) => setScore(e.target.value)}
+        />
+        <span className="muted">/ 10</span>
+        <button onClick={saveScore} disabled={score === ""}>
+          Save
+        </button>
+      </div>
+      {errorMessage ? (
+        <div className="error">{String(errorMessage)}</div>
+      ) : null}
+    </div>
+  );
+};
 
 export const StudentTestPage = () => {
   const { courseId, studentTestId } = useParams();
@@ -48,32 +111,9 @@ export const StudentTestPage = () => {
 
       <section className="stack">
         <h2>Answers</h2>
-        {studentTest.answers.map((answer, index) => {
-          const grades = answer.grades ?? [];
-          const llmGrade = grades[grades.length - 1];
-          return (
-            <div key={answer.id} className="card stack">
-              <div className="card-header">
-                <div>
-                  <span className="field-label">Question {index + 1}</span>
-                  {answer.questionText}
-                </div>
-                <div className="row">
-                  <span className="badge">
-                    Professor <b>{formatScore(answer.score)}</b>
-                  </span>
-                  <span className="badge">
-                    LLM <b>{formatScore(llmGrade && llmGrade.score / 10)}</b>
-                  </span>
-                </div>
-              </div>
-              <div>
-                <span className="field-label">Answer</span>
-                <div className="answer-text">{answer.answer}</div>
-              </div>
-            </div>
-          );
-        })}
+        {studentTest.answers.map((answer, index) => (
+          <AnswerCard key={answer.id} answer={answer} index={index} />
+        ))}
       </section>
     </div>
   );

@@ -49,7 +49,7 @@ export interface IStudentAnswer {
   question: number;
   questionText: string;
   answer: string;
-  score: number;
+  score: number | null;
   grades?: IAnswerGrade[];
 }
 

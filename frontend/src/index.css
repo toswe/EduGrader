@@ -281,6 +281,14 @@ label {
   border-radius: 999px;
 }
 
+.score-input {
+  width: 5rem;
+}
+
+.row label {
+  margin-bottom: 0;
+}
+
 .badge b {
   font-weight: 600;
   color: var(--text);

@@ -18,6 +18,7 @@ from backend.serializers import (
     TestQuestionsSerializer,
     StudentTestSerializer,
     StudentTestAnswersSerializer,
+    StudentAnswerSerializer,
 )
 
 
@@ -241,6 +242,21 @@ class StudentTestRUDView(
     # @student_route
     # def delete(self, request, *args, **kwargs):
     #     return self.destroy(request, *args, **kwargs)
+
+
+class StudentAnswerUView(
+    GenericAPIView,
+    UpdateModelMixin,
+):
+    permission_classes = (IsAuthenticated, IsProfessor)
+    serializer_class = StudentAnswerSerializer
+
+    def get_queryset(self):
+        courses = self.request.user.courses.all()
+        return StudentAnswer.objects.filter(test__test__course__in=courses)
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
 
 
 class UpcomingTestsView(

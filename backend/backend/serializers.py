@@ -62,8 +62,11 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
         model = StudentAnswer
         fields = "__all__"
         read_only_fields = (
-            "student_test",
+            "student",
+            "test",
             "question",
+            "question_text",
+            "answer",
         )
 
 
