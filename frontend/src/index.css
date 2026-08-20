@@ -227,3 +227,40 @@ label {
   margin-bottom: var(--gap);
   font-size: 0.9375rem;
 }
+
+.card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.card-header .row {
+  flex-shrink: 0;
+}
+
+/* Free text coming from students or LLMs: keep line breaks, never overflow */
+.answer-text {
+  padding: var(--gap);
+  background-color: var(--bg);
+  border-radius: var(--radius);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15em 0.65em;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  color: var(--muted);
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.badge b {
+  font-weight: 600;
+  color: var(--text);
+}
