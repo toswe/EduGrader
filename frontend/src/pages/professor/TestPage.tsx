@@ -84,77 +84,82 @@ export const TestPage = () => {
       <BackLink to={`/course/${courseId}`}>Back to course</BackLink>
       <h1>{testId ? "Edit test" : "New test"}</h1>
 
-      <div className="stack">
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            id="name"
-            value={formData.name}
-            onChange={(e) => setFormData({ name: e.target.value })}
-            type="text"
-          />
-        </div>
-        <div>
-          <label htmlFor="configuration">Configuration (JSON)</label>
-          <textarea
-            id="configuration"
-            value={formData.configuration}
-            onChange={(e) => setFormData({ configuration: e.target.value })}
-            rows={10}
-          />
-        </div>
-        <div>
-          <label htmlFor="questions">Questions</label>
-          <select
-            id="questions"
-            value={formData.questions}
-            multiple
-            size={8}
-            onChange={(e) =>
-              setFormData({
-                questions: Array.from(e.target.selectedOptions, (option) =>
-                  Number(option.value)
-                ),
-              })
-            }
-          >
-            {questions.map((question) => (
-              <option key={question.id} value={question.id}>
-                {question.question}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="row">
-          <button
-            onClick={saveTest}
-            disabled={!formData.name || !formData.questions.length}
-          >
-            Save
-          </button>
-          {testId && (
-            <button className="danger" onClick={removeTest}>
-              Delete
+      <div className="columns">
+        <div className="stack">
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              value={formData.name}
+              onChange={(e) => setFormData({ name: e.target.value })}
+              type="text"
+            />
+          </div>
+          <div>
+            <label htmlFor="configuration">Configuration (JSON)</label>
+            <textarea
+              id="configuration"
+              value={formData.configuration}
+              onChange={(e) => setFormData({ configuration: e.target.value })}
+              rows={10}
+            />
+          </div>
+          <div>
+            <label htmlFor="questions">Questions</label>
+            <select
+              id="questions"
+              value={formData.questions}
+              multiple
+              size={8}
+              onChange={(e) =>
+                setFormData({
+                  questions: Array.from(e.target.selectedOptions, (option) =>
+                    Number(option.value)
+                  ),
+                })
+              }
+            >
+              {questions.map((question) => (
+                <option key={question.id} value={question.id}>
+                  {question.question}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="row">
+            <button
+              onClick={saveTest}
+              disabled={!formData.name || !formData.questions.length}
+            >
+              Save
             </button>
-          )}
+            {testId && (
+              <button className="danger" onClick={removeTest}>
+                Delete
+              </button>
+            )}
+          </div>
+          {errorMessage ? (
+            <div className="error">{String(errorMessage)}</div>
+          ) : null}
         </div>
-        {errorMessage ? (
-          <div className="error">{String(errorMessage)}</div>
-        ) : null}
-      </div>
 
-      {studentTests.length > 0 && (
-        <section className="stack">
-          <h2>Submitted tests</h2>
-          {studentTests.map((studentTest) => (
-            <div key={studentTest.id} className="card">
-              <Link to={`/course/${courseId}/student-tests/${studentTest.id}`}>
-                Submission #{studentTest.id}
-              </Link>
-            </div>
-          ))}
-        </section>
-      )}
+        {testId && (
+          <section className="stack">
+            <h2>Submitted tests</h2>
+            {studentTests.map((studentTest) => (
+              <div key={studentTest.id} className="card">
+                <Link to={`/course/${courseId}/student-tests/${studentTest.id}`}>
+                  Submission #{studentTest.id}
+                </Link>
+              </div>
+            ))}
+            {studentTests.length === 0 && (
+              <p className="muted">No submissions yet.</p>
+            )}
+          </section>
+        )}
+      </div>
     </div>
   );
 };

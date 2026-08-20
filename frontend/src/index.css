@@ -147,6 +147,24 @@ label {
   flex-wrap: wrap;
 }
 
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-lg);
+  /* keep the shorter column from stretching to the taller one */
+  align-items: start;
+}
+
+@media (max-width: 48rem) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.narrow {
+  max-width: 24rem;
+}
+
 .card {
   padding: var(--gap);
   background-color: var(--surface);
@@ -199,7 +217,7 @@ label {
 }
 
 .app-main {
-  max-width: 56rem;
+  max-width: 72rem;
   margin: 0 auto;
   padding: var(--gap-lg);
 }

@@ -31,7 +31,7 @@ const LoginPage = () => {
   }
 
   return (
-    <main className="app-main">
+    <main className="app-main narrow">
       <h1>EduGrader</h1>
       <form className="stack" onSubmit={handleSubmit}>
         <div>
