@@ -14,7 +14,7 @@ To je deo sistema namenjen upotrebi u nastavi, organizovan u tri sloja (slika~\r
     \item \textbf{Serverski sloj.} REST API izgrađen u tehnologijama Python~3, Django~5.1 i Django REST Framework.
     Izlaže CRUD operacije nad domenskim modelima i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela,
     parsiranje izlaza i trajno čuvanje rezultata.
-    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM, sa entitetima za kurseve,
+    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM nad sistemom \emph{SQLite}, sa entitetima za kurseve,
     testove, pitanja, studentske odgovore i ocene.
     Pored samih ocena čuvaju se i povratne informacije, promptovi i metapodaci, potrebni za kasnije analize.
 \end{itemize}
@@ -51,7 +51,7 @@ Logika ocenjivanja i ponašanje modela tako se razvijaju nezavisno od korisničk
 % ---- Baza podataka ----
 \node[box, fill=yellow!15, minimum width=2.8cm, minimum height=1.2cm, below=1.4cm of be] (db) {};
 \node[font=\small\bfseries] at ([yshift=1.5mm]db.center) {Baza podataka};
-\node[font=\scriptsize] at ([yshift=-3mm]db.center) {kursevi, testovi, ocene};
+\node[font=\scriptsize] at ([yshift=-3mm]db.center) {SQLite: kursevi, testovi, ocene};
 
 % ---- LLM API-ji ----
 \node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=0.8cm]
@@ -133,7 +133,7 @@ Implementirane su dve integracije:
     Podržani modeli: \emph{deepseek-chat} (V3) i \emph{deepseek-reasoner} (R1).
 \end{itemize}
 
-Uz njih postoji i implementacija za Gugl Gemini, koja nije korišćena u eksperimentima opisanim u ovom radu.
+Uz njih postoji i implementacija za Google Gemini, koja nije korišćena u eksperimentima opisanim u ovom radu.
 
 Fabrička funkcija instancira odgovarajuću klasu na osnovu simboličkog imena integracije (\texttt{openai}, \texttt{deepseek}).
 Nov provajder se tako dodaje implementacijom jedne klase, bez izmena u logici ocenjivanja; isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
