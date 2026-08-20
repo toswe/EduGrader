@@ -26,6 +26,7 @@ obrazlažu ocenu prirodnim jezikom i ukazuju na ono što u odgovoru nedostaje,
 a ne samo na ono što je pogrešno~\cite{kasneci2023chatgpt,zhai2023chatgpt}.
 
 \subsection{Motivacija}
+\label{sec:motivacija}
 
 Cilj ovog rada je pouzdana automatizacija ocenjivanja.
 Ručno ocenjivanje troši veliki deo nastavničkog vremena, pa povratna informacija kasni,
@@ -36,10 +37,14 @@ Analiza odgovora stiže dok je gradivo još sveže.
 Vreme koje bi otišlo na rutinski deo ocenjivanja nastavnik usmerava na individualnu podršku studentima.
 
 Upotreba velikih jezičkih modela u ocenjivanju istovremeno otvara praktična i pedagoška pitanja.
-Koliko su njihove ocene dosledne kroz različite predmete i tipove pitanja?
-Mogu li nastavnici kalibrisati strogost ocenjivanja prema očekivanjima konkretnog kursa?
-Šta se dešava kada potpun referentni odgovor nije dostupan?
-I kako očuvati ljudsku odgovornost za konačne ocene, a iskoristiti efikasnost automatizacije?
+Ovaj rad razmatra četiri:
+\begin{enumerate}
+    \item Koliko su ocene velikih jezičkih modela usklađene sa nastavničkim i koliko su dosledne kroz različite predmete i tipove pitanja?
+    \item Mogu li nastavnici kalibrisati strogost ocenjivanja prema očekivanjima konkretnog kursa?
+    \item Šta se dešava kada potpun referentni odgovor nastavnika nije dostupan?
+    \item Kako očuvati ljudsku odgovornost za konačne ocene, a iskoristiti efikasnost automatizacije?
+\end{enumerate}
+Na ova pitanja rad se vraća u zaključku (poglavlje~\ref{sec:zakljucak}).
 
 \subsection{Sistem EduGrader i doprinosi rada}
 
@@ -88,6 +93,23 @@ Zato je sistem projektovan po principu čoveka u petlji (engl.
 \emph{human-in-the-loop}) i objavljen kao softver otvorenog koda\footnote{\url{https://github.com/toswe/Master}},
 kako bi bio proverljiv i prilagodljiv drugim institucijama.
 Postupak ponovnog izvođenja svih prikazanih rezultata opisan je u odeljku~\ref{sec:reprodukcija}.
+
+Doprinosi rada su sledeći:
+\begin{enumerate}
+    \item \textbf{Veb aplikacija EduGrader} (poglavlje~\ref{sec:aplikacija}):
+    nastavnički i studentski modul, serverski modul za ocenjivanje koji čuva prompt, odgovor modela i izdvojenu ocenu za svaki ocenjeni odgovor,
+    i integracioni sloj koji više provajdera jezičkih modela pokriva jednim interfejsom.
+    \item \textbf{Sistem za automatizovanu evaluaciju modela} (poglavlje~\ref{sec:pipeline}):
+    reproducibilan \emph{pipeline} koji nad ručno pripremljenim ispitnim podacima pokreće ocenjivanje
+    za proizvoljnu kombinaciju modela, konfiguracije strogosti i režima i računa metrike slaganja sa nastavnikom.
+    \item \textbf{Skup podataka na srpskom jeziku}: 583 autentična studentska odgovora sa pet kurseva na dve institucije,
+    sa nastavničkim ocenama i referentnim odgovorima (odeljak~\ref{sec:podaci}).
+    \item \textbf{Sistematska evaluacija}: pet modela u tri konfiguracije strogosti i dva režima ocenjivanja,
+    dopunjena eksperimentima sa nastavnim materijalom u promptu i sa temperaturom (poglavlje~\ref{sec:rezultati}).
+    \item \textbf{Empirijski nalazi}: referentni odgovor nastavnika dosledno poboljšava slaganje sa ljudskim ocenjivačima,
+    modeli usmereni na rezonovanje su im najbliži, a stroga konfiguracija po pravilu pogoršava slaganje;
+    najbolja konfiguracija dostiže PCC od 0{,}89.
+\end{enumerate}
 
 \subsection{Struktura rada}
 

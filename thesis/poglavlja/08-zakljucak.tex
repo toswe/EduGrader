@@ -8,15 +8,45 @@ Sistem objedinjuje više velikih jezičkih modela (GPT-4o, GPT-4o-mini, DeepSeek
 GPT-5 i DeepSeek-Reasoner) u podesiv tok ocenjivanja koji podržava evaluaciju i u PRA i u GRA režimu.
 EduGrader je evaluiran na 583 autentična studentska odgovora sa pet univerzitetskih kurseva na dve institucije,
 koji obuhvataju kratke činjeničke odgovore, teorijska objašnjenja i izraze nalik kodu.
+Rezultati daju odgovore na četiri pitanja postavljena u odeljku~\ref{sec:motivacija}.
 
-PRA režim daje višu usklađenost sa ljudskim ocenjivačima od GRA režima, kroz sve modele i konfiguracije strogosti.
-Modeli usmereni na rezonovanje, naročito GPT-5, najbliži su ljudskom ocenjivanju, sa Pirsonovim koeficijentom korelacije od 0{,}89 u PRA režimu.
+\paragraph{Usklađenost i doslednost ocena.}
+U PRA režimu svi evaluirani modeli postižu korelaciju sa nastavničkim ocenama od najmanje $0{,}77$,
+a modeli usmereni na rezonovanje najvišu: GPT-5 dostiže PCC od $0{,}89$ uz odnos RMSE/STDDEV od $0{,}47$,
+što znači da su njegova odstupanja od nastavnika manja od polovine prirodne varijabilnosti nastavničkih ocena.
+Slaganje, međutim, nije ujednačeno po predmetima.
+Najviše je tamo gde se očekuje strukturiran odgovor (HTML5, TSW, Programiranje 2),
+a najniže na kursu Veb programiranje ($0{,}74$--$0{,}81$), uz ogradu da su vrednosti za kurseve sa po deset odgovora nepouzdane.
+Pošto je svaka konfiguracija pokrenuta jednom, o doslednosti između ponovljenih pokretanja rad govori samo posredno,
+kroz eksperiment sa temperaturom, u kome dva pokretanja istog modela daju metrike jednake do druge decimale.
+
+\paragraph{Kalibracija strogosti.}
+Konfiguracija strogosti jeste upotrebljiva poluga, ali ne u oba smera podjednako.
+Blaga i neutralna konfiguracija daju najbolje slaganje kod četiri od pet modela,
+dok stroga kod većine modela snižava korelaciju i pomera ocene naniže, kod modela GPT-4o do odnosa prosečnih ocena od $0{,}79$.
+Nastavnik, dakle, može promptom da pomeri prosečnu ocenu prema očekivanjima kursa,
+ali stroža instrukcija po pravilu plaća cenu u slaganju sa ljudskim ocenjivačem,
+pa je neutralna ili blaga konfiguracija sigurnija polazna tačka.
+
+\paragraph{Ocenjivanje bez referentnog odgovora nastavnika.}
+Kada referentni odgovor ne postoji, GRA režim ga generiše iz nastavnog materijala, ali po cenu slaganja:
+kod svih modela i konfiguracija metrike su slabije nego u PRA režimu.
+Pad je najmanji kod modela GPT-5 (sa $0{,}88$ na $0{,}84$ u neutralnoj konfiguraciji),
+pa je GRA režim sa dovoljno sposobnim modelom za rezonovanje upotrebljiv kao zamena kada nastavnik nema pripremljeno rešenje.
+Umetanje celog udžbenika u prompt umesto generisanog odgovora ne poboljšava slaganje, a prompt čini oko 48 puta većim.
+Za modele DeepSeek ovaj deo evaluacije ostaje otvoren,
+jer na najvećem kursu referentni odgovor za njih nije ni generisan (odeljak~\ref{sec:gra-greska}).
+Zaključak je da referentni odgovor nastavnika ostaje najvredniji pojedinačni ulaz u sistem.
+
+\paragraph{Ljudska odgovornost.}
+EduGrader je projektovan tako da automatizacija ne preuzima odluku.
+Ocena modela se nastavniku prikazuje uz njegovu sopstvenu, konačnu ocenu donosi nastavnik,
+a za svaki ocenjeni odgovor čuvaju se prompt, kompletan odgovor modela i obrazloženje, pa je svaka ocena naknadno proverljiva.
+Rezultati pokazuju i zašto je to neophodno: i u najboljoj konfiguraciji model greši u graničnim slučajevima,
+na malim kursevima vrednosti su nestabilne, a otkrivena greška u GRA režimu pokazala je da se
+problem u ulaznim podacima može neprimećeno proširiti kroz hiljade ocena.
+Efikasnost automatizacije se tako koristi za rutinski deo posla, dok odgovornost za ocenu ostaje na nastavniku.
+
 Za evaluirane tipove odgovora, a posebno za relativno strukturirana STEM pitanja,
-savremeni veliki jezički modeli tako aproksimiraju obrasce ljudskog ocenjivanja sa odstupanjima uporedivim sa prirodnom ljudskom varijabilnošću.
-Razlike između modela, režima ocenjivanja i konfiguracija strogosti pri tome su sistematske,
-pa izbor modela i parametara nije proizvoljan.
-
-Rezultati istovremeno potvrđuju da su sistemi veštačke inteligencije najkorisniji kao pomoćni alat, a ne kao zamena za čoveka.
-Ljudski nadzor ostaje neophodan za pravednost, kontekstualno tumačenje i rešavanje graničnih slučajeva.
-
-EduGrader je objavljen kao projekat otvorenog koda, radi reproducibilnosti nalaza i daljeg razvoja sistema.
+savremeni veliki jezički modeli aproksimiraju obrasce ljudskog ocenjivanja sa odstupanjima uporedivim sa prirodnom ljudskom varijabilnošću,
+pod uslovom da imaju referentni odgovor nastavnika i da nastavnik zadrži poslednju reč.
