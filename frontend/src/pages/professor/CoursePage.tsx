@@ -6,6 +6,7 @@ import { fetchQuestions } from "../../api/questions";
 import { fetchTests } from "../../api/tests";
 import { fetchStudentTests } from "../../api/student-tests";
 import { ICourse, IQuestion, IStudentTest, ITest } from "../../types";
+import { BackLink } from "../../components/BackLink";
 
 export const CoursePage = () => {
   const { courseId } = useParams();
@@ -26,6 +27,7 @@ export const CoursePage = () => {
 
   return (
     <div className="stack-lg">
+      <BackLink to="/">Back to courses</BackLink>
       <h1>{course?.name}</h1>
 
       <div className="columns">

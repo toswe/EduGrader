@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { fetchTestWithQuestions } from "../../api/tests";
 import { createStudentTest } from "../../api/student-tests";
 import { ITestQuestions, IStudentTest } from "../../types";
+import { BackLink } from "../../components/BackLink";
 
 const initStudentTest = (test: ITestQuestions): IStudentTest => {
   return {
@@ -60,6 +61,7 @@ export const TestPage = () => {
         handleSubmit();
       }}
     >
+      <BackLink to="/">Back to tests</BackLink>
       <h1>Test</h1>
       <div className="stack">
         {test.answers.map((answer) => (
