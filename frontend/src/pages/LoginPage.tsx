@@ -31,31 +31,39 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h2>Login page</h2>
-      <form onSubmit={handleSubmit}>
+    <main className="app-main">
+      <h1>EduGrader</h1>
+      <form className="stack" onSubmit={handleSubmit}>
         <div>
+          <label htmlFor="userName">Username</label>
           <input
+            id="userName"
             value={formData.userName}
             name="userName"
             type="text"
+            autoComplete="username"
             onChange={handleChange}
           />
         </div>
         <div>
+          <label htmlFor="password">Password</label>
           <input
+            id="password"
             value={formData.password}
             name="password"
             type="password"
+            autoComplete="current-password"
             onChange={handleChange}
           />
         </div>
         <div>
           <button type="submit">Log in</button>
         </div>
-        {errorMessage ? <div>{String(errorMessage)}</div> : null}
+        {errorMessage ? (
+          <div className="error">{String(errorMessage)}</div>
+        ) : null}
       </form>
-    </div>
+    </main>
   );
 };
 

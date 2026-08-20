@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { fetchStudentTest } from "../../api/student-tests";
 import { IStudentTest } from "../../types";
+import { BackLink } from "../../components/BackLink";
 
 export const StudentTestPage = () => {
   const { courseId, studentTestId } = useParams();
@@ -25,46 +26,47 @@ export const StudentTestPage = () => {
   }
 
   if (!studentTest) {
-    return <div>Loading...</div>;
+    return <p className="muted">Loading…</p>;
   }
 
   return (
-    <div>
-      <h1>Student Test Details</h1>
-      <p>
-        <strong>ID:</strong> {studentTest.id}
+    <div className="stack-lg">
+      <BackLink to={`/course/${courseId}`}>Back to course</BackLink>
+      <h1>Submission #{studentTest.id}</h1>
+      <p className="muted">
+        Test:{" "}
+        <Link to={`/course/${courseId}/tests/${studentTest.test}`}>
+          #{studentTest.test}
+        </Link>
       </p>
-      <p>
-        <strong>Test:</strong>{" "}
-        <a href={`/course/${courseId}/tests/${studentTest.test}`}>
-          {studentTest.test}
-        </a>
-      </p>
-      <p>
-        Answers:
+
+      <section className="stack">
+        <h2>Answers</h2>
         {studentTest.answers.map((answer) => (
-          <div
-            key={answer.id}
-            style={{
-              border: "1px solid black",
-              margin: "10px",
-              padding: "5px",
-              borderRadius: "5px",
-            }}
-          >
-            <strong>Question:</strong> {answer.questionText}
-            <br />
-            <strong>Answer:</strong> {answer.answer}
-            <br />
-            <strong>Professor grade:</strong> {answer.score}
-            <br />
-            <strong>LLM score:</strong>{" "}
-            {answer.grades && answer.grades.length > 0
-              ? (answer.grades[answer.grades.length - 1].score / 10)
-              : "Not graded"}
+          <div key={answer.id} className="card stack">
+            <div>
+              <span className="field-label">Question</span>
+              {answer.questionText}
+            </div>
+            <div>
+              <span className="field-label">Answer</span>
+              {answer.answer}
+            </div>
+            <div className="row">
+              <div>
+                <span className="field-label">Professor grade</span>
+                {answer.score}
+              </div>
+              <div>
+                <span className="field-label">LLM score</span>
+                {answer.grades && answer.grades.length > 0
+                  ? answer.grades[answer.grades.length - 1].score / 10
+                  : "Not graded"}
+              </div>
+            </div>
           </div>
         ))}
-      </p>
+      </section>
     </div>
   );
 };
