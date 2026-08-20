@@ -36,7 +36,7 @@ export const StudentTestPage = () => {
       <p className="muted">
         Test:{" "}
         <Link to={`/course/${courseId}/tests/${studentTest.test}`}>
-          #{studentTest.test}
+          {studentTest.testName ?? `#${studentTest.test}`}
         </Link>
       </p>
 

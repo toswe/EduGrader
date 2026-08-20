@@ -68,6 +68,12 @@ class StudentAnswerSerializer(serializers.ModelSerializer):
 
 
 class StudentTestSerializer(serializers.ModelSerializer):
+    test_name = serializers.SerializerMethodField()
+
+    def get_test_name(self, obj):
+        # test is nullable (SET_NULL)
+        return obj.test.name if obj.test else None
+
     class Meta:
         model = StudentTest
         fields = "__all__"

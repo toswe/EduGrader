@@ -12,7 +12,7 @@ export const fetchStudentTests = async (
 ): Promise<IStudentTest[]> => {
   return axiosInstance
     .get(`/student-tests/`, { params })
-    .then((res) => res.data);
+    .then((res) => camelcaseKeys(res.data, { deep: true, lowercase: true }));
 };
 
 export const createStudentTest = async (test: IStudentTest) => {

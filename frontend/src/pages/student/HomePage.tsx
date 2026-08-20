@@ -38,7 +38,7 @@ export const HomePage = () => {
         <h2>Completed</h2>
         {studentTests.map((test) => (
           <div key={test.id} className="card">
-            Test #{test.test}
+            {test.testName ?? `Test #${test.test}`}
           </div>
         ))}
         {studentTests.length === 0 && (

@@ -57,5 +57,6 @@ export interface IStudentTest extends Object {
   id?: number;
   student?: number;
   test: number;
+  testName?: string;
   answers: IStudentAnswer[];
 }
