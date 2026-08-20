@@ -3,21 +3,26 @@
 \label{sec:uvod}
 
 Ocenjivanje retko predstavlja najzanimljiviji deo nastave, ali oblikuje način na koji studenti uče.
-Pravovremena i konkretna povratna informacija pomaže studentu da ispravi nesporazum pre nego što se ustali; kada kasni ili je neodređena, provera znanja postaje formalnost.
+Pravovremena i konkretna povratna informacija pomaže studentu da ispravi nesporazum pre nego što se ustali;
+kada kasni ili je neodređena, provera znanja postaje formalnost.
 Na velikim univerzitetskim kursevima nastavnici i saradnici moraju da ocene stotine odgovora otvorenog tipa u kratkim rokovima.
 Kratka objašnjenja i mini-eseji, za razliku od pitanja sa ponuđenim odgovorima, ne mogu se proveriti prostim uparivanjem obrazaca.
-Oni zahtevaju tumačenje: prepoznavanje delimično ispravnog rezonovanja, razlikovanje jezičkih nepreciznosti od konceptualnih praznina i odluku o tome koliko neki propust treba da utiče na ocenu.
-Takvo ocenjivanje je skupo, teško skalabilno i sklono nedoslednosti: čak i uz detaljna uputstva, dva ocenjivača mogu isti odgovor protumačiti različito,
+Oni zahtevaju tumačenje: prepoznavanje delimično ispravnog rezonovanja,
+razlikovanje jezičkih nepreciznosti od konceptualnih praznina i odluku o tome koliko neki propust treba da utiče na ocenu.
+Takvo ocenjivanje je skupo, teško skalabilno i sklono nedoslednosti:
+čak i uz detaljna uputstva, dva ocenjivača mogu isti odgovor protumačiti različito,
 naročito kada je odgovor dvosmislen, pisan u žurbi ili strukturno nejasan~\cite{brookhart2016century,jonsson2007use,stemler2004comparison}.
 Nastavnika to opterećenje odvraća od pitanja zasnovanih na objašnjenjima,
 a student povratnu informaciju dobija prekasno da bi mu koristila, ili je ne dobija uopšte.
 
 Ranije generacije sistema za automatsku proveru znanja funkcionisale su samo kada su odgovori bili strogo ograničeni:
-testovi sa ponuđenim odgovorima, pitanja dopunjavanja ili kratki odgovori sa predvidljivom formulacijom~\cite{brew2013automated,ramesh2022automated,shermis2003automated}.
+testovi sa ponuđenim odgovorima,
+pitanja dopunjavanja ili kratki odgovori sa predvidljivom formulacijom~\cite{brew2013automated,ramesh2022automated,shermis2003automated}.
 Napredak u obradi prirodnog jezika proširio je ove mogućnosti, ali su se mnogi pristupi i dalje oslanjali na ručno projektovanje atributa,
 uske domene ili velike označene skupove podataka~\cite{banko2001scaling,collobert2008unified,sebastiani2002machine}.
 Savremeni veliki jezički modeli (engl. \emph{large language models}, LLM) tumače slobodan tekst neposredno i rezonuju o njegovom značenju.
-Time je postalo izvodljivo projektovati alate koji ocenjuju odgovore otvorenog tipa, obrazlažu ocenu prirodnim jezikom i ukazuju na ono što u odgovoru nedostaje,
+Time je postalo izvodljivo projektovati alate koji ocenjuju odgovore otvorenog tipa,
+obrazlažu ocenu prirodnim jezikom i ukazuju na ono što u odgovoru nedostaje,
 a ne samo na ono što je pogrešno~\cite{kasneci2023chatgpt,zhai2023chatgpt}.
 
 \subsection{Motivacija}
@@ -68,15 +73,21 @@ Model ocenu izražava na skali od 0 do 100, jer finija granulacija olakšava raz
 Dobijena vrednost se zatim preslikava na skalu od 0 do 10, na kojoj ocenjuju nastavnici (detalji u odeljku~\ref{sec:pipeline}).
 Sve ocene u ovom radu, i sistemske i nastavničke, prikazane su na skali 0--10, osim tamo gde je naznačeno drugačije.
 
-Svi eksperimenti sprovedeni su na srpskom, jeziku sa ograničenim resursima koji je slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju,
+Svi eksperimenti sprovedeni su na srpskom,
+jeziku sa ograničenim resursima koji je slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju,
 dakle izvan engleskog konteksta u kome se ovakvi sistemi obično ispituju.
-Sistem je evaluiran na 583 autentična studentska odgovora prikupljena na dva univerziteta i pet kurseva, od kratkih činjeničkih odgovora i otvorenih tekstualnih objašnjenja do odgovora u obliku koda.
+Sistem je evaluiran na 583 autentična studentska odgovora prikupljena na dva univerziteta i pet kurseva,
+od kratkih činjeničkih odgovora i otvorenih tekstualnih objašnjenja do odgovora u obliku koda.
 Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da se modeli usmereni na rezonovanje najbolje slažu sa ljudskim ocenjivačima.
-U najboljoj konfiguraciji (GPT-5, blaga strogost) EduGrader postiže Pirsonov koeficijent korelacije (engl. \emph{Pearson correlation coefficient}, PCC) od 0{,}89 u odnosu na ljudsko ocenjivanje, a u neutralnoj konfiguraciji 0{,}88.
+U najboljoj konfiguraciji (GPT-5, blaga strogost) EduGrader postiže Pirsonov koeficijent korelacije (engl.
+\emph{Pearson correlation coefficient}, PCC) od 0{,}89 u odnosu na ljudsko ocenjivanje, a u neutralnoj konfiguraciji 0{,}88.
 
 EduGrader je zamišljen kao asistent za ocenjivanje, a ne kao zamena za sud nastavnika.
-On smanjuje repetitivno opterećenje i povećava doslednost, ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
-Zato je sistem projektovan po principu čoveka u petlji (engl. \emph{human-in-the-loop}) i objavljen kao softver otvorenog koda\footnote{\url{https://github.com/toswe/Master}}, kako bi bio proverljiv i prilagodljiv drugim institucijama.
+On smanjuje repetitivno opterećenje i povećava doslednost,
+ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
+Zato je sistem projektovan po principu čoveka u petlji (engl.
+\emph{human-in-the-loop}) i objavljen kao softver otvorenog koda\footnote{\url{https://github.com/toswe/Master}},
+kako bi bio proverljiv i prilagodljiv drugim institucijama.
 Postupak ponovnog izvođenja svih prikazanih rezultata opisan je u odeljku~\ref{sec:reprodukcija}.
 
 \subsection{Struktura rada}
@@ -85,7 +96,8 @@ Poglavlje~\ref{sec:pregled} daje pregled srodnih istraživanja primene veštačk
 Poglavlje~\ref{sec:aplikacija} opisuje veb aplikaciju EduGrader i sloj za integraciju jezičkih modela,
 a poglavlje~\ref{sec:pipeline} sistem za automatizovanu evaluaciju modela kojim su sprovedeni eksperimenti.
 Poglavlje~\ref{sec:metodologija} predstavlja metodologiju evaluacije: metrike, skupove podataka i konfiguracije modela.
-Poglavlje~\ref{sec:rezultati} donosi rezultate, uključujući poređenje PRA i GRA režima kroz modele i nivoe strogosti, uticaj konfiguracije strogosti i korelacije po pojedinačnim kursevima.
+Poglavlje~\ref{sec:rezultati} donosi rezultate, uključujući poređenje PRA i GRA režima kroz modele i nivoe strogosti,
+uticaj konfiguracije strogosti i korelacije po pojedinačnim kursevima.
 U poglavlju~\ref{sec:diskusija} rezultati su upoređeni sa prethodnim istraživanjima i razmotreni su pravci budućeg rada,
 dok poglavlje~\ref{sec:zakljucak} zaključuje rad.
 Dodatak~\ref{app:promptovi} sadrži šablone promptova i reprezentativne primere ocenjivanja.

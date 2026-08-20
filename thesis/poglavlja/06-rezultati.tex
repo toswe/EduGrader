@@ -3,7 +3,8 @@
 \label{sec:rezultati}
 
 Rezultati su iskazani kroz tri od četiri metrike uvedene u odeljku~\ref{sec:metrike}: PCC, odnos prosečnih ocena i odnos RMSE/STDDEV.
-RMSE se ne prikazuje posebno jer ulazi u odnos RMSE/STDDEV, koji istu grešku izražava u odnosu na varijabilnost ljudskih ocena i time je uporediv između kurseva sa različitim rasponom ocena.
+RMSE se ne prikazuje posebno jer ulazi u odnos RMSE/STDDEV,
+koji istu grešku izražava u odnosu na varijabilnost ljudskih ocena i time je uporediv između kurseva sa različitim rasponom ocena.
 Sve vrednosti izračunate su nad objedinjenim skupom svih ocenjenih odgovora,
 a ne kao prosek vrednosti po pojedinačnim skupovima podataka.
 
@@ -47,7 +48,8 @@ DeepSeek-Reasoner & 0{,}87 & 0{,}86 & 0{,}78 & 0{,}88 & 0{,}86 & 0{,}95 & 0{,}53
 }
 \end{table}
 
-Vrednosti u tabeli~\ref{tab:pra_results} izračunate su nad svih 583 odgovora, osim u dva slučaja u kojima ocenjivanje nije uspelo za sve odgovore: neutralna konfiguracija modela GPT-4o obuhvata 399 odgovora,
+Vrednosti u tabeli~\ref{tab:pra_results} izračunate su nad svih 583 odgovora,
+osim u dva slučaja u kojima ocenjivanje nije uspelo za sve odgovore: neutralna konfiguracija modela GPT-4o obuhvata 399 odgovora,
 a neutralna konfiguracija modela DeepSeek-Reasoner 555 odgovora.\footnote{Nedostajuće ocene posledica su prekinutog pokretanja,
 odnosno trajno neuspešnih API poziva, koji se prema opisu iz odeljka~\ref{sec:pipeline} označavaju i isključuju iz analize.}
 
@@ -95,10 +97,12 @@ DeepSeek-Reasoner & 0{,}79 & 0{,}79 & 0{,}70 & 0{,}81 & 0{,}77 & 0{,}87 & 0{,}70
 \end{table}
 
 U GRA režimu, gde referentni odgovor generiše model a ne nastavnik, sve metrike su lošije (tabela~\ref{tab:gra_results}).
-Generisani referentni odgovor unosi dodatnu neizvesnost: po strukturi, formulaciji i nivou detalja može se razlikovati od rešenja koje je nastavnik imao na umu.
+Generisani referentni odgovor unosi dodatnu neizvesnost: po strukturi,
+formulaciji i nivou detalja može se razlikovati od rešenja koje je nastavnik imao na umu.
 
 Modeli za rezonovanje najbolje podnose prelazak u GRA režim.
-GPT-5 zadržava slaganje od $0{,}85$ u blagoj i $0{,}84$ u neutralnoj konfiguraciji i jedini u svim konfiguracijama drži RMSE/STDDEV ispod $0{,}75$, a DeepSeek-Reasoner ostaje na $0{,}79$.
+GPT-5 zadržava slaganje od $0{,}85$ u blagoj i $0{,}84$ u neutralnoj konfiguraciji i jedini u svim konfiguracijama drži RMSE/STDDEV ispod $0{,}75$,
+a DeepSeek-Reasoner ostaje na $0{,}79$.
 Sposobniji modeli za rezonovanje su, dakle, bolji i u konstruisanju referentnog odgovora i u ocenjivanju u odnosu na njega.
 
 DeepSeek-Chat je u GRA režimu neupotrebljiv: korelacija pada na $0{,}43$--$0{,}50$, odnos prosečnih ocena na $0{,}37$--$0{,}52$,
@@ -114,19 +118,22 @@ a kod modela DeepSeek-Chat najveći (sa $0{,}82$ na $0{,}50$).
 Performanse u GRA režimu, dakle, presudno zavise od kvaliteta generisanog referentnog odgovora, a ne samo od sposobnosti ocenjivanja.
 
 Ne postoji konfiguracija strogosti koja je najbolja za sve modele, a optimalna se razlikuje između dva režima.
-U PRA režimu najvišu korelaciju blaga konfiguracija daje kod modela GPT-5, GPT-4o-mini i DeepSeek-Reasoner, neutralna kod modela GPT-4o, a stroga kod modela DeepSeek-Chat.
+U PRA režimu najvišu korelaciju blaga konfiguracija daje kod modela GPT-5,
+GPT-4o-mini i DeepSeek-Reasoner, neutralna kod modela GPT-4o, a stroga kod modela DeepSeek-Chat.
 U GRA režimu neutralna je najbolja kod svih modela osim GPT-5, kod koga je najbolja blaga,
 a kod modela DeepSeek-Reasoner razlika između blage i neutralne zanemarljiva je (oba $0{,}79$).
 Stroga konfiguracija je u oba režima najlošija za četiri od pet modela, po korelaciji i po sistematskom odstupanju.
 
 Sistematsko odstupanje razdvaja režime jasnije od korelacije.
-Dok u PRA režimu odnosi prosečnih ocena ostaju blizu $1{,}0$, u GRA režimu svi modeli ocenjuju niže od nastavnika, u skladu sa nalazom iz odeljka~\ref{sec:cross-dataset} da su generisani referentni odgovori po pravilu detaljniji od nastavničkih,
+Dok u PRA režimu odnosi prosečnih ocena ostaju blizu $1{,}0$, u GRA režimu svi modeli ocenjuju niže od nastavnika,
+u skladu sa nalazom iz odeljka~\ref{sec:cross-dataset} da su generisani referentni odgovori po pravilu detaljniji od nastavničkih,
 pa studentski odgovori u odnosu na njih izgledaju nepotpuniji.
 Isto važi i za odnose greške: u PRA režimu svi modeli ostaju ispod $0{,}75$,
 dok se u GRA režimu granica $1{,}0$ prelazi kod modela DeepSeek-Chat u svim konfiguracijama i kod modela GPT-4o u strogoj.
 
 Referentni odgovor nastavnika, ukupno gledano, poboljšava pouzdanost ocenjivanja kod svih modela i svih konfiguracija strogosti.
-GPT-5 je najjači u oba režima, a rezultat modela DeepSeek-Reasoner pokazuje da prednost modela za rezonovanje nije vezana za jednog provajdera; izraženija je u GRA režimu,
+GPT-5 je najjači u oba režima,
+a rezultat modela DeepSeek-Reasoner pokazuje da prednost modela za rezonovanje nije vezana za jednog provajdera; izraženija je u GRA režimu,
 gde model sam mora da konstruiše referentni standard.
 Modeli opšte namene su upotrebljivi, ali osetljiviji na postavku: GPT-4o-mini nudi povoljan odnos cene i performansi u PRA režimu,
 GPT-4o je konkurentan u neutralnoj konfiguraciji, a DeepSeek-Chat samo u PRA režimu.
@@ -135,7 +142,8 @@ GPT-4o je konkurentan u neutralnoj konfiguraciji, a DeepSeek-Chat samo u PRA re�
 \label{sec:cross-dataset}
 
 Vrednosti PCC-a po kursevima date su u tabelama~\ref{tab:pcc-reference} i~\ref{tab:pcc-generated}, u neutralnoj konfiguraciji strogosti.
-Budući da se broj odgovora po kursevima znatno razlikuje (tabela~\ref{tab:dataset}), vrednosti za manje kurseve treba tumačiti sa rezervom: kod kurseva DDS i HTML5 korelacija je izračunata nad po deset odgovora.
+Budući da se broj odgovora po kursevima znatno razlikuje (tabela~\ref{tab:dataset}),
+vrednosti za manje kurseve treba tumačiti sa rezervom: kod kurseva DDS i HTML5 korelacija je izračunata nad po deset odgovora.
 
 Razlika između režima najveća je na kursevima gde se očekuje kratak i precizan studentski odgovor, kao što su WP i TSW.
 Kod kursa TSW pad je najizraženiji, sa $0{,}81$--$0{,}93$ na $0{,}46$--$0{,}72$.
@@ -148,7 +156,8 @@ Kod kurseva na kojima se očekuju duži, opisniji odgovori (DDS i HTML5) razlike
 jer generisani referentni odgovori po strukturi i nivou detalja liče na nastavničke.
 Na kursu HTML5 vrednosti su praktično identične u oba režima ($0{,}93$--$0{,}97$).
 
-Najveći kurs, Programiranje 2, sa 477 od ukupno 583 odgovora, ponaša se u skladu sa objedinjenim rezultatima: GPT-5 je najbolji u oba režima ($0{,}88$ i $0{,}84$),
+Najveći kurs, Programiranje 2, sa 477 od ukupno 583 odgovora,
+ponaša se u skladu sa objedinjenim rezultatima: GPT-5 je najbolji u oba režima ($0{,}88$ i $0{,}84$),
 a DeepSeek-Chat pokazuje najveći pad između režima (sa $0{,}80$ na $0{,}42$).
 
 \begin{table}[ht]

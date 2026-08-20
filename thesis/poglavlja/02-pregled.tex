@@ -2,23 +2,29 @@
 \section{Pregled oblasti i srodni radovi}
 \label{sec:pregled}
 
-Primena veštačke inteligencije u obrazovanju razvijala se od rane automatizacije zasnovane na pravilima ka adaptivnim sistemima koji tumače i generišu složene odgovore nalik ljudskim.
-Pod veštačkom inteligencijom se podrazumevaju računarski sistemi projektovani da obavljaju kognitivne funkcije poput učenja, rezonovanja i rešavanja problema~\cite{baker2019educ},
+Primena veštačke inteligencije u obrazovanju razvijala se od rane automatizacije zasnovane na pravilima
+ka adaptivnim sistemima koji tumače i generišu složene odgovore nalik ljudskim.
+Pod veštačkom inteligencijom se podrazumevaju računarski sistemi projektovani da obavljaju kognitivne funkcije poput učenja,
+rezonovanja i rešavanja problema~\cite{baker2019educ},
 a u obrazovnom kontekstu skup tehnologija koje omogućavaju personalizovanija i adaptivnija okruženja za učenje~\cite{zawacki2019systematic}.
-Sistematski pregledi im pripisuju potencijal da unaprede ishode učenja, prošire dostupnost obrazovanja i efikasnije iskoriste nastavne resurse~\cite{yuskovych2022application,zhang2023study}.
+Sistematski pregledi im pripisuju potencijal da unaprede ishode učenja,
+prošire dostupnost obrazovanja i efikasnije iskoriste nastavne resurse~\cite{yuskovych2022application,zhang2023study}.
 Veliki jezički modeli tu donose promenu u odnosu na ranije pristupe zasnovane na obradi prirodnog jezika:
 ne zahtevaju ručno projektovane atribute ni obučavanje za konkretan domen,
 već obrađuju slobodan tekst i rezonuju o značenju na višem nivou apstrakcije.
 Zato se ispituju za nastavu usmerenu na učenika, automatsko generisanje sadržaja i nove oblike provere znanja~\cite{zhang2023study}.
 
 Empirijske studije ocenjivanja uz podršku velikih jezičkih modela daju mešovite rezultate.
-Kuli i Jusuf~\cite{kooli2025transforming} ispitali su ocenjivanje uz pomoć ChatGPT-a na 25 studentskih radova iz kohorte od približno 100 studenata druge godine na kursu iz društvenih nauka,
+Kuli i Jusuf~\cite{kooli2025transforming} ispitali su ocenjivanje uz pomoć ChatGPT-a na 25 studentskih radova
+iz kohorte od približno 100 studenata druge godine na kursu iz društvenih nauka,
 gde su radove nezavisno ocenili i ljudski ocenjivači i model.
-Dobijena je umerena korelacija između ocena veštačke inteligencije i ljudskih ocena (koeficijent korelacije približno 0{,}45): model aproksimira opšte obrasce ocenjivanja,
+Dobijena je umerena korelacija između ocena veštačke inteligencije i ljudskih ocena (koeficijent korelacije približno 0{,}45):
+model aproksimira opšte obrasce ocenjivanja,
 ali pojedinačne evaluacije se i dalje razlikuju.
 Autori ističu da ChatGPT ubrzava ocenjivanje i daje korisnu povratnu informaciju,
 ali da mu izostaje kontekstualno razumevanje nijansiranih studentskih argumenata.
-Upozoravaju i na rizik produbljivanja obrazovnih nejednakosti i na potrebu za institucionalnim okvirima za transparentnost, nadzor i ublažavanje pristrasnosti pri uvođenju takvih alata.
+Upozoravaju i na rizik produbljivanja obrazovnih nejednakosti i na potrebu za institucionalnim okvirima za transparentnost,
+nadzor i ublažavanje pristrasnosti pri uvođenju takvih alata.
 
 Lundgren~\cite{lundgren2024large} je ispitao GPT-4 na 60 eseja master nivoa iz političkih nauka koje su prethodno ocenili univerzitetski nastavnici.
 Prosečne ocene modela bile su usklađene sa nastavničkim, ali je pouzdanost među ocenjivačima (između modela i ljudi) bila niska:
@@ -27,11 +33,13 @@ Ocenjivanje je bilo sklono izbegavanju rizika i oslanjanju na opšte karakterist
 Izmene prompta i uputstava za ocenjivanje donele su samo ograničena poboljšanja,
 pa su tadašnji sistemi bili slabo osetljivi na suptilne varijacije u kriterijumima evaluacije.
 
-Jukjevič~\cite{jukiewicz2024future} je ChatGPT primenio na ocenjivanje devet programerskih zadataka na petnaestonedeljnom kursu programiranja u Python-u sa 67 studenata osnovnih studija kognitivnih nauka,
+Jukjevič~\cite{jukiewicz2024future} je ChatGPT primenio na ocenjivanje devet programerskih zadataka
+na petnaestonedeljnom kursu programiranja u Python-u sa 67 studenata osnovnih studija kognitivnih nauka,
 gde su radove nezavisno ocenili i nastavnik i model.
 Korelacija sa nastavničkim ocenama bila je snažno pozitivna, mada je model dodeljivao nešto strože ocene.
 Ponovljivost kroz višestruka pokretanja bila je visoka, sa zanemarljivim varijacijama između iteracija.
-Uz numeričku ocenu, ChatGPT je procenjivao ispravnost koda, proveravao poštovanje smernica PEP\,8 i za nekoliko sekundi generisao detaljnu povratnu informaciju.
+Uz numeričku ocenu, ChatGPT je procenjivao ispravnost koda,
+proveravao poštovanje smernica PEP\,8 i za nekoliko sekundi generisao detaljnu povratnu informaciju.
 Autor navodi i ograničenja: halucinirane greške, troškove korišćenja API-ja i povremene nedoslednosti u ocenjivanju koje zahtevaju proveru nastavnika.
 Zaključak studije je da je ChatGPT koristan komplementaran alat za procenu koda i generisanje povratnih informacija,
 ali da ljudski nadzor ostaje neophodan za pouzdanost i pravednost.
@@ -39,15 +47,23 @@ ali da ljudski nadzor ostaje neophodan za pouzdanost i pravednost.
 Ovi nalazi se uklapaju u širu sliku: pouzdanost ocenjivanja velikim jezičkim modelima zavisi od tipa zadatka.
 Slaganje sa ljudskim ocenjivačima veće je tamo gde su odgovori strukturirani, kao kod definicija, formula ili fragmenata koda,
 a opada kod subjektivnih ili otvorenih pisanih zadataka~\cite{tomic2022ai,vittorini2021ai}.
-U radu~\cite{pinto2023large} GPT-3 je evaluiran na odgovorima otvorenog tipa profesionalaca iz industrije i pokazao snažne korelacije sa ekspertskim ocenama, pod uslovom da su kriterijumi jasno definisani i kontekstualno utemeljeni.
+U radu~\cite{pinto2023large} GPT-3 je evaluiran na odgovorima otvorenog tipa profesionalaca iz industrije
+i pokazao snažne korelacije sa ekspertskim ocenama,
+pod uslovom da su kriterijumi jasno definisani i kontekstualno utemeljeni.
 Izvan numeričkog ocenjivanja, sistemi zasnovani na veštačkoj inteligenciji generišu adaptivne aktivnosti učenja,
-isporučuju personalizovanu povratnu informaciju i podržavaju formativno i sumativno ocenjivanje prilagođeno individualnim karakteristikama učenika~\cite{diwan2023ai,luckin2016intelligence}.
-Inteligentni tutorski sistemi i srodni pristupi nastoje da aproksimiraju individualnu nastavnu podršku uz veću doslednost i skalabilnost evaluacije~\cite{conati2009intelligent,garcia2018social}.
+isporučuju personalizovanu povratnu informaciju
+i podržavaju formativno i sumativno ocenjivanje prilagođeno individualnim karakteristikama učenika~\cite{diwan2023ai,luckin2016intelligence}.
+Inteligentni tutorski sistemi i srodni pristupi nastoje da aproksimiraju individualnu nastavnu podršku
+uz veću doslednost i skalabilnost evaluacije~\cite{conati2009intelligent,garcia2018social}.
 Kritičke perspektive, s druge strane, upozoravaju na „zamagljivanje'' odgovornosti u automatskom ocenjivanju,
 gde odluke postaju neprozirne, a odgovornost razvodnjena~\cite{swiecki2022assessment}.
-Transparentnost, objašnjivost, privatnost podataka i kvalitet povratnih informacija zato ostaju centralne teme konceptualnih analiza ocenjivanja podržanog veštačkom inteligencijom~\cite{kumar2023faculty}.
+Transparentnost, objašnjivost,
+privatnost podataka i kvalitet povratnih informacija
+zato ostaju centralne teme konceptualnih analiza ocenjivanja podržanog veštačkom inteligencijom~\cite{kumar2023faculty}.
 
 Kroz ovu literaturu provlači se isti zaključak: veliki jezički modeli su pomoćni alati koji automatizuju rutinske aspekte ocenjivanja,
-dok nastavnik ostaje nezamenljiv za pedagoško rasuđivanje, kontekstualno tumačenje i granične slučajeve~\cite{van2022applications,zawacki2019systematic}.
-Preporukama iz literature najbliže odgovaraju pristupi koji spajaju automatizaciju sa nadzorom čoveka u petlji, podesivom strogošću ocenjivanja i interpretabilnom povratnom informacijom.
+dok nastavnik ostaje nezamenljiv za pedagoško rasuđivanje,
+kontekstualno tumačenje i granične slučajeve~\cite{van2022applications,zawacki2019systematic}.
+Preporukama iz literature najbliže odgovaraju pristupi koji spajaju automatizaciju sa nadzorom čoveka u petlji,
+podesivom strogošću ocenjivanja i interpretabilnom povratnom informacijom.
 Ta tri zahteva, kontrola nastavnika, transparentnost i prilagodljivost, oblikovala su i platformu EduGrader predstavljenu u ovom radu.

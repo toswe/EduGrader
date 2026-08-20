@@ -2,8 +2,11 @@
 \section{Sistem za automatizovanu evaluaciju modela}
 \label{sec:pipeline}
 
-Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela, organizovan kao \emph{pipeline} u sistemu DVC (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}}.
-U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima, i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
+Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela,
+organizovan kao \emph{pipeline} u sistemu DVC (engl.
+\emph{Data Version Control})\footnote{\url{https://dvc.org}}.
+U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima,
+i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
 Eksperiment se tako reprodukuje bez ponovnog plaćanja API poziva čiji su ulazi ostali isti.
 
 \subsection{Format ulaznih podataka}
@@ -13,16 +16,19 @@ Svaki od devet skupova podataka (pet kurseva, pri čemu su za pojedine kurseve o
 \begin{itemize}
     \item \texttt{questions.csv}, po jedan red za svako pitanje, sa kolonama: identifikator pitanja,
     tekst pitanja, tačan odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
-    \item \texttt{student\_answers.csv}, po jedan red za svaki studentski odgovor, sa kolonama: identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
+    \item \texttt{student\_answers.csv}, po jedan red za svaki studentski odgovor, sa kolonama:
+    identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
 \end{itemize}
 
 \subsection{Faze obrade}
 
 Prva faza (\emph{spajanje ulaza}) validira i spaja ove dve datoteke u jedinstvenu tabelu.
-Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka, svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
+Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka,
+svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
 Provere su ovako stroge zato što su podaci pripremani ručno, a greška u njima otkrivena tek posle ocenjivanja znači bačene API pozive.
 
-Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
+Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt
+i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
 Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz odeljka~\ref{sec:modeli}:
 
 \begin{itemize}
@@ -31,13 +37,16 @@ Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz
     Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF,
     tekst se izdvaja bibliotekom PyPDF2 i kešira na disku (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom),
     a model iz njega konstruiše koncizan referentni odgovor dužine dve do pet rečenica.
-    U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, ponovnom upotrebom iste komponente kao u PRA varijanti, nad tabelom pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim.
-    \item \textbf{Varijanta sa nastavnim materijalom u promptu} ne koristi referentni odgovor, već ceo izvučeni tekst udžbenika umeće u svaki prompt za ocenjivanje.
+    U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, ponovnom upotrebom iste komponente kao u PRA varijanti,
+    nad tabelom pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim.
+    \item \textbf{Varijanta sa nastavnim materijalom u promptu} ne koristi referentni odgovor,
+    već ceo izvučeni tekst udžbenika umeće u svaki prompt za ocenjivanje.
     Ova varijanta nije pokrenuta za sve modele; razlozi su izloženi u odeljku~\ref{sec:rezim-udzbenik},
     a rezultati za pokrivene modele prikazani su odvojeno u odeljku~\ref{sec:rezultati-udzbenik}.
 \end{itemize}
 
-U svim varijantama sistemska instrukcija se sastoji od prompta strogosti (blag, neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza:
+U svim varijantama sistemska instrukcija se sastoji od prompta strogosti (blag,
+neutralan ili strog; dodatak~\ref{app:promptovi}) i fiksnog uputstva o formatu izlaza:
 prvi red odgovora mora sadržati samo ocenu na skali 0--100, a ostatak obrazloženje.
 Parametarske datoteke modela zadaju temperaturu $0$,
 ali je integracioni sloj za OpenAI izostavlja iz zahteva kada je jednaka nuli,
@@ -51,8 +60,10 @@ Trajno neuspešni redovi označavaju se specijalnom negativnom vrednošću i isk
 
 \subsection{Automatizacija eksperimenata i analiza}
 
-Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka, dakle 135 pokretanja po režimu ocenjivanja.
-Pomoćna skripta za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline}; ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
+Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka,
+dakle 135 pokretanja po režimu ocenjivanja.
+Pomoćna skripta za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline};
+ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
 Svaka kombinacija pokrenuta je jednom, pa rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
 Dva dodatna eksperimenta izvan ove mreže, sa nastavnim materijalom u promptu
 i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatni}.
@@ -121,7 +132,8 @@ Imena tih datoteka prate tri obrasca:
 \begin{itemize}
     \item \texttt{graded.<strogost>.<model>.correct.csv} za PRA režim;
     \item \texttt{graded.generated.<strogost>.<model>.csv} za GRA režim;
-    \item \texttt{graded.<strogost>.<model>.textbook.csv} za varijantu sa nastavnim materijalom u promptu, o kojoj je reč u odeljku~\ref{sec:rezim-udzbenik}.
+    \item \texttt{graded.<strogost>.<model>.textbook.csv} za varijantu sa nastavnim materijalom u promptu,
+    o kojoj je reč u odeljku~\ref{sec:rezim-udzbenik}.
 \end{itemize}
 
 Oznaka \texttt{generated} stoji pre nivoa strogosti,
