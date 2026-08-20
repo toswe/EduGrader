@@ -65,61 +65,61 @@ po dva za Tehničko i naučno pisanje i Veb programiranje, i po jedan za Digital
 Svi eksperimenti izvršavaju se nad pojedinačnim rokovima, dok se rezultati u poglavlju~\ref{sec:rezultati} prikazuju objedinjeno i po kursevima.
 
 Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici,
-referentne odgovore (kada su dostupni), napomene nastavnika i relevantne nastavne materijale korišćene u pripremi ispita.
-Ukupno, skup sadrži \textbf{583 studentska odgovora} iz različitih disciplina i formata pitanja.
-U zavisnosti od kursa, odgovori uključuju \textbf{kratka tekstualna objašnjenja} i \textbf{odgovore u obliku koda} (tabela~\ref{tab:dataset}).
-
-Uz raspodelu tipova odgovora praćena je i prosečna dužina odgovora, i to za referentna rešenja nastavnika,
-za automatski generisane referentne odgovore i za studentske odgovore,
-jer dužina odgovora utiče na težinu automatskog ocenjivanja.
-Generisani referentni odgovori znatno su duži od onih koje su pripremili nastavnici (tabela~\ref{tab:response_length}),
-naročito kod pitanja gde se očekuju kratki odgovori.
-Na više kurseva nastavnici očekuju sažete odgovore (npr.\ jedan izraz ili kratku konstataciju),
-dok jezički modeli uz odgovor po pravilu daju i dodatni kontekst i objašnjenje zašto je odgovor tačan.
+referentne odgovore nastavnika i adrese nastavnih materijala korišćenih u pripremi ispita.
+Za deo pitanja nastavnici su priložili i kratke napomene za ocenjivanje;
+one su sačuvane u ulaznim datotekama, ali ih sistem za evaluaciju ne koristi, pa u eksperimentima nisu učestvovale.
+Ukupno, skup sadrži \textbf{583 studentska odgovora} iz različitih disciplina (tabela~\ref{tab:dataset}).
+U zavisnosti od kursa, odgovori obuhvataju kratka tekstualna objašnjenja i odgovore u obliku koda,
+ali se tip pitanja u podacima ne beleži, pa se broj odgovora daje samo po kursu.
 
 \begin{table}[ht]
 \centering
-\caption{Struktura skupa podataka po kursevima (broj studentskih odgovora po tipu pitanja)}
+\caption{Struktura skupa podataka po kursevima (broj studentskih odgovora)}
 \label{tab:dataset}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lccc}
+\begin{tabular}{lc}
 \toprule
-\textbf{Kurs} &
-\textbf{Odgovori} &
-\textbf{Kratak tekst} &
-\textbf{Kod} \\
+\textbf{Kurs} & \textbf{Odgovori} \\
 \midrule
-Programiranje 2 (Prog 2) & 477 & 362 & 115 \\
-Tehničko i naučno pisanje (TSW) & 40 & 20 & 20 \\
-Veb programiranje (WP) & 46 & 40 & 6 \\
-Digitalno čuvanje podataka (DDS) & 10 & 10 & 0 \\
-HTML5 i JavaScript za video-igre (HTML5) & 10 & 10 & 0 \\
+Programiranje 2 (Prog 2) & 477 \\
+Tehničko i naučno pisanje (TSW) & 40 \\
+Veb programiranje (WP) & 46 \\
+Digitalno čuvanje podataka (DDS) & 10 \\
+HTML5 i JavaScript za video-igre (HTML5) & 10 \\
 \midrule
-\textbf{Ukupno} & \textbf{583} & \textbf{442 (75{,}8\%)} & \textbf{141 (24{,}2\%)} \\
+\textbf{Ukupno} & \textbf{583} \\
 \bottomrule
 \end{tabular}
-}
 \end{table}
 
-Pitanje je svrstano u kategoriju \emph{kod} ukoliko se od studenta traži da napiše programski kod, izraz ili \LaTeX{} naredbu,
-a u kategoriju \emph{kratak tekst} ukoliko se očekuje prozni odgovor, čak i kada se u samom pitanju navodi isečak koda.
+Praćena je i prosečna dužina odgovora, za referentne odgovore nastavnika,
+za generisane referentne odgovore svakog modela i za studentske odgovore (tabela~\ref{tab:response_length}),
+jer dužina referentnog odgovora utiče na to koliko studentski odgovor u poređenju sa njim deluje potpuno.
+Referentni odgovori nastavnika i studentski odgovori su podjednako kratki, oko 21 do 22 reči u proseku.
+Generisani referentni odgovori su dva do tri puta duži, od oko 47 do 67 reči u zavisnosti od modela,
+što odgovara traženom obimu od dve do pet rečenica (dodatak~\ref{app:promptovi}); instrukcija o dužini je, dakle, uglavnom ispoštovana.
+Razlika potiče otud što na više kurseva nastavnici očekuju sažet odgovor (npr.\ jedan izraz ili kratku konstataciju),
+dok jezički modeli i u okviru zadatog obima uz odgovor daju i kontekst i objašnjenje zašto je odgovor tačan.
 
 \begin{table}[ht]
 \centering
-\caption{Prosečna dužina odgovora po tipu pitanja i izvoru odgovora}
+\caption{Prosečna dužina odgovora po izvoru.
+Generisani referentni odgovori odnose se na neutralnu konfiguraciju GRA režima.
+U zagradi je broj odgovora nad kojim je prosek izračunat;
+za modele DeepSeek izostavljeno je 477 odgovora sa kursa Programiranje 2,
+kod kojih generisanje referentnog odgovora nije uspelo (odeljak~\ref{sec:gra-greska}).}
 \label{tab:response_length}
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccccc}
+\begin{tabular}{lcc}
 \toprule
-& \multicolumn{2}{c}{\textbf{Odgovor nastavnika}}
-& \multicolumn{2}{c}{\textbf{Generisani odgovor}}
-& \multicolumn{2}{c}{\textbf{Studentski odgovor}} \\
-\cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-\textbf{Tip pitanja} & reči & znakova & reči & znakova & reči & znakova \\
+\textbf{Izvor odgovora} & \textbf{reči} & \textbf{znakova} \\
 \midrule
-Kratak tekst & 20{,}9 & 130{,}5 & 201{,}7 & 1341{,}9 & 24{,}7 & 143{,}2 \\
-Kod & 22{,}2 & 137{,}4 & 162{,}7 & 1144{,}3 & 15{,}9 & 102{,}5 \\
+Referentni odgovor nastavnika (583) & 21{,}3 & 132{,}5 \\
+Studentski odgovor (583) & 22{,}2 & 131{,}6 \\
+\midrule
+Generisani, GPT-4o-mini (583) & 67{,}1 & 431{,}9 \\
+Generisani, GPT-4o (583) & 67{,}1 & 437{,}0 \\
+Generisani, GPT-5 (583) & 54{,}4 & 344{,}1 \\
+Generisani, DeepSeek-Chat (106) & 46{,}6 & 329{,}0 \\
+Generisani, DeepSeek-Reasoner (106) & 52{,}3 & 370{,}9 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -143,7 +143,7 @@ Podela na tri nivoa strogosti prati nalaz prethodnih studija da i ljudski ocenji
 
 EduGrader podržava dva komplementarna režima ocenjivanja:
 \begin{itemize}
-    \item PRA, u kome se studentski odgovori porede sa tačnim odgovorima i napomenama za ocenjivanje koje je pripremio nastavnik;
+    \item PRA, u kome se studentski odgovori porede sa referentnim odgovorima koje je pripremio nastavnik;
     \item GRA, u kome model najpre generiše referentni odgovor na osnovu priloženih nastavnih materijala,
     a zatim studentski odgovor ocenjuje u odnosu na taj generisani standard.
 \end{itemize}
@@ -156,6 +156,28 @@ a nalazi su izloženi u odeljku~\ref{sec:rezultati-temperatura}.
 Svi eksperimenti sprovedeni su na srpskom jeziku, uključujući ispitna pitanja, studentske odgovore i referentne odgovore.
 Srpski je jezik sa ograničenim resursima, slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju,
 pa se ovo istraživanje pomera izvan dominantnog engleskog konteksta.
+
+\subsection{Neuspelo generisanje referentnog odgovora za modele DeepSeek}
+\label{sec:gra-greska}
+
+Pri proveri podataka posle završenih eksperimenata utvrđeno je da GRA režim za dva modela nije izveden onako kako je opisan.
+Nastavni materijal za kurs Programiranje 2 je ceo udžbenik, čiji izdvojeni tekst zauzima oko $255\,000$ tokena,
+dok kontekstni prozor modela DeepSeek-Chat i DeepSeek-Reasoner iznosi $131\,072$ tokena.
+Integracija za OpenAI takav ulaz automatski skraćuje na veličinu kontekstnog prozora,
+pa su modeli porodice GPT referentne odgovore generisali iz skraćenog udžbenika.
+Integracija za DeepSeek tu mogućnost nema: API je svaki zahtev odbio,
+a faza generisanja je posle tri neuspela pokušaja u kolonu referentnog odgovora upisala tekst poruke o grešci.
+Faza ocenjivanja je potom ta pitanja obradila kao i sva ostala,
+pa je za oba modela DeepSeek, u sve tri konfiguracije strogosti, svih 477 odgovora sa kursa Programiranje 2 ocenjeno
+tako što je model umesto referentnog odgovora video poruku o grešci, odnosno ocenjivao je bez referentnog odgovora, iz sopstvenog znanja.
+Za preostala četiri kursa (106 odgovora) udžbenici su znatno manji i generisanje je uspelo.
+
+Greška je otkrivena kada eksperimenti više nisu ponavljani, pa rezultati nisu prepravljeni.
+Umesto toga, u poglavlju~\ref{sec:rezultati} GRA vrednosti za modele DeepSeek prikazane su kako su dobijene,
+uz izričitu napomenu da na kursu Programiranje 2 ne mere ocenjivanje u odnosu na generisani referentni odgovor,
+već ocenjivanje bez ikakvog referentnog odgovora,
+a tumačenje tih vrednosti ograničeno je na ono što takva postavka dopušta (odeljak~\ref{sec:ogranicenja}).
+Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovori izostavljeni iz proseka dužine.
 
 \subsection{Razmatran treći režim: ocenjivanje direktno iz nastavnog materijala}
 \label{sec:rezim-udzbenik}

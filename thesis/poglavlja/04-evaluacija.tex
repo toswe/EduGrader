@@ -15,7 +15,9 @@ Svaki od devet skupova podataka (pet kurseva, pri čemu su za pojedine kurseve o
 
 \begin{itemize}
     \item \texttt{questions.csv}, po jedan red za svako pitanje, sa kolonama: identifikator pitanja,
-    tekst pitanja, tačan odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
+    tekst pitanja, referentni odgovor nastavnika i adresa nastavnog materijala (PDF udžbenika) iz koga je pitanje postavljeno;
+    datoteka sadrži i kolonu sa napomenom nastavnika za ocenjivanje i pomoćni identifikator,
+    koje faze obrade ne čitaju;
     \item \texttt{student\_answers.csv}, po jedan red za svaki studentski odgovor, sa kolonama:
     identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
 \end{itemize}
@@ -23,8 +25,10 @@ Svaki od devet skupova podataka (pet kurseva, pri čemu su za pojedine kurseve o
 \subsection{Faze obrade}
 
 Prva faza (\emph{spajanje ulaza}) validira i spaja ove dve datoteke u jedinstvenu tabelu.
-Validacija obuhvata proveru obaveznih kolona, jedinstvenosti identifikatora pitanja, nepraznosti svih polja i kompletnosti podataka,
-svaki student mora imati odgovor na svako pitanje; u suprotnom se obrada prekida sa opisom greške.
+Validacija obuhvata proveru obaveznih kolona u obe datoteke;
+za pitanja se proverava jedinstvenost identifikatora i nepraznost svih korišćenih polja,
+a za studentske odgovore da se pozivaju na postojeće pitanje i da svaki student ima odgovor na svako pitanje.
+U suprotnom se obrada prekida sa opisom greške.
 Provere su ovako stroge zato što su podaci pripremani ručno, a greška u njima otkrivena tek posle ocenjivanja znači bačene API pozive.
 
 Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt
@@ -101,12 +105,14 @@ pipeline/
   run_all_models.py
   calculate_corelations.py
   calculate_temperature.py
+  calculate_lengths.py
   data/<skup>/raw/questions.csv
   data/<skup>/raw/student_answers.csv
   data/<skup>/graded/graded.*.csv
   data/<skup>/graded/correlation_results.csv
   data/correlation_summary.csv
   data/temperature_summary.csv
+  data/length_summary.csv
 data/<rok>/results/gpt-4o.default.t-*.csv
 \end{verbatim}
 \end{tcolorbox}
@@ -212,3 +218,8 @@ python calculate_temperature.py
 Pošto dva izvora koriste različite identifikatore studenata,
 uparivanje se sprovodi po redosledu studenata i pitanja,
 uz proveru poklapanja nastavničkih ocena red po red.
+
+Na isti način, skripta \texttt{calculate\_lengths.py} iz ocenjenih datoteka prebrojava prosečne dužine
+referentnih odgovora nastavnika, studentskih odgovora i generisanih referentnih odgovora svakog modela
+i zapisuje ih u \texttt{length\_summary.csv}, odakle je preuzeta tabela~\ref{tab:response_length};
+redovi kod kojih generisanje referentnog odgovora nije uspelo (odeljak~\ref{sec:gra-greska}) izostavljaju se iz proseka.
