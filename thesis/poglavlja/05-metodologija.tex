@@ -8,15 +8,18 @@ EduGrader uključuje velike jezičke modele u tok provere znanja pod nadzorom na
 \label{sec:metrike}
 
 Ocene sistema EduGrader upoređene su sa ocenama koje su dodelila dva univerzitetska nastavnika.
-Svaki nastavnik je ocenio drugačiji podskup od ukupno 583 odgovora, pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju,
-tako da se sistem poredi sa dvojicom ocenjivača, a ne sa jednim standardom.
+Svaki nastavnik je ocenio drugačiji podskup od ukupno 583 odgovora, pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju, pa se ne preklapaju.
+Nastavnik sa Matematičkog fakulteta ocenio je 563 odgovora (Programiranje 2: 477, Tehničko i naučno pisanje: 40, Veb programiranje: 46),
+a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalno čuvanje podataka: 10, HTML5 i JavaScript za video-igre: 10).
+Sistem se tako poredi sa dvojicom ocenjivača, a ne sa jednim standardom, ali je podela izrazito neravnomerna,
+pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta (odeljak~\ref{sec:ogranicenja}).
 Ocenjivalo se prema kriterijumima koji se koriste na datom kursu, na skali 0--10, prema konceptualnoj tačnosti i potpunosti odgovora.
 Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne koncepte, da li nedostaju važni elementi i da li je rezonovanje delimično tačno, ali nepotpuno.
 Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji,
 dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
 Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema, preslikanom na istu skalu 0--10, pomoću metrika opisanih u nastavku.
 
-Korišćena su tri pokazatelja: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena (engl. \emph{Mean Ratio}) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
+Korišćene su četiri metrike: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena (engl. \emph{Mean Ratio}), koren srednje kvadratne greške (RMSE) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
 
 PCC~\cite{sedgwick2012pearson} meri jačinu linearne povezanosti između ocena koje su dodelili ljudi i ocena koje je dodelio sistem.
 Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu pozitivnu linearnu vezu, $0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
@@ -26,7 +29,7 @@ PCC je zato dopunjen metrikama koje obuhvataju apsolutna odstupanja između ocen
 Odnos prosečnih ocena poredi prosečnu ocenu sistema sa prosečnom ocenom nastavnika i otkriva sistematsku blagost ili strogost, ali ne i usklađenost u variranju ocena.
 
 Koren srednje kvadratne greške (RMSE)~\cite{hodson2022root} obuhvata prosečnu veličinu razlika između ljudskih ocena i ocena sistema; manja vrednost RMSE ukazuje na jače slaganje.
-Odnos RMSE/STDDEV~\cite{chai2014root} meri koliko se ocene sistema slažu sa ljudskim ocenama u odnosu na prirodnu varijabilnost samih ljudskih ocena,
+Odnos RMSE/STDDEV~\cite{moriasi2007model} meri koliko se ocene sistema slažu sa ljudskim ocenama u odnosu na prirodnu varijabilnost samih ljudskih ocena,
 odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
 Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje, vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja,
 dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
@@ -154,8 +157,8 @@ Režim je implementiran i pokrenut, ali \textbf{nije sproveden za sve modele},
 pa se njegovi rezultati prikazuju odvojeno od glavnih, u odeljku~\ref{sec:rezultati-udzbenik}.
 Razlog je cena: budući da ceo udžbenik ulazi u svaki poziv, veličina prompta raste za red veličine.
 Medijana broja tokena u promptu iznosila je oko $14\,500$ za kurs Programiranje 2, naspram oko $260$ tokena u PRA režimu za istu grupu pitanja, dakle približno \textbf{55 puta više}.
-Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima,
-pri čemu je pokrio samo oko trećine planirane mreže konfiguracija; njeno kompletiranje zahtevalo bi približno $119$ miliona tokena.
+Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima i pokrio samo oko trećine planirane mreže konfiguracija.
+Procenjeni ukupan broj tokena za kompletnu mrežu u ovom režimu iznosi približno $119$ miliona, dakle još oko $80$ miliona povrh već potrošenih.
 
 Zbog toga su u ovom režimu evaluirani samo modeli GPT-4o-mini i GPT-4o,
 dok modeli usmereni na rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
