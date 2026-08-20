@@ -2,7 +2,7 @@
 \section{Sistem za automatizovanu evaluaciju modela}
 \label{sec:pipeline}
 
-Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela, organizovan kao DVC \emph{pipeline} (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}}.
+Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela, organizovan kao \emph{pipeline} u sistemu DVC (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}}.
 U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima, i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
 Eksperiment se tako reprodukuje bez ponovnog plaćanja API poziva čiji su ulazi ostali isti.
 
@@ -59,7 +59,9 @@ i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatn
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke,
 uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike},
-Pirsonov koeficijent korelacije, odnos prosečnih ocena, RMSE i odnos RMSE/STDDEV,
+PCC, odnos prosečnih ocena (engl. \emph{mean ratio}),
+koren srednje kvadratne greške (engl. \emph{root mean square error}, RMSE)
+i odnos RMSE i standardne devijacije (engl. \emph{standard deviation}, STDDEV),
 po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
 
