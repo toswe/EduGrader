@@ -161,10 +161,6 @@ label {
   }
 }
 
-.narrow {
-  max-width: 24rem;
-}
-
 .card {
   padding: var(--gap);
   background-color: var(--surface);
@@ -220,6 +216,31 @@ label {
   max-width: 72rem;
   margin: 0 auto;
   padding: var(--gap-lg);
+}
+
+/* Login: a single card centred in the viewport, no app shell around it */
+
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--gap-lg);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 22rem;
+  padding: var(--gap-lg);
+}
+
+.auth-card h1 {
+  margin-bottom: var(--gap-lg);
+  text-align: center;
+}
+
+.auth-card button {
+  width: 100%;
 }
 
 .back-link {
