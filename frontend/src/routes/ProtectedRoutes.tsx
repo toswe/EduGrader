@@ -1,6 +1,7 @@
 import { Navigate } from "react-router";
 
 import { AuthData } from "../auth/AuthWrapper";
+import { Layout } from "../components/Layout";
 import { ProfessorRoutes } from "./ProfessorRoutes";
 import { StudentRoutes } from "./StudentRoutes";
 
@@ -12,7 +13,9 @@ function ProtectedRoutes() {
   }
 
   return (
-    <>{user.type === "PROFESSOR" ? <ProfessorRoutes /> : <StudentRoutes />}</>
+    <Layout>
+      {user.type === "PROFESSOR" ? <ProfessorRoutes /> : <StudentRoutes />}
+    </Layout>
   );
 }
 

@@ -110,12 +110,22 @@ def _grade_answers(
     ]
 
 
+# Keys a professor may set in Test.configuration to override the _grade_answers defaults.
+GRADING_OPTIONS = ("integration", "model", "instructions", "temperature")
+
+
+def _grading_options(test):
+    """Grading kwargs from a test's configuration, ignoring anything we do not know."""
+    configuration = test.configuration if test else {}
+    return {key: value for key, value in configuration.items() if key in GRADING_OPTIONS}
+
+
 def grade_student_test(student_test_id):
     student_answers = StudentAnswer.objects.filter(test=student_test_id)
     student_test = StudentTest.objects.get(id=student_test_id)
 
     print(f"Grading student test {student_test.id} for {student_answers.count()} answers")
-    return _grade_answers(student_answers, student_test.test)
+    return _grade_answers(student_answers, **_grading_options(student_test.test))
 
 
 def grade_test(

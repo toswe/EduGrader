@@ -26,6 +26,7 @@ from backend.views import (
     TestRUDView,
     StudentTestCRView,
     StudentTestRUDView,
+    StudentAnswerUView,
     UpcomingTestsView,
 )
 
@@ -45,5 +46,6 @@ urlpatterns = [
     #
     path("student-tests/", StudentTestCRView.as_view(), name="student-tests-CR"),
     path("student-tests/<int:pk>/", StudentTestRUDView.as_view(), name="student-tests-RUD"),
+    path("student-answers/<int:pk>/", StudentAnswerUView.as_view(), name="student-answers-U"),
     path("upcoming-tests/", UpcomingTestsView.as_view(), name="upcoming-tests"),
 ]

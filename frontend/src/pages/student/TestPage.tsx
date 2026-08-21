@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { fetchTestWithQuestions } from "../../api/tests";
 import { createStudentTest } from "../../api/student-tests";
 import { ITestQuestions, IStudentTest } from "../../types";
+import { BackLink } from "../../components/BackLink";
 
 const initStudentTest = (test: ITestQuestions): IStudentTest => {
   return {
@@ -49,29 +50,36 @@ export const TestPage = () => {
   };
 
   if (!test) {
-    return <div>Loading...</div>;
+    return <p className="muted">Loading…</p>;
   }
 
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
+    <form
+      className="stack-lg"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
+      }}
+    >
+      <BackLink to="/">Back to tests</BackLink>
+      <h1>Test</h1>
+      <div className="stack">
         {test.answers.map((answer) => (
-          <div key={answer.id}>
-            {answer.questionText}
-            <br />
+          <div key={answer.question} className="card">
+            <label htmlFor={`answer-${answer.question}`}>
+              {answer.questionText}
+            </label>
             <textarea
+              id={`answer-${answer.question}`}
               value={answer.answer || ""}
               onChange={(e) => handleChange(answer.question, e.target.value)}
             />
           </div>
         ))}
+      </div>
+      <div>
         <button type="submit">Submit</button>
-      </form>
-    </>
+      </div>
+    </form>
   );
 };

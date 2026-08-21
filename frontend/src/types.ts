@@ -39,6 +39,7 @@ export interface IAnswerGrade {
   id?: number;
   prompt: string;
   llm_response: any;
+  explanation: string;
   score: number;
   student_answer: number; // ID of the student's answer
 }
@@ -49,7 +50,7 @@ export interface IStudentAnswer {
   question: number;
   questionText: string;
   answer: string;
-  score: number;
+  score: number | null;
   grades?: IAnswerGrade[];
 }
 
@@ -57,5 +58,6 @@ export interface IStudentTest extends Object {
   id?: number;
   student?: number;
   test: number;
+  testName?: string;
   answers: IStudentAnswer[];
 }

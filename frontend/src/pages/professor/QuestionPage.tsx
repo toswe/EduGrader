@@ -7,6 +7,7 @@ import {
   updateQuestion,
   deleteQuestion,
 } from "../../api/questions";
+import { BackLink } from "../../components/BackLink";
 
 export const QuestionPage = () => {
   const navigate = useNavigate();
@@ -51,35 +52,40 @@ export const QuestionPage = () => {
   };
 
   return (
-    <div>
-      <h2>New Question</h2>
-      <div className="inputs">
-        <div className="input">
-          <label>Question</label>
-          <br />
+    <div className="stack-lg">
+      <BackLink to={`/course/${courseId}`}>Back to course</BackLink>
+      <h1>{questionId ? "Edit question" : "New question"}</h1>
+
+      <div className="stack">
+        <div>
+          <label htmlFor="question">Question</label>
           <textarea
+            id="question"
             value={formData.question}
             onChange={(e) => setFormData({ question: e.target.value })}
           />
         </div>
-        <div className="input">
-          <label>Answer</label>
-          <br />
+        <div>
+          <label htmlFor="answer">Answer</label>
           <textarea
+            id="answer"
             value={formData.answer}
             onChange={(e) => setFormData({ answer: e.target.value })}
           />
         </div>
-        {formData.question && formData.answer && (
-          <div className="button">
-            <button onClick={saveQuestion}>Save</button>
-          </div>
-        )}
-        {questionId && (
-          <div className="button">
-            <button onClick={removeQuestion}>Delete</button>
-          </div>
-        )}
+        <div className="row">
+          <button
+            onClick={saveQuestion}
+            disabled={!formData.question || !formData.answer}
+          >
+            Save
+          </button>
+          {questionId && (
+            <button className="danger" onClick={removeQuestion}>
+              Delete
+            </button>
+          )}
+        </div>
         {errorMessage ? (
           <div className="error">{String(errorMessage)}</div>
         ) : null}

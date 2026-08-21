@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
-
-import { AuthData } from "../../auth/AuthWrapper";
-import { fetchUpcomingTests, fetchStudentTests } from "../../api/student-tests";
-import { ITest, IStudentTest } from "../../types";
 import { Link } from "react-router";
 
-export const HomePage = () => {
-  const { user, logout } = AuthData();
+import { fetchUpcomingTests, fetchStudentTests } from "../../api/student-tests";
+import { ITest, IStudentTest } from "../../types";
 
+export const HomePage = () => {
   const [upcomingTests, setUpcomingTests] = useState<ITest[]>([]);
   const [studentTests, setStudentTests] = useState<IStudentTest[]>([]);
 
-  const fetchTests = () => {
+  useEffect(() => {
     fetchUpcomingTests().then((upcomingTests) => {
       setUpcomingTests(upcomingTests);
     });
@@ -19,38 +16,35 @@ export const HomePage = () => {
     fetchStudentTests().then((studentTests) => {
       setStudentTests(studentTests);
     });
-  };
-
-  useEffect(() => {
-    fetchTests();
   }, []);
 
   return (
-    <>
-      <h1>Student Home</h1>
-      <div> Hello, {user.username} </div>
-      <br />
-      <div>
-        <button onClick={logout}> logout </button>
-      </div>
-      <br />
-      <div>
-        <h5>Upcoming Tests:</h5>
-        {upcomingTests.map((test: any) => {
-          return (
-            <Link key={test.id} to={`/test/${test.id}`}>
-              {test.name}
-            </Link>
-          );
-        })}
-      </div>
-      <br />
-      <div>
-        <h5>Completed Tests:</h5>
-        {studentTests.map((test: any) => {
-          return <div key={test.id}>{test.test}</div>;
-        })}
-      </div>
-    </>
+    <div className="stack-lg">
+      <h1>Your tests</h1>
+
+      <section className="stack">
+        <h2>Upcoming</h2>
+        {upcomingTests.map((test) => (
+          <div key={test.id} className="card">
+            <Link to={`/test/${test.id}`}>{test.name}</Link>
+          </div>
+        ))}
+        {upcomingTests.length === 0 && (
+          <p className="muted">No upcoming tests.</p>
+        )}
+      </section>
+
+      <section className="stack">
+        <h2>Completed</h2>
+        {studentTests.map((test) => (
+          <div key={test.id} className="card">
+            {test.testName ?? `Test #${test.test}`}
+          </div>
+        ))}
+        {studentTests.length === 0 && (
+          <p className="muted">No completed tests yet.</p>
+        )}
+      </section>
+    </div>
   );
 };

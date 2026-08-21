@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
 
-import { AuthData } from "../../auth/AuthWrapper";
 import { fetchCourses } from "../../api/courses";
 import { ICourse } from "../../types";
 
 export const HomePage = () => {
-  const { user, logout } = AuthData();
-
   const [courses, setCourses] = useState<ICourse[]>([]);
   useEffect(() => {
     fetchCourses().then((data) => {
@@ -16,20 +13,16 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <>
-      <div> Hello, {user.username} </div>
-      <br />
-      <div>
-        <button onClick={logout}> logout </button>
-      </div>
-      <br />
-      <div>
-        {courses.map((course: any) => (
-          <div key={course.id}>
+    <div className="stack-lg">
+      <h1>Courses</h1>
+      <div className="stack">
+        {courses.map((course) => (
+          <div key={course.id} className="card">
             <Link to={`/course/${course.id}`}>{course.name}</Link>
           </div>
         ))}
+        {courses.length === 0 && <p className="muted">No courses yet.</p>}
       </div>
-    </>
+    </div>
   );
 };

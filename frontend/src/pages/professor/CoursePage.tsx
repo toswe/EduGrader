@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 import { fetchCourse } from "../../api/courses";
 import { fetchQuestions } from "../../api/questions";
 import { fetchTests } from "../../api/tests";
 import { fetchStudentTests } from "../../api/student-tests";
 import { ICourse, IQuestion, IStudentTest, ITest } from "../../types";
+import { BackLink } from "../../components/BackLink";
 
 export const CoursePage = () => {
   const { courseId } = useParams();
@@ -17,98 +17,69 @@ export const CoursePage = () => {
   const [studentTests, setStudentTests] = useState<IStudentTest[]>([]);
 
   useEffect(() => {
-    if (courseId) {
-      fetchCourse(Number(courseId)).then((data) => {
-        setCourse(data);
-      });
+    if (!courseId) return;
 
-      fetchQuestions(Number(courseId)).then((data) => {
-        setQuestions(data);
-      });
-
-      fetchTests(Number(courseId)).then((data) => {
-        setTests(data);
-      });
-
-      fetchStudentTests({ course: Number(courseId) }).then((data) => {
-        setStudentTests(data);
-      });
-    }
-  }, []);
+    fetchCourse(Number(courseId)).then(setCourse);
+    fetchQuestions(Number(courseId)).then(setQuestions);
+    fetchTests(Number(courseId)).then(setTests);
+    fetchStudentTests({ course: Number(courseId) }).then(setStudentTests);
+  }, [courseId]);
 
   return (
-    <>
-      <div>
-        <h3>{course?.name} </h3>
-      </div>
-      <div>
-        <h4>Questions</h4>
-        {questions.map((question) => (
-          <div
-            key={question.id}
-            style={{
-              border: "1px solid black",
-              margin: "10px",
-              padding: "5px",
-              borderRadius: "5px",
-            }}
-          >
-            <strong>{question.question}</strong>
-            <br />
-            <span>{question.answer}</span>
-            <br />
-            <Link to={`/course/${courseId}/questions/${question.id}`}>
-              <button>Edit</button>
+    <div className="stack-lg">
+      <BackLink to="/">Back to courses</BackLink>
+      <h1>{course?.name}</h1>
+
+      <div className="columns">
+        <section className="stack">
+          <h2>Questions</h2>
+          {questions.map((question) => (
+            <div key={question.id} className="card stack">
+              <Link to={`/course/${courseId}/questions/${question.id}`}>
+                {question.question}
+              </Link>
+              <span className="muted">{question.answer}</span>
+            </div>
+          ))}
+          {questions.length === 0 && <p className="muted">No questions yet.</p>}
+          <div>
+            <Link to={`/course/${courseId}/new-question`}>
+              <button>Create question</button>
             </Link>
           </div>
-        ))}
-      </div>
-      <div>
-        <Link to={`/course/${courseId}/new-question`}>
-          <button>Create question</button>
-        </Link>
-      </div>
-      <div>
-        <h4>Tests</h4>
-        {tests.map((test) => (
-          <div
-            key={test.id}
-            style={{
-              border: "1px solid black",
-              margin: "10px",
-              padding: "5px",
-              borderRadius: "5px",
-            }}
-          >
-            <strong>{test.name}</strong>
-            <br />
-            <Link to={`/course/${courseId}/tests/${test.id}`}>
-              <button>Edit</button>
+        </section>
+
+        <section className="stack">
+          <h2>Tests</h2>
+          {tests.map((test) => (
+            <div key={test.id} className="card">
+              <Link to={`/course/${courseId}/tests/${test.id}`}>
+                {test.name}
+              </Link>
+            </div>
+          ))}
+          {tests.length === 0 && <p className="muted">No tests yet.</p>}
+          <div>
+            <Link to={`/course/${courseId}/new-test`}>
+              <button>Create test</button>
             </Link>
           </div>
-        ))}
+        </section>
       </div>
-      <div>
-        <Link to={`/course/${courseId}/new-test`}>
-          <button>Create test</button>
-        </Link>
-      </div>
-      <div>
-        <h4>Student Tests</h4>
+
+      <section className="stack">
+        <h2>Submitted tests</h2>
         {studentTests.map((studentTest) => (
-          <div
-            key={studentTest.id}
-            style={{
-              border: "1px solid black",
-              margin: "10px",
-              padding: "5px",
-              borderRadius: "5px",
-            }}
-          >
-            <a href={`/course/${courseId}/student-tests/${studentTest.id}`}>{studentTest.id}</a>
+          <div key={studentTest.id} className="card">
+            <Link to={`/course/${courseId}/student-tests/${studentTest.id}`}>
+              Submission #{studentTest.id}
+            </Link>
           </div>
         ))}
-      </div>
-    </>
+        {studentTests.length === 0 && (
+          <p className="muted">No submissions yet.</p>
+        )}
+      </section>
+    </div>
   );
 };
