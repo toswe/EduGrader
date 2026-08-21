@@ -213,8 +213,8 @@ stages:
       isexec: true
     - path: data/tnp_sept/raw/student_answers.csv
       hash: md5
-      md5: 3e7e3c67eedc174f5bcf864ebc9d14de
-      size: 1809
+      md5: 496100552fa9e0a8e9e85481a5d152b7
+      size: 1639
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -236,8 +236,8 @@ stages:
       isexec: true
     - path: data/p2_sept2/raw/student_answers.csv
       hash: md5
-      md5: 10d46a5e4cb94e5251286f6dcf132b04
-      size: 47246
+      md5: 5d97839677ef4b35001dd0bdeadb4c1e
+      size: 46130
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -259,8 +259,8 @@ stages:
       isexec: true
     - path: data/vp_sept/raw/student_answers.csv
       hash: md5
-      md5: ba2cefec5c86f6c3c103fcd6c6efa69d
-      size: 3770
+      md5: 13ffe603ef79f7e7d52bb8ee463e96e0
+      size: 3260
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -282,8 +282,8 @@ stages:
       isexec: true
     - path: data/vp_jun/raw/student_answers.csv
       hash: md5
-      md5: 2ce8fe83a4bc137db987074683be0ec5
-      size: 2883
+      md5: a63358015945e9bed75d086ac235cb2e
+      size: 2739
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -345,8 +345,8 @@ stages:
     outs:
     - path: data/tnp_sept/graded/graded.soft.deepseek-chat.correct.csv
       hash: md5
-      md5: 9a310ff600867cfb3a7a199209a8ebe1
-      size: 31920
+      md5: 2d5b9e9e9b878671bd14f666c30e5c5a
+      size: 31750
   grade_correct@p2_sept2:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_sept2/interim/merged.csv
       --out data/p2_sept2/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
@@ -375,8 +375,8 @@ stages:
     outs:
     - path: data/p2_sept2/graded/graded.soft.deepseek-chat.correct.csv
       hash: md5
-      md5: a8ec4702b2c9851fe45ded0fef2684a1
-      size: 436071
+      md5: 8c51aea0c02f28cbff3a0c532cb88830
+      size: 434955
   grade_correct@vp_sept:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_sept/interim/merged.csv
       --out data/vp_sept/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
@@ -405,8 +405,8 @@ stages:
     outs:
     - path: data/vp_sept/graded/graded.soft.deepseek-chat.correct.csv
       hash: md5
-      md5: 171c294b54cce8d07d5dd2317283fcc4
-      size: 55351
+      md5: 810bdf8ffff840fb882f6f074602237f
+      size: 54841
   grade_correct@vp_jun:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_jun/interim/merged.csv
       --out data/vp_jun/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
@@ -435,8 +435,8 @@ stages:
     outs:
     - path: data/vp_jun/graded/graded.soft.deepseek-chat.correct.csv
       hash: md5
-      md5: bb05b5668d9f01a989ae0a4178b26719
-      size: 31310
+      md5: 77cadcc1f7c7137b4da7a999f02eb8ac
+      size: 31166
   grade_correct@tnp_jan:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_jan/interim/merged.csv
       --out data/tnp_jan/graded/graded.soft.deepseek-chat.correct.csv --model params/models/deepseek-chat.yaml
@@ -555,8 +555,8 @@ stages:
     outs:
     - path: data/tnp_sept/graded/graded.soft.gpt-4o.textbook.csv
       hash: md5
-      md5: cc631ef6001314065bb10eaa3269f114
-      size: 12038
+      md5: 3edeccbe7823098b377bce6f5b73e017
+      size: 11868
   grade_textbook@p2_sept2:
     cmd: "python src/pipeline/03_grade_with_textbook.py --in data/p2_sept2/interim/merged.csv
       --out data/p2_sept2/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
@@ -585,8 +585,8 @@ stages:
     outs:
     - path: data/p2_sept2/graded/graded.hard.gpt-4o.textbook.csv
       hash: md5
-      md5: a450283c36ba9d35c38e48dddb752fd6
-      size: 700540
+      md5: 565326e7ac798415e28573a219ccf887
+      size: 699424
   grade_textbook@vp_sept:
     cmd: "python src/pipeline/03_grade_with_textbook.py --in data/vp_sept/interim/merged.csv
       --out data/vp_sept/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
@@ -615,8 +615,8 @@ stages:
     outs:
     - path: data/vp_sept/graded/graded.hard.gpt-4o.textbook.csv
       hash: md5
-      md5: 383b82b2c1a46d75a537d8e9f01276db
-      size: 93601
+      md5: 84cf38448e36d23074cec65a9545d3c9
+      size: 93091
   grade_textbook@vp_jun:
     cmd: "python src/pipeline/03_grade_with_textbook.py --in data/vp_jun/interim/merged.csv
       --out data/vp_jun/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
@@ -645,8 +645,8 @@ stages:
     outs:
     - path: data/vp_jun/graded/graded.hard.gpt-4o.textbook.csv
       hash: md5
-      md5: 87db937e90d6b6a601209ad7ca84edf2
-      size: 50638
+      md5: 10b1a5e378ea84bd75a8da3040a8e270
+      size: 50494
   grade_textbook@tnp_jan:
     cmd: "python src/pipeline/03_grade_with_textbook.py --in data/tnp_jan/interim/merged.csv
       --out data/tnp_jan/graded/graded.hard.gpt-4o.textbook.csv --model params/models/gpt-4o.yaml
@@ -834,8 +834,8 @@ stages:
       size: 3487
     - path: data/tnp_sept/raw/student_answers.csv
       hash: md5
-      md5: 3e7e3c67eedc174f5bcf864ebc9d14de
-      size: 1809
+      md5: 496100552fa9e0a8e9e85481a5d152b7
+      size: 1639
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -1066,8 +1066,8 @@ stages:
       size: 6319
     - path: data/p2_sept2/raw/student_answers.csv
       hash: md5
-      md5: 10d46a5e4cb94e5251286f6dcf132b04
-      size: 47246
+      md5: 5d97839677ef4b35001dd0bdeadb4c1e
+      size: 46130
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -1088,8 +1088,8 @@ stages:
       size: 8764
     - path: data/vp_sept/raw/student_answers.csv
       hash: md5
-      md5: ba2cefec5c86f6c3c103fcd6c6efa69d
-      size: 3770
+      md5: 13ffe603ef79f7e7d52bb8ee463e96e0
+      size: 3260
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -1110,8 +1110,8 @@ stages:
       size: 4616
     - path: data/vp_jun/raw/student_answers.csv
       hash: md5
-      md5: 2ce8fe83a4bc137db987074683be0ec5
-      size: 2883
+      md5: a63358015945e9bed75d086ac235cb2e
+      size: 2739
       isexec: true
     - path: src/pipeline/01_merge_inputs.py
       hash: md5
@@ -1258,8 +1258,8 @@ stages:
     outs:
     - path: data/tnp_sept/graded/graded.generated.soft.deepseek-reasoner.csv
       hash: md5
-      md5: e8a026990757e4620be14bd64cf57fcc
-      size: 121960
+      md5: 2415754f5044dedb8f50051b7a39073e
+      size: 121790
   grade_generated@p2_sept2:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/p2_sept2/interim/merged.generated.deepseek-reasoner.csv
       --out data/p2_sept2/graded/graded.generated.soft.deepseek-reasoner.csv --model
@@ -1288,8 +1288,8 @@ stages:
     outs:
     - path: data/p2_sept2/graded/graded.generated.soft.deepseek-reasoner.csv
       hash: md5
-      md5: f12b55871d6c8575297b2eff6ead8030
-      size: 1107641
+      md5: 37c8ef73f5cf955faedaeff7ff993381
+      size: 1106525
   grade_generated@vp_sept:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_sept/interim/merged.generated.deepseek-reasoner.csv
       --out data/vp_sept/graded/graded.generated.soft.deepseek-reasoner.csv --model
@@ -1318,8 +1318,8 @@ stages:
     outs:
     - path: data/vp_sept/graded/graded.generated.soft.deepseek-reasoner.csv
       hash: md5
-      md5: db7077304bdc2b1ab1593cea8f7ba9b5
-      size: 138062
+      md5: eaac75f0e77e82c48f4128240d0c3117
+      size: 137552
   grade_generated@vp_jun:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/vp_jun/interim/merged.generated.deepseek-reasoner.csv
       --out data/vp_jun/graded/graded.generated.soft.deepseek-reasoner.csv --model
@@ -1348,8 +1348,8 @@ stages:
     outs:
     - path: data/vp_jun/graded/graded.generated.soft.deepseek-reasoner.csv
       hash: md5
-      md5: 41d9cbec891fa7457f74c085447463c1
-      size: 82157
+      md5: 33abf8ee84deac521b1c7ab59af15502
+      size: 82013
   grade_generated@tnp_jan:
     cmd: "python src/pipeline/02_grade_with_correct_answer.py --in data/tnp_jan/interim/merged.generated.deepseek-reasoner.csv
       --out data/tnp_jan/graded/graded.generated.soft.deepseek-reasoner.csv --model
