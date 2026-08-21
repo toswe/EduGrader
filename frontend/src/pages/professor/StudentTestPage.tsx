@@ -49,6 +49,12 @@ const AnswerCard = ({
         <span className="field-label">Answer</span>
         <div className="answer-text">{answer.answer}</div>
       </div>
+      {llmGrade?.explanation ? (
+        <details className="explanation">
+          <summary>LLM explanation</summary>
+          <div className="answer-text">{llmGrade.explanation}</div>
+        </details>
+      ) : null}
       <div className="row">
         <label htmlFor={`score-${answer.id}`}>Grade</label>
         <input

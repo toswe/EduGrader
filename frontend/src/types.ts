@@ -39,6 +39,7 @@ export interface IAnswerGrade {
   id?: number;
   prompt: string;
   llm_response: any;
+  explanation: string;
   score: number;
   student_answer: number; // ID of the student's answer
 }
