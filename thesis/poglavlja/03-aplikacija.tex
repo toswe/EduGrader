@@ -96,6 +96,38 @@ Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena
     \item \textbf{Studentski modul} omogućava pregled nadolazećih testova, izradu testa i uvid u rezultate već urađenih testova.
 \end{itemize}
 
+Slike~\ref{fig:ui-kurs}--\ref{fig:ui-student} prikazuju tipičan tok rada.
+Nastavnik na stranici kursa unosi pitanja sa referentnim odgovorima i od njih sastavlja testove (slika~\ref{fig:ui-kurs}).
+Kada student preda test (slika~\ref{fig:ui-student}),
+nastavnik pri pregledu za svaki odgovor vidi predlog ocene jezičkog modela i, po potrebi, njegovo obrazloženje,
+a konačnu ocenu unosi sam (slika~\ref{fig:ui-ocena}).
+Predlog modela je tako samo polazna tačka: nastavnik ga može prihvatiti ili prepraviti, što je princip čoveka u petlji iz uvoda.
+Elementi interfejsa su na engleskom, dok su pitanja, referentni odgovori i studentski odgovori na srpskom,
+isto kao u eksperimentima iz poglavlja~\ref{sec:rezultati}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{screenshots/profesor_course.png}
+\caption{Nastavnički modul: stranica kursa sa pitanjima, njihovim referentnim odgovorima i listom testova.}
+\label{fig:ui-kurs}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{screenshots/professor_test_submittion_with_llm.png}
+\caption{Nastavnički modul: pregled rešenog testa.
+Uz svaki odgovor prikazan je predlog ocene jezičkog modela (ovde 7,5 od 10) sa rasklopljenim obrazloženjem,
+a konačnu ocenu unosi nastavnik u polje \emph{Grade}.}
+\label{fig:ui-ocena}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{screenshots/student_test.png}
+\caption{Studentski modul: izrada testa.}
+\label{fig:ui-student}
+\end{figure}
+
 Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa:
 logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje,
 a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz liniju obrade (engl. \emph{pipeline}) u sistemu DVC,
