@@ -52,11 +52,11 @@ U ovom radu predstavljen je EduGrader, platforma za ocenjivanje pitanja otvoreno
 EduGrader objedinjuje više velikih jezičkih modela,
 GPT-4o,\footnote{\url{https://platform.openai.com/docs/models/gpt-4o}}
 GPT-4o-mini,\footnote{\url{https://platform.openai.com/docs/models/gpt-4o-mini}}
-DeepSeek-Chat,\footnote{\url{https://api-docs.deepseek.com/}} i dva modela usmerena na rezonovanje,
+DeepSeek-Chat,\footnote{\url{https://api-docs.deepseek.com/}} i dva modela za rezonovanje (engl. \emph{reasoning models}),
 GPT-5\footnote{\url{https://platform.openai.com/docs/models/gpt-5}}
 i DeepSeek-Reasoner,\footnote{\url{https://api-docs.deepseek.com/guides/reasoning\_model}}
 u jedinstven tok ocenjivanja u kome poslednju reč ima nastavnik.
-Sistem podržava tri profila strogosti ocenjivanja: blag, neutralan i strog.
+Sistem podržava tri konfiguracije strogosti ocenjivanja: blagu, neutralnu i strogu.
 Podela odgovara nastavnoj praksi, u kojoj neki kursevi nagrađuju delimično ispravno rezonovanje,
 dok drugi zahtevaju preciznu terminologiju i potpuna rešenja.
 
@@ -82,7 +82,7 @@ jeziku sa ograničenim resursima koji je slabo zastupljen u podacima na kojima s
 dakle izvan engleskog konteksta u kome se ovakvi sistemi obično ispituju.
 Sistem je evaluiran na 583 autentična studentska odgovora prikupljena na dva univerziteta i pet kurseva,
 od kratkih činjeničkih odgovora i otvorenih tekstualnih objašnjenja do odgovora u obliku koda.
-Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da se modeli usmereni na rezonovanje najbolje slažu sa ljudskim ocenjivačima.
+Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da modeli za rezonovanje daju ocene najbliže nastavničkim.
 U najboljoj konfiguraciji (GPT-5, blaga strogost) EduGrader postiže Pirsonov koeficijent korelacije (engl.
 \emph{Pearson correlation coefficient}, PCC) od 0{,}89 u odnosu na ljudsko ocenjivanje, a u neutralnoj konfiguraciji 0{,}88.
 
@@ -101,23 +101,24 @@ Doprinosi rada su sledeći:
     i integracioni sloj koji više provajdera jezičkih modela pokriva jednim interfejsom.
     \item \textbf{Sistem za automatizovanu evaluaciju modela} (poglavlje~\ref{sec:pipeline}):
     reproducibilan \emph{pipeline} koji nad ručno pripremljenim ispitnim podacima pokreće ocenjivanje
-    za proizvoljnu kombinaciju modela, konfiguracije strogosti i režima i računa metrike slaganja sa nastavnikom.
+    za proizvoljnu kombinaciju modela, konfiguracije strogosti i režima i računa metrike korelacije i slaganja sa ocenama nastavnika.
     \item \textbf{Skup podataka na srpskom jeziku}: 583 autentična studentska odgovora sa pet kurseva na dve institucije,
     sa nastavničkim ocenama i referentnim odgovorima (odeljak~\ref{sec:podaci}).
     \item \textbf{Sistematska evaluacija}: pet modela u tri konfiguracije strogosti i dva režima ocenjivanja,
     dopunjena eksperimentima sa nastavnim materijalom u promptu i sa temperaturom (poglavlje~\ref{sec:rezultati}).
-    \item \textbf{Empirijski nalazi}: referentni odgovor nastavnika dosledno poboljšava slaganje sa ljudskim ocenjivačima,
-    modeli usmereni na rezonovanje su im najbliži, a stroga konfiguracija po pravilu pogoršava slaganje;
+    \item \textbf{Empirijski nalazi}: referentni odgovor nastavnika dosledno poboljšava i korelaciju i slaganje sa ljudskim ocenjivačima,
+    modeli za rezonovanje su im najbliži, a stroga konfiguracija po pravilu pogoršava oba;
     najbolja konfiguracija dostiže PCC od 0{,}89.
 \end{enumerate}
 
 \subsection{Struktura rada}
 
-Poglavlje~\ref{sec:pregled} daje pregled srodnih istraživanja primene veštačke inteligencije u ocenjivanju.
+Poglavlje~\ref{sec:pregled} daje pregled srodnih istraživanja primene veštačke inteligencije u ocenjivanju
+i pozicionira ovaj rad u odnosu na njih.
 Poglavlje~\ref{sec:aplikacija} opisuje veb aplikaciju EduGrader i sloj za integraciju jezičkih modela,
 a poglavlje~\ref{sec:pipeline} sistem za automatizovanu evaluaciju modela kojim su sprovedeni eksperimenti.
 Poglavlje~\ref{sec:metodologija} predstavlja metodologiju evaluacije: metrike, skupove podataka i konfiguracije modela.
-Poglavlje~\ref{sec:rezultati} donosi rezultate, uključujući poređenje PRA i GRA režima kroz modele i nivoe strogosti,
+Poglavlje~\ref{sec:rezultati} donosi rezultate, uključujući poređenje PRA i GRA režima kroz modele i konfiguracije strogosti,
 uticaj konfiguracije strogosti i korelacije po pojedinačnim kursevima.
 U poglavlju~\ref{sec:diskusija} rezultati su upoređeni sa prethodnim istraživanjima i razmotreni su pravci budućeg rada,
 dok poglavlje~\ref{sec:zakljucak} zaključuje rad.

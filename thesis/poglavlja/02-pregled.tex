@@ -2,6 +2,9 @@
 \section{Pregled oblasti i srodni radovi}
 \label{sec:pregled}
 
+\subsection{Veštačka inteligencija u obrazovanju}
+\label{sec:vi-obrazovanje}
+
 Primena veštačke inteligencije u obrazovanju razvijala se od rane automatizacije zasnovane na pravilima
 ka adaptivnim sistemima koji tumače i generišu složene odgovore nalik ljudskim.
 Pod veštačkom inteligencijom se podrazumevaju računarski sistemi projektovani da obavljaju kognitivne funkcije poput učenja,
@@ -14,42 +17,6 @@ ne zahtevaju ručno projektovane atribute ni obučavanje za konkretan domen,
 već obrađuju slobodan tekst i rezonuju o značenju na višem nivou apstrakcije.
 Zato se ispituju za nastavu usmerenu na učenika, automatsko generisanje sadržaja i nove oblike provere znanja~\cite{zhang2023study}.
 
-Empirijske studije ocenjivanja uz podršku velikih jezičkih modela daju mešovite rezultate.
-Kuli i Jusuf~\cite{kooli2025transforming} ispitali su ocenjivanje uz pomoć ChatGPT-a na 25 studentskih radova
-iz kohorte od približno 100 studenata druge godine na kursu iz društvenih nauka,
-gde su radove nezavisno ocenili i ljudski ocenjivači i model.
-Dobijena je umerena korelacija između ocena veštačke inteligencije i ljudskih ocena (koeficijent korelacije približno 0{,}45):
-model aproksimira opšte obrasce ocenjivanja,
-ali pojedinačne evaluacije se i dalje razlikuju.
-Autori ističu da ChatGPT ubrzava ocenjivanje i daje korisnu povratnu informaciju,
-ali da mu izostaje kontekstualno razumevanje nijansiranih studentskih argumenata.
-Upozoravaju i na rizik produbljivanja obrazovnih nejednakosti i na potrebu za institucionalnim okvirima za transparentnost,
-nadzor i ublažavanje pristrasnosti pri uvođenju takvih alata.
-
-Lundgren~\cite{lundgren2024large} je ispitao GPT-4 na 60 eseja master nivoa iz političkih nauka koje su prethodno ocenili univerzitetski nastavnici.
-Prosečne ocene modela bile su usklađene sa nastavničkim, ali je pouzdanost među ocenjivačima (između modela i ljudi) bila niska:
-model prati agregirane trendove, a ne fino ljudsko rasuđivanje.
-Ocenjivanje je bilo sklono izbegavanju rizika i oslanjanju na opšte karakteristike eseja, poput kvaliteta jezika, umesto na detaljne rubrike.
-Izmene prompta i uputstava za ocenjivanje donele su samo ograničena poboljšanja,
-pa su tadašnji sistemi bili slabo osetljivi na suptilne varijacije u kriterijumima evaluacije.
-
-Jukjevič~\cite{jukiewicz2024future} je ChatGPT primenio na ocenjivanje devet programerskih zadataka
-na petnaestonedeljnom kursu programiranja u Python-u sa 67 studenata osnovnih studija kognitivnih nauka,
-gde su radove nezavisno ocenili i nastavnik i model.
-Korelacija sa nastavničkim ocenama bila je snažno pozitivna, mada je model dodeljivao nešto strože ocene.
-Ponovljivost kroz višestruka pokretanja bila je visoka, sa zanemarljivim varijacijama između iteracija.
-Uz numeričku ocenu, ChatGPT je procenjivao ispravnost koda,
-proveravao poštovanje smernica PEP\,8 i za nekoliko sekundi generisao detaljnu povratnu informaciju.
-Autor navodi i ograničenja: halucinirane greške, troškove korišćenja API-ja i povremene nedoslednosti u ocenjivanju koje zahtevaju proveru nastavnika.
-Zaključak studije je da je ChatGPT koristan komplementaran alat za procenu koda i generisanje povratnih informacija,
-ali da ljudski nadzor ostaje neophodan za pouzdanost i pravednost.
-
-Ovi nalazi se uklapaju u širu sliku: pouzdanost ocenjivanja velikim jezičkim modelima zavisi od tipa zadatka.
-Slaganje sa ljudskim ocenjivačima veće je tamo gde su odgovori strukturirani, kao kod definicija, formula ili fragmenata koda,
-a opada kod subjektivnih ili otvorenih pisanih zadataka~\cite{tomic2022ai,vittorini2021ai}.
-U radu~\cite{pinto2023large} GPT-3 je evaluiran na odgovorima otvorenog tipa profesionalaca iz industrije
-i pokazao snažne korelacije sa ekspertskim ocenama,
-pod uslovom da su kriterijumi jasno definisani i kontekstualno utemeljeni.
 Izvan numeričkog ocenjivanja, sistemi zasnovani na veštačkoj inteligenciji generišu adaptivne aktivnosti učenja,
 isporučuju personalizovanu povratnu informaciju
 i podržavaju formativno i sumativno ocenjivanje prilagođeno individualnim karakteristikama učenika~\cite{diwan2023ai,luckin2016intelligence}.
@@ -61,9 +28,129 @@ Transparentnost, objašnjivost,
 privatnost podataka i kvalitet povratnih informacija
 zato ostaju centralne teme konceptualnih analiza ocenjivanja podržanog veštačkom inteligencijom~\cite{kumar2023faculty}.
 
-Kroz ovu literaturu provlači se isti zaključak: veliki jezički modeli su pomoćni alati koji automatizuju rutinske aspekte ocenjivanja,
+\subsection{Empirijske studije ocenjivanja jezičkim modelima}
+\label{sec:empirijske-studije}
+
+Empirijske studije ocenjivanja uz podršku velikih jezičkih modela daju mešovite rezultate.
+Kuli i Jusuf~\cite{kooli2025transforming} ispitali su ocenjivanje uz pomoć ChatGPT-a na 25 studentskih radova
+iz kohorte od približno 100 studenata druge godine na kursu iz društvenih nauka,
+gde su radove nezavisno ocenili i ljudski ocenjivači i model.
+Dobijena je umerena korelacija između ocena veštačke inteligencije i ljudskih ocena (koeficijent korelacije približno 0{,}45):
+model aproksimira opšte obrasce ocenjivanja,
+ali pojedinačne evaluacije se i dalje razlikuju.
+Autori ističu da ChatGPT ubrzava ocenjivanje i daje korisnu povratnu informaciju,
+ali da mu izostaje kontekstualno razumevanje nijansiranih studentskih argumenata.
+Upozoravaju i na rizik produbljivanja obrazovnih nejednakosti i na potrebu za institucionalnim okvirima za transparentnost,
+nadzor i ublažavanje pristrasnosti pri uvođenju takvih alata.
+Za ovaj rad ta studija daje donju tačku poređenja (odeljak~\ref{sec:poredjenje}):
+ona meri eseje iz društvenih nauka, dok se ovde ocenjuju kratki odgovori iz STEM oblasti, za koje literatura očekuje veću korelaciju.
+
+Lundgren~\cite{lundgren2024large} je ispitao GPT-4 na 60 eseja master nivoa iz političkih nauka koje su prethodno ocenili univerzitetski nastavnici.
+Prosečne ocene modela bile su usklađene sa nastavničkim, ali je pouzdanost među ocenjivačima (između modela i ljudi) bila niska:
+model prati agregirane trendove, a ne fino ljudsko rasuđivanje.
+Ocenjivanje je bilo sklono izbegavanju rizika i oslanjanju na opšte karakteristike eseja, poput kvaliteta jezika, umesto na detaljne rubrike.
+Izmene prompta i uputstava za ocenjivanje donele su samo ograničena poboljšanja,
+pa su tadašnji sistemi bili slabo osetljivi na suptilne varijacije u kriterijumima evaluacije.
+Upravo taj nalaz motiviše eksperiment sa tri konfiguracije strogosti u ovom radu (odeljak~\ref{sec:modeli}):
+umesto da se pretpostavi da instrukcija o strogosti deluje, meri se da li i koliko ona pomera ocene i njihovu korelaciju sa nastavničkim.
+
+Jukjevič~\cite{jukiewicz2024future} je ChatGPT primenio na ocenjivanje devet programerskih zadataka
+na petnaestonedeljnom kursu programiranja u Python-u sa 67 studenata osnovnih studija kognitivnih nauka,
+gde su radove nezavisno ocenili i nastavnik i model.
+Korelacija sa nastavničkim ocenama bila je snažno pozitivna, mada je model dodeljivao nešto strože ocene.
+Ponovljivost kroz višestruka pokretanja bila je visoka, sa zanemarljivim varijacijama između iteracija.
+Uz numeričku ocenu, ChatGPT je procenjivao ispravnost koda,
+proveravao poštovanje smernica PEP\,8 i za nekoliko sekundi generisao detaljnu povratnu informaciju.
+Autor navodi i ograničenja: halucinirane greške, troškove korišćenja API-ja i povremene nedoslednosti u ocenjivanju koje zahtevaju proveru nastavnika.
+Zaključak studije je da je ChatGPT koristan komplementaran alat za procenu koda i generisanje povratnih informacija,
+ali da ljudski nadzor ostaje neophodan za pouzdanost i pravednost.
+Dva nalaza iz te studije ovde se proveravaju na drugom jeziku i novijim modelima:
+sistematsko odstupanje modela od nastavnika prati se kroz odnos prosečnih ocena (odeljak~\ref{sec:metrike}),
+a ponovljivost kroz eksperiment sa temperaturom (odeljak~\ref{sec:rezultati-temperatura}).
+
+Olivos i dr.~\cite{olivos2025assessing} ispitali su saradnju nastavnika i modela na 70 rukom pisanih ispita sa uvodnog kursa sociologije,
+gde su GPT-4 i GPT-4o-mini korišćeni i za transkripciju rukopisa i za ocenjivanje pitanja esejskog tipa.
+Ocene modela su bile snažno korelisane sa ocenama ljudskog ocenjivača,
+i to naročito kada je modelu uz pitanje dat i šablonski odgovor (engl. \emph{template answer}).
+Pošto su odstupanja ipak ostala, autori modelu namenjuju ulogu „drugog ocenjivača'' koji označava nedoslednosti za naknadnu proveru,
+a ne zamene za ljudsku procenu.
+Razlika između ocenjivanja sa referentnim odgovorom i bez njega u toj studiji je zabeležena usput;
+ovde je ona podignuta na nivo eksperimentalne promenljive, kroz PRA i GRA režim pokrenute nad istim podacima i modelima.
+
+Vecler i dr.~\cite{wetzler2025grading} uporedili su osam nastavnika sa dve verzije ChatGPT-a (3.5 i 4o)
+na 186 eseja sa uvodnog kursa psihologije, ocenjenih po istoj detaljnoj rubrici, koristeći Bland-Altmanovu i regresionu analizu.
+ChatGPT 3.5 je u proseku ocenjivao više od nastavnika, dok su proseci verzije 4o bili bliži ljudskim,
+ali su obe verzije bile blaže od nastavnika kod slabijih radova i strože kod boljih, što je proporcionalno sistematsko odstupanje.
+Autori zaključuju da model i nastavnici istu rubriku primenjuju različito.
+Taj rezultat je razlog što se u ovom radu korelacija i slaganje posmatraju odvojeno:
+visoka korelacija može da postoji uz sistematsko pomeranje ocena, pa se uz PCC prate i odnos prosečnih ocena i RMSE/STDDEV.
+
+Ovi nalazi se uklapaju u širu sliku: pouzdanost ocenjivanja velikim jezičkim modelima zavisi od tipa zadatka.
+Slaganje sa ljudskim ocenjivačima veće je tamo gde su odgovori strukturirani, kao kod definicija, formula ili fragmenata koda,
+a opada kod subjektivnih ili otvorenih pisanih zadataka~\cite{tomic2022ai,vittorini2021ai}.
+U radu~\cite{pinto2023large} GPT-3 je evaluiran na odgovorima otvorenog tipa profesionalaca iz industrije
+i pokazao snažne korelacije sa ekspertskim ocenama,
+pod uslovom da su kriterijumi jasno definisani i kontekstualno utemeljeni.
+
+\subsection{Pozicioniranje ovog rada}
+\label{sec:pozicioniranje}
+
+Tabela~\ref{tab:srodni-radovi} sažima empirijske studije iz prethodnog odeljka po dimenzijama koje su bitne za ovaj rad:
+vrsti zadatka, obimu podataka, modelima, ulozi referentnog odgovora, tretmanu strogosti i korišćenim metrikama.
+Podaci su preuzeti iz samih studija;
+gde studija neku dimenziju ne navodi, polje je označeno sa „n/p''.
+
+\begin{table}[ht]
+\centering
+\caption{Srodne empirijske studije i ovaj rad po dimenzijama eksperimenta.
+Kolona „Ref.\ odgovor'' označava šta je model dobijao uz pitanje pri ocenjivanju;
+kolona „Strogost'' da li je strogost ocenjivanja bila kontrolisana promenljiva.}
+\label{tab:srodni-radovi}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+\textbf{Studija} & \textbf{Zadatak i obim} & \textbf{Modeli} & \textbf{Ref.\ odgovor} & \textbf{Strogost} & \textbf{Metrike} \\
+\midrule
+\makecell[l]{Kuli i Jusuf\\\cite{kooli2025transforming}} & \makecell[l]{eseji,\\društvene nauke,\\25 radova} & ChatGPT & n/p & ne & korelacija \\
+\addlinespace
+\makecell[l]{Lundgren\\\cite{lundgren2024large}} & \makecell[l]{eseji,\\političke nauke,\\60 eseja} & GPT-4 & rubrika & \makecell[l]{varijacije\\prompta} & \makecell[l]{PCC, procenat\\slaganja, kapa} \\
+\addlinespace
+\makecell[l]{Jukjevič\\\cite{jukiewicz2024future}} & \makecell[l]{kod (Python),\\9 zadataka,\\67 studenata} & ChatGPT & n/p & ne & \makecell[l]{korelacija,\\ponovljivost} \\
+\addlinespace
+\makecell[l]{Olivos i dr.\\\cite{olivos2025assessing}} & \makecell[l]{eseji,\\sociologija,\\70 ispita} & \makecell[l]{GPT-4,\\GPT-4o-mini} & \makecell[l]{sa šablonom\\i bez njega} & ne & korelacija \\
+\addlinespace
+\makecell[l]{Vecler i dr.\\\cite{wetzler2025grading}} & \makecell[l]{eseji,\\psihologija,\\186 eseja} & \makecell[l]{GPT-3.5,\\GPT-4o} & rubrika & ne & \makecell[l]{Bland-Altman,\\regresija} \\
+\midrule
+Ovaj rad & \makecell[l]{kratki odgovori\\i kod, STEM, srpski,\\583 odgovora,\\5 kurseva} & \makecell[l]{5 (od toga 2\\za rezonovanje)} & PRA / GRA & \makecell[l]{3 konfigu-\\racije} & \makecell[l]{PCC, odnos\\prosečnih ocena,\\RMSE/STDDEV} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Iz tabele se vide četiri praznine koje ovaj rad popunjava.
+Prva je jezik.
+Nijedna od navedenih studija ne ispituje ocenjivanje na jeziku sa ograničenim resursima niti jezik tretira kao okolnost eksperimenta;
+ovde su pitanja, studentski odgovori, referentni odgovori, nastavni materijali i promptovi na srpskom (odeljak~\ref{sec:podaci}),
+pa rezultati govore o upotrebljivosti modela izvan engleskog konteksta u kome se obično ispituju.
+Druga je referentni odgovor kao promenljiva.
+Prethodne studije modelu ili daju rubriku ili je ne daju, a jedino Olivos i dr.\ beleže da šablonski odgovor popravlja korelaciju;
+ovde su režimi sa referentnim odgovorom nastavnika (PRA) i sa generisanim referentnim odgovorom (GRA)
+pokrenuti nad istim odgovorima, modelima i konfiguracijama,
+pa se doprinos referentnog odgovora može izdvojiti od svega ostalog (odeljci~\ref{sec:modeli} i~\ref{sec:pra-vs-gra}).
+Treća je strogost.
+Lundgren i Vecler i dr.\ uočavaju da model sistematski odstupa od nastavnika, ali odstupanje ne pokušavaju da kontrolišu;
+ovde su tri konfiguracije strogosti deo eksperimentalnog plana,
+a metrike razdvajaju korelaciju (PCC) od sistematskog odstupanja i greške (odnos prosečnih ocena, RMSE/STDDEV),
+pa se vidi da li instrukcija o strogosti menja redosled ocena, njihov nivo ili oboje (odeljak~\ref{sec:metrike}).
+Četvrta su modeli: pregledane studije koriste ChatGPT, GPT-3.5, GPT-4 i GPT-4o,
+dok se ovde modeli opšte namene pod istim uslovima porede sa modelima za rezonovanje (GPT-5, DeepSeek-Reasoner).
+Numeričko poređenje postignutih vrednosti PCC-a sa onima iz literature dato je u odeljku~\ref{sec:poredjenje}.
+
+Kroz svu navedenu literaturu provlači se isti zaključak: veliki jezički modeli su pomoćni alati koji automatizuju rutinske aspekte ocenjivanja,
 dok nastavnik ostaje nezamenljiv za pedagoško rasuđivanje,
 kontekstualno tumačenje i granične slučajeve~\cite{van2022applications,zawacki2019systematic}.
 Preporukama iz literature najbliže odgovaraju pristupi koji spajaju automatizaciju sa nadzorom čoveka u petlji,
 podesivom strogošću ocenjivanja i interpretabilnom povratnom informacijom.
-Ta tri zahteva, kontrola nastavnika, transparentnost i prilagodljivost, oblikovala su i platformu EduGrader predstavljenu u ovom radu.
+Ta tri zahteva, kontrola nastavnika, transparentnost i prilagodljivost, oblikovala su i platformu EduGrader predstavljenu u ovom radu,
+a uloga „drugog ocenjivača'' koju predlažu Olivos i dr.\ odgovara mestu koje model ima u njenom toku rada (poglavlje~\ref{sec:aplikacija}):
+model predlaže ocenu i obrazloženje, a konačnu odluku donosi nastavnik.

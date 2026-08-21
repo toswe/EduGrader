@@ -36,8 +36,9 @@ i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:i
 Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz odeljka~\ref{sec:modeli}:
 
 \begin{itemize}
-    \item \textbf{PRA varijanta} u prompt uključuje pitanje, tačan odgovor nastavnika i studentski odgovor.
-    \item \textbf{GRA varijanta} umesto tačnog odgovora nastavnika koristi referentni odgovor koji model sam generiše iz nastavnog materijala.
+    \item \textbf{PRA varijanta} u prompt uključuje pitanje, referentni odgovor nastavnika i studentski odgovor.
+    \item \textbf{GRA varijanta} umesto referentnog odgovora nastavnika koristi generisani referentni odgovor,
+    koji model sam konstruiše iz nastavnog materijala.
     Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF,
     tekst se izdvaja bibliotekom PyPDF2 i kešira (engl. \emph{cache}) na disku
     (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom),
@@ -64,7 +65,7 @@ Trajno neuspešni redovi označavaju se specijalnom negativnom vrednošću i isk
 
 \subsection{Automatizacija eksperimenata i analiza}
 
-Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri nivoa strogosti) nad svih devet skupova podataka,
+Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri konfiguracije strogosti) nad svih devet skupova podataka,
 dakle 135 pokretanja po režimu ocenjivanja.
 Pomoćna skripta za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline};
 ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
@@ -122,10 +123,10 @@ u kome se čuvaju rezultati dodatnog eksperimenta sa temperaturom (odeljak~\ref{
 
 Datoteka \texttt{dvc.yaml} opisuje faze obrade sa njihovim zavisnostima i izlazima,
 a \texttt{params.yaml} sadrži spisak skupova podataka
-i izbor modela i nivoa strogosti za tekuće pokretanje.
+i izbor modela i konfiguracije strogosti za tekuće pokretanje.
 Svaki model opisan je zasebnom datotekom u \texttt{params/models},
 koja navodi provajdera i tačan identifikator modela.
-Datoteke u \texttt{params/prompts/strictness} opisuju nivoe strogosti,
+Datoteke u \texttt{params/prompts/strictness} opisuju konfiguracije strogosti,
 a svaka od njih sadrži tekst sistemske instrukcije u obe varijante,
 sa zadatim referentnim odgovorom i sa nastavnim materijalom.
 
@@ -142,7 +143,7 @@ Imena tih datoteka prate tri obrasca:
     o kojoj je reč u odeljku~\ref{sec:rezim-udzbenik}.
 \end{itemize}
 
-Oznaka \texttt{generated} stoji pre nivoa strogosti,
+Oznaka \texttt{generated} stoji pre konfiguracije strogosti,
 a oznake \texttt{correct} i \texttt{textbook} posle imena modela.
 Analitička skripta iz ovih imena rekonstruiše konfiguraciju svake datoteke,
 pa dodatna evidencija o pokrenutim eksperimentima nije potrebna.

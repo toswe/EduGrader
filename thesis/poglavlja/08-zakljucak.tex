@@ -4,7 +4,7 @@
 
 U ovom radu predstavljen je EduGrader,
 višemodelska platforma otvorenog koda za ocenjivanje pitanja otvorenog tipa uz podršku veštačke inteligencije i pod nadzorom nastavnika.
-Sistem objedinjuje više velikih jezičkih modela (GPT-4o, GPT-4o-mini, DeepSeek-Chat i dva modela usmerena na rezonovanje,
+Sistem objedinjuje više velikih jezičkih modela (GPT-4o, GPT-4o-mini, DeepSeek-Chat i dva modela za rezonovanje,
 GPT-5 i DeepSeek-Reasoner) u podesiv tok ocenjivanja koji podržava evaluaciju i u PRA i u GRA režimu.
 EduGrader je evaluiran na 583 autentična studentska odgovora sa pet univerzitetskih kurseva na dve institucije,
 koji obuhvataju kratke činjeničke odgovore, teorijska objašnjenja i izraze nalik kodu.
@@ -12,9 +12,9 @@ Rezultati daju odgovore na četiri pitanja postavljena u odeljku~\ref{sec:motiva
 
 \paragraph{Usklađenost i doslednost ocena.}
 U PRA režimu svi evaluirani modeli postižu korelaciju sa nastavničkim ocenama od najmanje $0{,}77$,
-a modeli usmereni na rezonovanje najvišu: GPT-5 dostiže PCC od $0{,}89$ uz odnos RMSE/STDDEV od $0{,}47$,
+a modeli za rezonovanje najvišu: GPT-5 dostiže PCC od $0{,}89$ uz odnos RMSE/STDDEV od $0{,}47$,
 što znači da su njegova odstupanja od nastavnika manja od polovine prirodne varijabilnosti nastavničkih ocena.
-Slaganje, međutim, nije ujednačeno po predmetima.
+Korelacija, međutim, nije ujednačena po predmetima.
 Najviše je tamo gde se očekuje strukturiran odgovor (HTML5, TSW, Programiranje 2),
 a najniže na kursu Veb programiranje ($0{,}74$--$0{,}81$), uz ogradu da su vrednosti za kurseve sa po deset odgovora nepouzdane.
 Pošto je svaka konfiguracija pokrenuta jednom, o doslednosti između ponovljenih pokretanja rad govori samo posredno,
@@ -22,18 +22,18 @@ kroz eksperiment sa temperaturom, u kome dva pokretanja istog modela daju metrik
 
 \paragraph{Kalibracija strogosti.}
 Konfiguracija strogosti jeste upotrebljiva poluga, ali ne u oba smera podjednako.
-Blaga i neutralna konfiguracija daju najbolje slaganje kod četiri od pet modela,
+Blaga i neutralna konfiguracija daju najbolje rezultate kod četiri od pet modela,
 dok stroga kod većine modela snižava korelaciju i pomera ocene naniže, kod modela GPT-4o do odnosa prosečnih ocena od $0{,}79$.
 Nastavnik, dakle, može promptom da pomeri prosečnu ocenu prema očekivanjima kursa,
-ali stroža instrukcija po pravilu plaća cenu u slaganju sa ljudskim ocenjivačem,
+ali stroža instrukcija po pravilu plaća cenu i u korelaciji i u slaganju sa ljudskim ocenjivačem,
 pa je neutralna ili blaga konfiguracija sigurnija polazna tačka.
 
 \paragraph{Ocenjivanje bez referentnog odgovora nastavnika.}
-Kada referentni odgovor ne postoji, GRA režim ga generiše iz nastavnog materijala, ali po cenu slaganja:
+Kada referentni odgovor ne postoji, GRA režim ga generiše iz nastavnog materijala, ali po cenu kvaliteta ocenjivanja:
 kod svih modela i konfiguracija metrike su slabije nego u PRA režimu.
 Pad je najmanji kod modela GPT-5 (sa $0{,}88$ na $0{,}84$ u neutralnoj konfiguraciji),
-pa je GRA režim sa dovoljno sposobnim modelom za rezonovanje upotrebljiv kao zamena kada nastavnik nema pripremljeno rešenje.
-Umetanje celog udžbenika u prompt umesto generisanog odgovora ne poboljšava slaganje, a prompt čini oko 48 puta većim.
+pa je GRA režim sa dovoljno sposobnim modelom za rezonovanje upotrebljiv kao zamena kada nastavnik nema pripremljen referentni odgovor.
+Umetanje celog udžbenika u prompt umesto generisanog odgovora ne poboljšava nijednu metriku, a prompt čini oko 48 puta većim.
 Za modele DeepSeek ovaj deo evaluacije ostaje otvoren,
 jer na najvećem kursu referentni odgovor za njih nije ni generisan (odeljak~\ref{sec:gra-greska}).
 Zaključak je da referentni odgovor nastavnika ostaje najvredniji pojedinačni ulaz u sistem.

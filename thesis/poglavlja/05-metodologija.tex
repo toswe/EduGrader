@@ -31,6 +31,8 @@ Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu poziti
 $0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
 PCC ne meri apsolutno slaganje: sistem koji sve ocene dosledno umanjuje za istu vrednost postigao bi savršenu korelaciju uz očigledno pogrešne ocene.
 PCC je zato dopunjen metrikama koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
+U radu se zbog toga dosledno razlikuju korelacija, koju meri PCC, i slaganje, koje mere RMSE i RMSE/STDDEV;
+visoka korelacija ne podrazumeva slaganje, što je poznat argument iz metodologije poređenja metoda merenja~\cite{mansournia2021bland}.
 
 Odnos prosečnih ocena poredi prosečnu ocenu sistema sa prosečnom ocenom nastavnika i otkriva sistematsku blagost ili strogost,
 ali ne i usklađenost u variranju ocena.
@@ -127,9 +129,9 @@ Generisani, DeepSeek-Reasoner (106) & 52{,}3 & 370{,}9 \\
 \subsection{Modeli i konfiguracije}
 \label{sec:modeli}
 
-EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele opšte namene i modele optimizovane za rezonovanje:
+EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele opšte namene i modele za rezonovanje:
 \begin{itemize}
-    \item standardni modeli: GPT-4o, GPT-4o-mini, DeepSeek-Chat;
+    \item modeli opšte namene: GPT-4o, GPT-4o-mini, DeepSeek-Chat;
     \item modeli za rezonovanje: GPT-5, DeepSeek-Reasoner.
 \end{itemize}
 Svaki model evaluiran je u tri konfiguracije strogosti ocenjivanja: blagoj, neutralnoj i strogoj.
@@ -139,7 +141,7 @@ usmerava mu pažnju na stavke koje se ne poklapaju sa studentskim odgovorom i za
 dok blaga konfiguracija usmerava pažnju na stavke koje se poklapaju.
 Neutralna konfiguracija ne uvodi nikakvo dodatno pravilo i predstavlja osnovnu postavku ocenjivanja.
 Puni tekstovi svih promptova navedeni su u dodatku~\ref{app:promptovi}.
-Podela na tri nivoa strogosti prati nalaz prethodnih studija da i ljudski ocenjivači variraju u strogosti~\cite{jukiewicz2024future}.
+Podela na tri konfiguracije strogosti prati nalaz prethodnih studija da i ljudski ocenjivači variraju u strogosti~\cite{jukiewicz2024future}.
 
 EduGrader podržava dva komplementarna režima ocenjivanja:
 \begin{itemize}
@@ -147,7 +149,7 @@ EduGrader podržava dva komplementarna režima ocenjivanja:
     \item GRA, u kome model najpre generiše referentni odgovor na osnovu priloženih nastavnih materijala,
     a zatim studentski odgovor ocenjuje u odnosu na taj generisani standard.
 \end{itemize}
-PRA režim pokriva ispite sa dobro definisanim ključem za ocenjivanje, a GRA one na kojima nastavnik ne obezbeđuje eksplicitno referentno rešenje.
+PRA režim pokriva ispite za koje postoji referentni odgovor nastavnika, a GRA one na kojima ga nastavnik ne obezbeđuje.
 
 Mreža konfiguracija ne varira temperaturu, parametar koji upravlja slučajnošću pri uzorkovanju odgovora modela.
 Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o,
@@ -199,7 +201,7 @@ Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovi
 Procenjeni ukupan broj tokena za kompletnu mrežu u ovom režimu iznosi približno $119$ miliona, dakle još oko $80$ miliona povrh već potrošenih.
 
 Zbog toga su u ovom režimu evaluirani samo modeli GPT-4o-mini i GPT-4o,
-dok modeli usmereni na rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
+dok modeli za rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
 Ocenjivanje je u potpunosti sprovedeno jedino za model GPT-4o-mini, kroz sve tri konfiguracije strogosti;
 za model GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
 Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.

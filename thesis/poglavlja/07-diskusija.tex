@@ -5,7 +5,8 @@
 \subsection{Poređenje sa prethodnim istraživanjima}
 \label{sec:poredjenje}
 
-Tabela~\ref{tab:prior-study} smešta vrednosti PCC-a postignute u ovom istraživanju u kontekst prethodnih studija.
+Tabela~\ref{tab:prior-study} smešta vrednosti PCC-a postignute u ovom istraživanju u kontekst prethodnih studija,
+čiji je pregled po dimenzijama eksperimenta dat u odeljku~\ref{sec:pozicioniranje}.
 
 \begin{table}[ht]
 \centering
@@ -31,8 +32,8 @@ Vrednost $0{,}43$ kod Lundgrena jeste Pirsonov koeficijent korelacije,
 i to najviša od četiri prompt konfiguracije koje autor poredi (raspon $0{,}26$--$0{,}43$);
 autor uz nju izveštava i mere slaganja (procenat slaganja i Koenova kapa), koje su niske i nisu direktno uporedive sa PCC.
 Poređenja treba tumačiti sa oprezom, jer se skupovi podataka i formati zadataka razlikuju,
-ali dva faktora verovatno doprinose višoj usklađenosti u ovoj postavci.
-Prvo, evaluirani su noviji modeli, pre svega oni usmereni na rezonovanje (GPT-5, DeepSeek-Reasoner),
+ali dva faktora verovatno doprinose višoj korelaciji u ovoj postavci.
+Prvo, evaluirani su noviji modeli, pre svega modeli za rezonovanje (GPT-5, DeepSeek-Reasoner),
 koji stabilnije zadržavaju ponašanje kroz konfiguracije strogosti i uz visok PCC daju i niske odnose RMSE/STDDEV,
 blizu tipične varijabilnosti ljudskog ocenjivanja.
 Drugo, skup podataka sastoji se prvenstveno od kratkih teorijskih pitanja iz STEM oblasti (nauka,
@@ -60,7 +61,7 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenuto je samo za dva modela,
     jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim.
     Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje sa nastavnicima (odeljak~\ref{sec:rezultati-udzbenik});
-    za modele usmerene na rezonovanje režim nije pokretan, pa za njih nalaza nema.
+    za modele za rezonovanje režim nije pokretan, pa za njih nalaza nema.
     \item \textbf{GRA režim bez referentnog odgovora za modele DeepSeek.}
     Na kursu Programiranje 2 udžbenik premašuje kontekstni prozor modela DeepSeek,
     pa referentni odgovor za njih nije generisan, a ocenjivanje je izvedeno bez njega (odeljak~\ref{sec:gra-greska}).
@@ -91,7 +92,7 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     slaganje između više jezičkih modela iskoristiti kao meru pouzdanosti ocene
     i slučajeve niske pouzdanosti automatski označavati za proveru nastavnika.
     \item \textbf{Kombinovano ocenjivanje:}
-    kombinovati modele za rezonovanje i standardne modele (npr.\ usrednjavanjem ili većinskim glasanjem)
+    kombinovati modele za rezonovanje i modele opšte namene (npr.\ usrednjavanjem ili većinskim glasanjem)
     radi stabilnijih ocena od onih koje daje pojedinačni model.
     \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim i kreativnim zadacima i u višejezičnim okruženjima,
     izvan STEM disciplina sa njihovim strukturiranijim odgovorima.
