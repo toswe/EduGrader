@@ -57,6 +57,19 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Temperatura je zadržana na podrazumevanoj vrednosti provajdera;
     njen uticaj ispitan je odvojeno (odeljak~\ref{sec:rezultati-temperatura}) i nije primećen,
     ali samo za jedan model, jednu konfiguraciju strogosti i deo skupova podataka.
+    \item \textbf{Konfiguracije strogosti se ne razlikuju samo po strogosti.}
+    Tri sistemske instrukcije (dodatak~\ref{app:promptovi}) pisane su nezavisno, pa se razlikuju i mimo strogosti.
+    Blaga i stroga instrukcija dele istu strukturu i razlikuju se u opisu uloge, u tome da li se pažnja usmerava na stavke koje se poklapaju
+    ili na one koje se ne poklapaju sa referentnim odgovorom, i po eksplicitnom pravilu kažnjavanja (petina poena po nepoklapanju),
+    koje postoji samo u strogoj.
+    Neutralna instrukcija je kraća, drugačije formulisana i drugačijeg redosleda informacija, a jedina je pisana sa dijakritikom,
+    dok su blaga i stroga bez nje.
+    Razlike između konfiguracija zato se ne mogu pripisati isključivo strogosti:
+    one mere zajednički efekat strogosti, formulacije i pravopisa, a kod stroge konfiguracije i eksplicitnog pravila o oduzimanju poena,
+    koje je verovatno glavni uzrok pomeranja ocena naniže.
+    Poređenje blage i stroge konfiguracije je čistije od poređenja bilo koje od njih sa neutralnom.
+    Instrukcije nisu naknadno ujednačene, jer bi tekst u dodatku prestao da odgovara promptovima koji su proizveli prikazane rezultate;
+    ponavljanje svih pokretanja sa ujednačenim instrukcijama, u kojima bi se menjala samo jedna rečenica, ostavljeno je za budući rad.
     \item \textbf{Nepotpuni treći režim.}
     Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenuto je samo za dva modela,
     jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim.
@@ -94,6 +107,9 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     \item \textbf{Kombinovano ocenjivanje:}
     kombinovati modele za rezonovanje i modele opšte namene (npr.\ usrednjavanjem ili većinskim glasanjem)
     radi stabilnijih ocena od onih koje daje pojedinačni model.
+    \item \textbf{Kontrolisane varijacije prompta:}
+    ponoviti sweep sa tri instrukcije koje se razlikuju samo u rečenici o strogosti,
+    uz istu strukturu, redosled informacija i pravopis, kako bi se efekat strogosti izdvojio od efekta formulacije (odeljak~\ref{sec:ogranicenja}).
     \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim i kreativnim zadacima i u višejezičnim okruženjima,
     izvan STEM disciplina sa njihovim strukturiranijim odgovorima.
 \end{itemize}
