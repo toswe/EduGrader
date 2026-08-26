@@ -205,3 +205,8 @@ thesis/main.pdf
 
 # Local backup archives (Overleaf export, ComSIS source zip)
 *.zip
+
+# Studentski odgovori nisu deo javnog repozitorijuma (dostupni na zahtev)
+pipeline/data/*/raw/student_answers.csv
+pipeline/data/*/graded/graded.*.csv
+pipeline/data/*/graded/graded-*.csv
