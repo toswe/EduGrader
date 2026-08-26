@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Pairs temperature-sweep runs (outside pipeline/data) with the matching
-baseline run and reports the same metrics as calculate_corelations.py."""
+baseline run and reports the same metrics as calculate_correlations.py."""
 import csv
 import math
 import re
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, cast
 
-from calculate_corelations import pearson, safe_float
+from calculate_correlations import pearson, safe_float
 
 
 ROOT = Path(__file__).resolve().parent

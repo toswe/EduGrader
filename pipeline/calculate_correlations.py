@@ -248,15 +248,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-# This script should do the same as calculate_corelations.py in the root/scripts directory
-# But it should loop through all datasets defined in params.yaml
-# Besides the columns in the original script, it should also store:
-# - dataset_name
-# - model_name
-# - strictness_level
-# - correct_answer or textbook_based (indicating which grading method was used)
-#
-# It should read all of the files in the graded directory for each dataset
-# And write the correlation results to data/<dataset_name>/graded/correlation_results.csv
-# After that, it should also write a summary file data/correlation_summary.csv
-# That file should contain all of the correlation results for all datasets
