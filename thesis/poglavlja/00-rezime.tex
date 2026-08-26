@@ -8,8 +8,8 @@ Zahvaljujem se...
 Ubrzani razvoj veštačke inteligencije i velikih jezičkih modela (engl.
 \emph{large language models}, LLM) menja praksu provere znanja u visokom obrazovanju,
 naročito u ocenjivanju pitanja otvorenog tipa.
-Tradicionalno ocenjivanje je vremenski zahtevno, sklono nedoslednosti i teško skalabilno za velike grupe studenata.
-Veliki jezički modeli tumače slobodan tekst i rezonuju o njegovom značenju,
+Tradicionalno ocenjivanje je vremenski zahtevno, sklono nedoslednosti i teško primenljivo na velike grupe studenata.
+Veliki jezički modeli mogu da analiziraju i tumače značenje slobodnog teksta,
 pa povratna informacija može biti brža, doslednija i češća.
 U ovom radu predstavljen je EduGrader, platforma za ocenjivanje otvorenog koda koja objedinjuje GPT-4o,
 GPT-4o-mini, DeepSeek-Chat, GPT-5 i DeepSeek-Reasoner.
@@ -18,13 +18,14 @@ strogu) i uz numeričku ocenu daje sažeto obrazloženje: šta je u odgovoru isp
 Sistem radi u dva režima: režimu sa zadatim referentnim odgovorom (engl. \emph{provided-reference-answer}, PRA),
 vođenom referentnim odgovorima nastavnika,
 i režimu sa generisanim referentnim odgovorom (engl. \emph{generated-reference-answer}, GRA),
-koji referentne odgovore automatski konstruiše iz nastavnih materijala.
-Svi eksperimenti sprovedeni su na srpskom, jeziku sa ograničenim resursima koji je slabo zastupljen u podacima za obučavanje savremenih modela,
-dakle izvan engleskog konteksta u kome se ovakvi sistemi obično ispituju.
-EduGrader je evaluiran na 583 autentična studentska odgovora sa pet univerzitetskih kurseva na dve institucije,
-uključujući tekstualna objašnjenja i odgovore u obliku koda.
+koji referentne odgovore automatski generiše iz nastavnih materijala.
+Svi eksperimenti sprovedeni su na srpskom jeziku,
+koji spada u jezike sa ograničenim resursima i znatno je manje zastupljen u podacima za obučavanje savremenih modela,
+čime je ispitivanje prošireno izvan dominantnog engleskog jezičkog konteksta.
+EduGrader je ocenjen na 583 autentična studentska odgovora sa pet univerzitetskih kurseva na dve institucije,
+obuhvatajući i tekstualna obrazloženja i programski kod.
 U najboljoj konfiguraciji sistem postiže Pirsonov koeficijent korelacije od 0{,}89 sa ljudskim ocenjivačima.
-Zamišljen je kao pomoć nastavniku koja preuzima rutinski deo ocenjivanja, a ne kao njegova zamena.
+Zamišljen je kao alat za podršku ocenjivanju: preuzima rutinski deo posla, a ne zamenjuje nastavnika.
 
 \vspace{1em}
 \noindent\textbf{Ključne reči:} veliki jezički modeli, automatsko ocenjivanje, pitanja otvorenog tipa, referentni odgovor,

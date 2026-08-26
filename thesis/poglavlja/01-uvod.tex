@@ -9,7 +9,7 @@ Na velikim univerzitetskim kursevima nastavnici i saradnici moraju da ocene stot
 Kratka objašnjenja i mini-eseji, za razliku od pitanja sa ponuđenim odgovorima, ne mogu se proveriti prostim uparivanjem obrazaca.
 Oni zahtevaju tumačenje: prepoznavanje delimično ispravnog rezonovanja,
 razlikovanje jezičkih nepreciznosti od konceptualnih praznina i odluku o tome koliko neki propust treba da utiče na ocenu.
-Takvo ocenjivanje je skupo, teško skalabilno i sklono nedoslednosti:
+Takvo ocenjivanje je skupo, teško primenljivo na velike grupe studenata i sklono nedoslednosti:
 čak i uz detaljna uputstva, dva ocenjivača mogu isti odgovor protumačiti različito,
 naročito kada je odgovor dvosmislen, pisan u žurbi ili strukturno nejasan~\cite{brookhart2016century,jonsson2007use,stemler2004comparison}.
 Nastavnika to opterećenje odvraća od pitanja zasnovanih na objašnjenjima,
@@ -20,7 +20,7 @@ testovi sa ponuđenim odgovorima,
 pitanja dopunjavanja ili kratki odgovori sa predvidljivom formulacijom~\cite{brew2013automated,ramesh2022automated,shermis2003automated}.
 Napredak u obradi prirodnog jezika proširio je ove mogućnosti, ali su se mnogi pristupi i dalje oslanjali na ručno projektovanje atributa,
 uske domene ili velike označene skupove podataka~\cite{banko2001scaling,collobert2008unified,sebastiani2002machine}.
-Savremeni veliki jezički modeli (engl. \emph{large language models}, LLM) tumače slobodan tekst neposredno i rezonuju o njegovom značenju.
+Savremeni veliki jezički modeli (engl. \emph{large language models}, LLM) mogu da analiziraju i tumače odgovore formulisane slobodnim tekstom.
 Time je postalo izvodljivo projektovati alate koji ocenjuju odgovore otvorenog tipa,
 obrazlažu ocenu prirodnim jezikom i ukazuju na ono što u odgovoru nedostaje,
 a ne samo na ono što je pogrešno~\cite{kasneci2023chatgpt,zhai2023chatgpt}.
@@ -28,7 +28,7 @@ a ne samo na ono što je pogrešno~\cite{kasneci2023chatgpt,zhai2023chatgpt}.
 \subsection{Motivacija}
 \label{sec:motivacija}
 
-Cilj ovog rada je pouzdana automatizacija ocenjivanja.
+Cilj ovog rada je ispitivanje mogućnosti pouzdane primene velikih jezičkih modela kao podrške u ocenjivanju.
 Ručno ocenjivanje troši veliki deo nastavničkog vremena, pa povratna informacija kasni,
 a provere znanja se organizuju ređe nego što bi bilo korisno.
 Automatizovan sistem za ocenjivanje menja tu ravnotežu.
@@ -42,7 +42,7 @@ Ovaj rad razmatra četiri:
     \item Koliko su ocene velikih jezičkih modela usklađene sa nastavničkim i koliko su dosledne kroz različite predmete i tipove pitanja?
     \item Mogu li nastavnici kalibrisati strogost ocenjivanja prema očekivanjima konkretnog kursa?
     \item Šta se dešava kada potpun referentni odgovor nastavnika nije dostupan?
-    \item Kako očuvati ljudsku odgovornost za konačne ocene, a iskoristiti efikasnost automatizacije?
+    \item Kako sistem za automatizovano ocenjivanje projektovati tako da nastavnik zadrži kontrolu nad konačnom ocenom?
 \end{enumerate}
 Na ova pitanja rad se vraća u zaključku (poglavlje~\ref{sec:zakljucak}).
 
@@ -65,7 +65,7 @@ EduGrader nudi dva komplementarna režima ocenjivanja:
     \item \textbf{Režim sa zadatim referentnim odgovorom} (engl. \emph{provided-reference-answer}, PRA),
     u kome se studentski odgovori porede sa referentnim odgovorima koje je pripremio nastavnik.
     \item \textbf{Režim sa generisanim referentnim odgovorom} (engl. \emph{generated-reference-answer}, GRA),
-    u kome sistem najpre sam konstruiše referentni odgovor na osnovu nastavnih materijala,
+    u kome sistem najpre generiše referentni odgovor na osnovu nastavnih materijala,
     beležaka sa predavanja, skripti i udžbenika,
     a zatim studentske odgovore ocenjuje u odnosu na tako generisani standard.
 \end{itemize}
@@ -77,16 +77,16 @@ Model ocenu izražava na skali od 0 do 100, jer finija granulacija olakšava raz
 Dobijena vrednost se zatim preslikava na skalu od 0 do 10, na kojoj ocenjuju nastavnici (detalji u odeljku~\ref{sec:pipeline}).
 Sve ocene u ovom radu, i sistemske i nastavničke, prikazane su na skali 0--10, osim tamo gde je naznačeno drugačije.
 
-Svi eksperimenti sprovedeni su na srpskom,
-jeziku sa ograničenim resursima koji je slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju,
-dakle izvan engleskog konteksta u kome se ovakvi sistemi obično ispituju.
+Svi eksperimenti sprovedeni su na srpskom jeziku,
+koji spada u jezike sa ograničenim resursima i znatno je manje zastupljen u podacima za obučavanje savremenih modela,
+čime je ispitivanje prošireno izvan dominantnog engleskog jezičkog konteksta.
 Sistem je evaluiran na 583 autentična studentska odgovora prikupljena na dva univerziteta i pet kurseva,
 od kratkih činjeničkih odgovora i otvorenih tekstualnih objašnjenja do odgovora u obliku koda.
 Rezultati pokazuju da PRA režim daje stabilnije ishode od GRA režima i da modeli za rezonovanje daju ocene najbliže nastavničkim.
 U najboljoj konfiguraciji (GPT-5, blaga strogost) EduGrader postiže Pirsonov koeficijent korelacije (engl.
 \emph{Pearson correlation coefficient}, PCC) od 0{,}89 u odnosu na ljudsko ocenjivanje, a u neutralnoj konfiguraciji 0{,}88.
 
-EduGrader je zamišljen kao asistent za ocenjivanje, a ne kao zamena za sud nastavnika.
+EduGrader je zamišljen kao alat za podršku ocenjivanju, a ne kao zamena za nastavnika.
 Namenjen je smanjenju repetitivnog dela ocenjivanja,
 ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
 Zato je sistem projektovan po principu čoveka u petlji (engl.
