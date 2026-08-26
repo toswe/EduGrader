@@ -134,15 +134,15 @@ Ustupili su ih nastavnici koji su ispite sastavili i ocenili, sa Matematičkog f
 isključivo za potrebe ovog rada.
 Studenti nisu posebno kontaktirani,
 pa se zaštita njihovih podataka oslanja na pseudonimizaciju sprovedenu pre bilo kakve obrade
-i na to da se iz objavljenog skupa ne može utvrditi čiji je koji odgovor.
+i na to da se iz samog skupa ne može utvrditi čiji je koji odgovor.
 
-Objavljeni skup podataka sadrži samo četiri polja po odgovoru, opisana u poglavlju~\ref{sec:pipeline}:
+Skup podataka korišćen u radu sadrži samo četiri polja po odgovoru, opisana u poglavlju~\ref{sec:pipeline}:
 pseudonimni identifikator studenta, identifikator pitanja, ocenu nastavnika i tekst odgovora.
 Imena, brojevi indeksa, adrese elektronske pošte ni bilo koji drugi identifikatori u skupu ne postoje.
 Pseudonimi (\texttt{Student 1}, \texttt{Student 2}, \dots) dodeljeni su po redosledu pojavljivanja u okviru jednog ispitnog roka,
 nezavisno za svaki rok,
 pa se odgovori istog studenta iz dva roka ne mogu povezati.
-Tabela preslikavanja identiteta na pseudonime nije deo repozitorijuma i nije sačuvana.
+Tabela preslikavanja identiteta na pseudonime nije sačuvana.
 Jedina zadržana veza je ona između odgovora jednog studenta unutar istog roka;
 ona je potrebna validaciji ulaza (svaki student ima odgovor na svako pitanje, poglavlje~\ref{sec:pipeline}) i ne nosi identitet.
 
@@ -153,7 +153,12 @@ Lični podaci u njima nisu nađeni,
 i da se odgovori ne odnose na studenta lično.
 Ovakav postupak je pseudonimizacija, a ne potpuna anonimizacija:
 nastavnik koji je ispit ocenjivao može prepoznati pojedini odgovor,
-ali treće lice iz objavljenih podataka identitet studenta ne može utvrditi.
+ali treće lice iz samih podataka identitet studenta ne može utvrditi.
+
+Studentski odgovori se, i pored pseudonimizacije, ne objavljuju javno.
+Javni repozitorijum projekta sadrži izvorni kod, pitanja sa referentnim odgovorima nastavnika i agregatne metrike,
+a datoteke sa studentskim odgovorima, ulazne i ocenjene, dostupne su na zahtev,
+uz saglasnost nastavnika koji su ih ustupili (odeljak~\ref{sec:reprodukcija}).
 
 Isti princip važi za podatke koji napuštaju sistem.
 Ocenjivanje se izvodi preko API-ja provajdera u oblaku (odeljak~\ref{sec:integracije}),
@@ -161,7 +166,7 @@ a prompt koji se modelu šalje sadrži isključivo tekst pitanja, referentni odg
 bez identifikatora studenta, i u \emph{pipeline}-u (poglavlje~\ref{sec:pipeline}) i u aplikaciji.
 Provajderima se tako prosleđuje samo sadržaj koji je već pseudonimizovan.
 U aplikaciji se identitet korisnika čuva isključivo u lokalnoj bazi institucije koja aplikaciju izvršava;
-ta baza, kao ni pristupni ključevi (odeljak~\ref{sec:reprodukcija}), nije deo objavljenog repozitorijuma.
+ta baza, kao ni pristupni ključevi (odeljak~\ref{sec:reprodukcija}), nije deo javnog repozitorijuma.
 
 Konačno, sistem je zamišljen kao alat za podršku ocenjivanju, a ne kao ocenjivač:
 konačna ocena i odluka o graničnim slučajevima ostaju kod nastavnika (odeljak~\ref{sec:ogranicenja}),

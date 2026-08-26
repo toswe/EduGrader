@@ -86,10 +86,13 @@ Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani
 \subsection{Reprodukcija eksperimenata}
 \label{sec:reprodukcija}
 
-Izvorni kod sistema, ulazni podaci (u pseudonimizovanom obliku, odeljak~\ref{sec:etika}) i sve ocenjene datoteke javno su dostupni
-u repozitorijumu projekta\footnote{\url{https://github.com/toswe/Master}},
-tako da se svaki opisani eksperiment može ponoviti.
-Struktura dela repozitorijuma koji se odnosi na evaluaciju prikazana je u nastavku.
+Izvorni kod sistema, pitanja sa referentnim odgovorima nastavnika i sve agregatne metrike javno su dostupni
+u repozitorijumu projekta\footnote{\url{https://github.com/toswe/Master}}.
+Studentski odgovori i ocenjene datoteke koje ih sadrže nisu deo javnog repozitorijuma (odeljak~\ref{sec:etika}),
+već se u pseudonimizovanom obliku ustupaju na zahtev, uz saglasnost nastavnika koji su ih obezbedili;
+sa njima se svaki opisani eksperiment može ponoviti istim komandama.
+Struktura dela repozitorijuma koji se odnosi na evaluaciju prikazana je u nastavku;
+datoteke označene zvezdicom nisu deo javnog repozitorijuma.
 
 \begin{tcolorbox}[promptbox, title={Organizacija evaluacione infrastrukture}]
 \begin{verbatim}
@@ -109,13 +112,13 @@ pipeline/
   calculate_temperature.py
   calculate_lengths.py
   data/<skup>/raw/questions.csv
-  data/<skup>/raw/student_answers.csv
-  data/<skup>/graded/graded.*.csv
+  data/<skup>/raw/student_answers.csv        *
+  data/<skup>/graded/graded.*.csv            *
   data/<skup>/graded/correlation_results.csv
   data/correlation_summary.csv
   data/temperature_summary.csv
   data/length_summary.csv
-data/<rok>/results/gpt-4o.default.t-*.csv
+data/<rok>/results/gpt-4o.default.t-*.csv    *
 \end{verbatim}
 \end{tcolorbox}
 
@@ -191,7 +194,7 @@ professor_stddev, rmse_stddev_ratio
 
 Prve četiri kolone određuju konfiguraciju, a ostale sadrže metrike opisane u odeljku~\ref{sec:metrike}.
 
-Pošto su ocenjene datoteke zadržane u repozitorijumu,
+Pošto su ocenjene datoteke sačuvane u celini,
 vrednosti prikazane u poglavlju~\ref{sec:rezultati} dobijaju se pokretanjem samo analitičke skripte,
 bez ijednog poziva jezičkom modelu i bez pristupnih ključeva.
 Kako su rezultati zapisani po ispitnim rokovima,
