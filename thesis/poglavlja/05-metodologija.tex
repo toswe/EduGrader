@@ -201,7 +201,7 @@ Svi eksperimenti sprovedeni su na srpskom jeziku, uključujući ispitna pitanja,
 Srpski je jezik sa ograničenim resursima, slabo zastupljen u podacima na kojima se veliki jezički modeli obučavaju,
 pa se ovo istraživanje pomera izvan dominantnog engleskog konteksta.
 
-\subsection{Neuspelo generisanje referentnog odgovora za modele DeepSeek}
+\subsection{Ograničenje GRA režima za modele DeepSeek}
 \label{sec:gra-greska}
 
 Pri proveri podataka posle završenih eksperimenata utvrđeno je da GRA režim za dva modela nije izveden onako kako je opisan.
@@ -223,10 +223,10 @@ već ocenjivanje bez ikakvog referentnog odgovora,
 a tumačenje tih vrednosti ograničeno je na ono što takva postavka dopušta (odeljak~\ref{sec:ogranicenja}).
 Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovori izostavljeni iz proseka dužine.
 
-\subsection{Razmatran treći režim: ocenjivanje direktno iz nastavnog materijala}
+\subsection{Treći režim: ocenjivanje na osnovu nastavnog materijala}
 \label{sec:rezim-udzbenik}
 
-Pored dva režima opisana u prethodnom odeljku, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
+Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
 U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom,
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor,
