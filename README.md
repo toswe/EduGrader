@@ -10,9 +10,9 @@ Full‑stack platform for course and test management with automated grading.
 
 ## Thesis
 
-[![Compile thesis](https://github.com/toswe/Master/actions/workflows/thesis.yml/badge.svg)](https://github.com/toswe/Master/actions/workflows/thesis.yml)
+[![Compile thesis](https://github.com/toswe/EduGrader/actions/workflows/thesis.yml/badge.svg)](https://github.com/toswe/EduGrader/actions/workflows/thesis.yml)
 
-**[View the latest PDF](https://toswe.github.io/Master/main.pdf)** (compiled automatically on every push to `main`).
+**[View the latest PDF](https://toswe.github.io/EduGrader/main.pdf)** (compiled automatically on every push to `main`).
 
 ## Quick start (Docker)
 
