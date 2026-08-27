@@ -2,8 +2,8 @@
 \chapter{Šabloni promptova i primeri ocenjivanja}
 \label{app:promptovi}
 
-Dodatak sadrži šablone promptova korišćene u eksperimentima i nekoliko primera ocenjivanja koje je sistem proizveo.
-Promptovi su preneti verbatim iz konfiguracionih datoteka, sa izvornim nedoslednostima u dijakritici, jer su modeli primili upravo takav tekst.
+Dodatak sadrži šablone promptova korišćene u eksperimentima i nekoliko primera ocenjivanja.
+Promptovi su preneti verbatim iz konfiguracionih datoteka, sa izvornim nedoslednostima u dijakritici, jer su modeli primili takav tekst.
 
 \medskip
 \noindent\textbf{Napomena.} Model ocenjuje na skali 0--100,
@@ -25,8 +25,8 @@ Ostatak odgovora treba da sadrži obrazloženje ocene.
 
 \section*{Promptovi strogosti za PRA režim}
 
-U PRA režimu prompt uz sistemsku instrukciju sadrži pitanje, referentni odgovor nastavnika (u promptu označen kao „tačan odgovor'')
-i studentski odgovor, svaki u zasebnom bloku.
+U PRA režimu prompt uz sistemsku instrukciju sadrži pitanje, referentni odgovor nastavnika (označen kao „tačan odgovor'')
+i studentski odgovor, u zasebnim blokovima.
 
 \begin{tcolorbox}[promptbox, title={Blaga konfiguracija}]
 
@@ -63,8 +63,8 @@ blaga i stroga usmeravaju pažnju modela na poklapanja odnosno na nepoklapanja, 
 
 \section*{Prompt za generisanje referentnog odgovora (GRA režim)}
 
-U prvom koraku GRA režima model iz nastavnog materijala konstruiše referentni odgovor, koristeći sledeću instrukciju.
-Korak ne zavisi od konfiguracije strogosti; ona se primenjuje tek pri ocenjivanju, i to istim promptovima kao u PRA režimu.
+U prvom koraku GRA režima model iz nastavnog materijala konstruiše referentni odgovor sledećom instrukcijom.
+Korak ne zavisi od strogosti; ona se primenjuje tek pri ocenjivanju, istim promptovima kao u PRA režimu.
 
 \begin{tcolorbox}[promptbox]
 
@@ -115,10 +115,12 @@ void f(unsigned n) {
 
 \medskip
 \textbf{Referentni odgovor nastavnika}
+\nopagebreak
 
 Ispisuje 7 tackica. $T(n) = 2 \cdot T(n-1) + 1$ sa baznim slučajem $T(0) = 0$.
 
 \medskip
+\begin{samepage}
 \textbf{Studentski odgovor}
 
 \begin{verbatim}
@@ -131,14 +133,17 @@ f(1) 1>0, . , f(0)
 f(2) . f(1), 1>0, .
 . .
 \end{verbatim}
+\end{samepage}
 
 \medskip
 \textbf{Ocene}
+\nopagebreak
 
 Nastavnik: 5/10 \hfill Sistem: 3/10
 
 \medskip
 \textbf{Obrazloženje sistema}
+\nopagebreak
 
 Netačan je krajnji rezultat: \texttt{f(3)} ispisuje 7 tačkica, ne 6.
 Ispravno je $T(n) = 2 \cdot T(n-1) + 1$ sa $T(0) = 0$, pa je $T(1) = 1$, $T(2) = 3$, $T(3) = 7$.
@@ -162,23 +167,30 @@ Molim Vas obrazložite odgovor.
 
 \medskip
 \textbf{Referentni odgovor nastavnika}
+\nopagebreak
 
 Za niz. Za niz je $O(1)$, za listu $O(n)$.
 Isto je. U oba slučaja je $O(1)$.
 
 \medskip
+\begin{samepage}
 \textbf{Studentski odgovor}
+\nopagebreak
 
 pristup n-tom elementu je laksi za niz, posto se elementi u nizu dodaju uz numeraciju,
 dok se kod listi pokazuje sa liste na listu bez znanja reda, sto bi znacilo da bi nam trebala petlja sa brojacem n dok ne dodjemo do n tog elemta liste
 
+\end{samepage}
+
 \medskip
 \textbf{Ocene}
+\nopagebreak
 
 Nastavnik: 5/10 \hfill Sistem: 6/10
 
 \medskip
 \textbf{Obrazloženje sistema}
+\nopagebreak
 
 Student je tačno objasnio prvi deo: pristup n-tom elementu je efikasniji za niz nego za povezanu listu,
 jer se u listi mora prolaziti element po element (linearno), dok je u nizu direktan pristup.

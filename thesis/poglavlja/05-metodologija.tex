@@ -21,7 +21,7 @@ da li nedostaju važni elementi i da li je rezonovanje delimično tačno, ali ne
 Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji,
 dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
 Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema,
-preslikanom na istu skalu 0--10, pomoću metrika opisanih u nastavku.
+preslikanom na istu skalu 0--10.
 
 Korišćene su četiri metrike: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena,
 koren srednje kvadratne greške (RMSE) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
@@ -93,8 +93,8 @@ HTML5 i JavaScript za video-igre (HTML5) & 10 \\
 \end{tabular}
 \end{table}
 
-Praćena je i prosečna dužina odgovora, za referentne odgovore nastavnika,
-za generisane referentne odgovore svakog modela i za studentske odgovore (tabela~\ref{tab:response_length}),
+Praćena je i prosečna dužina referentnih odgovora nastavnika,
+generisanih referentnih odgovora svakog modela i studentskih odgovora (tabela~\ref{tab:response_length}),
 jer dužina referentnog odgovora utiče na to koliko studentski odgovor u poređenju sa njim deluje potpuno.
 Referentni odgovori nastavnika i studentski odgovori su podjednako kratki, oko 21 do 22 reči u proseku.
 Generisani referentni odgovori su dva do tri puta duži, od oko 47 do 67 reči u zavisnosti od modela,
@@ -139,8 +139,8 @@ i na to da se iz samog skupa ne može utvrditi čiji je koji odgovor.
 Skup podataka korišćen u radu sadrži samo četiri polja po odgovoru, opisana u poglavlju~\ref{sec:pipeline}:
 pseudonimni identifikator studenta, identifikator pitanja, ocenu nastavnika i tekst odgovora.
 Imena, brojevi indeksa, adrese elektronske pošte ni bilo koji drugi identifikatori u skupu ne postoje.
-Pseudonimi (\texttt{Student 1}, \texttt{Student 2}, \dots) dodeljeni su po redosledu pojavljivanja u okviru jednog ispitnog roka,
-nezavisno za svaki rok,
+Pseudonimi (\texttt{Student~1}, \texttt{Student~2},~\dots) dodeljeni su po redosledu pojavljivanja u okviru jednog ispitnog roka,
+i to za svaki rok posebno,
 pa se odgovori istog studenta iz dva roka ne mogu povezati.
 Tabela preslikavanja identiteta na pseudonime nije sačuvana.
 Jedina zadržana veza je ona između odgovora jednog studenta unutar istog roka;

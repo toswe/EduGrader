@@ -104,14 +104,14 @@ formulaciji i nivou detalja može se razlikovati od odgovora koji je nastavnik i
 
 Među modelima porodice GPT prelazak u GRA režim najbolje podnosi GPT-5:
 zadržava korelaciju od $0{,}85$ u blagoj i $0{,}84$ u neutralnoj konfiguraciji i jedini u svim konfiguracijama drži RMSE/STDDEV ispod $0{,}75$.
-Sposobniji model za rezonovanje je, dakle, bolji i u konstruisanju referentnog odgovora i u ocenjivanju u odnosu na njega.
+Sposobniji model za rezonovanje, dakle, i bolje konstruiše referentni odgovor i bolje ocenjuje u odnosu na njega.
 GPT-4o u strogoj konfiguraciji prelazi granicu upotrebljivosti (RMSE/STDDEV $=1{,}04$, odnos prosečnih ocena $0{,}61$).
 
 Vrednosti za modele DeepSeek treba čitati uz napomenu iz odeljka~\ref{sec:gra-greska}:
 na kursu Programiranje 2, koji nosi 477 od 583 odgovora, ova dva modela nisu imala generisani referentni odgovor,
 već su ocenjivala iz sopstvenog znanja.
 DeepSeek-Reasoner i u takvoj postavci zadržava korelaciju od $0{,}79$ u blagoj i neutralnoj konfiguraciji,
-što govori o robusnosti samog modela, ali se ne može pripisati kvalitetu generisanog referentnog odgovora.
+što govori o robusnosti modela, a ne o kvalitetu generisanog referentnog odgovora.
 DeepSeek-Chat bez referentnog odgovora praktično ne funkcioniše: korelacija pada na $0{,}43$--$0{,}50$, odnos prosečnih ocena na $0{,}37$--$0{,}52$,
 a RMSE/STDDEV prelazi $1{,}2$ u svim konfiguracijama, pa njegove ocene odstupaju od nastavničkih više nego što nastavničke variraju međusobno.
 Koliko bi ova dva modela postigla sa stvarno generisanim referentnim odgovorom na tom kursu, ovi podaci ne pokazuju.
@@ -123,14 +123,14 @@ Kroz sve modele i konfiguracije strogosti PRA režim nadmašuje GRA, po korelaci
 Pad korelacije pri prelasku u GRA nije ujednačen: kod modela GPT-5 je najmanji (sa $0{,}88$ na $0{,}84$ u neutralnoj konfiguraciji),
 a kod modela DeepSeek-Chat najveći (sa $0{,}82$ na $0{,}50$),
 s tim što kod modela DeepSeek pad uključuje i potpuno odsustvo referentnog odgovora na najvećem kursu (odeljak~\ref{sec:gra-greska}).
-Performanse u GRA režimu, dakle, presudno zavise od toga da li referentni odgovor postoji i kakvog je kvaliteta, a ne samo od sposobnosti ocenjivanja.
+Performanse u GRA režimu, dakle, presudno zavise od postojanja i kvaliteta referentnog odgovora, a ne samo od sposobnosti ocenjivanja.
 
-Ne postoji konfiguracija strogosti koja je najbolja za sve modele, a optimalna se razlikuje između dva režima.
+Nijedna konfiguracija strogosti nije najbolja za sve modele, a optimalna se razlikuje između režima.
 U PRA režimu najvišu korelaciju blaga konfiguracija daje kod modela GPT-5,
 GPT-4o-mini i DeepSeek-Reasoner, neutralna kod modela GPT-4o, a stroga kod modela DeepSeek-Chat.
-U GRA režimu neutralna je najbolja kod svih modela osim GPT-5, kod koga je najbolja blaga,
-a kod modela DeepSeek-Reasoner razlika između blage i neutralne zanemarljiva je (oba $0{,}79$).
-Stroga konfiguracija je u oba režima najlošija za četiri od pet modela, po korelaciji i po sistematskom odstupanju.
+U GRA režimu neutralna je najbolja kod svih modela osim GPT-5, kod koga je to blaga,
+a kod modela DeepSeek-Reasoner blaga i neutralna su izjednačene (obe $0{,}79$).
+Stroga konfiguracija je u oba režima najlošija za četiri od pet modela, i po korelaciji i po sistematskom odstupanju.
 
 Sistematsko odstupanje razdvaja režime jasnije od korelacije.
 Dok u PRA režimu odnosi prosečnih ocena ostaju blizu $1{,}0$, u GRA režimu svi modeli ocenjuju niže od nastavnika,
