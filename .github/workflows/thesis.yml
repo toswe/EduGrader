@@ -39,6 +39,12 @@ jobs:
           restore-keys: |
             tectonic-${{ runner.os }}-
 
+      - name: Install fonts required by the MATF template (CMU Serif, Open Sans)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-cmu fonts-open-sans
+          fc-cache -f
+
       - name: Compile thesis
         working-directory: thesis
         run: tectonic main.tex

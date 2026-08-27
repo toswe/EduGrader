@@ -1,5 +1,5 @@
 % 4. Sistem za automatizovanu evaluaciju modela
-\section{Sistem za automatizovanu evaluaciju modela}
+\chapter{Sistem za automatizovanu evaluaciju modela}
 \label{sec:pipeline}
 
 Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela,
@@ -9,7 +9,7 @@ U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izla
 i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
 Eksperiment se tako reprodukuje bez ponovnog plaćanja API poziva čiji su ulazi ostali isti.
 
-\subsection{Format ulaznih podataka}
+\section{Format ulaznih podataka}
 
 Svaki od devet skupova podataka (pet kurseva, pri čemu su za pojedine kurseve obuhvaćeni odvojeni ispitni rokovi) opisan je dvema CSV datotekama:
 
@@ -22,7 +22,7 @@ Svaki od devet skupova podataka (pet kurseva, pri čemu su za pojedine kurseve o
     pseudonimni identifikator studenta, identifikator pitanja, ocena nastavnika (0--10) i tekst odgovora.
 \end{itemize}
 
-\subsection{Faze obrade}
+\section{Faze obrade}
 
 Prva faza (\emph{spajanje ulaza}) validira i spaja ove dve datoteke u jedinstvenu tabelu.
 Validacija obuhvata proveru obaveznih kolona u obe datoteke;
@@ -65,7 +65,7 @@ Redovi za koje ni posle tri pokušaja nije dobijena ocena u izlaznoj datoteci do
 Pošto je skala ocenjivanja 0--100, negativna vrednost ne može biti stvarna ocena,
 pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izračunavanja metrika.
 
-\subsection{Automatizacija eksperimenata i analiza rezultata}
+\section{Automatizacija eksperimenata i analiza rezultata}
 
 Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri konfiguracije strogosti) nad svih devet skupova podataka,
 dakle 135 pokretanja po režimu ocenjivanja.
@@ -83,7 +83,7 @@ i odnos RMSE i standardne devijacije (engl. \emph{standard deviation}, STDDEV),
 po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
 
-\subsection{Reprodukcija eksperimenata}
+\section{Reprodukcija eksperimenata}
 \label{sec:reprodukcija}
 
 Izvorni kod sistema, pitanja sa referentnim odgovorima nastavnika i sve agregatne metrike javno su dostupni

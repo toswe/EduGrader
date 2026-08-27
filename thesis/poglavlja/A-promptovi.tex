@@ -1,5 +1,5 @@
 % Dodatak A: Šabloni promptova i primeri ocenjivanja
-\section{Šabloni promptova i primeri ocenjivanja}
+\chapter{Šabloni promptova i primeri ocenjivanja}
 \label{app:promptovi}
 
 Dodatak sadrži šablone promptova korišćene u eksperimentima i nekoliko primera ocenjivanja koje je sistem proizveo.
@@ -9,7 +9,7 @@ Promptovi su preneti verbatim iz konfiguracionih datoteka, sa izvornim nedosledn
 \noindent\textbf{Napomena.} Model ocenjuje na skali 0--100,
 a ocene se u analizi i u primerima ispod preslikavaju na skalu 0--10, radi poređenja sa ocenama nastavnika.
 
-\subsection*{Uputstvo o formatu izlaza}
+\section*{Uputstvo o formatu izlaza}
 
 Sledeće uputstvo dodaje se na kraj sistemske instrukcije u svim konfiguracijama strogosti i u svim režimima ocenjivanja:
 
@@ -23,7 +23,7 @@ Ostatak odgovora treba da sadrži obrazloženje ocene.
 
 \end{tcolorbox}
 
-\subsection*{Promptovi strogosti za PRA režim}
+\section*{Promptovi strogosti za PRA režim}
 
 U PRA režimu prompt uz sistemsku instrukciju sadrži pitanje, referentni odgovor nastavnika (u promptu označen kao „tačan odgovor'')
 i studentski odgovor, svaki u zasebnom bloku.
@@ -61,7 +61,7 @@ Fokusiraj se na stavke koje se ne poklapaju sa studentovim odgovorom.
 Neutralna konfiguracija je namerno najkraća i ne uvodi dodatna pravila;
 blaga i stroga usmeravaju pažnju modela na poklapanja odnosno na nepoklapanja, a stroga zadaje i meru kazne.
 
-\subsection*{Prompt za generisanje referentnog odgovora (GRA režim)}
+\section*{Prompt za generisanje referentnog odgovora (GRA režim)}
 
 U prvom koraku GRA režima model iz nastavnog materijala konstruiše referentni odgovor, koristeći sledeću instrukciju.
 Korak ne zavisi od konfiguracije strogosti; ona se primenjuje tek pri ocenjivanju, i to istim promptovima kao u PRA režimu.
@@ -76,7 +76,7 @@ Odgovor treba da bude precizan i dužine od 2 do 5 rečenica.
 
 \end{tcolorbox}
 
-\subsection*{Promptovi za razmatrani treći režim}
+\section*{Promptovi za razmatrani treći režim}
 
 Instrukcije za varijantu sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik})
 razlikuju se od PRA verzija samo u opisu priloženog materijala.
@@ -90,12 +90,12 @@ Dobijaš odgovor studenta i pitanje na koje je student odgovarao, kao i udzbenik
 
 \end{tcolorbox}
 
-\subsection*{Reprezentativni primeri ocenjivanja}
+\section*{Reprezentativni primeri ocenjivanja}
 
 Naredni primeri preuzeti su iz rezultata ocenjivanja modelom GPT-5 u neutralnoj konfiguraciji PRA režima, sa kursa Programiranje 2.
 Izabrani su tako da ilustruju oba smera odstupanja od nastavničke ocene.
 
-\subsection*{Primer A: sistem ocenjuje strože od nastavnika}
+\section*{Primer A: sistem ocenjuje strože od nastavnika}
 
 \begin{tcolorbox}[promptbox]
 
@@ -150,7 +150,7 @@ Delimični poeni za pokušaj raščlanjivanja rekurzije, ali računanje i zaklju
 Primer ilustruje tipičan izvor neslaganja: student je postupak razložio korektno, ali je konačan broj pogrešan.
 Nastavnik je pokušaj nagradio polovinom poena, dok je model veću težinu dao netačnom rezultatu.
 
-\subsection*{Primer B: sistem ocenjuje blaže od nastavnika}
+\section*{Primer B: sistem ocenjuje blaže od nastavnika}
 
 \begin{tcolorbox}[promptbox]
 

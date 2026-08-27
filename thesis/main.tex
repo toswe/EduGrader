@@ -5,28 +5,22 @@
 % (naslov je usklađen sa naslovom u prijavi rada)
 % Autor: Svetozar Iković, Matematički fakultet, UB
 %
-% NAPOMENA: preambula je namerno minimalna i modularna , ako
-% fakultet zahteva zvanični šablon, menja se samo ovaj fajl,
-% a poglavlja u poglavlja/ ostaju netaknuta.
+% Zvanični šablon MATF-a: paket matfmaster (Filip Marić, 2015),
+% preuzet sa https://www.matf.bg.ac.rs/nastava/master-radovi/
+% (teze.zip). Uz njega idu matfmaster.sty, hyperref.cfg,
+% serbian*.lbx/ldf i matf.png u ovom direktorijumu.
+% Kompajliranje: tectonic main.tex (XeTeX). Potrebni su fontovi
+% CMU Serif i Open Sans (u teze.zip/fonts; na Ubuntu paketi
+% fonts-cmu i fonts-open-sans, na macOS kopirati u ~/Library/Fonts).
 % ============================================================
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,oneside]{memoir}
 
-% --- Jezik i pismo (srpski, latinica) ---
-% Preambula radi i pod pdfLaTeX-om (inputenc/fontenc) i pod
-% XeTeX/LuaTeX-om (fontspec) , Tectonic koristi XeTeX.
-\usepackage{iftex}
-\ifPDFTeX
-  \usepackage[utf8]{inputenc}
-  \usepackage[T1]{fontenc}
-  \usepackage{lmodern}
-\else
-  \usepackage{fontspec} % podrazumevani font je Latin Modern
-\fi
-\usepackage[serbian]{babel}
+% Paket koji definiše sve specifičnosti master rada Matematičkog fakulteta
+% (naslovna strana, strana komisije, rezime, zaglavlja, margine, fontovi, jezik).
+\usepackage[latinica]{matfmaster}
 
-% --- Matematika, grafika, tabele ---
+% --- Matematika, tabele ---
 \usepackage{amsmath}
-\usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{multirow}
@@ -61,67 +55,37 @@
   showstringspaces=false
 }
 
-% --- Ostalo ---
-\usepackage{url}
-\usepackage[hidelinks]{hyperref}
-
 % Marker za nedovršene delove , pretragom po \todo lako se
 % nalazi šta je preostalo; pre predaje ne sme ostati nijedan.
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
 
-% Razmak i uvlačenje pasusa
-\usepackage{setspace}
-\onehalfspacing
+% --- Metapodaci rada ---
+\bib{literatura}
+\autor{Svetozar Iković}
+\naslov{Primena veštačke inteligencije u obrazovanju: veliki jezički modeli za testiranje i ocenjivanje studenata}
+\godina{2026}
+\mentor{prof. dr Jelena \textsc{Graovac}\\ Univerzitet u Beogradu, Matematički fakultet}
+\komisijaA{prof. dr Milena \textsc{Vujošević Janičić}\\ Univerzitet u Beogradu, Matematički fakultet}
+\komisijaB{prof. dr Saša \textsc{Malkov}\\ Univerzitet u Beogradu, Matematički fakultet}
+% \datumodbrane{...}  % ako se ne navede, ostaje crta za ručni upis
+\input{poglavlja/00-rezime}   % \apstr{...} i \kljucnereci{...}
 
 \begin{document}
 
 % ------------------------------------------------------------
-% Naslovna strana
+% Uvodne strane: naslovna, komisija, zahvalnica, rezime, sadržaj
 % ------------------------------------------------------------
-\begin{titlepage}
-    \centering
-    \vspace*{2cm}
-    {\Large\bfseries Univerzitet u Beogradu\\Matematički fakultet\par}
-    \vspace{3cm}
-    {\LARGE\bfseries Primena veštačke inteligencije u obrazovanju: veliki jezički modeli za testiranje i ocenjivanje studenata\par}
-    \vspace{1cm}
-    {\large Master rad\par}
-    \vspace{2cm}
-    {\Large Autor: Svetozar Iković\par}
-    \vfill
-    {\large Mentor: prof. dr Jelena Graovac\par}
-    \vspace{1cm}
-    {\large Beograd, 2026.\par}
-\end{titlepage}
-
-% ------------------------------------------------------------
-% Mentor i članovi komisije
-% ------------------------------------------------------------
-\thispagestyle{empty}
-\vspace*{3cm}
-\noindent\textbf{Mentor:}\\[0.5em]
-prof. dr Jelena Graovac, Univerzitet u Beogradu, Matematički fakultet
-
-\vspace{2cm}
-\noindent\textbf{Članovi komisije:}\\[0.5em]
-prof. dr Milena Vujošević Janičić, Univerzitet u Beogradu, Matematički fakultet\\
-prof. dr Saša Malkov, Univerzitet u Beogradu, Matematički fakultet
-
-\vfill
-\noindent\textbf{Datum odbrane:} \rule{4cm}{0.4pt}
-\newpage
-
-% ------------------------------------------------------------
-% Zahvalnica, rezime, sadržaj
-% ------------------------------------------------------------
-\input{poglavlja/00-rezime}
-
-\tableofcontents
-\newpage
+\frontmatter
+\naslovna
+\komisija
+\input{poglavlja/00-zahvalnica}
+\apstrakt
+\tableofcontents*
 
 % ------------------------------------------------------------
 % Poglavlja
 % ------------------------------------------------------------
+\mainmatter
 \input{poglavlja/01-uvod}
 \input{poglavlja/02-pregled}
 \input{poglavlja/03-aplikacija}
@@ -132,15 +96,21 @@ prof. dr Saša Malkov, Univerzitet u Beogradu, Matematički fakultet
 \input{poglavlja/08-zakljucak}
 
 % ------------------------------------------------------------
-% Literatura
-% ------------------------------------------------------------
-\bibliographystyle{plain}
-\bibliography{literatura}
-
-% ------------------------------------------------------------
 % Dodaci
 % ------------------------------------------------------------
 \appendix
+% polyglossia (gloss-serbian iz Tectonic paketa) ostavlja \@Alph nedefinisanim, pa memoir-ov \appendix
+% pada na prvom \chapter ("Missing number"); vraćamo standardnu LaTeX definiciju.
+\makeatletter
+\def\@Alph#1{\ifcase#1\or A\or B\or C\or D\or E\or F\or G\or H\or I\or J\or K\or L\or M\or
+  N\or O\or P\or Q\or R\or S\or T\or U\or V\or W\or X\or Y\or Z\else\@ctrerr\fi}
+\makeatother
 \input{poglavlja/A-promptovi}
+
+% ------------------------------------------------------------
+% Literatura
+% ------------------------------------------------------------
+\backmatter
+\literatura
 
 \end{document}

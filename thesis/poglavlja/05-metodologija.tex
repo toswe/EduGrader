@@ -1,11 +1,11 @@
 % 4. Metodologija evaluacije
-\section{Metodologija evaluacije}
+\chapter{Metodologija evaluacije}
 \label{sec:metodologija}
 
 EduGrader uključuje velike jezičke modele u tok provere znanja pod nadzorom nastavnika,
 sa ciljem efikasnijeg i doslednijeg ocenjivanja uz očuvanje pedagoške transparentnosti i ljudske odgovornosti.
 
-\subsection{Metrike i evaluacija}
+\section{Metrike i evaluacija}
 \label{sec:metrike}
 
 Ocene sistema EduGrader upoređene su sa ocenama koje su dodelila dva univerzitetska nastavnika.
@@ -45,7 +45,7 @@ Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje,
 vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja,
 dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
 
-\subsection{Prikupljanje podataka}
+\section{Prikupljanje podataka}
 \label{sec:podaci}
 
 Evaluacija je sprovedena na autentičnim odgovorima sa teorijskih ispita, prikupljenim tokom više ispitnih rokova na dva univerziteta u Srbiji.
@@ -126,7 +126,7 @@ Generisani, DeepSeek-Reasoner (106) & 52{,}3 & 370{,}9 \\
 \end{tabular}
 \end{table}
 
-\subsection{Etička pitanja i zaštita podataka}
+\section{Etička pitanja i zaštita podataka}
 \label{sec:etika}
 
 Podaci opisani u prethodnom odeljku su autentični odgovori sa ispita, a ne odgovori prikupljeni za potrebe istraživanja.
@@ -173,7 +173,7 @@ konačna ocena i odluka o graničnim slučajevima ostaju kod nastavnika (odeljak
 a svaka ocena modela čuva se zajedno sa promptom i obrazloženjem (poglavlje~\ref{sec:aplikacija}), pa je naknadno proverljiva.
 Šira pitanja transparentnosti i odgovornosti u ocenjivanju podržanom veštačkom inteligencijom razmotrena su u poglavlju~\ref{sec:pregled}.
 
-\subsection{Modeli i konfiguracije}
+\section{Modeli i konfiguracije}
 \label{sec:modeli}
 
 EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele opšte namene i modele za rezonovanje:
@@ -204,7 +204,7 @@ a nalazi su izloženi u odeljku~\ref{sec:rezultati-temperatura}.
 
 Svi eksperimenti sprovedeni su na srpskom jeziku: ispitna pitanja, studentski odgovori, referentni odgovori i sistemske instrukcije.
 
-\subsection{Ograničenje GRA režima za modele DeepSeek}
+\section{Ograničenje GRA režima za modele DeepSeek}
 \label{sec:gra-greska}
 
 Pri proveri podataka posle završenih eksperimenata utvrđeno je da GRA režim za dva modela nije izveden onako kako je opisan.
@@ -226,7 +226,7 @@ već ocenjivanje bez ikakvog referentnog odgovora,
 a tumačenje tih vrednosti ograničeno je na ono što takva postavka dopušta (odeljak~\ref{sec:ogranicenja}).
 Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovori izostavljeni iz proseka dužine.
 
-\subsection{Treći režim: ocenjivanje na osnovu nastavnog materijala}
+\section{Treći režim: ocenjivanje na osnovu nastavnog materijala}
 \label{sec:rezim-udzbenik}
 
 Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.

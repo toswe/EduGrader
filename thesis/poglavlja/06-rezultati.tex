@@ -1,5 +1,5 @@
 % 5. Rezultati
-\section{Rezultati}
+\chapter{Rezultati}
 \label{sec:rezultati}
 
 Rezultati su iskazani kroz tri od četiri metrike uvedene u odeljku~\ref{sec:metrike}: PCC, odnos prosečnih ocena i odnos RMSE/STDDEV.
@@ -15,7 +15,7 @@ modeli porodice GPT rade na podrazumevanoj vrednosti svog provajdera,
 a modelima DeepSeek prosleđuje se vrednost $0$ (odeljak~\ref{sec:pipeline}).
 Njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
 
-\subsection{Performanse modela}
+\section{Performanse modela}
 \label{sec:performanse}
 
 \begin{table}[ht]
@@ -116,7 +116,7 @@ DeepSeek-Chat bez referentnog odgovora praktično ne funkcioniše: korelacija pa
 a RMSE/STDDEV prelazi $1{,}2$ u svim konfiguracijama, pa njegove ocene odstupaju od nastavničkih više nego što nastavničke variraju međusobno.
 Koliko bi ova dva modela postigla sa stvarno generisanim referentnim odgovorom na tom kursu, ovi podaci ne pokazuju.
 
-\subsection{Poređenje PRA i GRA režima}
+\section{Poređenje PRA i GRA režima}
 \label{sec:pra-vs-gra}
 
 Kroz sve modele i konfiguracije strogosti PRA režim nadmašuje GRA, po korelaciji sa ljudskim ocenama i po normalizovanim odnosima greške.
@@ -146,7 +146,7 @@ i da se održava čak i kada referentni odgovor izostane.
 Modeli opšte namene su upotrebljivi, ali osetljiviji na postavku: GPT-4o-mini nudi povoljan odnos cene i performansi u PRA režimu,
 GPT-4o je konkurentan u neutralnoj konfiguraciji, a DeepSeek-Chat samo u PRA režimu.
 
-\subsection{Korelacija sa ljudskim ocenama po skupovima podataka}
+\section{Korelacija sa ljudskim ocenama po skupovima podataka}
 \label{sec:cross-dataset}
 
 Vrednosti PCC-a po kursevima date su u tabelama~\ref{tab:pcc-reference} i~\ref{tab:pcc-generated}, u neutralnoj konfiguraciji strogosti.
@@ -215,7 +215,7 @@ HTML5  & 0{,}96 (10) & 0{,}94 (10) & 0{,}96 (10) & \textbf{0{,}97} (10) & 0{,}93
 }
 \end{table}
 
-\subsection{Dodatni eksperimenti}
+\section{Dodatni eksperimenti}
 \label{sec:dodatni}
 
 Sprovedena su i dva manja eksperimenta o odlukama koje glavna mreža konfiguracija ne pokriva:
@@ -223,7 +223,7 @@ može li se posrednički referentni odgovor izostaviti i umesto njega u prompt u
 i menja li variranje temperature slaganje sa ljudskim ocenjivanjem.
 Zbog ograničenog obuhvata prikazuju se odvojeno; ni jedan ne menja nalaze iz prethodnih odeljaka.
 
-\subsubsection{Ocenjivanje iz nastavnog materijala}
+\subsection{Ocenjivanje iz nastavnog materijala}
 \label{sec:rezultati-udzbenik}
 
 Režim sa nastavnim materijalom u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenut je samo za modele GPT-4o-mini i GPT-4o,
@@ -276,7 +276,7 @@ Kod modela za rezonovanje ishod bi mogao biti drugačiji,
 budući da oni najbolje podnose prelazak u GRA režim,
 ali u ovom režimu nisu pokretani.
 
-\subsubsection{Uticaj temperature}
+\subsection{Uticaj temperature}
 \label{sec:rezultati-temperatura}
 
 Temperatura upravlja slučajnošću pri uzorkovanju odgovora modela:
