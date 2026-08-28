@@ -1,0 +1,8 @@
+source,model_name,n,n_error,avg_words,avg_chars
+instructor,,583,0,21.3,132.5
+student,,583,0,22.2,131.6
+generated,gpt-4o-mini,583,0,67.1,431.9
+generated,gpt-4o,583,0,67.1,437.0
+generated,gpt-5,583,0,54.4,344.1
+generated,deepseek-chat,106,477,46.6,329.0
+generated,deepseek-reasoner,106,477,52.3,370.9

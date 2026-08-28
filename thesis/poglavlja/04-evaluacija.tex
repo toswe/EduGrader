@@ -3,8 +3,7 @@
 \label{sec:pipeline}
 
 Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela,
-organizovan kao \emph{pipeline} u sistemu DVC (engl.
-\emph{Data Version Control})\footnote{\url{https://dvc.org}}.
+organizovan kao \emph{pipeline} u sistemu DVC.
 U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima,
 i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
 Eksperiment se tako reprodukuje bez ponovnog plaćanja API poziva čiji su ulazi ostali isti.
@@ -40,7 +39,7 @@ Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz
     \item \textbf{GRA varijanta} umesto referentnog odgovora nastavnika koristi generisani referentni odgovor,
     koji model generiše iz nastavnog materijala.
     Ovo je dvostepen postupak: u prvom koraku materijal se preuzima sa zadate adrese kao PDF,
-    tekst se izdvaja bibliotekom PyPDF2 i kešira (engl. \emph{cache}) na disku
+    tekst se izdvaja bibliotekom PyPDF2 i kešira na disku
     (po heš vrednosti adrese, tako da se svaki udžbenik preuzima i obrađuje samo jednom),
     a model iz njega konstruiše koncizan referentni odgovor dužine dve do pet rečenica.
     U drugom koraku studentski odgovor ocenjuje se u odnosu na taj generisani standard, ponovnom upotrebom iste komponente kao u PRA varijanti,
@@ -59,8 +58,8 @@ pa modeli porodice GPT zapravo rade na podrazumevanoj vrednosti svog provajdera,
 dok se modelima DeepSeek vrednost $0$ uvek prosleđuje.
 Temperatura se ni u jednom slučaju ne varira kroz konfiguracije;
 njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
-Numerička ocena se parsira iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
-Ako parsiranje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
+Numerička ocena se izdvaja iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
+Ako izdvajanje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
 Redovi za koje ni posle tri pokušaja nije dobijena ocena u izlaznoj datoteci dobijaju vrednost $-1$.
 Pošto je skala ocenjivanja 0--100, negativna vrednost ne može biti stvarna ocena,
 pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izračunavanja metrika.
@@ -77,9 +76,7 @@ i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatn
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke,
 uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike},
-PCC, odnos prosečnih ocena (engl. \emph{mean ratio}),
-koren srednje kvadratne greške (engl. \emph{root mean square error}, RMSE)
-i odnos RMSE i standardne devijacije (engl. \emph{standard deviation}, STDDEV),
+PCC, odnos prosečnih ocena, koren srednje kvadratne greške (RMSE) i odnos RMSE/STDDEV,
 po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
 

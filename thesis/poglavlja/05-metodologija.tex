@@ -60,6 +60,8 @@ sa mešavinom konceptualnih pitanja i zadataka vezanih za programiranje:
     \item Digitalno čuvanje podataka (DDS): kurs master studija, Univerzitet umetnosti;
     \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti.
 \end{itemize}
+Skraćenice kurseva u zagradama preuzete su iz objavljenog rada~\cite{ikovic2025edugrader},
+da bi tabele u poglavlju~\ref{sec:rezultati} ostale uporedive sa njim.
 
 Podaci su organizovani po ispitnim rokovima, a ne po kursevima: postoji po jedan skup za svaki od devet rokova,
 koji se grupišu u pet navedenih kurseva (tri roka za Programiranje 2,
@@ -137,7 +139,7 @@ pa se zaštita njihovih podataka oslanja na pseudonimizaciju sprovedenu pre bilo
 i na to da se iz samog skupa ne može utvrditi čiji je koji odgovor.
 
 Skup podataka korišćen u radu sadrži samo četiri polja po odgovoru, opisana u poglavlju~\ref{sec:pipeline}:
-pseudonimni identifikator studenta, identifikator pitanja, ocenu nastavnika i tekst odgovora.
+pseudonimni identifikator studenta, identifikator pitanja, \mbox{ocenu} nastavnika i tekst odgovora.
 Imena, brojevi indeksa, adrese elektronske pošte ni bilo koji drugi identifikatori u skupu ne postoje.
 Pseudonimi (\texttt{Student~1}, \texttt{Student~2},~\dots) dodeljeni su po redosledu pojavljivanja u okviru jednog ispitnog roka,
 i to za svaki rok posebno,
@@ -198,7 +200,7 @@ EduGrader podržava dva komplementarna režima ocenjivanja:
 \end{itemize}
 PRA režim pokriva ispite za koje postoji referentni odgovor nastavnika, a GRA one na kojima ga nastavnik ne obezbeđuje.
 
-Mreža konfiguracija ne varira temperaturu, parametar koji upravlja slučajnošću pri uzorkovanju odgovora modela.
+Mreža konfiguracija ne varira temperaturu.
 Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o,
 a nalazi su izloženi u odeljku~\ref{sec:rezultati-temperatura}.
 
@@ -208,8 +210,9 @@ Svi eksperimenti sprovedeni su na srpskom jeziku: ispitna pitanja, studentski od
 \label{sec:gra-greska}
 
 Pri proveri podataka posle završenih eksperimenata utvrđeno je da GRA režim za dva modela nije izveden onako kako je opisan.
-Nastavni materijal za kurs Programiranje 2 je ceo udžbenik, čiji izdvojeni tekst zauzima oko $255\,000$ tokena,
-dok kontekstni prozor modela DeepSeek-Chat i DeepSeek-Reasoner iznosi $131\,072$ tokena.
+Nastavni materijal za kurs Programiranje 2 je ceo udžbenik,
+čiji izdvojeni tekst zauzima oko $255\,000$ tokena, jedinica teksta na koje model deli ulaz,
+dok kontekstni prozor (engl. \emph{context window}) modela DeepSeek-Chat i DeepSeek-Reasoner iznosi $131\,072$ tokena.
 Integracija za OpenAI takav ulaz automatski skraćuje na veličinu kontekstnog prozora,
 pa su modeli porodice GPT referentne odgovore generisali iz skraćenog udžbenika.
 Integracija za DeepSeek tu mogućnost nema: API je svaki zahtev odbio,
@@ -240,7 +243,7 @@ naročito kod pitanja čiji odgovor zahteva širi kontekst.
 Režim je implementiran i pokrenut, ali \textbf{nije sproveden za sve modele},
 pa se njegovi rezultati prikazuju odvojeno od glavnih, u odeljku~\ref{sec:rezultati-udzbenik}.
 Razlog je cena: budući da ceo udžbenik ulazi u svaki poziv, veličina prompta raste za red veličine.
-Medijana broja tokena, jedinica teksta na koje model deli ulaz, u promptu je iznosila oko $14\,500$ za kurs Programiranje 2,
+Medijana broja tokena u promptu je iznosila oko $14\,500$ za kurs Programiranje 2,
 naspram oko $300$ tokena u PRA režimu nad istim odgovorima, dakle približno \textbf{48 puta više}.
 Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima i pokrio samo oko trećine planirane mreže konfiguracija.
 Procenjeni ukupan broj tokena za kompletnu mrežu u ovom režimu iznosi približno $119$ miliona, dakle još oko $80$ miliona povrh već potrošenih.
