@@ -12,7 +12,7 @@ Ocene sistema EduGrader upoređene su sa ocenama koje su dodelila dva univerzite
 Svaki nastavnik je ocenio različit podskup od ukupno 583 odgovora,
 pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju, pa se ne preklapaju.
 Nastavnik sa Matematičkog fakulteta ocenio je 563 odgovora (Programiranje 2: 477, Tehničko i naučno pisanje: 40, Veb programiranje: 46),
-a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalno čuvanje podataka: 10, HTML5 i JavaScript za video-igre: 10).
+a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalni zapis podataka: 10, HTML5 i JavaScript za video-igre: 10).
 Sistem se tako poredi sa dva ocenjivača, a ne sa jednim standardom, ali je podela izrazito neravnomerna,
 pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta (odeljak~\ref{sec:ogranicenja}).
 Ocenjivalo se prema kriterijumima koji se koriste na datom kursu, na skali 0--10, prema konceptualnoj tačnosti i potpunosti odgovora.
@@ -54,18 +54,21 @@ Skup podataka obuhvata \textbf{pet univerzitetskih kurseva} sa osnovnih i master
 sa mešavinom konceptualnih pitanja i zadataka vezanih za programiranje:
 
 \begin{itemize}
-    \item Programiranje 2 (Prog 2): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
-    \item Tehničko i naučno pisanje (TSW): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
-    \item Veb programiranje (WP): kurs četvrte godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
-    \item Digitalno čuvanje podataka (DDS): kurs master studija, Univerzitet umetnosti;
+    \item Programiranje 2 (P2): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Tehničko i naučno pisanje (TNP): kurs prve godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Veb programiranje (VP): kurs četvrte godine osnovnih studija, Matematički fakultet, Univerzitet u Beogradu;
+    \item Digitalni zapis podataka (DZP): kurs master studija, Univerzitet umetnosti;
     \item HTML5 i JavaScript za video-igre (HTML5): kurs master studija, Univerzitet umetnosti.
 \end{itemize}
-Skraćenice kurseva u zagradama preuzete su iz objavljenog rada~\cite{ikovic2025edugrader},
-da bi tabele u poglavlju~\ref{sec:rezultati} ostale uporedive sa njim.
+Skraćenice kurseva u zagradama izvedene su iz srpskih imena kurseva
+i poklapaju se sa imenima skupova podataka u repozitorijumu (p2, tnp, vp, dzp);
+skup kursa HTML5 nosi ime \texttt{uu}, po instituciji na kojoj se kurs drži.
+U objavljenom radu~\cite{ikovic2025edugrader} korišćene su engleske skraćenice kurseva,
+pa se tabele u poglavlju~\ref{sec:rezultati} od tabela u radu razlikuju samo po oznakama kurseva.
 
 Podaci su organizovani po ispitnim rokovima, a ne po kursevima: postoji po jedan skup za svaki od devet rokova,
 koji se grupišu u pet navedenih kurseva (tri roka za Programiranje 2,
-po dva za Tehničko i naučno pisanje i Veb programiranje, i po jedan za Digitalno čuvanje podataka i HTML5).
+po dva za Tehničko i naučno pisanje i Veb programiranje, i po jedan za Digitalni zapis podataka i HTML5).
 Svi eksperimenti izvršavaju se nad pojedinačnim rokovima, dok se rezultati u poglavlju~\ref{sec:rezultati} prikazuju objedinjeno i po kursevima.
 
 Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici,
@@ -84,10 +87,10 @@ ali se tip pitanja u podacima ne beleži, pa se broj odgovora daje samo po kursu
 \toprule
 \textbf{Kurs} & \textbf{Odgovori} \\
 \midrule
-Programiranje 2 (Prog 2) & 477 \\
-Tehničko i naučno pisanje (TSW) & 40 \\
-Veb programiranje (WP) & 46 \\
-Digitalno čuvanje podataka (DDS) & 10 \\
+Programiranje 2 (P2) & 477 \\
+Tehničko i naučno pisanje (TNP) & 40 \\
+Veb programiranje (VP) & 46 \\
+Digitalni zapis podataka (DZP) & 10 \\
 HTML5 i JavaScript za video-igre (HTML5) & 10 \\
 \midrule
 \textbf{Ukupno} & \textbf{583} \\

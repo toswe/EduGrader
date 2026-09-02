@@ -155,10 +155,10 @@ GPT-4o je konkurentan u neutralnoj konfiguraciji, a DeepSeek-Chat samo u PRA re�
 
 Vrednosti PCC-a po kursevima date su u tabelama~\ref{tab:pcc-reference} i~\ref{tab:pcc-generated}, u neutralnoj konfiguraciji strogosti.
 Budući da se broj odgovora po kursevima znatno razlikuje (tabela~\ref{tab:dataset}),
-vrednosti za manje kurseve treba tumačiti sa rezervom: kod kurseva DDS i HTML5 korelacija je izračunata nad po deset odgovora.
+vrednosti za manje kurseve treba tumačiti sa rezervom: kod kurseva DZP i HTML5 korelacija je izračunata nad po deset odgovora.
 
-Razlika između režima najveća je na kursevima gde se očekuje kratak i precizan studentski odgovor, kao što su WP i TSW.
-Kod kursa TSW pad je najizraženiji, sa $0{,}81$--$0{,}93$ na $0{,}46$--$0{,}72$.
+Razlika između režima najveća je na kursevima gde se očekuje kratak i precizan studentski odgovor, kao što su VP i TNP.
+Kod kursa TNP pad je najizraženiji, sa $0{,}81$--$0{,}93$ na $0{,}46$--$0{,}72$.
 Uzrok je to što su generisani referentni odgovori duži i opisniji od sažetih rešenja koja daje nastavnik,
 pa model visoko ocenjuje odgovore koji traženi postupak ispravno opisuju, ali ga ne izvršavaju.
 Nastavnik je takve odgovore po pravilu ocenjivao nulom.
@@ -166,7 +166,7 @@ Raskorak bi se mogao ublažiti kada bi se u prompt uključila kratka napomena na
 da li je tačno objašnjenje dovoljno ili student mora i da izvrši traženi zadatak;
 sistem takav ulaz trenutno ne podržava (odeljak~\ref{sec:buduci-rad}).
 
-Kod kurseva na kojima se očekuju duži, opisniji odgovori (DDS i HTML5) razlike između režima su znatno manje,
+Kod kurseva na kojima se očekuju duži, opisniji odgovori (DZP i HTML5) razlike između režima su znatno manje,
 jer generisani referentni odgovori po strukturi i nivou detalja liče na nastavničke.
 Na kursu HTML5 vrednosti su praktično identične u oba režima ($0{,}93$--$0{,}97$).
 
@@ -188,10 +188,10 @@ U zagradi je broj odgovora nad kojim je vrednost izračunata.}
 \toprule
 \textbf{Kurs} & \textbf{DeepSeek-Chat} & \textbf{DeepSeek-Reasoner} & \textbf{GPT-4o} & \textbf{GPT-4o-mini} & \textbf{GPT-5} \\
 \midrule
-Prog 2 & 0{,}80 (477) & 0{,}85 (449) & 0{,}82 (293) & 0{,}79 (477) & \textbf{0{,}88} (477) \\
-TSW    & 0{,}81 (40) & 0{,}89 (40) & \textbf{0{,}93} (40) & 0{,}86 (40) & 0{,}91 (40) \\
-WP     & 0{,}78 (46) & 0{,}74 (46) & \textbf{0{,}81} (46) & 0{,}78 (46) & 0{,}75 (46) \\
-DDS    & 0{,}80 (10) & 0{,}82 (10) & 0{,}61 (10) & 0{,}86 (10) & \textbf{0{,}92} (10) \\
+P2     & 0{,}80 (477) & 0{,}85 (449) & 0{,}82 (293) & 0{,}79 (477) & \textbf{0{,}88} (477) \\
+TNP    & 0{,}81 (40) & 0{,}89 (40) & \textbf{0{,}93} (40) & 0{,}86 (40) & 0{,}91 (40) \\
+VP     & 0{,}78 (46) & 0{,}74 (46) & \textbf{0{,}81} (46) & 0{,}78 (46) & 0{,}75 (46) \\
+DZP    & 0{,}80 (10) & 0{,}82 (10) & 0{,}61 (10) & 0{,}86 (10) & \textbf{0{,}92} (10) \\
 HTML5  & 0{,}96 (10) & 0{,}94 (10) & \textbf{0{,}97} (10) & \textbf{0{,}97} (10) & 0{,}94 (10) \\
 \bottomrule
 \end{tabular}
@@ -202,17 +202,17 @@ HTML5  & 0{,}96 (10) & 0{,}94 (10) & \textbf{0{,}97} (10) & \textbf{0{,}97} (10)
 \centering
 \caption{PCC po kursevima za GRA režim (neutralna konfiguracija strogosti).
 U zagradi je broj odgovora nad kojim je vrednost izračunata.
-Vrednosti modela DeepSeek za kurs Prog 2 dobijene su bez generisanog referentnog odgovora (odeljak~\ref{sec:gra-greska}).}
+Vrednosti modela DeepSeek za kurs P2 dobijene su bez generisanog referentnog odgovora (odeljak~\ref{sec:gra-greska}).}
 \label{tab:pcc-generated}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Kurs} & \textbf{DeepSeek-Chat} & \textbf{DeepSeek-Reasoner} & \textbf{GPT-4o} & \textbf{GPT-4o-mini} & \textbf{GPT-5} \\
 \midrule
-Prog 2 & 0{,}42 (477) & 0{,}81 (477) & 0{,}74 (477) & 0{,}64 (477) & \textbf{0{,}84} (477) \\
-TSW    & 0{,}47 (40) & 0{,}46 (40) & \textbf{0{,}72} (40) & 0{,}62 (40) & 0{,}65 (40) \\
-WP     & 0{,}75 (46) & 0{,}66 (46) & \textbf{0{,}77} (46) & 0{,}56 (46) & 0{,}71 (46) \\
-DDS    & 0{,}84 (10) & 0{,}86 (10) & 0{,}60 (10) & 0{,}51 (10) & \textbf{0{,}86} (10) \\
+P2     & 0{,}42 (477) & 0{,}81 (477) & 0{,}74 (477) & 0{,}64 (477) & \textbf{0{,}84} (477) \\
+TNP    & 0{,}47 (40) & 0{,}46 (40) & \textbf{0{,}72} (40) & 0{,}62 (40) & 0{,}65 (40) \\
+VP     & 0{,}75 (46) & 0{,}66 (46) & \textbf{0{,}77} (46) & 0{,}56 (46) & 0{,}71 (46) \\
+DZP    & 0{,}84 (10) & 0{,}86 (10) & 0{,}60 (10) & 0{,}51 (10) & \textbf{0{,}86} (10) \\
 HTML5  & 0{,}96 (10) & 0{,}94 (10) & 0{,}96 (10) & \textbf{0{,}97} (10) & 0{,}93 (10) \\
 \bottomrule
 \end{tabular}
@@ -250,7 +250,7 @@ deo odgovora koje je nastavnik ocenio desetkom sistem ocenjuje znatno niže, izr
 Sprovedena su i dva manja eksperimenta o odlukama koje glavna mreža konfiguracija ne pokriva:
 može li se posrednički referentni odgovor izostaviti i umesto njega u prompt umetnuti ceo nastavni materijal,
 i menja li variranje temperature slaganje sa ljudskim ocenjivanjem.
-Zbog ograničenog obuhvata prikazuju se odvojeno; ni jedan ne menja nalaze iz prethodnih odeljaka.
+Zbog ograničenog obuhvata prikazuju se odvojeno; nijedan ne menja nalaze iz prethodnih odeljaka.
 
 \subsection{Ocenjivanje iz nastavnog materijala}
 \label{sec:rezultati-udzbenik}
@@ -318,7 +318,7 @@ Kako se u glavnoj mreži konfiguracija ne postavlja eksplicitno,
 njen uticaj ispitan je posebno, za model GPT-4o u neutralnoj konfiguraciji i PRA režimu,
 sa temperaturama $0{,}5$ i $1{,}0$,
 nad 305 odgovora: 285 odgovora sa dva od tri roka kursa Programiranje 2
-i po deset odgovora sa kurseva DDS i HTML5.
+i po deset odgovora sa kurseva DZP i HTML5.
 
 \begin{table}[ht]
 \centering
@@ -344,7 +344,7 @@ Prvi i treći red tabele su, dakle, na istoj nominalnoj temperaturi,
 pa razlika između njih meri variranje između dva pokretanja istog modela,
 i po veličini je uporediva sa svim ostalim razlikama u tabeli.
 
-Jedini izraženiji pomak javlja se na kursu DDS, gde PCC raste sa $0{,}61$ na $0{,}89$ i $0{,}83$.
+Jedini izraženiji pomak javlja se na kursu DZP, gde PCC raste sa $0{,}61$ na $0{,}89$ i $0{,}83$.
 I on je, u skladu sa rezervom iz odeljka~\ref{sec:cross-dataset},
 posledica pojedinačnih ocena među samo deset odgovora, a ne temperature.
 Uz ovako ograničen obuhvat, eksperiment potvrđuje samo to da izbor temperature
