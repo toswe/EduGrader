@@ -56,6 +56,9 @@ odnosno trajno neuspešnih API poziva, koji se prema opisu iz odeljka~\ref{sec:p
 Modeli za rezonovanje postižu najvišu korelaciju i najmanja odstupanja od nastavnika.
 GPT-5 postiže najvišu korelaciju u blagoj i neutralnoj konfiguraciji (PCC $=0{,}89$ i $0{,}88$) uz najniže odnose RMSE/STDDEV ($0{,}47$ i $0{,}50$),
 a DeepSeek-Reasoner ga prati u stopu ($0{,}87$ i $0{,}86$).
+Izraženo u izvornim poenima, RMSE modela GPT-5 iznosi $1{,}91$ poen u blagoj i $2{,}04$ u neutralnoj konfiguraciji na skali 0--10:
+ocena sistema tipično odstupa od nastavničke za oko dva poena,
+pri čemu standardna devijacija samih nastavničkih ocena iznosi $4{,}07$ poena.
 GPT-4o je konkurentan u neutralnoj konfiguraciji (PCC $=0{,}84$), gde postiže i odnos prosečnih ocena praktično jednak $1{,}0$,
 dok su GPT-4o-mini i DeepSeek-Chat dosledno nešto slabiji.
 
@@ -103,7 +106,8 @@ Generisani referentni odgovor unosi dodatnu neizvesnost: po strukturi,
 formulaciji i nivou detalja može se razlikovati od odgovora koji je nastavnik imao na umu.
 
 Među modelima porodice GPT prelazak u GRA režim najbolje podnosi GPT-5:
-zadržava korelaciju od $0{,}85$ u blagoj i $0{,}84$ u neutralnoj konfiguraciji i jedini u svim konfiguracijama drži RMSE/STDDEV ispod $0{,}75$.
+zadržava korelaciju od $0{,}85$ u blagoj i $0{,}84$ u neutralnoj konfiguraciji i jedini u svim konfiguracijama drži RMSE/STDDEV ispod $0{,}75$
+(u izvornim poenima, RMSE od $2{,}32$ u blagoj i $2{,}49$ u neutralnoj konfiguraciji, naspram $1{,}91$ i $2{,}04$ u PRA režimu).
 Sposobniji model za rezonovanje, dakle, i bolje konstruiše referentni odgovor i bolje ocenjuje u odnosu na njega.
 GPT-4o u strogoj konfiguraciji prelazi granicu upotrebljivosti (RMSE/STDDEV $=1{,}04$, odnos prosečnih ocena $0{,}61$).
 
@@ -214,6 +218,31 @@ HTML5  & 0{,}96 (10) & 0{,}94 (10) & 0{,}96 (10) & \textbf{0{,}97} (10) & 0{,}93
 \end{tabular}
 }
 \end{table}
+
+Za najveći kurs korelacija je prikazana i vizuelno.
+Slika~\ref{fig:rasejanje-p2} daje dijagram rasejanja ocena na kursu Programiranje 2 za model GPT-5 u neutralnoj konfiguraciji:
+svaki odgovor je jedna tačka, sa ocenom nastavnika na horizontalnoj i ocenom sistema na vertikalnoj osi,
+a PRA i GRA režim prikazani su različitim bojama.
+Ocene su diskretne, pa bi se tačke sa istim parom ocena preklapale;
+zato je svakoj tački dodat mali slučajni pomeraj, do $\pm 0{,}4$ na obe ose.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{slike/rasejanje-p2.pdf}
+\caption{Dijagram rasejanja ocena nastavnika i sistema na kursu Programiranje 2
+(GPT-5, neutralna konfiguracija, 477 odgovora po režimu).
+Svaka tačka je jedan odgovor, a siva linija označava potpuno slaganje.
+Tačkama je dodat slučajni pomeraj do $\pm 0{,}4$ na obe ose, jer su ocene diskretne pa bi se inače preklapale.}
+\label{fig:rasejanje-p2}
+\end{figure}
+
+Dijagram čini vrednosti PCC od $0{,}88$ (PRA) i $0{,}84$ (GRA) opipljivijim.
+Tačke se najgušće grupišu na krajevima dijagonale:
+nastavnik je 201 odgovor ocenio desetkom, a 125 nulom, i u tim jasnim slučajevima sistem se pretežno slaže.
+U PRA režimu 68\% ocena sistema odstupa od nastavničke za najviše jedan poen, u GRA režimu 61\%.
+Veća odstupanja češće idu naniže nego naviše (23\% naspram 9\% u PRA, odnosno 31\% naspram 8\% u GRA režimu),
+što se na dijagramu vidi kao oblak tačaka ispod dijagonale uz desnu ivicu:
+deo odgovora koje je nastavnik ocenio desetkom sistem ocenjuje znatno niže, izraženije u GRA režimu.
 
 \section{Dodatni eksperimenti}
 \label{sec:dodatni}
