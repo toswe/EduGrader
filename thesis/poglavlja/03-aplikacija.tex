@@ -73,7 +73,7 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
   (deepseek) {\scriptsize DeepSeek API\\[-1pt]\tiny deepseek-chat, deepseek-reasoner};
 
 \node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=-1.4cm]
-  (gemini) {\scriptsize Gemini API\\[-1pt]\tiny gemini-2.5-flash (nije korišćen u eksperimentima)};
+  (gemini) {\scriptsize Gemini API\\[-1pt]\tiny gemini-2.5-flash};
 
 % ---- DVC pipeline ----
 \node[box, fill=purple!8, minimum width=4.8cm, minimum height=1.6cm, below=1.4cm of fe] (pipe) {};
@@ -94,7 +94,8 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 \caption{Arhitektura sistema EduGrader.
 Klijentski sloj komunicira sa serverskim slojem preko REST API-ja.
 Serverski sloj pristupa jezičkim modelima kroz jedinstven integracioni sloj (projektni obrazac fabrika) koji apstrahuje API-je pojedinačnih provajdera.
-Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti integracioni sloj za grupne eksperimente.}
+Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti integracioni sloj za grupne eksperimente.
+Integracija Gemini nije korišćena u eksperimentima opisanim u ovom radu.}
 \label{fig:architecture}
 \end{figure}
 

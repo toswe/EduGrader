@@ -66,6 +66,9 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Razlike između konfiguracija zato mere zajednički efekat strogosti, formulacije i pravopisa,
     a kod stroge konfiguracije i pravila o oduzimanju poena,
     koje je verovatno glavni uzrok pomeranja ocena naniže.
+    Da nivoi strogosti ne deluju kao čista skala vidi se i u tabeli~\ref{tab:pra_results}:
+    razlike u odnosu prosečnih ocena među konfiguracijama su male,
+    a kod nekih modela ni redosled nivoa nije očekivan.
     Poređenje blage i stroge konfiguracije je čistije od poređenja bilo koje od njih sa neutralnom.
     Instrukcije nisu naknadno ujednačene, jer bi tekst u dodatku prestao da odgovara promptovima koji su dali prikazane rezultate;
     ponavljanje svih pokretanja sa ujednačenim instrukcijama ostavljeno je za budući rad.
@@ -117,7 +120,7 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     \item \textbf{Kombinovano ocenjivanje:}
     kombinovati modele za rezonovanje i modele opšte namene (npr.\ usrednjavanjem ili većinskim glasanjem)
     radi stabilnijih ocena od onih koje daje pojedinačni model.
-    \item \textbf{Ocenjivanje sa primerima (\emph{few-shot}):}
+    \item \textbf{Ocenjivanje sa primerima (engl. \emph{few-shot}):}
     pored referentnog odgovora u prompt uključiti i nekoliko već ocenjenih studentskih odgovora,
     kako bi model kriterijum ocenjivanja video i iz primera, a ne samo iz opisa strogosti.
     Evaluaciona infrastruktura to dopušta dopunom prompta;

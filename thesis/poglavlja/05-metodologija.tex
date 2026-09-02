@@ -191,13 +191,13 @@ Konfiguracije se razlikuju samo u promptu, koji oponaša različite filozofije o
 Strogost, dakle, nije numerički parametar:
 zadaje se isključivo formulacijom sistemske instrukcije
 i oslanja se na to kako model protumači pojmove blagog odnosno strogog ocenjivača.
-Jedini numerički element je pravilo o oduzimanju petine poena u strogoj konfiguraciji.
-Koliko dosledno modeli razlikuju nivoe vidi se iz odnosa prosečnih ocena u tabeli~\ref{tab:pra_results}:
-razlike među konfiguracijama su male i nisu monotone kod svih modela (odeljak~\ref{sec:ogranicenja}).
 Stroga konfiguracija predstavlja model kao „strogog profesora visokoakademske institucije'',
 usmerava mu pažnju na stavke koje se ne poklapaju sa studentskim odgovorom i zadaje eksplicitnu meru kazne (oduzimanje petine poena po nepoklapanju),
 dok blaga konfiguracija usmerava pažnju na stavke koje se poklapaju.
 Neutralna konfiguracija ne uvodi nikakvo dodatno pravilo i predstavlja osnovnu postavku ocenjivanja.
+Jedini numerički element je pravilo o oduzimanju petine poena u strogoj konfiguraciji.
+Koliko dosledno modeli razlikuju nivoe vidi se iz odnosa prosečnih ocena u tabeli~\ref{tab:pra_results}:
+razlike među konfiguracijama su male i nisu monotone kod svih modela (odeljak~\ref{sec:ogranicenja}).
 Puni tekstovi svih promptova navedeni su u dodatku~\ref{app:promptovi}.
 Podela na tri konfiguracije strogosti prati nalaz prethodnih studija da i ljudski ocenjivači variraju u strogosti~\cite{jukiewicz2024future}.
 
@@ -249,7 +249,7 @@ Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega iz
 ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
 Drugačije nije bilo moguće: API za dopunu razgovora nema stanje,
 pa ne postoji sesija u kojoj bi se udžbenik priložio jednom, a zatim redom ocenjivali odgovori, već svaki poziv nosi ceo kontekst.
-Provajder nudi jedino automatsko keširanje zajedničkog početka prompta, koje umanjuje cenu ulaznih tokena, ali je ne uklanja.
+Provajderi nude jedino automatsko keširanje zajedničkog početka prompta, koje umanjuje cenu ulaznih tokena, ali je ne uklanja.
 U ovoj implementaciji udžbenik stoji na kraju prompta, iza pitanja i studentskog odgovora, pa se ni to nije primenjivalo.
 Motivacija je bila da izostavljanje posredničkog koraka spreči gubitak informacija pri generisanju referentnog odgovora,
 naročito kod pitanja čiji odgovor zahteva širi kontekst.

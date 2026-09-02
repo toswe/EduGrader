@@ -63,10 +63,10 @@ Numerička ocena se izdvaja iz prvog reda odgovora; skala 0--100 naknadno se pre
 Ako izdvajanje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
 Redovi za koje ni posle tri pokušaja nije dobijena ocena u izlaznoj datoteci dobijaju vrednost $-1$.
 U sprovedenim eksperimentima to je retko:
-u PRA i GRA režimu ocena nedostaje za 29 od $17\,306$ ocenjenih redova ($0{,}17\,\%$),
+u PRA i GRA režimu ocena nedostaje za 29 od $17\,306$ ocenjenih redova (0,17\%),
 od čega 28 u jednom pokretanju (DeepSeek-Reasoner, neutralna konfiguracija, jedan rok kursa Programiranje 2),
 dakle reč je o privremenom prekidu API-ja, a ne o tome da model odbija da oceni.
-U režimu sa nastavnim materijalom nedostaje 237 od $3\,033$ ocena ($7{,}8\,\%$),
+U režimu sa nastavnim materijalom nedostaje 237 od $3\,033$ ocena (7,8\%),
 gotovo isključivo u nedovršenim pokretanjima modela GPT-4o (odeljak~\ref{sec:rezultati-udzbenik}).
 Pošto je skala ocenjivanja 0--100, negativna vrednost ne može biti stvarna ocena,
 pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izračunavanja metrika.
@@ -91,7 +91,7 @@ Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani
 \label{sec:reprodukcija}
 
 Izvorni kod sistema, pitanja sa referentnim odgovorima nastavnika i sve agregatne metrike javno su dostupni
-u repozitorijumu projekta\footnote{\url{https://github.com/toswe/EduGrader}}.
+u repozitorijumu projekta~\cite{ikovic2026edugraderrepo}.
 Studentski odgovori i ocenjene datoteke koje ih sadrže nisu deo javnog repozitorijuma (odeljak~\ref{sec:etika}),
 već se u pseudonimizovanom obliku ustupaju na zahtev, uz saglasnost nastavnika koji su ih obezbedili;
 sa njima se svaki opisani eksperiment može ponoviti istim komandama.
@@ -115,6 +115,7 @@ pipeline/
   calculate_correlations.py
   calculate_temperature.py
   calculate_lengths.py
+  plot_scatter.py
   data/<skup>/raw/questions.csv
   data/<skup>/raw/student_answers.csv        *
   data/<skup>/graded/graded.*.csv            *
@@ -232,3 +233,6 @@ Na isti način, skripta \texttt{calculate\_lengths.py} iz ocenjenih datoteka pre
 referentnih odgovora nastavnika, studentskih odgovora i generisanih referentnih odgovora svakog modela
 i zapisuje ih u \texttt{length\_summary.csv}, odakle je preuzeta tabela~\ref{tab:response_length};
 redovi kod kojih generisanje referentnog odgovora nije uspelo (odeljak~\ref{sec:gra-greska}) izostavljaju se iz proseka.
+Slika~\ref{fig:rasejanje-p2} dobija se skriptom \texttt{plot\_scatter.py},
+koja iz ocenjenih datoteka kursa Programiranje 2 čita parove ocena
+i crta dijagram rasejanja, sa fiksiranim semenom slučajnog pomeraja radi ponovljivosti.
