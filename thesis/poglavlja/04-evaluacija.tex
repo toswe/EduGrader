@@ -28,7 +28,8 @@ Validacija obuhvata proveru obaveznih kolona u obe datoteke;
 za pitanja se proverava jedinstvenost identifikatora i nepraznost svih korišćenih polja,
 a za studentske odgovore da se pozivaju na postojeće pitanje i da svaki student ima odgovor na svako pitanje.
 U suprotnom se obrada prekida sa opisom greške.
-Provere su ovako stroge zato što su podaci pripremani ručno, a greška u njima otkrivena tek posle ocenjivanja znači bačene API pozive.
+Provere su ovako stroge zato što su podaci pripremani ručno,
+a greška u njima otkrivena tek posle ocenjivanja znači uzalud utrošene resurse modela (plaćene pozive API-ja).
 
 Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt
 i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
@@ -61,6 +62,12 @@ njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
 Numerička ocena se izdvaja iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
 Ako izdvajanje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
 Redovi za koje ni posle tri pokušaja nije dobijena ocena u izlaznoj datoteci dobijaju vrednost $-1$.
+U sprovedenim eksperimentima to je retko:
+u PRA i GRA režimu ocena nedostaje za 29 od $17\,306$ ocenjenih redova ($0{,}17\,\%$),
+od čega 28 u jednom pokretanju (DeepSeek-Reasoner, neutralna konfiguracija, jedan rok kursa Programiranje 2),
+dakle reč je o privremenom prekidu API-ja, a ne o tome da model odbija da oceni.
+U režimu sa nastavnim materijalom nedostaje 237 od $3\,033$ ocena ($7{,}8\,\%$),
+gotovo isključivo u nedovršenim pokretanjima modela GPT-4o (odeljak~\ref{sec:rezultati-udzbenik}).
 Pošto je skala ocenjivanja 0--100, negativna vrednost ne može biti stvarna ocena,
 pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izračunavanja metrika.
 

@@ -185,6 +185,12 @@ EduGrader koristi višemodelski pristup ocenjivanju koji uključuje i modele op�
 \end{itemize}
 Svaki model evaluiran je u tri konfiguracije strogosti ocenjivanja: blagoj, neutralnoj i strogoj.
 Konfiguracije se razlikuju samo u promptu, koji oponaša različite filozofije ocenjivanja iz akademske prakse.
+Strogost, dakle, nije numerički parametar:
+zadaje se isključivo formulacijom sistemske instrukcije
+i oslanja se na to kako model protumači pojmove blagog odnosno strogog ocenjivača.
+Jedini numerički element je pravilo o oduzimanju petine poena u strogoj konfiguraciji.
+Koliko dosledno modeli razlikuju nivoe vidi se iz odnosa prosečnih ocena u tabeli~\ref{tab:pra_results}:
+razlike među konfiguracijama su male i nisu monotone kod svih modela (odeljak~\ref{sec:ogranicenja}).
 Stroga konfiguracija predstavlja model kao „strogog profesora visokoakademske institucije'',
 usmerava mu pažnju na stavke koje se ne poklapaju sa studentskim odgovorom i zadaje eksplicitnu meru kazne (oduzimanje petine poena po nepoklapanju),
 dok blaga konfiguracija usmerava pažnju na stavke koje se poklapaju.
@@ -199,6 +205,7 @@ EduGrader podržava dva komplementarna režima ocenjivanja:
     a zatim studentski odgovor ocenjuje u odnosu na taj generisani standard.
 \end{itemize}
 PRA režim pokriva ispite za koje postoji referentni odgovor nastavnika, a GRA one na kojima ga nastavnik ne obezbeđuje.
+U svim GRA pokretanjima isti model i generiše referentni odgovor i ocenjuje u odnosu na njega.
 
 Mreža konfiguracija ne varira temperaturu.
 Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o,
@@ -237,6 +244,10 @@ U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće di
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor,
 ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
+Drugačije nije bilo moguće: API za dopunu razgovora nema stanje,
+pa ne postoji sesija u kojoj bi se udžbenik priložio jednom, a zatim redom ocenjivali odgovori, već svaki poziv nosi ceo kontekst.
+Provajder nudi jedino automatsko keširanje zajedničkog početka prompta, koje umanjuje cenu ulaznih tokena, ali je ne uklanja.
+U ovoj implementaciji udžbenik stoji na kraju prompta, iza pitanja i studentskog odgovora, pa se ni to nije primenjivalo.
 Motivacija je bila da izostavljanje posredničkog koraka spreči gubitak informacija pri generisanju referentnog odgovora,
 naročito kod pitanja čiji odgovor zahteva širi kontekst.
 

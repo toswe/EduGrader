@@ -231,40 +231,44 @@ pa se nalazi odnose isključivo na ta dva modela (tabela~\ref{tab:udzbenik}).
 
 \begin{table}[ht]
 \centering
-\caption{Metrike režima sa nastavnim materijalom u promptu,
-uz vrednosti PCC-a u PRA i GRA režimu kao referencu.
+\caption{Metrike režima sa nastavnim materijalom u promptu (kolone „mat.''),
+uporedo sa vrednostima PRA i GRA režima za ista dva modela, prenetim iz tabela~\ref{tab:pra_results} i~\ref{tab:gra_results}.
 Za model GPT-4o-mini sve vrednosti su nad svih 583 odgovora.
-Za model GPT-4o ovaj režim obuhvata 581 odgovor u neutralnoj i 454 u strogoj konfiguraciji,
+Za model GPT-4o režim sa materijalom obuhvata 581 odgovor u neutralnoj i 454 u strogoj konfiguraciji,
 a blaga je ostala praktično nepokrenuta (12 odgovora) pa se ne prikazuje.
-PRA vrednost za GPT-4o u neutralnoj konfiguraciji izračunata je nad 399 odgovora, kao u tabeli~\ref{tab:pra_results}.}
+PRA vrednosti za GPT-4o u neutralnoj konfiguraciji izračunate su nad 399 odgovora, kao u tabeli~\ref{tab:pra_results}.}
 \label{tab:udzbenik}
 \resizebox{\columnwidth}{!}{%
-\begin{tabular}{ll ccc cc}
+\begin{tabular}{ll ccc ccc ccc}
 \toprule
 \multirow{2}{*}{\textbf{Model}} & \multirow{2}{*}{\textbf{Strogost}} &
 \multicolumn{3}{c}{\textbf{PCC}} &
-\multicolumn{2}{c}{\textbf{Režim sa materijalom}} \\
+\multicolumn{3}{c}{\textbf{Odnos prosečnih ocena}} &
+\multicolumn{3}{c}{\textbf{RMSE/STDDEV}} \\
 \cmidrule(lr){3-5}
-\cmidrule(lr){6-7}
-& & PRA & materijal & GRA & odnos prosečnih ocena & RMSE/STDDEV \\
+\cmidrule(lr){6-8}
+\cmidrule(lr){9-11}
+& & PRA & mat. & GRA & PRA & mat. & GRA & PRA & mat. & GRA \\
 \midrule
-GPT-4o-mini & blaga     & 0{,}82 & 0{,}70 & 0{,}63 & 0{,}92 & 0{,}73 \\
-GPT-4o-mini & neutralna & 0{,}80 & 0{,}70 & 0{,}65 & 0{,}92 & 0{,}73 \\
-GPT-4o-mini & stroga    & 0{,}77 & 0{,}63 & 0{,}61 & 0{,}89 & 0{,}80 \\
+GPT-4o-mini & blaga     & 0{,}82 & 0{,}70 & 0{,}63 & 0{,}96 & 0{,}92 & 0{,}79 & 0{,}57 & 0{,}73 & 0{,}85 \\
+GPT-4o-mini & neutralna & 0{,}80 & 0{,}70 & 0{,}65 & 0{,}93 & 0{,}92 & 0{,}77 & 0{,}61 & 0{,}73 & 0{,}84 \\
+GPT-4o-mini & stroga    & 0{,}77 & 0{,}63 & 0{,}61 & 0{,}97 & 0{,}89 & 0{,}82 & 0{,}65 & 0{,}80 & 0{,}84 \\
 \midrule
-GPT-4o      & neutralna & 0{,}84 & 0{,}67 & 0{,}75 & 0{,}86 & 0{,}79 \\
-GPT-4o      & stroga    & 0{,}79 & 0{,}62 & 0{,}65 & 0{,}68 & 0{,}97 \\
+GPT-4o      & neutralna & 0{,}84 & 0{,}67 & 0{,}75 & 1{,}00 & 0{,}86 & 0{,}88 & 0{,}55 & 0{,}79 & 0{,}69 \\
+GPT-4o      & stroga    & 0{,}79 & 0{,}62 & 0{,}65 & 0{,}79 & 0{,}68 & 0{,}61 & 0{,}74 & 0{,}97 & 1{,}04 \\
 \bottomrule
 \end{tabular}
 }
 \end{table}
 
 Kod oba modela režim sa nastavnim materijalom ostaje jasno ispod PRA režima,
-sa vrednostima PCC-a u rasponu $0{,}62$--$0{,}70$ naspram $0{,}77$--$0{,}84$.
+sa vrednostima PCC-a u rasponu $0{,}62$--$0{,}70$ naspram $0{,}77$--$0{,}84$,
+uz dosledno slabije vrednosti i po odnosu prosečnih ocena i po odnosu RMSE/STDDEV.
 U odnosu na GRA režim nema dosledne prednosti:
 kod modela GPT-4o-mini materijal u promptu daje nešto višu korelaciju u sve tri konfiguracije
-($0{,}70$ naspram $0{,}65$ u neutralnoj),
-a kod modela GPT-4o osetno slabije ($0{,}67$ naspram $0{,}75$).
+($0{,}70$ naspram $0{,}65$ u neutralnoj) i bolje slaganje po obe preostale metrike,
+a kod modela GPT-4o korelacija je osetno slabija ($0{,}67$ naspram $0{,}75$),
+uz RMSE/STDDEV lošiji nego u GRA režimu u neutralnoj konfiguraciji.
 
 Stroga konfiguracija se i ovde ponaša kao u GRA režimu:
 kod modela GPT-4o povlači odnos prosečnih ocena na $0{,}68$, a odnos RMSE/STDDEV na granicu upotrebljivosti ($0{,}97$).

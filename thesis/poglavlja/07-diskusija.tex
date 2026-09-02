@@ -80,6 +80,9 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     GRA vrednosti ta dva modela zato nisu uporedive sa vrednostima modela porodice GPT,
     a zaključak o prednosti modela za rezonovanje u GRA režimu oslanja se na GPT-5 i na četiri manja kursa.
     Rešenje je podela udžbenika na delove ili izdvajanje relevantnog odlomka pre generisanja, što je ostavljeno za budući rad.
+    \item \textbf{Isti model generiše i ocenjuje u GRA režimu.}
+    Referentni odgovor i ocena potiču od istog modela, pa se kvalitet generisanog odgovora i kvalitet ocenjivanja ne mogu razdvojiti:
+    slabiji GRA rezultat nekog modela može poticati iz bilo kog od ta dva koraka.
     \item \textbf{Neujednačena veličina skupova.} Kurs Programiranje 2 nosi 477 od ukupno 583 odgovora, dok kursevi DDS i HTML5 imaju po deset.
     Objedinjene metrike zato pretežno odražavaju jedan kurs, a vrednosti po manjim kursevima osetljive su na pojedinačne odgovore.
     \item \textbf{Dva ljudska ocenjivača.} Referentne ocene dodelila su dva nastavnika, svaki na svom podskupu kurseva,
@@ -87,6 +90,10 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Slaganje sistema poredi se sa jednim nastavnikom po odgovoru, a ne sa konsenzusom.
     Podskupovi su uz to izrazito neravnomerni (563 naspram 20 odgovora),
     pa objedinjeni rezultati gotovo u celini mere slaganje sa jednim od dvojice nastavnika.
+    \item \textbf{Prototipska baza podataka.}
+    Aplikacija koristi SQLite, dovoljan za eksperimente i demonstraciju pri lokalnom pokretanju.
+    Višekorisnički rad sa istovremenim upisom i transakciona pouzdanost zahtevaju serverski sistem za upravljanje bazom,
+    na koji Django ORM dopušta prelazak izmenom konfiguracije.
 \end{itemize}
 
 Zbog svega toga ljudski nadzor ostaje neophodan.
@@ -110,6 +117,13 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     \item \textbf{Kontrolisane varijacije prompta:}
     ponoviti celu mrežu konfiguracija sa tri instrukcije koje se razlikuju samo u rečenici o strogosti,
     uz istu strukturu, redosled informacija i pravopis, kako bi se efekat strogosti izdvojio od efekta formulacije (odeljak~\ref{sec:ogranicenja}).
+    Strogost bi se pri tome mogla zadati i numerički, eksplicitnom kaznom po nepoklapanju ili ciljanim odnosom prosečnih ocena
+    u svim konfiguracijama, umesto opisnim nazivima nivoa.
+    \item \textbf{Ukršteni GRA dizajn:}
+    referentni odgovor generiše jedan model, a ocenjuje drugi, za sve parove modela,
+    čime se odvojeno odgovara na pitanja koji model bolje generiše referentni odgovor, a koji bolje ocenjuje.
+    Sistem za evaluaciju to tehnički dopušta, jer su faze generisanja i ocenjivanja odvojene:
+    potreban je samo zaseban parametar modela za fazu generisanja.
     \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim i kreativnim zadacima i u višejezičnim okruženjima,
     izvan STEM disciplina sa njihovim strukturiranijim odgovorima.
 \end{itemize}

@@ -47,7 +47,8 @@ Na ova pitanja rad se vraća u zaključku (poglavlje~\ref{sec:zakljucak}).
 
 \section{Sistem EduGrader i doprinosi rada}
 
-U ovom radu predstavljen je EduGrader, platforma za ocenjivanje pitanja otvorenog tipa u visokom obrazovanju, pod nadzorom nastavnika.
+U ovom radu predstavljen je EduGrader, platforma za ocenjivanje pitanja otvorenog tipa u visokom obrazovanju, pod nadzorom nastavnika,
+koju je autor projektovao i razvio u okviru ovog rada~\cite{ikovic2025edugraderconf,ikovic2025edugrader,ikovic2026edugraderrepo}.
 EduGrader objedinjuje više velikih jezičkih modela,
 GPT-4o,\footnote{\url{https://platform.openai.com/docs/models/gpt-4o}}
 GPT-4o-mini,\footnote{\url{https://platform.openai.com/docs/models/gpt-4o-mini}}
@@ -90,16 +91,16 @@ EduGrader je zamišljen kao alat za podršku ocenjivanju, a ne kao zamena za nas
 Namenjen je smanjenju ponavljajućeg dela ocenjivanja,
 ali ljudski nadzor ostaje neophodan za dvosmislena pitanja, očekivanja specifična za disciplinu i granične slučajeve.
 Zato je sistem projektovan po principu čoveka u petlji (engl.~\emph{human-in-the-loop})
-i objavljen kao softver otvorenog koda\footnote{\url{https://github.com/toswe/EduGrader}},
+i objavljen kao softver otvorenog koda~\cite{ikovic2026edugraderrepo},
 kako bi bio proverljiv i prilagodljiv drugim institucijama.
 Postupak ponovnog izvođenja svih prikazanih rezultata opisan je u odeljku~\ref{sec:reprodukcija}.
 
 Doprinosi rada su sledeći:
 \begin{enumerate}
-    \item \textbf{Veb aplikacija EduGrader} (poglavlje~\ref{sec:aplikacija}):
+    \item \textbf{Veb aplikacija EduGrader} (poglavlje~\ref{sec:aplikacija}), koju je autor projektovao i implementirao:
     nastavnički i studentski modul, serverski modul za ocenjivanje koji čuva prompt, odgovor modela i izdvojenu ocenu za svaki ocenjeni odgovor,
     i integracioni sloj koji više provajdera (engl. \emph{provider}) jezičkih modela pokriva jednim interfejsom.
-    \item \textbf{Sistem za automatizovanu evaluaciju modela} (poglavlje~\ref{sec:pipeline}):
+    \item \textbf{Sistem za automatizovanu evaluaciju modela} (poglavlje~\ref{sec:pipeline}), koji je autor razvio:
     ponovljiv \emph{pipeline} koji nad ručno pripremljenim ispitnim podacima pokreće ocenjivanje
     za proizvoljnu kombinaciju modela, konfiguracije strogosti i režima i računa metrike korelacije i slaganja sa ocenama nastavnika.
     \item \textbf{Skup podataka na srpskom jeziku}: 583 autentična, pseudonimizovana studentska odgovora sa pet kurseva na dve institucije,
