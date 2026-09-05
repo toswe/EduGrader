@@ -211,6 +211,9 @@ PRA režim pokriva ispite za koje postoji referentni odgovor nastavnika, a GRA o
 U GRA režimu referentni odgovor se generiše iz udžbenika čija je adresa data uz pitanje,
 u obimu od dve do pet rečenica (postupak je opisan u poglavlju~\ref{sec:pipeline}),
 a u svim pokretanjima isti model koji ga generiše zatim i ocenjuje u odnosu na njega.
+Modelu se pri tome prilaže ceo udžbenik, jer ispiti pokrivaju gradivo celog kursa,
+a pitanja nisu ručno preslikana na poglavlja, pa sistem unapred ne zna iz kog dela udžbenika pitanje potiče.
+Automatsko izdvajanje relevantnog odlomka (engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad.
 
 Mreža konfiguracija ne varira temperaturu.
 Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o,
@@ -247,9 +250,7 @@ Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovor
 Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
 U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom,
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
-Prilaže se ceo udžbenik jer ispiti pokrivaju gradivo celog kursa,
-a pitanja nisu ručno preslikana na poglavlja, pa sistem unapred ne zna iz kog dela udžbenika pitanje potiče.
-Automatsko izdvajanje relevantnog odlomka (engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad.
+Ceo udžbenik se prilaže iz istih razloga kao u GRA režimu.
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor,
 ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
 Drugačije nije bilo moguće: API za dopunu razgovora nema stanje,
@@ -269,6 +270,6 @@ Procenjeni ukupan broj tokena za kompletnu mrežu u ovom režimu iznosi približ
 
 Zbog toga su evaluirani samo modeli GPT-4o-mini i GPT-4o,
 dok modeli za rezonovanje (GPT-5 i DeepSeek-Reasoner) i DeepSeek-Chat nisu pokretani.
-Ocenjivanje je u potpunosti sprovedeno jedino za GPT-4o-mini, kroz sve tri konfiguracije strogosti;
-za GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
+Ocenjivanje je u potpunosti sprovedeno jedino za GPT-4o-mini, kroz sve tri konfiguracije strogosti,
+dok je za GPT-4o blaga konfiguracija ostala praktično nepokrenuta, a stroga nepotpuna.
 Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.
