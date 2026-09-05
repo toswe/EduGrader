@@ -249,6 +249,10 @@ Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovor
 Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
 U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom,
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
+Prilaže se ceo udžbenik, a ne samo deo koji se odnosi na pitanje, jer ispiti pokrivaju gradivo celog kursa,
+a sistem unapred ne zna iz kog dela udžbenika pitanje potiče, niti postoji ručno preslikavanje pitanja na poglavlja udžbenika.
+Automatsko izdvajanje odlomka relevantnog za pitanje pre ocenjivanja
+(engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad (odeljak~\ref{sec:buduci-rad}).
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor,
 ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
 Drugačije nije bilo moguće: API za dopunu razgovora nema stanje,

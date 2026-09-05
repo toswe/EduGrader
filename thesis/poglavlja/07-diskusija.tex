@@ -87,7 +87,7 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     pa referentni odgovor za njih nije generisan, a ocenjivanje je izvedeno bez njega (odeljak~\ref{sec:gra-greska}).
     GRA vrednosti ta dva modela zato nisu uporedive sa vrednostima modela porodice GPT,
     a zaključak o prednosti modela za rezonovanje u GRA režimu oslanja se na GPT-5 i na četiri manja kursa.
-    Rešenje je podela udžbenika na delove ili izdvajanje relevantnog odlomka pre generisanja, što je ostavljeno za budući rad.
+    Rešenje je izdvajanje relevantnog odlomka udžbenika pre generisanja, o čemu je reč među pravcima budućeg rada.
     \item \textbf{Isti model generiše i ocenjuje u GRA režimu.}
     Referentni odgovor i ocena potiču od istog modela, pa se kvalitet generisanog odgovora i kvalitet ocenjivanja ne mogu razdvojiti:
     slabiji GRA rezultat nekog modela može poticati iz bilo kog od ta dva koraka.
@@ -146,6 +146,12 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     čime se odvojeno odgovara na pitanja koji model bolje generiše referentni odgovor, a koji bolje ocenjuje.
     Sistem za evaluaciju to tehnički dopušta, jer su faze generisanja i ocenjivanja odvojene:
     potreban je samo zaseban parametar modela za fazu generisanja.
+    \item \textbf{Izdvajanje relevantnog odlomka nastavnog materijala:}
+    umesto celog udžbenika, modelu priložiti samo odlomke koji se odnose na postavljeno pitanje,
+    a koji se automatski pronalaze po sličnosti sa tekstom pitanja (pristup RAG).
+    Prompt u režimu sa nastavnim materijalom time bi postao višestruko kraći,
+    a generisanje referentnog odgovora u GRA režimu ne bi zavisilo od toga
+    da li ceo udžbenik staje u kontekstni prozor modela.
     \item \textbf{Proširenje domena i jezika:} evaluirati EduGrader na dugim esejskim i kreativnim zadacima i u višejezičnim okruženjima,
     izvan STEM disciplina sa njihovim strukturiranijim odgovorima.
 \end{itemize}
