@@ -151,8 +151,8 @@ a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz \emph{pip
 nad podacima pripremljenim u vidu CSV (engl. \emph{comma-separated values}) datoteka.
 Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz parametarske datoteke tog \emph{pipeline}-a, a ne kroz veb interfejs.
 
-Autentifikacija koristi JWT, koji se čuva u \emph{session storage}-u pregledača (skladištu koje traje dok je kartica otvorena);
-uloge (nastavnik ili student) ugrađene su u njega i na osnovu njih se sprovodi kontrola pristupa rutama.
+Autentifikacija koristi JWT, koji se čuva u skladištu sesije (engl. \emph{session storage}) pregledača, koje traje dok je kartica otvorena.
+Uloge (nastavnik ili student) ugrađene su u njega i na osnovu njih se sprovodi kontrola pristupa rutama.
 U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu,
 dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
 
