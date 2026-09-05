@@ -26,12 +26,12 @@ Skraćenice kurseva u zagradama izvedene su iz srpskih imena kurseva
 i poklapaju se sa imenima skupova podataka u repozitorijumu (p2, tnp, vp, dzp);
 skup kursa HTML5 nosi ime \texttt{uu}, po instituciji na kojoj se kurs drži.
 U objavljenom radu~\cite{ikovic2025edugrader} korišćene su engleske skraćenice kurseva,
-pa se tabele u poglavlju~\ref{sec:rezultati} od tabela u radu razlikuju samo po oznakama kurseva.
+pa se tabele sa rezultatima u ovom radu od tabela u članku razlikuju samo po oznakama kurseva.
 
 Podaci su organizovani po ispitnim rokovima, a ne po kursevima: postoji po jedan skup za svaki od devet rokova,
 koji se grupišu u pet navedenih kurseva (tri roka za Programiranje 2,
 po dva za Tehničko i naučno pisanje i Veb programiranje, i po jedan za Digitalni zapis podataka i HTML5).
-Svi eksperimenti izvršavaju se nad pojedinačnim rokovima, dok se rezultati u poglavlju~\ref{sec:rezultati} prikazuju objedinjeno i po kursevima.
+Svi eksperimenti izvršavaju se nad pojedinačnim rokovima, dok se rezultati prikazuju objedinjeno i po kursevima.
 
 Uz svaki kurs, skup podataka sadrži studentske odgovore, ocene koje su dodelili nastavnici,
 referentne odgovore nastavnika i adrese nastavnih materijala korišćenih u pripremi ispita.
@@ -103,7 +103,7 @@ Studenti nisu posebno kontaktirani,
 pa se zaštita njihovih podataka oslanja na pseudonimizaciju sprovedenu pre bilo kakve obrade
 i na to da se iz samog skupa ne može utvrditi čiji je koji odgovor.
 
-Skup podataka korišćen u radu sadrži samo četiri polja po odgovoru, opisana u poglavlju~\ref{sec:pipeline}:
+Skup podataka korišćen u radu sadrži samo četiri polja po odgovoru:
 pseudonimni identifikator studenta, identifikator pitanja, \mbox{ocenu} nastavnika i tekst odgovora.
 Imena, brojevi indeksa, adrese elektronske pošte ni bilo koji drugi identifikatori u skupu ne postoje.
 Pseudonimi (\texttt{Student~1}, \texttt{Student~2},~\dots) dodeljeni su po redosledu pojavljivanja u okviru jednog ispitnog roka,
@@ -111,7 +111,7 @@ i to za svaki rok posebno,
 pa se odgovori istog studenta iz dva roka ne mogu povezati.
 Tabela preslikavanja identiteta na pseudonime nije sačuvana.
 Jedina zadržana veza je ona između odgovora jednog studenta unutar istog roka;
-ona je potrebna validaciji ulaza (svaki student ima odgovor na svako pitanje, poglavlje~\ref{sec:pipeline}) i ne nosi identitet.
+ona je potrebna validaciji ulaza (svaki student ima odgovor na svako pitanje) i ne nosi identitet.
 
 Pored identifikatora, pregledan je i slobodan tekst: studentski odgovori, tekst pitanja, referentni odgovori i napomene nastavnika,
 kako pretragom po obrascima (brojevi indeksa, adrese, brojevi telefona, potpisi) tako i ručnim čitanjem.
@@ -125,20 +125,20 @@ ali treće lice iz samih podataka identitet studenta ne može utvrditi.
 Studentski odgovori se, i pored pseudonimizacije, ne objavljuju javno.
 Javni repozitorijum projekta sadrži izvorni kod, pitanja sa referentnim odgovorima nastavnika i agregatne metrike,
 a datoteke sa studentskim odgovorima, ulazne i ocenjene, dostupne su na zahtev,
-uz saglasnost nastavnika koji su ih ustupili (odeljak~\ref{sec:reprodukcija}).
+uz saglasnost nastavnika koji su ih ustupili.
 
 Isti princip važi za podatke koji napuštaju sistem.
-Ocenjivanje se izvodi preko API-ja provajdera u oblaku (odeljak~\ref{sec:integracije}),
+Ocenjivanje se izvodi preko API-ja provajdera u oblaku,
 a prompt koji se modelu šalje sadrži isključivo tekst pitanja, referentni odgovor i tekst studentskog odgovora,
-bez identifikatora studenta, i u evaluacionom postupku (poglavlje~\ref{sec:pipeline}) i u aplikaciji.
+bez identifikatora studenta, i u evaluacionom postupku i u aplikaciji.
 Provajderima se tako prosleđuje samo sadržaj koji je već pseudonimizovan.
 U aplikaciji se identitet korisnika čuva isključivo u lokalnoj bazi institucije koja aplikaciju izvršava;
-ta baza, kao ni pristupni ključevi (odeljak~\ref{sec:reprodukcija}), nije deo javnog repozitorijuma.
+ta baza, kao ni pristupni ključevi, nije deo javnog repozitorijuma.
 
 Konačno, sistem je zamišljen kao alat za podršku ocenjivanju, a ne kao ocenjivač:
-konačna ocena i odluka o graničnim slučajevima ostaju kod nastavnika (odeljak~\ref{sec:ogranicenja}),
-a svaka ocena modela čuva se zajedno sa promptom i obrazloženjem (poglavlje~\ref{sec:aplikacija}), pa je naknadno proverljiva.
-Šira pitanja transparentnosti i odgovornosti u ocenjivanju podržanom veštačkom inteligencijom razmotrena su u poglavlju~\ref{sec:pregled}.
+konačna ocena i odluka o graničnim slučajevima ostaju kod nastavnika,
+a svaka ocena modela čuva se zajedno sa promptom i obrazloženjem, pa je naknadno proverljiva.
+Šira pitanja transparentnosti i odgovornosti u ocenjivanju podržanom veštačkom inteligencijom razmotrena su u pregledu literature.
 
 \section{Metrike i evaluacija}
 \label{sec:metrike}
@@ -149,7 +149,7 @@ pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju, pa se 
 Nastavnik sa Matematičkog fakulteta ocenio je 563 odgovora (Programiranje 2: 477, Tehničko i naučno pisanje: 40, Veb programiranje: 46),
 a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalni zapis podataka: 10, HTML5 i JavaScript za video-igre: 10).
 Sistem se tako poredi sa dva ocenjivača, a ne sa jednim standardom, ali je podela izrazito neravnomerna,
-pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta (odeljak~\ref{sec:ogranicenja}).
+pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta.
 Svaki odgovor ocenjivan je zasebno, poenima na skali 0--10,
 prema kriterijumima koji se koriste na datom kursu, to jest prema konceptualnoj tačnosti i potpunosti odgovora.
 Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne koncepte,
@@ -201,23 +201,22 @@ dok blaga konfiguracija usmerava pažnju na stavke koje se poklapaju.
 Neutralna konfiguracija ne uvodi nikakvo dodatno pravilo i predstavlja osnovnu postavku ocenjivanja.
 Jedini numerički element je pravilo o oduzimanju petine poena u strogoj konfiguraciji.
 Koliko dosledno modeli razlikuju nivoe vidi se iz odnosa prosečnih ocena u tabeli~\ref{tab:pra_results}:
-razlike među konfiguracijama su male i nisu monotone kod svih modela (odeljak~\ref{sec:ogranicenja}).
+razlike među konfiguracijama su male i nisu monotone kod svih modela.
 Puni tekstovi svih promptova navedeni su u dodatku~\ref{app:promptovi}.
 Podela na tri konfiguracije strogosti prati nalaz prethodnih studija da i ljudski ocenjivači variraju u strogosti~\cite{jukiewicz2024future}.
 
-Ocenjivanje je izvedeno u dva režima uvedena u poglavlju~\ref{sec:uvod}:
+Ocenjivanje je izvedeno u dva režima uvedena u uvodu:
 PRA sa referentnim odgovorom nastavnika i GRA sa referentnim odgovorom koji generiše sam model.
 PRA režim pokriva ispite za koje postoji referentni odgovor nastavnika, a GRA one na kojima ga nastavnik ne obezbeđuje.
 U GRA režimu referentni odgovor se generiše iz udžbenika čija je adresa data uz pitanje,
-u obimu od dve do pet rečenica (postupak je opisan u poglavlju~\ref{sec:pipeline}),
+u obimu od dve do pet rečenica,
 a u svim pokretanjima isti model koji ga generiše zatim i ocenjuje u odnosu na njega.
 Modelu se pri tome prilaže ceo udžbenik, jer ispiti pokrivaju gradivo celog kursa,
 a pitanja nisu ručno preslikana na poglavlja, pa sistem unapred ne zna iz kog dela udžbenika pitanje potiče.
 Automatsko izdvajanje relevantnog odlomka (engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad.
 
 Mreža konfiguracija ne varira temperaturu.
-Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o,
-a nalazi su izloženi u odeljku~\ref{sec:rezultati-temperatura}.
+Temperatura je ispitana odvojeno, na podskupu odgovora i za model GPT-4o.
 
 Svi eksperimenti sprovedeni su na srpskom jeziku: ispitna pitanja, studentski odgovori, referentni odgovori i sistemske instrukcije.
 
@@ -238,16 +237,16 @@ tako što je model umesto referentnog odgovora video poruku o grešci, odnosno o
 Za preostala četiri kursa (106 odgovora) udžbenici su znatno manji i generisanje je uspelo.
 
 Greška je otkrivena kada eksperimenti više nisu ponavljani, pa rezultati nisu prepravljeni.
-Umesto toga, u poglavlju~\ref{sec:rezultati} GRA vrednosti za modele DeepSeek prikazane su kako su dobijene,
+Umesto toga, GRA vrednosti za modele DeepSeek prikazane su u rezultatima onako kako su dobijene,
 uz izričitu napomenu da na kursu Programiranje 2 ne mere ocenjivanje u odnosu na generisani referentni odgovor,
 već ocenjivanje bez ikakvog referentnog odgovora,
-a tumačenje tih vrednosti ograničeno je na ono što takva postavka dopušta (odeljak~\ref{sec:ogranicenja}).
+a tumačenje tih vrednosti ograničeno je na ono što takva postavka dopušta.
 Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovori izostavljeni iz proseka dužine.
 
 \section{Treći režim: ocenjivanje na osnovu nastavnog materijala}
 \label{sec:rezim-udzbenik}
 
-Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
+Pored režima PRA i GRA, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
 U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom,
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
 Ceo udžbenik se prilaže iz istih razloga kao u GRA režimu.
@@ -261,7 +260,7 @@ Motivacija je bila da izostavljanje posredničkog koraka spreči gubitak informa
 naročito kod pitanja čiji odgovor zahteva širi kontekst.
 
 Režim je implementiran i pokrenut, ali \textbf{nije sproveden za sve modele},
-pa se njegovi rezultati prikazuju odvojeno od glavnih, u odeljku~\ref{sec:rezultati-udzbenik}.
+pa se njegovi rezultati prikazuju odvojeno od glavnih.
 Razlog je cena: budući da ceo udžbenik ulazi u svaki poziv, veličina prompta raste za red veličine.
 Medijana broja tokena u promptu je iznosila oko $14\,500$ za kurs Programiranje 2,
 naspram oko $300$ tokena u PRA režimu nad istim odgovorima, dakle približno \textbf{48 puta više}.
@@ -272,4 +271,3 @@ Zbog toga su evaluirani samo modeli GPT-4o-mini i GPT-4o,
 dok modeli za rezonovanje (GPT-5 i DeepSeek-Reasoner) i DeepSeek-Chat nisu pokretani.
 Ocenjivanje je u potpunosti sprovedeno jedino za GPT-4o-mini, kroz sve tri konfiguracije strogosti,
 dok je za GPT-4o blaga konfiguracija ostala praktično nepokrenuta, a stroga nepotpuna.
-Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.
