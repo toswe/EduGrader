@@ -4,10 +4,8 @@
 
 EduGrader uključuje velike jezičke modele u tok provere znanja pod nadzorom nastavnika,
 sa ciljem efikasnijeg i doslednijeg ocenjivanja uz očuvanje pedagoške transparentnosti i ljudske odgovornosti.
-U ovom poglavlju najpre su opisani podaci na kojima je evaluacija sprovedena i način na koji su zaštićeni,
-zatim metrike kojima se ocene sistema porede sa nastavničkim,
-a potom modeli, konfiguracije strogosti i režimi ocenjivanja koji su evaluirani,
-uključujući i dva odstupanja od planiranog eksperimenta.
+Poglavlje najpre opisuje podatke i njihovu zaštitu, zatim metrike,
+a potom modele, konfiguracije strogosti i režime ocenjivanja, uključujući dva odstupanja od planiranog eksperimenta.
 
 \section{Prikupljanje podataka}
 \label{sec:podaci}
@@ -249,10 +247,9 @@ Ista okolnost važi i za tabelu~\ref{tab:response_length}, u kojoj su ti odgovor
 Pored dva režima opisana u odeljku~\ref{sec:modeli}, razmatran je i treći pristup, u kome se referentni odgovor uopšte ne koristi.
 U njemu se ceo tekst nastavnog materijala, izdvojen iz PDF udžbenika, umeće direktno u prompt zajedno sa pitanjem i studentskim odgovorom,
 a od modela se traži da odgovor oceni oslanjajući se isključivo na taj materijal.
-Prilaže se ceo udžbenik, a ne samo deo koji se odnosi na pitanje, jer ispiti pokrivaju gradivo celog kursa,
-a sistem unapred ne zna iz kog dela udžbenika pitanje potiče, niti postoji ručno preslikavanje pitanja na poglavlja udžbenika.
-Automatsko izdvajanje odlomka relevantnog za pitanje pre ocenjivanja
-(engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad (odeljak~\ref{sec:buduci-rad}).
+Prilaže se ceo udžbenik jer ispiti pokrivaju gradivo celog kursa,
+a pitanja nisu ručno preslikana na poglavlja, pa sistem unapred ne zna iz kog dela udžbenika pitanje potiče.
+Automatsko izdvajanje relevantnog odlomka (engl. \emph{retrieval-augmented generation}, RAG) ostavljeno je za budući rad.
 Za razliku od GRA režima, gde se udžbenik koristi jednom, da bi se iz njega izveo kratak referentni odgovor,
 ovde udžbenik ulazi u svaki pojedinačni poziv za ocenjivanje.
 Drugačije nije bilo moguće: API za dopunu razgovora nema stanje,
@@ -270,8 +267,8 @@ naspram oko $300$ tokena u PRA režimu nad istim odgovorima, dakle približno \t
 Sprovedeni deo eksperimenta potrošio je oko $38{,}5$ miliona tokena u promptovima i pokrio samo oko trećine planirane mreže konfiguracija.
 Procenjeni ukupan broj tokena za kompletnu mrežu u ovom režimu iznosi približno $119$ miliona, dakle još oko $80$ miliona povrh već potrošenih.
 
-Zbog toga su u ovom režimu evaluirani samo modeli GPT-4o-mini i GPT-4o,
-dok modeli za rezonovanje (GPT-5 i DeepSeek-Reasoner) i model DeepSeek-Chat nisu pokretani.
-Ocenjivanje je u potpunosti sprovedeno jedino za model GPT-4o-mini, kroz sve tri konfiguracije strogosti;
-za model GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
+Zbog toga su evaluirani samo modeli GPT-4o-mini i GPT-4o,
+dok modeli za rezonovanje (GPT-5 i DeepSeek-Reasoner) i DeepSeek-Chat nisu pokretani.
+Ocenjivanje je u potpunosti sprovedeno jedino za GPT-4o-mini, kroz sve tri konfiguracije strogosti;
+za GPT-4o blaga konfiguracija ostala je praktično nepokrenuta, a stroga nepotpuna.
 Ograničenja koja iz ovoga slede razmatraju se u odeljku~\ref{sec:ogranicenja}.
