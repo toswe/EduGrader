@@ -4,48 +4,10 @@
 
 EduGrader uključuje velike jezičke modele u tok provere znanja pod nadzorom nastavnika,
 sa ciljem efikasnijeg i doslednijeg ocenjivanja uz očuvanje pedagoške transparentnosti i ljudske odgovornosti.
-
-\section{Metrike i evaluacija}
-\label{sec:metrike}
-
-Ocene sistema EduGrader upoređene su sa ocenama koje su dodelila dva univerzitetska nastavnika.
-Svaki nastavnik je ocenio različit podskup od ukupno 583 odgovora,
-pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju, pa se ne preklapaju.
-Nastavnik sa Matematičkog fakulteta ocenio je 563 odgovora (Programiranje 2: 477, Tehničko i naučno pisanje: 40, Veb programiranje: 46),
-a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalni zapis podataka: 10, HTML5 i JavaScript za video-igre: 10).
-Sistem se tako poredi sa dva ocenjivača, a ne sa jednim standardom, ali je podela izrazito neravnomerna,
-pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta (odeljak~\ref{sec:ogranicenja}).
-Svaki odgovor ocenjivan je zasebno, poenima na skali 0--10,
-prema kriterijumima koji se koriste na datom kursu, to jest prema konceptualnoj tačnosti i potpunosti odgovora.
-Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne koncepte,
-da li nedostaju važni elementi i da li je rezonovanje delimično tačno, ali nepotpuno.
-Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji,
-dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
-Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema,
-preslikanom na istu skalu 0--10.
-
-Korišćene su četiri metrike: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena,
-koren srednje kvadratne greške (RMSE) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
-
-PCC~\cite{sedgwick2012pearson} meri jačinu linearne povezanosti između ocena koje su dodelili ljudi i ocena koje je dodelio sistem.
-Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu pozitivnu linearnu vezu,
-$0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
-PCC ne meri apsolutno slaganje: sistem koji sve ocene dosledno umanjuje za istu vrednost postigao bi savršenu korelaciju uz očigledno pogrešne ocene.
-PCC je zato dopunjen metrikama koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
-U radu se zbog toga dosledno razlikuju korelacija, koju meri PCC, i slaganje, koje mere RMSE i RMSE/STDDEV;
-visoka korelacija ne podrazumeva slaganje, što je poznat argument iz metodologije poređenja metoda merenja~\cite{mansournia2021bland}.
-
-Odnos prosečnih ocena poredi prosečnu ocenu sistema sa prosečnom ocenom nastavnika i otkriva sistematsku blagost ili strogost,
-ali ne i usklađenost u variranju ocena.
-
-Koren srednje kvadratne greške (RMSE)~\cite{hodson2022root} obuhvata prosečnu veličinu razlika između ljudskih ocena i ocena sistema;
-manja vrednost RMSE ukazuje na jače slaganje.
-Odnos RMSE/STDDEV~\cite{moriasi2007model} meri koliko se ocene sistema slažu sa ljudskim ocenama
-u odnosu na prirodnu varijabilnost samih ljudskih ocena,
-odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
-Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje,
-vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja,
-dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
+U ovom poglavlju najpre su opisani podaci na kojima je evaluacija sprovedena i način na koji su zaštićeni,
+zatim metrike kojima se ocene sistema porede sa nastavničkim,
+a potom modeli, konfiguracije strogosti i režimi ocenjivanja koji su evaluirani,
+uključujući i dva odstupanja od planiranog eksperimenta.
 
 \section{Prikupljanje podataka}
 \label{sec:podaci}
@@ -179,6 +141,48 @@ Konačno, sistem je zamišljen kao alat za podršku ocenjivanju, a ne kao ocenji
 konačna ocena i odluka o graničnim slučajevima ostaju kod nastavnika (odeljak~\ref{sec:ogranicenja}),
 a svaka ocena modela čuva se zajedno sa promptom i obrazloženjem (poglavlje~\ref{sec:aplikacija}), pa je naknadno proverljiva.
 Šira pitanja transparentnosti i odgovornosti u ocenjivanju podržanom veštačkom inteligencijom razmotrena su u poglavlju~\ref{sec:pregled}.
+
+\section{Metrike i evaluacija}
+\label{sec:metrike}
+
+Ocene sistema EduGrader upoređene su sa ocenama koje su dodelila dva univerzitetska nastavnika.
+Svaki nastavnik je ocenio različit podskup od ukupno 583 odgovora,
+pri čemu su podskupovi određeni kursevima na kojima nastavnici predaju, pa se ne preklapaju.
+Nastavnik sa Matematičkog fakulteta ocenio je 563 odgovora (Programiranje 2: 477, Tehničko i naučno pisanje: 40, Veb programiranje: 46),
+a nastavnik sa Univerziteta umetnosti preostalih 20 odgovora (Digitalni zapis podataka: 10, HTML5 i JavaScript za video-igre: 10).
+Sistem se tako poredi sa dva ocenjivača, a ne sa jednim standardom, ali je podela izrazito neravnomerna,
+pa objedinjene vrednosti metrika pretežno odražavaju kriterijume nastavnika sa Matematičkog fakulteta (odeljak~\ref{sec:ogranicenja}).
+Svaki odgovor ocenjivan je zasebno, poenima na skali 0--10,
+prema kriterijumima koji se koriste na datom kursu, to jest prema konceptualnoj tačnosti i potpunosti odgovora.
+Nastavnici su uzimali u obzir da li je student ispravno identifikovao ključne koncepte,
+da li nedostaju važni elementi i da li je rezonovanje delimično tačno, ali nepotpuno.
+Odgovori koji demonstriraju ispravne osnovne ideje dobijali su delimične poene čak i kada nedostaju terminologija, struktura ili pojedini detalji,
+dok su suštinski netačni odgovori dobijali niske ocene ili nula poena.
+Za svaki odgovor, ocena koju je dodelio nastavnik zadužen za kurs tretirana je kao referentna ocena i upoređena sa ocenom sistema,
+preslikanom na istu skalu 0--10.
+
+Korišćene su četiri metrike: Pirsonov koeficijent korelacije (PCC), odnos prosečnih ocena,
+koren srednje kvadratne greške (RMSE) i odnos korena srednje kvadratne greške i standardne devijacije (RMSE/STDDEV).
+
+PCC~\cite{sedgwick2012pearson} meri jačinu linearne povezanosti između ocena koje su dodelili ljudi i ocena koje je dodelio sistem.
+Koeficijent uzima vrednosti od $-1$ do $+1$, gde $+1$ označava savršenu pozitivnu linearnu vezu,
+$0$ odsustvo linearne veze, a $-1$ savršenu negativnu linearnu vezu.
+PCC ne meri apsolutno slaganje: sistem koji sve ocene dosledno umanjuje za istu vrednost postigao bi savršenu korelaciju uz očigledno pogrešne ocene.
+PCC je zato dopunjen metrikama koje obuhvataju apsolutna odstupanja između ocena sistema i nastavnika.
+U radu se zbog toga dosledno razlikuju korelacija, koju meri PCC, i slaganje, koje mere RMSE i RMSE/STDDEV;
+visoka korelacija ne podrazumeva slaganje, što je poznat argument iz metodologije poređenja metoda merenja~\cite{mansournia2021bland}.
+
+Odnos prosečnih ocena poredi prosečnu ocenu sistema sa prosečnom ocenom nastavnika i otkriva sistematsku blagost ili strogost,
+ali ne i usklađenost u variranju ocena.
+
+Koren srednje kvadratne greške (RMSE)~\cite{hodson2022root} obuhvata prosečnu veličinu razlika između ljudskih ocena i ocena sistema;
+manja vrednost RMSE ukazuje na jače slaganje.
+Odnos RMSE/STDDEV~\cite{moriasi2007model} meri koliko se ocene sistema slažu sa ljudskim ocenama
+u odnosu na prirodnu varijabilnost samih ljudskih ocena,
+odnosno, da li su odstupanja sistema od ljudskog suda mala u poređenju sa tim koliko ljudske ocene uopšte variraju.
+Vrednost odnosa RMSE/STDDEV blizu $0$ ukazuje na veoma visoko slaganje,
+vrednost oko $1$ znači da su odstupanja sistema uporediva sa tipičnom varijabilnošću ljudskog ocenjivanja,
+dok vrednost veća od $1$ sugeriše da se ocene sistema razlikuju od ljudskih više nego što se ljudi razlikuju međusobno.
 
 \section{Modeli i konfiguracije}
 \label{sec:modeli}
