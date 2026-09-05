@@ -11,7 +11,7 @@ a na kraju se navode pravci u kojima bi se sistem EduGrader mogao dalje razvijat
 \label{sec:poredjenje}
 
 Tabela~\ref{tab:prior-study} smešta vrednosti PCC-a postignute u ovom istraživanju u kontekst prethodnih studija,
-čiji je pregled po dimenzijama eksperimenta dat u odeljku~\ref{sec:pozicioniranje}.
+čiji je pregled po dimenzijama eksperimenta dat u tabeli~\ref{tab:srodni-radovi}.
 
 \begin{table}[ht]
 \centering
@@ -60,7 +60,7 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Svaka kombinacija modela, strogosti i režima izvršena je jednom,
     pa glavni rezultati ne govore o varijabilnosti između ponovljenih pokretanja istog modela.
     Temperatura je zadržana na podrazumevanoj vrednosti provajdera;
-    njen uticaj ispitan je odvojeno (odeljak~\ref{sec:rezultati-temperatura}) i nije primećen,
+    njen uticaj ispitan je odvojeno i nije primećen,
     ali samo za jedan model, jednu konfiguraciju strogosti i deo skupova podataka.
     \item \textbf{Konfiguracije strogosti se ne razlikuju samo po strogosti.}
     Tri sistemske instrukcije (dodatak~\ref{app:promptovi}) pisane su nezavisno, pa se razlikuju i mimo strogosti.
@@ -78,9 +78,9 @@ Nekoliko ograničenja odnosi se na samu postavku evaluacije:
     Instrukcije nisu naknadno ujednačene, jer bi tekst u dodatku prestao da odgovara promptovima koji su dali prikazane rezultate;
     ponavljanje svih pokretanja sa ujednačenim instrukcijama ostavljeno je za budući rad.
     \item \textbf{Nepotpuni treći režim.}
-    Ocenjivanje sa nastavnim materijalom neposredno u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenuto je samo za dva modela,
+    Ocenjivanje sa nastavnim materijalom neposredno u promptu pokrenuto je samo za dva modela,
     jer je veličina prompta činila potpuni eksperiment nesrazmerno skupim.
-    Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje sa nastavnicima (odeljak~\ref{sec:rezultati-udzbenik});
+    Kod ta dva modela izostavljanje posredničkog referentnog odgovora ne poboljšava slaganje sa nastavnicima;
     za modele za rezonovanje režim nije pokretan, pa za njih nalaza nema.
     \item \textbf{GRA režim bez referentnog odgovora za modele DeepSeek.}
     Na kursu Programiranje 2 udžbenik premašuje kontekstni prozor modela DeepSeek,
@@ -132,11 +132,11 @@ Nekoliko pravaca može dodatno unaprediti sistem EduGrader:
     dodatno obučavanje modela (engl. \emph{fine-tuning}) nije razmatrano, jer je skup od 583 odgovora za to premali.
     \item \textbf{Kontrolisane varijacije prompta:}
     ponoviti celu mrežu konfiguracija sa tri instrukcije koje se razlikuju samo u rečenici o strogosti,
-    uz istu strukturu, redosled informacija i pravopis, kako bi se efekat strogosti izdvojio od efekta formulacije (odeljak~\ref{sec:ogranicenja}).
+    uz istu strukturu, redosled informacija i pravopis, kako bi se efekat strogosti izdvojio od efekta formulacije.
     Strogost bi se pri tome mogla zadati i numerički, eksplicitnom kaznom po nepoklapanju ili ciljanim odnosom prosečnih ocena
     u svim konfiguracijama, umesto opisnim nazivima nivoa.
     \item \textbf{Dužina generisanog referentnog odgovora kao parametar:}
-    prompt za generisanje traži odgovor od dve do pet rečenica (dodatak~\ref{app:promptovi}),
+    prompt za generisanje traži odgovor od dve do pet rečenica,
     pa su generisani odgovori dva do tri puta duži od nastavničkih (tabela~\ref{tab:response_length}).
     Vredelo bi ispitati da li još obimniji referentni odgovor, od desetak rečenica,
     ostavlja više prostora za ispravno vrednovanje alternativnih formulacija studentskih odgovora,

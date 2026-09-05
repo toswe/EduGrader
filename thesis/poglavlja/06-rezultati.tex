@@ -2,7 +2,7 @@
 \chapter{Rezultati}
 \label{sec:rezultati}
 
-Rezultati su iskazani kroz tri od četiri metrike uvedene u odeljku~\ref{sec:metrike}: PCC, odnos prosečnih ocena i odnos RMSE/STDDEV.
+Rezultati su iskazani kroz tri od četiri metrike: PCC, odnos prosečnih ocena i odnos RMSE/STDDEV.
 RMSE se ne prikazuje posebno jer ulazi u odnos RMSE/STDDEV,
 koji istu grešku izražava u odnosu na varijabilnost ljudskih ocena i time je uporediv između kurseva sa različitim rasponom ocena.
 Sve vrednosti izračunate su nad objedinjenim skupom svih ocenjenih odgovora,
@@ -12,8 +12,8 @@ Svaka konfiguracija (model $\times$ strogost $\times$ režim) pokrenuta je jedno
 pa rezultati odražavaju jedno uzorkovanje iz svakog modela.
 Temperatura se u glavnoj mreži konfiguracija ne varira:
 modeli porodice GPT rade na podrazumevanoj vrednosti svog provajdera,
-a modelima DeepSeek prosleđuje se vrednost $0$ (odeljak~\ref{sec:pipeline}).
-Njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
+a modelima DeepSeek prosleđuje se vrednost $0$.
+Njen uticaj ispitan je odvojeno, na kraju ovog poglavlja.
 
 \section{Performanse modela}
 \label{sec:performanse}
@@ -51,7 +51,7 @@ DeepSeek-Reasoner & 0{,}87 & 0{,}86 & 0{,}78 & 0{,}88 & 0{,}86 & 0{,}95 & 0{,}53
 Vrednosti u tabeli~\ref{tab:pra_results} izračunate su nad svih 583 odgovora,
 osim u dva slučaja u kojima ocenjivanje nije uspelo za sve odgovore: neutralna konfiguracija modela GPT-4o obuhvata 399 odgovora,
 a neutralna konfiguracija modela DeepSeek-Reasoner 555 odgovora\footnote{Nedostajuće ocene posledica su prekinutog pokretanja,
-odnosno trajno neuspešnih API poziva, koji se prema opisu iz odeljka~\ref{sec:pipeline} označavaju i isključuju iz analize.}.
+odnosno trajno neuspešnih API poziva, koji se u analizi označavaju i isključuju.}.
 
 Modeli za rezonovanje postižu najvišu korelaciju i najmanja odstupanja od nastavnika.
 GPT-5 postiže najvišu korelaciju u blagoj i neutralnoj konfiguraciji (PCC $=0{,}89$ i $0{,}88$) uz najniže odnose RMSE/STDDEV ($0{,}47$ i $0{,}50$),
@@ -126,7 +126,7 @@ Koliko bi ova dva modela postigla sa stvarno generisanim referentnim odgovorom n
 Kroz sve modele i konfiguracije strogosti PRA režim nadmašuje GRA, po korelaciji sa ljudskim ocenama i po normalizovanim odnosima greške.
 Pad korelacije pri prelasku u GRA nije ujednačen: kod modela GPT-5 je najmanji (sa $0{,}88$ na $0{,}84$ u neutralnoj konfiguraciji),
 a kod modela DeepSeek-Chat najveći (sa $0{,}82$ na $0{,}50$),
-s tim što kod modela DeepSeek pad uključuje i potpuno odsustvo referentnog odgovora na najvećem kursu (odeljak~\ref{sec:gra-greska}).
+s tim što kod modela DeepSeek pad uključuje i potpuno odsustvo referentnog odgovora na najvećem kursu.
 Performanse u GRA režimu, dakle, presudno zavise od postojanja i kvaliteta referentnog odgovora, a ne samo od sposobnosti ocenjivanja.
 
 Nijedna konfiguracija strogosti nije najbolja za sve modele, a optimalna se razlikuje između režima.
@@ -138,7 +138,7 @@ Stroga konfiguracija je u oba režima najlošija za četiri od pet modela, i po 
 
 Sistematsko odstupanje razdvaja režime jasnije od korelacije.
 Dok u PRA režimu odnosi prosečnih ocena ostaju blizu $1{,}0$, u GRA režimu svi modeli ocenjuju niže od nastavnika,
-u skladu sa nalazom iz odeljka~\ref{sec:cross-dataset} da su generisani referentni odgovori po pravilu detaljniji od nastavničkih,
+u skladu sa tim što su generisani referentni odgovori po pravilu detaljniji od nastavničkih (tabela~\ref{tab:response_length}),
 pa studentski odgovori u odnosu na njih izgledaju nepotpuniji.
 Isto važi i za odnose greške: u PRA režimu svi modeli ostaju ispod $0{,}75$,
 dok se u GRA režimu granica $1{,}0$ prelazi kod modela DeepSeek-Chat u svim konfiguracijama i kod modela GPT-4o u strogoj.
@@ -164,7 +164,7 @@ pa model visoko ocenjuje odgovore koji traženi postupak ispravno opisuju, ali g
 Nastavnik je takve odgovore po pravilu ocenjivao nulom.
 Raskorak bi se mogao ublažiti kada bi se u prompt uključila kratka napomena nastavnika o tome
 da li je tačno objašnjenje dovoljno ili student mora i da izvrši traženi zadatak;
-sistem takav ulaz trenutno ne podržava (odeljak~\ref{sec:buduci-rad}).
+sistem takav ulaz trenutno ne podržava.
 
 Kod kurseva na kojima se očekuju duži, opisniji odgovori (DZP i HTML5) razlike između režima su znatno manje,
 jer generisani referentni odgovori po strukturi i nivou detalja liče na nastavničke.
@@ -202,7 +202,7 @@ HTML5  & 0{,}96 (10) & 0{,}94 (10) & \textbf{0{,}97} (10) & \textbf{0{,}97} (10)
 \centering
 \caption{PCC po kursevima za GRA režim (neutralna konfiguracija strogosti).
 U zagradi je broj odgovora nad kojim je vrednost izračunata.
-Vrednosti modela DeepSeek za kurs P2 dobijene su bez generisanog referentnog odgovora (odeljak~\ref{sec:gra-greska}).}
+Vrednosti modela DeepSeek za kurs P2 dobijene su bez generisanog referentnog odgovora.}
 \label{tab:pcc-generated}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lccccc}
@@ -253,7 +253,7 @@ Zbog ograničenog obuhvata prikazuju se odvojeno; nijedan ne menja nalaze iz pre
 \subsection{Ocenjivanje iz nastavnog materijala}
 \label{sec:rezultati-udzbenik}
 
-Režim sa nastavnim materijalom u promptu (odeljak~\ref{sec:rezim-udzbenik}) pokrenut je samo za modele GPT-4o-mini i GPT-4o,
+Režim sa nastavnim materijalom u promptu pokrenut je samo za modele GPT-4o-mini i GPT-4o,
 pa se nalazi odnose isključivo na ta dva modela (tabela~\ref{tab:udzbenik}).
 
 \begin{table}[ht]
@@ -300,7 +300,7 @@ uz RMSE/STDDEV lošiji nego u GRA režimu u neutralnoj konfiguraciji.
 Stroga konfiguracija se i ovde ponaša kao u GRA režimu:
 kod modela GPT-4o povlači odnos prosečnih ocena na $0{,}68$, a odnos RMSE/STDDEV na granicu upotrebljivosti ($0{,}97$).
 
-Pitanje iz odeljka~\ref{sec:rezim-udzbenik} time je delimično odgovoreno:
+Pitanje da li izostavljanje posredničkog referentnog odgovora popravlja ocenjivanje time je delimično odgovoreno:
 prompt je višestruko veći nego u PRA režimu, a ni korelacija ni slaganje nisu bolji,
 pa dodatni kontekst ne opravdava svoju cenu.
 Kod modela za rezonovanje ishod bi mogao biti drugačiji,
@@ -343,7 +343,6 @@ pa razlika između njih meri variranje između dva pokretanja istog modela,
 i po veličini je uporediva sa svim ostalim razlikama u tabeli.
 
 Jedini izraženiji pomak javlja se na kursu DZP, gde PCC raste sa $0{,}61$ na $0{,}89$ i $0{,}83$.
-I on je, u skladu sa rezervom iz odeljka~\ref{sec:cross-dataset},
-posledica pojedinačnih ocena među samo deset odgovora, a ne temperature.
+I on je posledica pojedinačnih ocena među samo deset odgovora, a ne temperature.
 Uz ovako ograničen obuhvat, eksperiment potvrđuje samo to da izbor temperature
 nije prikriveni izvor razlika u glavnim rezultatima.
