@@ -3,7 +3,7 @@
 \label{sec:pipeline}
 
 Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela,
-organizovan kao \emph{pipeline} u sistemu DVC.
+organizovan kao evaluacioni postupak (engl. \emph{pipeline}, po čemu je nazvan i direktorijum \texttt{pipeline/}) u sistemu DVC.
 U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima,
 i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
 Eksperiment se tako reprodukuje bez ponovnog plaćanja API poziva čiji su ulazi ostali isti.
@@ -75,8 +75,8 @@ pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izra�
 
 Potpuni eksperiment obuhvata petnaest kombinacija (pet modela $\times$ tri konfiguracije strogosti) nad svih devet skupova podataka,
 dakle 135 pokretanja po režimu ocenjivanja.
-Pomoćna skripta za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC \emph{pipeline};
-ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
+Pomoćna skripta za svaku kombinaciju upisuje izbor modela i strogosti u parametarsku datoteku i ponovo pokreće DVC postupak.
+Ime svake izlazne datoteke kodira konfiguraciju (strogost, model i režim) kojom je proizvedena.
 Svaka kombinacija pokrenuta je jednom, pa rezultati ne obuhvataju procenu varijabilnosti između ponovljenih pokretanja istog modela.
 Dva dodatna eksperimenta izvan ove mreže, sa nastavnim materijalom u promptu
 i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatni}.
@@ -182,7 +182,7 @@ python calculate_correlations.py
 Prva komanda pokreće faze obrade za konfiguraciju zapisanu u parametarskoj datoteci,
 uz preskakanje faza čiji se ulazi nisu promenili.
 Druga komanda sprovodi ceo eksperiment tako što redom upisuje
-svaku od petnaest kombinacija u tu datoteku i ponovo pokreće \emph{pipeline}.
+svaku od petnaest kombinacija u tu datoteku i ponovo pokreće postupak.
 Treća komanda prolazi kroz ocenjene datoteke svih skupova podataka,
 za svaki skup zapisuje metrike u njegov direktorijum \texttt{graded},
 a sve rezultate objedinjuje u zbirnu tabelu \texttt{correlation\_summary.csv},
@@ -207,7 +207,7 @@ vrednosti po kursevima u tabelama poglavlja~\ref{sec:rezultati}
 dobijene su objedinjavanjem rokova koji pripadaju istom kursu,
 prema Tabeli~\ref{tab:dataset}.
 
-Jedini eksperiment koji nije pokrenut kroz opisani \emph{pipeline} je eksperiment sa temperaturom
+Jedini eksperiment koji nije pokrenut kroz opisani postupak je eksperiment sa temperaturom
 (odeljak~\ref{sec:rezultati-temperatura}).
 On je sproveden ranije, kroz upravljačku komandu same aplikacije,
 sa istim promptom i istim formatom izlaza,
@@ -216,7 +216,7 @@ i imenovane su po ispitnim rokovima iz baze aplikacije
 (\texttt{p2} i \texttt{p2\_jul\_2} odgovaraju skupovima \texttt{p2\_1} i \texttt{p2\_2},
 a \texttt{uu} i \texttt{dzp} zovu se isto u oba slučaja).
 Skripta \texttt{calculate\_temperature.py} uparuje te datoteke sa odgovarajućim
-pokretanjem iz \emph{pipeline}-a i računa iste metrike,
+pokretanjem iz evaluacionog postupka i računa iste metrike,
 pa se tabela~\ref{tab:temperatura} dobija jednom komandom, takođe bez ijednog poziva jezičkom modelu:
 
 \begin{tcolorbox}[promptbox, title={Reprodukcija eksperimenta sa temperaturom}]

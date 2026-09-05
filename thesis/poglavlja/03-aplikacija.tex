@@ -30,7 +30,7 @@ To je deo sistema namenjen upotrebi u nastavi, organizovan u tri sloja (slika~\r
 
 Logika ocenjivanja i ponašanje modela razvijaju se nezavisno od korisničkog interfejsa;
 klijentski i serverski deo komuniciraju samo preko REST API-ja.
-Slika prikazuje i evaluacioni \emph{pipeline} u sistemu DVC (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}},
+Slika prikazuje i evaluacioni postupak u sistemu DVC (engl. \emph{Data Version Control})\footnote{\url{https://dvc.org}},
 opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 
 % --- DIJAGRAM ARHITEKTURE (TikZ) ---
@@ -77,7 +77,7 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 
 % ---- DVC pipeline ----
 \node[box, fill=purple!8, minimum width=4.8cm, minimum height=1.6cm, below=1.4cm of fe] (pipe) {};
-\node[font=\small\bfseries, anchor=north] at (pipe.north) {DVC \emph{pipeline}};
+\node[font=\small\bfseries, anchor=north] at (pipe.north) {DVC postupak};
 \node[font=\scriptsize] at (pipe.center) {Grupni eksperimenti};
 \node[font=\scriptsize, anchor=south] at (pipe.south) {spajanje \textrightarrow{} ocenjivanje};
 
@@ -150,9 +150,9 @@ Na snimku je nastavnik uneo konačnu ocenu 10, različitu od predloga modela,
 
 Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa:
 logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje,
-a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz \emph{pipeline} u sistemu DVC,
+a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz postupak u sistemu DVC,
 nad podacima pripremljenim u vidu CSV (engl. \emph{comma-separated values}) datoteka.
-Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz parametarske datoteke tog \emph{pipeline}-a, a ne kroz veb interfejs.
+Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz parametarske datoteke tog postupka, a ne kroz veb interfejs.
 
 Autentifikacija koristi JWT, koji se čuva u skladištu sesije (engl. \emph{session storage}) pregledača, koje traje dok je kartica otvorena.
 Uloge (nastavnik ili student) ugrađene su u JWT i na osnovu njih se sprovodi kontrola pristupa rutama.
