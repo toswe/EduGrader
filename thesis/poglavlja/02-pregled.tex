@@ -50,7 +50,7 @@ Autori ističu da ChatGPT ubrzava ocenjivanje i daje korisnu povratnu informacij
 ali da mu izostaje kontekstualno razumevanje nijansiranih studentskih argumenata.
 Upozoravaju i na rizik produbljivanja obrazovnih nejednakosti i na potrebu za institucionalnim okvirima za transparentnost,
 nadzor i ublažavanje pristrasnosti pri uvođenju takvih alata.
-Za ovaj rad ta studija daje donju tačku poređenja (odeljak~\ref{sec:poredjenje}):
+Za ovaj rad ta studija daje donju tačku poređenja:
 ona meri eseje iz društvenih nauka, dok se ovde ocenjuju kratki odgovori iz STEM oblasti (nauka, tehnologija, inženjerstvo i matematika),
 za koje literatura očekuje veću korelaciju.
 
@@ -61,7 +61,7 @@ Model je pri ocenjivanju izbegavao rizik i oslanjao se na opšte karakteristike 
 umesto na detaljne rubrike (engl. \emph{rubric}).
 Izmene prompta i uputstava za ocenjivanje donele su samo ograničena poboljšanja,
 pa su tadašnji sistemi bili slabo osetljivi na suptilne varijacije u kriterijumima evaluacije.
-Upravo taj nalaz motiviše eksperiment sa tri konfiguracije strogosti u ovom radu (odeljak~\ref{sec:modeli}):
+Upravo taj nalaz motiviše eksperiment sa tri konfiguracije strogosti u ovom radu:
 umesto da se pretpostavi da instrukcija o strogosti deluje, meri se da li i koliko ona pomera ocene i njihovu korelaciju sa nastavničkim.
 
 Jukjevič~\cite{jukiewicz2024future} je ChatGPT primenio na ocenjivanje devet programerskih zadataka
@@ -76,8 +76,8 @@ i povremene nedoslednosti u ocenjivanju koje traže proveru nastavnika.
 Zaključak je da je ChatGPT koristan dopunski alat za procenu koda i generisanje povratnih informacija,
 ali da ljudski nadzor ostaje neophodan za pouzdanost i pravednost.
 Dva nalaza te studije ovde se proveravaju na drugom jeziku i novijim modelima:
-sistematsko odstupanje od nastavnika prati se kroz odnos prosečnih ocena (engl. \emph{mean ratio}; odeljak~\ref{sec:metrike}),
-a ponovljivost kroz eksperiment sa temperaturom (odeljak~\ref{sec:rezultati-temperatura}).
+sistematsko odstupanje od nastavnika prati se kroz odnos prosečnih ocena (engl. \emph{mean ratio}),
+a ponovljivost kroz eksperiment sa temperaturom.
 
 Olivos i dr.~\cite{olivos2025assessing} ispitali su saradnju nastavnika i modela na 70 rukom pisanih ispita sa uvodnog kursa sociologije,
 gde su GPT-4 i GPT-4o-mini korišćeni za transkripciju rukopisa i ocenjivanje pitanja esejskog tipa.
@@ -96,7 +96,7 @@ Autori zaključuju da model i nastavnici istu rubriku primenjuju različito.
 Taj rezultat je razlog što se u ovom radu korelacija i slaganje posmatraju odvojeno:
 visoka korelacija može da postoji uz sistematsko pomeranje ocena,
 pa se uz PCC prate i odnos prosečnih ocena i RMSE/STDDEV\footnote{RMSE je koren srednje kvadratne greške (engl. \emph{root mean square error}),
-a STDDEV standardna devijacija (engl. \emph{standard deviation}). Obe metrike definisane su u odeljku~\ref{sec:metrike}.}.
+a STDDEV standardna devijacija (engl. \emph{standard deviation}).}.
 
 Ovi nalazi se uklapaju u širu sliku: pouzdanost ocenjivanja zavisi od tipa zadatka.
 Slaganje sa ljudskim ocenjivačima veće je kod strukturiranih odgovora (definicije, formule, fragmenti koda),
@@ -142,18 +142,18 @@ Ovaj rad & \makecell[l]{kratki odgovori\\i kod, STEM, srpski,\\583 odgovora,\\5 
 Iz tabele se vide četiri praznine koje ovaj rad popunjava.
 Prva je jezik.
 Nijedna od navedenih studija ne ispituje ocenjivanje na jeziku sa ograničenim resursima niti jezik tretira kao okolnost eksperimenta;
-ovde su pitanja, studentski odgovori, referentni odgovori, nastavni materijali i promptovi na srpskom (odeljak~\ref{sec:podaci}),
+ovde su pitanja, studentski odgovori, referentni odgovori, nastavni materijali i promptovi na srpskom,
 pa rezultati govore o upotrebljivosti modela izvan engleskog konteksta u kome se obično ispituju.
 Druga je referentni odgovor kao promenljiva.
 Prethodne studije modelu ili daju rubriku ili je ne daju, a jedino Olivos i dr.\ beleže da šablonski odgovor popravlja korelaciju;
 ovde su režimi sa referentnim odgovorom nastavnika (PRA) i sa generisanim referentnim odgovorom (GRA)
 pokrenuti nad istim odgovorima, modelima i konfiguracijama,
-pa se doprinos referentnog odgovora može izdvojiti od svega ostalog (odeljci~\ref{sec:modeli} i~\ref{sec:pra-vs-gra}).
+pa se doprinos referentnog odgovora može izdvojiti od svega ostalog.
 Treća je strogost.
 Lundgren i \mbox{Vecler} i dr.\ uočavaju da model sistematski odstupa od nastavnika, ali odstupanje ne pokušavaju da kontrolišu;
 ovde su tri konfiguracije strogosti deo eksperimentalnog plana,
 a metrike razdvajaju korelaciju (PCC) od sistematskog odstupanja i greške (odnos prosečnih ocena, RMSE/STDDEV),
-pa se vidi da li instrukcija o strogosti menja redosled ocena, njihov nivo ili oboje (odeljak~\ref{sec:metrike}).
+pa se vidi da li instrukcija o strogosti menja redosled ocena, njihov nivo ili oboje.
 Četvrta su modeli: pregledane studije koriste ChatGPT, GPT-3.5, GPT-4 i GPT-4o,
 dok se ovde modeli opšte namene pod istim uslovima porede sa modelima za rezonovanje (GPT-5, DeepSeek-Reasoner).
 Numeričko poređenje postignutih vrednosti PCC-a sa onima iz literature dato je u odeljku~\ref{sec:poredjenje}.
@@ -164,5 +164,5 @@ kontekstualno tumačenje i granične slučajeve~\cite{swiecki2022assessment,zawa
 Preporukama iz literature najbliže odgovaraju pristupi koji spajaju automatizaciju sa nadzorom čoveka kao sastavnog dela sistema,
 podesivom strogošću ocenjivanja i razumljivom povratnom informacijom.
 Ta tri zahteva, kontrola nastavnika, transparentnost i prilagodljivost, oblikovala su i platformu EduGrader predstavljenu u ovom radu,
-a uloga „drugog ocenjivača'' koju predlažu Olivos i dr.\ odgovara mestu koje model ima u njenom toku rada (poglavlje~\ref{sec:aplikacija}):
+a uloga „drugog ocenjivača'' koju predlažu Olivos i dr.\ odgovara mestu koje model ima u njenom toku rada:
 model predlaže ocenu i obrazloženje, a konačnu odluku donosi nastavnik.

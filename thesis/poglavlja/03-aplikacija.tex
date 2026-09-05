@@ -95,7 +95,7 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 Klijentski sloj komunicira sa serverskim slojem preko REST API-ja.
 Serverski sloj pristupa jezičkim modelima kroz jedinstven integracioni sloj (projektni obrazac fabrika)
 koji apstrahuje API-je pojedinačnih provajdera.
-Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti integracioni sloj za grupne eksperimente.
+Sistem za automatizovanu evaluaciju koristi isti integracioni sloj za grupne eksperimente.
 Integracija Gemini nije korišćena u eksperimentima opisanim u ovom radu.}
 \label{fig:architecture}
 \end{figure}
@@ -122,7 +122,7 @@ Predlog modela je tako samo polazna tačka: nastavnik ga može prihvatiti ili pr
 u skladu sa principom iz uvoda da je čovek sastavni deo sistema.
 
 Elementi interfejsa su na engleskom, dok su pitanja, referentni odgovori i studentski odgovori na srpskom,
-isto kao u eksperimentima iz poglavlja~\ref{sec:rezultati}.
+isto kao u svim eksperimentima u ovom radu.
 
 \begin{figure}[htbp]
 \centering
@@ -151,7 +151,7 @@ Na snimku je nastavnik uneo konačnu ocenu 10, različitu od predloga modela,
 
 Grupno ocenjivanje se u trenutnoj implementaciji ne pokreće iz korisničkog interfejsa:
 logika ocenjivanja izložena je kao funkcije serverskog modula za ocenjivanje,
-a eksperimenti opisani u poglavlju~\ref{sec:pipeline} pokreću je kroz evaluacioni postupak u sistemu DVC,
+a eksperimenti iz ovog rada pokreću je kroz evaluacioni postupak u sistemu DVC,
 nad podacima pripremljenim u vidu CSV (engl. \emph{comma-separated values}) datoteka.
 Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz parametarske datoteke tog postupka, a ne kroz veb interfejs.
 
@@ -207,5 +207,5 @@ Implementirane su tri integracije, kao tri implementacije zajedničkog interfejs
 Fabrička funkcija instancira odgovarajuću klasu na osnovu simboličkog imena integracije
 (\texttt{openai}, \texttt{deepseek}, \texttt{gemini}).
 Nov provajder se tako dodaje implementacijom jedne klase, bez izmena u logici ocenjivanja;
-isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju iz poglavlja~\ref{sec:pipeline}.
+isti mehanizam koriste i veb aplikacija i sistem za automatizovanu evaluaciju.
 API ključevi čuvaju se kao promenljive okruženja i nikada nisu ugrađeni u izvorni kod.

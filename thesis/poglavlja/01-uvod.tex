@@ -75,8 +75,7 @@ Izlaz u oba režima je numerička ocena praćena obrazloženjem koje ukazuje na 
 Takva povratna informacija studentu je upotrebljiva, a nastavniku proverljiva, za razliku od čiste numeričke ocene bez obrazloženja.
 
 Model ocenu izražava na skali od 0 do 100, jer finija podela skale olakšava razlikovanje bliskih nivoa kvaliteta odgovora.
-Dobijena vrednost se zatim preslikava na skalu od 0 do 10, na kojoj nastavnici dodeljuju poene za svaki pojedinačni odgovor
-(detalji u odeljku~\ref{sec:pipeline}).
+Dobijena vrednost se zatim preslikava na skalu od 0 do 10, na kojoj nastavnici dodeljuju poene za svaki pojedinačni odgovor.
 Reč je, dakle, o poenima po pitanju, a ne o zaključnoj oceni na kursu (od 5 do 10).
 Sve ocene u ovom radu, i sistemske i nastavničke, prikazane su na skali 0--10, osim tamo gde je naznačeno drugačije.
 
@@ -97,26 +96,25 @@ Obrazloženje koje sistem daje uz ocenu je nacrt povratne informacije koju bi na
 Predložena ocena je druga, nezavisna procena, koja pomaže doslednosti kroz stotine odgovora u istom roku.
 Konačno, kod odgovora gde se nastavnik sa sistemom slaže dovoljna je potvrda,
 pa se vreme ulaže u granične i sporne slučajeve.
-Koliko vremena se time stvarno štedi u ovom radu nije mereno (odeljak~\ref{sec:ogranicenja}).
+Koliko vremena se time stvarno štedi u ovom radu nije mereno.
 Zato je sistem projektovan tako da je čovek njegov sastavni deo (engl.~\emph{human-in-the-loop})
 i objavljen kao softver otvorenog koda~\cite{ikovic2026edugraderrepo},
 kako bi bio proverljiv i prilagodljiv drugim institucijama.
-Postupak ponovnog izvođenja svih prikazanih rezultata opisan je u odeljku~\ref{sec:reprodukcija}.
 
 Doprinosi rada su sledeći:
 \begin{enumerate}
-    \item \textbf{Veb aplikacija EduGrader} (poglavlje~\ref{sec:aplikacija}), koju je autor projektovao i implementirao:
+    \item \textbf{Veb aplikacija EduGrader}, koju je autor projektovao i implementirao:
     nastavnički i studentski modul, serverski modul za ocenjivanje koji čuva prompt, odgovor modela i izdvojenu ocenu za svaki ocenjeni odgovor,
     i integracioni sloj koji više provajdera (engl. \emph{provider}) jezičkih modela pokriva jednim interfejsom.
-    \item \textbf{Sistem za automatizovanu evaluaciju modela} (poglavlje~\ref{sec:pipeline}), koji je autor razvio:
+    \item \textbf{Sistem za automatizovanu evaluaciju modela}, koji je autor razvio:
     ponovljiv postupak (engl. \emph{pipeline}) koji nad ručno pripremljenim ispitnim podacima pokreće ocenjivanje
     za proizvoljnu kombinaciju modela, konfiguracije strogosti i režima i računa metrike korelacije i slaganja sa ocenama nastavnika.
     \item \textbf{Skup podataka na srpskom jeziku}: 583 autentična, pseudonimizovana studentska odgovora sa pet kurseva na dve institucije,
-    sa nastavničkim ocenama i referentnim odgovorima (odeljci~\ref{sec:podaci} i~\ref{sec:etika});
+    sa nastavničkim ocenama i referentnim odgovorima;
     studentski odgovori nisu javno objavljeni, već su dostupni na zahtev.
     \item \textbf{Sistematska evaluacija}: pet modela u tri konfiguracije strogosti i dva režima ocenjivanja,
     dopunjena eksperimentima sa nastavnim materijalom u promptu i sa temperaturom,
-    parametrom koji upravlja slučajnošću pri uzorkovanju odgovora modela (poglavlje~\ref{sec:rezultati}).
+    parametrom koji upravlja slučajnošću pri uzorkovanju odgovora modela.
     \item \textbf{Empirijski nalazi}: referentni odgovor nastavnika dosledno poboljšava i korelaciju i slaganje sa ljudskim ocenjivačima,
     modeli za rezonovanje su im najbliži, a stroga konfiguracija po pravilu pogoršava oba.
 \end{enumerate}
