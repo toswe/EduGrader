@@ -2,7 +2,7 @@
 \chapter{Sistem za automatizovanu evaluaciju modela}
 \label{sec:pipeline}
 
-Za potrebe evaluacije opisane u poglavlju~\ref{sec:metodologija} razvijen je zaseban sistem za automatizovanu evaluaciju modela,
+Za potrebe evaluacije opisane u narednom poglavlju razvijen je zaseban sistem za automatizovanu evaluaciju modela,
 organizovan kao evaluacioni postupak (engl. \emph{pipeline}, po čemu je nazvan i direktorijum \texttt{pipeline/}) u sistemu DVC.
 U DVC-u se faze obrade opisuju deklarativno, sa eksplicitnim zavisnostima i izlazima,
 i svaka se ponovo izvršava samo ako su se njeni ulazi ili parametri promenili.
@@ -33,8 +33,8 @@ Provere su ovako stroge zato što su podaci pripremani ručno,
 a greška u njima otkrivena tek posle ocenjivanja znači uzalud utrošene resurse modela (plaćene pozive API-ja).
 
 Druga faza (\emph{ocenjivanje}) za svaki red spojene tabele konstruiše prompt
-i poziva izabrani jezički model preko integracionog sloja iz odeljka~\ref{sec:integracije}.
-Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz odeljka~\ref{sec:modeli}:
+i poziva izabrani jezički model preko integracionog sloja iz prethodnog poglavlja.
+Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja PRA i GRA:
 
 \begin{itemize}
     \item \textbf{PRA varijanta} u prompt uključuje pitanje, referentni odgovor nastavnika i studentski odgovor.
@@ -48,7 +48,7 @@ Postoje tri varijante ove faze, od kojih dve odgovaraju režimima ocenjivanja iz
     nad tabelom pitanja u kojoj su nastavnički referentni odgovori zamenjeni generisanim.
     \item \textbf{Varijanta sa nastavnim materijalom u promptu} umesto referentnog odgovora
     u svaki prompt za ocenjivanje umeće ceo izvučeni tekst udžbenika, istom komponentom za preuzimanje i keširanje kao GRA varijanta.
-    Režim koji ova varijanta realizuje opisan je u odeljku~\ref{sec:rezim-udzbenik}.
+    Ova varijanta realizuje treći, probni režim, u kome se referentni odgovor uopšte ne koristi (odeljak~\ref{sec:rezim-udzbenik}).
 \end{itemize}
 
 U svim varijantama sistemska instrukcija se sastoji od prompta strogosti (blag,
@@ -59,7 +59,7 @@ ali je integracioni sloj za OpenAI izostavlja iz zahteva kada je jednaka nuli,
 pa modeli porodice GPT zapravo rade na podrazumevanoj vrednosti svog provajdera,
 dok se modelima DeepSeek vrednost $0$ uvek prosleđuje.
 Temperatura se ni u jednom slučaju ne varira kroz konfiguracije;
-njen uticaj ispitan je odvojeno, u odeljku~\ref{sec:rezultati-temperatura}.
+njen uticaj ispitan je odvojeno, u dodatnom eksperimentu.
 Numerička ocena se izdvaja iz prvog reda odgovora; skala 0--100 naknadno se preslikava na skalu 0--10 radi poređenja sa ocenama nastavnika.
 Ako izdvajanje ne uspe, poziv se ponavlja, do tri pokušaja ukupno; ako API poziv privremeno otkaže, ponavljanju prethodi rastuće odlaganje.
 Redovi za koje ni posle tri pokušaja nije dobijena ocena u izlaznoj datoteci dobijaju vrednost $-1$.
@@ -68,7 +68,7 @@ u PRA i GRA režimu ocena nedostaje za 29 od $17\,306$ ocenjenih redova (0,17\%)
 od čega 28 u jednom pokretanju (DeepSeek-Reasoner, neutralna konfiguracija, jedan rok kursa Programiranje 2),
 dakle reč je o privremenom prekidu API-ja, a ne o tome da model odbija da oceni.
 U režimu sa nastavnim materijalom nedostaje 237 od $3\,033$ ocena (7,8\%),
-gotovo isključivo u nedovršenim pokretanjima modela GPT-4o (odeljak~\ref{sec:rezultati-udzbenik}).
+gotovo isključivo u nedovršenim pokretanjima modela GPT-4o.
 Pošto je skala ocenjivanja 0--100, negativna vrednost ne može biti stvarna ocena,
 pa je analitička skripta po njoj prepoznaje i takve redove isključuje iz izračunavanja metrika.
 
@@ -83,7 +83,7 @@ Dva dodatna eksperimenta izvan ove mreže, sa nastavnim materijalom u promptu
 i sa različitim vrednostima temperature, prikazana su u odeljku~\ref{sec:dodatni}.
 
 Završna analitička skripta prolazi kroz sve ocenjene datoteke,
-uparuje ocene modela sa ocenama nastavnika i računa metrike opisane u odeljku~\ref{sec:metrike},
+uparuje ocene modela sa ocenama nastavnika i računa četiri metrike:
 PCC, odnos prosečnih ocena, koren srednje kvadratne greške (RMSE) i odnos RMSE/STDDEV,
 po svakoj kombinaciji skupa podataka, modela, strogosti i režima.
 Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani u poglavlju~\ref{sec:rezultati}.
@@ -93,7 +93,7 @@ Rezultati se objedinjuju u zbirnu tabelu iz koje su izvedeni rezultati prikazani
 
 Izvorni kod sistema, pitanja sa referentnim odgovorima nastavnika i sve agregatne metrike javno su dostupni
 u repozitorijumu projekta~\cite{ikovic2026edugraderrepo}.
-Studentski odgovori i ocenjene datoteke koje ih sadrže nisu deo javnog repozitorijuma (odeljak~\ref{sec:etika}),
+Studentski odgovori i ocenjene datoteke koje ih sadrže nisu deo javnog repozitorijuma, radi zaštite podataka studenata,
 već se u pseudonimizovanom obliku ustupaju na zahtev, uz saglasnost nastavnika koji su ih obezbedili;
 sa njima se svaki opisani eksperiment može ponoviti istim komandama.
 Struktura dela repozitorijuma koji se odnosi na evaluaciju prikazana je u nastavku;
@@ -130,7 +130,7 @@ data/<rok>/results/gpt-4o.default.t-*.csv    *
 
 Sve datoteke navedene sa uvlačenjem nalaze se unutar direktorijuma \texttt{pipeline/},
 dok se poslednja stavka odnosi na direktorijum \texttt{data/} u korenu repozitorijuma,
-u kome se čuvaju rezultati dodatnog eksperimenta sa temperaturom (odeljak~\ref{sec:rezultati-temperatura}).
+u kome se čuvaju rezultati dodatnog eksperimenta sa temperaturom.
 
 Datoteka \texttt{dvc.yaml} opisuje faze obrade sa njihovim zavisnostima i izlazima,
 a \texttt{params.yaml} sadrži spisak skupova podataka
@@ -150,8 +150,7 @@ Imena tih datoteka prate tri obrasca:
 \begin{itemize}
     \item \texttt{graded.<strogost>.<model>.correct.csv} za PRA režim;
     \item \texttt{graded.generated.<strogost>.<model>.csv} za GRA režim;
-    \item \texttt{graded.<strogost>.<model>.textbook.csv} za varijantu sa nastavnim materijalom u promptu,
-    o kojoj je reč u odeljku~\ref{sec:rezim-udzbenik}.
+    \item \texttt{graded.<strogost>.<model>.textbook.csv} za varijantu sa nastavnim materijalom u promptu.
 \end{itemize}
 
 Oznaka \texttt{generated} stoji pre konfiguracije strogosti,
@@ -198,18 +197,17 @@ professor_stddev, rmse_stddev_ratio
 \end{verbatim}
 \end{tcolorbox}
 
-Prve četiri kolone određuju konfiguraciju, a ostale sadrže metrike opisane u odeljku~\ref{sec:metrike}.
+Prve četiri kolone određuju konfiguraciju, a ostale sadrže vrednosti metrika.
 
 Pošto su ocenjene datoteke sačuvane u celini,
-vrednosti prikazane u poglavlju~\ref{sec:rezultati} dobijaju se pokretanjem samo analitičke skripte,
+sve prikazane vrednosti metrika dobijaju se pokretanjem samo analitičke skripte,
 bez ijednog poziva jezičkom modelu i bez pristupnih ključeva.
 Kako su rezultati zapisani po ispitnim rokovima,
-vrednosti po kursevima u tabelama poglavlja~\ref{sec:rezultati}
+vrednosti po kursevima u tabelama sa rezultatima
 dobijene su objedinjavanjem rokova koji pripadaju istom kursu,
-prema Tabeli~\ref{tab:dataset}.
+prema tabeli~\ref{tab:dataset}.
 
-Jedini eksperiment koji nije pokrenut kroz opisani postupak je eksperiment sa temperaturom
-(odeljak~\ref{sec:rezultati-temperatura}).
+Jedini eksperiment koji nije pokrenut kroz opisani postupak je eksperiment sa temperaturom.
 On je sproveden ranije, kroz upravljačku komandu same aplikacije,
 sa istim promptom i istim formatom izlaza,
 pa se njegove ocenjene datoteke nalaze izvan direktorijuma \texttt{pipeline}
