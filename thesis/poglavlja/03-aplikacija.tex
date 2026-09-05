@@ -117,7 +117,8 @@ Nastavnik na stranici kursa unosi pitanja sa referentnim odgovorima i od njih sa
 Kada student preda test (slika~\ref{fig:ui-student}),
 nastavnik pri pregledu za svaki odgovor vidi predlog ocene jezičkog modela i, po potrebi, njegovo obrazloženje,
 a konačnu ocenu unosi sam (slika~\ref{fig:ui-ocena}).
-Predlog modela je tako samo polazna tačka: nastavnik ga može prihvatiti ili prepraviti, što je princip iz uvoda da je čovek sastavni deo sistema.
+Predlog modela je tako samo polazna tačka: nastavnik ga može prihvatiti ili prepraviti,
+u skladu sa principom iz uvoda da je čovek sastavni deo sistema.
 
 Elementi interfejsa su na engleskom, dok su pitanja, referentni odgovori i studentski odgovori na srpskom,
 isto kao u eksperimentima iz poglavlja~\ref{sec:rezultati}.
@@ -135,8 +136,8 @@ isto kao u eksperimentima iz poglavlja~\ref{sec:rezultati}.
 \caption{Nastavnički modul: pregled rešenog testa.
 Uz svaki odgovor prikazan je predlog ocene jezičkog modela (ovde 7,5 od 10) sa rasklopljenim obrazloženjem,
 a konačnu ocenu unosi nastavnik u polje \emph{Grade}.
-Na snimku je nastavnik, uprkos predlogu modela od 7,5, uneo konačnu ocenu 10,
-što ilustruje da konačna odluka ostaje na njemu.}
+Na snimku je nastavnik uneo konačnu ocenu 10, različitu od predloga modela,
+što ilustruje da odluka ostaje na njemu.}
 \label{fig:ui-ocena}
 \end{figure}
 
@@ -154,7 +155,7 @@ nad podacima pripremljenim u vidu CSV (engl. \emph{comma-separated values}) dato
 Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz parametarske datoteke tog \emph{pipeline}-a, a ne kroz veb interfejs.
 
 Autentifikacija koristi JWT, koji se čuva u skladištu sesije (engl. \emph{session storage}) pregledača, koje traje dok je kartica otvorena.
-Uloge (nastavnik ili student) ugrađene su u njega i na osnovu njih se sprovodi kontrola pristupa rutama.
+Uloge (nastavnik ili student) ugrađene su u JWT i na osnovu njih se sprovodi kontrola pristupa rutama.
 U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu,
 dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
 
