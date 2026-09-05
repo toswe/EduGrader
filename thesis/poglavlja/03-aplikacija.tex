@@ -7,23 +7,23 @@ To je deo sistema namenjen upotrebi u nastavi, organizovan u tri sloja (slika~\r
 
 \begin{itemize}
     \item \textbf{Klijentski sloj.} Jednostranična aplikacija (engl. \emph{single-page application}, SPA)
-    izgrađena u tehnologijama React~19 i TypeScript, koju poslužuje Nginx server.
+    izgrađena u tehnologijama \emph{React}~19 i \emph{TypeScript}, koju poslužuje \emph{Nginx} server.
     Prikazi za nastavnike i studente su odvojeni: nastavnici upravljaju kursevima,
     testovima i pitanjima i pregledaju rešene testove, a studenti rešavaju testove i prate svoje rezultate.
     Na prikazu rešenog testa, uz svaki odgovor stoje i ocena nastavnika i ocena koju je predložio jezički model; konačnu odluku donosi nastavnik.
     Autentifikacija se obavlja putem JWT-a (engl. \emph{JSON Web Token}) sa kontrolom pristupa zasnovanom na ulogama.
-    \item \textbf{Serverski sloj.} REST (engl. \emph{representational state transfer}) API izgrađen u tehnologijama Python~3,
-    Django~5.1 i Django REST Framework.
+    \item \textbf{Serverski sloj.} REST (engl. \emph{representational state transfer}) API izgrađen u tehnologijama \emph{Python}~3,
+    \emph{Django}~5.1 i \emph{Django REST Framework}.
     Izlaže CRUD (engl. \emph{create, read, update, delete}) operacije nad domenskim modelima
     i sadrži modul za ocenjivanje, odgovoran za sastavljanje promptova, pozivanje modela,
     izdvajanje ocene iz odgovora i trajno čuvanje rezultata.
-    \item \textbf{Sloj baze podataka.} Realizovan kroz Django ORM (engl. \emph{object-relational mapping})
-    nad bazom SQLite,
+    \item \textbf{Sloj baze podataka.} Realizovan kroz \emph{Django} ORM (engl. \emph{object-relational mapping})
+    nad bazom \emph{SQLite},
     sa entitetima za kurseve, testove, pitanja, studentske odgovore i ocene.
-    SQLite je izabran kao razvojna i prototipska baza, dovoljna za lokalno pokretanje:
-    umesto zasebnog serverskog procesa, biblioteka SQLite radi u samom procesu aplikacije,
+    \emph{SQLite} je izabran kao razvojna i prototipska baza, dovoljna za lokalno pokretanje:
+    umesto zasebnog serverskog procesa, biblioteka \emph{SQLite} radi u samom procesu aplikacije,
     a celu bazu čuva u jednoj datoteci.
-    Django ORM dopušta prelazak na serverski sistem za upravljanje bazom (npr. PostgreSQL)
+    \emph{Django} ORM dopušta prelazak na serverski sistem za upravljanje bazom (npr. \emph{PostgreSQL})
     izmenom konfiguracije, bez izmena u kodu aplikacije.
     Pored samih ocena čuvaju se i povratne informacije, promptovi i metapodaci, potrebni za kasnije analize.
 \end{itemize}
@@ -48,13 +48,13 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 % ---- Klijentski sloj ----
 \node[box, fill=red!8, minimum width=4.8cm, minimum height=1.6cm] (fe) {};
 \node[font=\small\bfseries, anchor=north] at (fe.north) {Klijentski sloj};
-\node[font=\scriptsize, anchor=south] at (fe.south) {React 19 + TypeScript};
+\node[font=\scriptsize, anchor=south] at (fe.south) {\emph{React} 19 + \emph{TypeScript}};
 \node[font=\scriptsize] at (fe.center) {Interfejs za ocenjivanje \textbar{} JWT};
 
 % ---- Serverski sloj ----
 \node[box, fill=red!8, minimum width=6.2cm, minimum height=3.4cm, right=2.2cm of fe] (be) {};
 \node[font=\small\bfseries, anchor=north] at (be.north) {Serverski sloj};
-\node[font=\scriptsize, anchor=north, yshift=-3mm] at (be.north) {Django 5.1 + Django REST Framework};
+\node[font=\scriptsize, anchor=north, yshift=-3mm] at (be.north) {\emph{Django} 5.1 + \emph{Django REST Framework}};
 
 % Unutrašnje komponente
 \node[box, fill=red!15, minimum width=4.4cm, font=\scriptsize] at ([yshift=-2mm]be.center) (gm) {Modul za ocenjivanje};
@@ -63,7 +63,7 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 % ---- Baza podataka ----
 \node[box, fill=yellow!15, minimum width=2.8cm, minimum height=1.2cm, below=1.4cm of be] (db) {};
 \node[font=\small\bfseries] at ([yshift=1.5mm]db.center) {Baza podataka};
-\node[font=\scriptsize] at ([yshift=-3mm]db.center) {SQLite: kursevi, testovi, ocene};
+\node[font=\scriptsize] at ([yshift=-3mm]db.center) {\emph{SQLite}: kursevi, testovi, ocene};
 
 % ---- LLM API-ji ----
 \node[box, fill=red!8, minimum width=3.4cm, minimum height=1.1cm, align=center, right=2.2cm of factory, yshift=1.4cm]
@@ -93,7 +93,8 @@ opisan u poglavlju~\ref{sec:pipeline}, koji koristi isti integracioni sloj.
 }
 \caption{Arhitektura sistema EduGrader.
 Klijentski sloj komunicira sa serverskim slojem preko REST API-ja.
-Serverski sloj pristupa jezičkim modelima kroz jedinstven integracioni sloj (projektni obrazac fabrika) koji apstrahuje API-je pojedinačnih provajdera.
+Serverski sloj pristupa jezičkim modelima kroz jedinstven integracioni sloj (projektni obrazac fabrika)
+koji apstrahuje API-je pojedinačnih provajdera.
 Sistem za automatizovanu evaluaciju (poglavlje~\ref{sec:pipeline}) koristi isti integracioni sloj za grupne eksperimente.
 Integracija Gemini nije korišćena u eksperimentima opisanim u ovom radu.}
 \label{fig:architecture}
@@ -102,9 +103,9 @@ Integracija Gemini nije korišćena u eksperimentima opisanim u ovom radu.}
 \section{Klijentska aplikacija}
 \label{sec:webapp}
 
-Klijentska aplikacija je jednostranična aplikacija koja koristi biblioteku React (verzija 19) i jezik TypeScript,
-uz Vite kao alat za izgradnju i razvojno okruženje.
-Rutiranje je rešeno bibliotekom React Router, kroz koju je aplikacija podeljena na dva modula sa odvojenim pravima pristupa:
+Klijentska aplikacija je jednostranična aplikacija koja koristi biblioteku \emph{React} (verzija 19) i jezik \emph{TypeScript},
+uz \emph{Vite} kao alat za izgradnju i razvojno okruženje.
+Rutiranje je rešeno bibliotekom \emph{React Router}, kroz koju je aplikacija podeljena na dva modula sa odvojenim pravima pristupa:
 
 \begin{itemize}
     \item \textbf{Nastavnički modul} omogućava pregled predmeta, kreiranje testova i pitanja i pregled rešenih studentskih testova,
@@ -156,12 +157,12 @@ Izbor modela, režima ocenjivanja i konfiguracije strogosti zadaje se kroz param
 
 Autentifikacija koristi JWT, koji se čuva u skladištu sesije (engl. \emph{session storage}) pregledača, koje traje dok je kartica otvorena.
 Uloge (nastavnik ili student) ugrađene su u JWT i na osnovu njih se sprovodi kontrola pristupa rutama.
-U razvojnom okruženju Vite server prosleđuje API pozive ka serverskom delu,
-dok se u produkciji statička verzija aplikacije poslužuje kroz Nginx.
+U razvojnom okruženju \emph{Vite} server prosleđuje API pozive ka serverskom delu,
+dok se u produkciji statička verzija aplikacije poslužuje kroz \emph{Nginx}.
 
 \section{Serverska aplikacija}
 
-Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django konvencijom razdvajanja odgovornosti:
+Serverski deo je \emph{Django} projekat podeljen na tri aplikacije, u skladu sa \emph{Django} konvencijom razdvajanja odgovornosti:
 
 \begin{itemize}
     \item \textbf{Aplikacija za autentifikaciju} implementira prilagođeni korisnički model sa ulogama student i nastavnik,
@@ -176,8 +177,8 @@ Serverski deo je Django projekat podeljen na tri aplikacije, u skladu sa Django 
     kompletnim odgovorom modela i izdvojenom numeričkom ocenom, pa je svaka ocena naknadno proverljiva.
 \end{itemize}
 
-Sistem je zapakovan u Docker kontejnere: jedan kontejner izvršava Django aplikaciju,
-a drugi Nginx koji poslužuje klijentsku aplikaciju i prosleđuje API saobraćaj.
+Sistem je zapakovan u \emph{Docker} kontejnere: jedan kontejner izvršava \emph{Django} aplikaciju,
+a drugi \emph{Nginx} koji poslužuje klijentsku aplikaciju i prosleđuje API saobraćaj.
 
 \section{Integracija jezičkih modela}
 \label{sec:integracije}
@@ -193,11 +194,11 @@ Implementirane su tri integracije, kao tri implementacije zajedničkog interfejs
 (\texttt{LLMIntegration}), dostupne istovremeno i birane po simboličkom imenu:
 
 \begin{itemize}
-    \item \textbf{OpenAI}, koristi zvanični OpenAI Python SDK (engl. \emph{software development kit}).
+    \item \textbf{OpenAI}, koristi zvanični OpenAI \emph{Python} SDK (engl. \emph{software development kit}).
     Podržani modeli: \texttt{gpt-\allowbreak 4o-\allowbreak mini}, \texttt{gpt-4o} i \texttt{gpt-5}.
     \item \textbf{DeepSeek}, koristi OpenAI-kompatibilni API \emph{endpoint} preko istog SDK-a, sa promenjenom baznom adresom.
     Podržani modeli: \texttt{deepseek-chat} (V3) i \texttt{deepseek-reasoner} (R1).
-    \item \textbf{Google Gemini}, koristi zvanični Google GenAI Python SDK.
+    \item \textbf{Google Gemini}, koristi zvanični Google GenAI \emph{Python} SDK.
     Podrazumevani model: \texttt{gemini-2.5-flash}.
     U aplikaciji služi za generisanje simuliranih studentskih odgovora pri testiranju
     i nije korišćena u eksperimentima opisanim u ovom radu.
